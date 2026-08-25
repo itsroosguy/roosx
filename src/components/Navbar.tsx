@@ -35,7 +35,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { name: 'Services', href: '#services', action: onNavigateHome },
     { name: 'Process', href: '#process', action: onNavigateHome },
     { name: 'Works', href: '#portfolio', action: onNavigateHome },
-    { name: 'FAQ', href: '#faq', action: onNavigateHome },
   ];
 
   return (
