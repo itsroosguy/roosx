@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interactive Kangaroo Mascot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Clean Stage -->
+  <main class="mascot-stage">
+    
+    <!-- Mascot Viewport & Registered Assembly -->
+    <div class="mascot-viewport">
+      <div id="mascot-container" class="mascot-container">
+        
+        <!-- Asset 1: Body 1.png (Static Base Anchor) -->
+        <img id="layer-body" src="Body 1.png" alt="Body" class="mascot-asset body-asset" />
+
+        <!-- Head Sub-System (Decoupled, 20% Controlled Movement) -->
+        <div id="head-subsystem" class="head-subsystem">
+          
+          <!-- Asset 2: Head 1.png (Decoupled Top Layer) -->
+          <img id="layer-head" src="Head 1.png" alt="Head" class="mascot-asset head-asset" />
+
+          <!-- Asset 3: eye balls.png (Eyeballs Layer, Clamped inside eye sockets) -->
+          <img id="layer-eyes" src="eye balls.png" alt="Eyes" class="mascot-asset eyes-asset" />
+
+          <div id="eye-bounds-left" class="eye-socket-bounds eye-socket-left"></div>
+          <div id="eye-bounds-right" class="eye-socket-bounds eye-socket-right"></div>
+
+        </div>
+
+      </div>
+
+      <!-- Studio Ground Shadow -->
+      <div class="mascot-floor-shadow"></div>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

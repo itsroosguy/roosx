@@ -1,0 +1,77 @@
+.mascotContainer {
+  position: relative;
+  width: min(440px, 100%);
+  aspect-ratio: 440 / 660;
+  height: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+.bodyAsset {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.headSubsystem {
+  position: absolute;
+  top: 10.5px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  transform-origin: 50% 40.3%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.headAsset {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.eyesAsset {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+  will-change: transform;
+}
+
+.eyeSocketBounds {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.socketLeft {
+  top: 24.6%;
+  left: 33.0%;
+  width: 13.1%;
+  height: 8.8%;
+}
+
+.socketRight {
+  top: 24.6%;
+  left: 53.4%;
+  width: 13.1%;
+  height: 8.8%;
+}

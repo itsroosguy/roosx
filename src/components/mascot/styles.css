@@ -1,0 +1,126 @@
+:root {
+  --bg-dark-start: #0d1117;
+  --bg-dark-end: #040609;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--bg-dark-end);
+}
+
+/* 1. Canvas & Backdrop (Static #0d1117 to #040609, Zero Shift) */
+.mascot-stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 50%, var(--bg-dark-start) 0%, var(--bg-dark-end) 100%);
+  overflow: hidden;
+}
+
+/* 2. Mascot Viewport & Fluid Responsive Container */
+.mascot-viewport {
+  position: relative;
+  width: 100%;
+  height: 85vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 3vh;
+}
+
+.mascot-container {
+  position: relative;
+  width: min(440px, 88vw);
+  aspect-ratio: 440 / 660;
+  height: auto;
+  max-height: 80vh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  perspective: 1200px;
+  z-index: 10;
+}
+
+.mascot-asset {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Asset 1: Body 1.png (Static Base Anchor - NEVER moves, tilts, scales, or rotates) */
+.body-asset {
+  z-index: 1;
+}
+
+/* Asset 2: Head Sub-system (Decoupled, 20% Responsive Motion) */
+.head-subsystem {
+  position: absolute;
+  top: 10.5px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  transform-origin: 50% 40.3%; /* Exact Neck Joint Pivot */
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.head-asset {
+  z-index: 1;
+}
+
+/* Asset 3: eye balls.png (Eyeballs Layer, Clamped inside eye sockets) */
+.eyes-asset {
+  z-index: 2;
+  will-change: transform;
+}
+
+/* Eye Socket Bounds (Used for JS Geometry Calculations) */
+.eye-socket-bounds {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.eye-socket-left {
+  top: 24.6%;
+  left: 33.0%;
+  width: 13.1%;
+  height: 8.8%;
+}
+
+.eye-socket-right {
+  top: 24.6%;
+  left: 53.4%;
+  width: 13.1%;
+  height: 8.8%;
+}
+
+/* Static Floor Shadow */
+.mascot-floor-shadow {
+  position: absolute;
+  bottom: 0;
+  width: min(380px, 80vw);
+  height: 35px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.8) 0%, transparent 70%);
+  filter: blur(10px);
+  z-index: 1;
+  pointer-events: none;
+}
