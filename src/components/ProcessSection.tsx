@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Layers, ArrowUpRight } from 'lucide-react';
+import { Layers, ArrowUpRight, Compass, Code, Search, Zap, TrendingUp } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
 interface ProcessSectionProps {
@@ -10,13 +10,13 @@ interface ProcessSectionProps {
 
 interface TeamMemberCard {
   id: string;
-  name: string;
+  stepNum: string;
   role: string;
+  name: string;
   description: string;
-  imageSrc: string;
+  avatarIcon: any;
   isFeatured?: boolean;
-  ctaLabel?: string;
-  ctaHref?: string;
+  ctaLabel: string;
   jitterRotate: number;
   jitterY: number;
   spreadX: number;
@@ -24,64 +24,77 @@ interface TeamMemberCard {
   spreadRotate: number;
 }
 
-const processTeamCards: TeamMemberCard[] = [
+const process5StepCards: TeamMemberCard[] = [
   {
-    id: 'entry',
-    name: '01. Rapid Audit & Entry',
-    role: 'DAY 01 • INSTANT TRACTION',
-    description: 'We step in within 24 hours to audit your site, messaging, and funnel to eliminate lost revenue points.',
-    imageSrc: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
-    isFeatured: true,
-    ctaLabel: 'Rapid 24h Entry',
-    ctaHref: '#inquiry',
-    jitterRotate: -4,
-    jitterY: -8,
-    spreadX: -320,
-    spreadY: 12,
-    spreadRotate: -8,
+    id: 'research',
+    stepNum: '01',
+    role: 'STAGE 01 • AUDIT & DISCOVERY',
+    name: '01. Research & Audit',
+    description: 'We analyze your target market, buyer friction points, and competitor blind spots to locate immediate growth levers.',
+    avatarIcon: Search,
+    ctaLabel: 'Audit Market',
+    jitterRotate: -8,
+    jitterY: -6,
+    spreadX: -360,
+    spreadY: 14,
+    spreadRotate: -12,
   },
   {
     id: 'positioning',
-    name: '02. Strategy & Copy',
-    role: 'DAYS 02–05 • POSITIONED TO WIN',
-    description: 'We craft sharp conversion messaging so potential buyers grasp your unique value in under 3 seconds.',
-    imageSrc: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80',
-    ctaLabel: 'Conversion Messaging',
-    ctaHref: '#inquiry',
-    jitterRotate: 2,
-    jitterY: -4,
-    spreadX: -100,
-    spreadY: -6,
-    spreadRotate: -3,
+    stepNum: '02',
+    role: 'STAGE 02 • STRATEGY & COPY',
+    name: '02. Strategy & Concepting',
+    description: 'We craft sharp positioning headlines and value props so potential buyers grasp your unique advantage in under 3 seconds.',
+    avatarIcon: Compass,
+    ctaLabel: 'Position Brand',
+    jitterRotate: -3,
+    jitterY: -2,
+    spreadX: -180,
+    spreadY: -4,
+    spreadRotate: -5,
   },
   {
     id: 'build',
-    name: '03. High-Velocity Build',
-    role: 'DAYS 06–15 • 99+ SPEED ENGINE',
-    description: 'Custom React codebase built in parallel with Lighthouse 100/100 performance and zero template bloat.',
-    imageSrc: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=400&q=80',
-    ctaLabel: 'React Codebase',
-    ctaHref: '#inquiry',
-    jitterRotate: -2,
-    jitterY: 4,
-    spreadX: 120,
-    spreadY: 6,
-    spreadRotate: 3,
+    stepNum: '03',
+    role: 'STAGE 03 • 99+ SPEED ENGINE',
+    name: '03. Meticulous UI/UX & Build',
+    description: 'Bespoke React codebase engineered in parallel with Lighthouse 100/100 performance baseline and zero template bloat.',
+    avatarIcon: Code,
+    isFeatured: true,
+    ctaLabel: 'Build React Code',
+    jitterRotate: 0,
+    jitterY: 0,
+    spreadX: 0,
+    spreadY: -10,
+    spreadRotate: 0,
+  },
+  {
+    id: 'handoff',
+    stepNum: '04',
+    role: 'STAGE 04 • RAPID PROTOCOL',
+    name: '04. Developer Handoff & QA',
+    description: 'We deploy infrastructure to edge CDNs, configure automated CRM webhooks, and complete strict pre-launch checklists.',
+    avatarIcon: Zap,
+    ctaLabel: 'Deploy QA Engine',
+    jitterRotate: 4,
+    jitterY: 3,
+    spreadX: 180,
+    spreadY: -4,
+    spreadRotate: 5,
   },
   {
     id: 'scale',
-    name: '04. Launch & Scale',
-    role: 'DAY 16+ • 4.8X REVENUE MULTIPLIER',
-    description: 'Zero-downtime deployment with active conversion telemetry tracking and ongoing revenue optimization.',
-    imageSrc: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
-    isFeatured: true,
+    stepNum: '05',
+    role: 'STAGE 05 • 4.8X REVENUE TUNING',
+    name: '05. Rollout & Growth Tuning',
+    description: 'Continuous conversion rate telemetry monitoring, live A/B split testing, and revenue tuning for compounding momentum.',
+    avatarIcon: TrendingUp,
     ctaLabel: 'Scale Revenue',
-    ctaHref: '#inquiry',
-    jitterRotate: 4,
+    jitterRotate: 9,
     jitterY: 8,
-    spreadX: 340,
-    spreadY: -10,
-    spreadRotate: 8,
+    spreadX: 360,
+    spreadY: 14,
+    spreadRotate: 12,
   },
 ];
 
@@ -90,7 +103,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   isDarkMode = true,
 }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const [activeCardId, setActiveCardId] = useState<string>('entry');
+  const [activeCardId, setActiveCardId] = useState<string>('build');
 
   return (
     <section
@@ -99,7 +112,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
-      {/* Background Grid */}
+      {/* Background Architectural Grid */}
       <div
         className={`absolute inset-0 bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none ${
           isDarkMode
@@ -109,7 +122,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
       />
 
       {/* Ambient Radial Spotlight */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-radial from-[#FF7A1A]/15 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-radial from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12 text-center">
         
@@ -123,7 +136,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest backdrop-blur-md">
             <Layers className="w-3.5 h-3.5" />
-            <span>TEAM STACK PROCESS DECK</span>
+            <span>EXACT 5-STEP TEAM STACK PROCESS DECK</span>
           </div>
 
           <h2
@@ -142,18 +155,19 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
               isDarkMode ? 'text-[#B8B8B8]' : 'text-[#52525B]'
             }`}
           >
-            Hover or tap the deck to fan out and explore our execution stages.
+            Hover or tap the 5-card deck to fan out and explore our studio execution methodology.
           </p>
         </motion.div>
 
-        {/* TEAM STACK DECK CONTAINER (EXPAND ON HOVER / TAP, CLOSE ON LEAVE) */}
+        {/* 5-CARD TEAM STACK DECK CONTAINER (EXACT MATCHING UI.UNLUMEN.COM) */}
         <div
           onMouseEnter={() => setIsExpanded(true)}
           onMouseLeave={() => setIsExpanded(false)}
-          className="relative h-[420px] sm:h-[460px] max-w-5xl mx-auto flex items-center justify-center py-8"
+          className="relative h-[440px] sm:h-[480px] max-w-6xl mx-auto flex items-center justify-center py-8"
         >
-          {processTeamCards.map((card, idx) => {
+          {process5StepCards.map((card, idx) => {
             const isActive = card.id === activeCardId;
+            const IconComp = card.avatarIcon;
 
             return (
               <motion.div
@@ -165,71 +179,70 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 animate={
                   isExpanded
                     ? {
-                        x: window.innerWidth > 768 ? card.spreadX : (idx - 1.5) * 80,
+                        x: window.innerWidth > 1024 ? card.spreadX : (idx - 2) * 75,
                         y: card.spreadY,
                         rotate: card.spreadRotate,
-                        scale: isActive ? 1.05 : 0.96,
-                        zIndex: isActive ? 40 : 20 - idx,
+                        scale: isActive ? 1.05 : 0.95,
+                        zIndex: isActive ? 50 : 30 - Math.abs(idx - 2),
                       }
                     : {
-                        x: (idx - 1.5) * 18,
+                        x: (idx - 2) * 22,
                         y: card.jitterY,
                         rotate: card.jitterRotate,
-                        scale: isActive ? 1.02 : 0.96,
-                        zIndex: isActive ? 40 : 20 - idx,
+                        scale: isActive ? 1.02 : 0.95,
+                        zIndex: isActive ? 50 : 30 - Math.abs(idx - 2),
                       }
                 }
                 transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-                className={`absolute w-72 sm:w-80 rounded-3xl p-6 border text-left cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl ${
-                  card.isFeatured
-                    ? isDarkMode
-                      ? 'bg-[#121215] text-white border-[#FF7A1A]/60 ring-1 ring-[#FF7A1A]/30 shadow-[#FF7A1A]/20'
-                      : 'bg-zinc-900 text-white border-[#FF7A1A] shadow-xl'
+                className={`absolute w-64 sm:w-72 rounded-3xl p-5 border text-left cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl ${
+                  isActive || card.isFeatured
+                    ? 'bg-[#121215] text-white border-[#FF7A1A]/70 ring-1 ring-[#FF7A1A]/40 shadow-[0_0_40px_rgba(255,122,26,0.25)]'
                     : isDarkMode
                     ? 'bg-[#0A0A0C] text-zinc-200 border-zinc-800 hover:border-zinc-700'
                     : 'bg-white text-zinc-900 border-zinc-200 shadow-lg'
                 }`}
               >
-                {/* Member Avatar / Step Icon Header */}
-                <div className="flex items-center gap-4 mb-4">
-                  <img
-                    src={card.imageSrc}
-                    alt={card.name}
-                    className="w-14 h-14 rounded-2xl object-cover border border-[#FF7A1A]/40 shadow-md"
-                  />
-                  <div>
-                    <div className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider">
-                      {card.role}
-                    </div>
-                    <h3 className="font-display text-lg font-bold leading-snug">
-                      {card.name}
-                    </h3>
+                {/* Top Avatar Canvas Box with Top-Right Spring CTA Button */}
+                <div className="relative mb-4">
+                  <div className={`w-full h-32 rounded-2xl flex items-center justify-center relative overflow-hidden ${
+                    isActive || card.isFeatured
+                      ? 'bg-zinc-800/80 border border-zinc-700'
+                      : 'bg-zinc-900/60 border border-zinc-800'
+                  }`}>
+                    <IconComp className="w-12 h-12 text-[#FF7A1A] filter drop-shadow-[0_4px_12px_rgba(255,122,26,0.5)]" />
                   </div>
+
+                  {/* Top-Right Spring Animated Pill Button (Matching unlumen UI) */}
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onOpenInquiry?.();
+                    }}
+                    className={`absolute top-2.5 right-2.5 flex items-center gap-1.5 px-3 py-1.5 rounded-full font-mono text-[11px] font-bold transition-all shadow-md cursor-pointer ${
+                      isActive
+                        ? 'bg-[#FF7A1A] text-white shadow-[#FF7A1A]/40'
+                        : 'bg-zinc-900/90 text-zinc-300 border border-zinc-700 hover:text-white hover:border-[#FF7A1A]'
+                    }`}
+                  >
+                    <span>{isActive ? card.ctaLabel : 'Connect'}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
+                  </button>
                 </div>
 
+                {/* Subtitle / Role Tag */}
+                <div className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider mb-1">
+                  {card.role}
+                </div>
+
+                {/* Card Title */}
+                <h3 className="font-display text-lg font-bold leading-snug mb-2 text-white">
+                  {card.name}
+                </h3>
+
                 {/* Description Copy */}
-                <p className={`text-xs leading-relaxed mb-6 ${
-                  card.isFeatured || isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
-                }`}>
+                <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3">
                   {card.description}
                 </p>
-
-                {/* Animated Spring CTA Pill Button */}
-                {card.ctaLabel && (
-                  <div className="pt-2 flex items-center justify-between border-t border-zinc-800/80">
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        onOpenInquiry?.();
-                      }}
-                      className="px-4 py-2 rounded-full bg-[#FF7A1A] text-white text-xs font-mono font-bold flex items-center gap-1.5 hover:bg-[#EA580C] transition-all shadow-md shadow-[#FF7A1A]/30 cursor-pointer"
-                    >
-                      <span>{card.ctaLabel}</span>
-                      <ArrowUpRight className="w-3.5 h-3.5" />
-                    </button>
-                    <span className="text-[10px] font-mono text-zinc-500">ROOS STUDIO</span>
-                  </div>
-                )}
               </motion.div>
             );
           })}
