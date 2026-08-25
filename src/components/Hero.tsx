@@ -97,22 +97,27 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
 
       <div className="max-w-[1750px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
         
-        {/* 1. TOP CENTER: 2-LINE LARGE HEADLINE (SILVER TOP LINE & ORANGE BOTTOM LINE, NO SUBHEAD) */}
+        {/* 1. TOP CENTER: 2-LINE HEADLINE (1:1 MATCH TO REFERENCE IMAGE media_1787682552969.png) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-center max-w-5xl mx-auto flex flex-col items-center mb-2 sm:mb-4 px-2"
+          className="text-center max-w-6xl mx-auto flex flex-col items-center mb-2 sm:mb-4 px-2"
         >
           <motion.h2
             variants={itemVariants}
-            className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.08] text-center"
+            className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.06] text-center"
           >
-            <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent block pb-1">
-              You Bring Ambition
+            <span className="text-white block pb-1">
+              You bring ambition.
             </span>
-            <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
-              We’ll Build The Win
+            <span className="block pt-1">
+              <span className="bg-gradient-to-r from-zinc-100 via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+                We’ll build the{' '}
+              </span>
+              <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent">
+                momentum
+              </span>
             </span>
           </motion.h2>
         </motion.div>
