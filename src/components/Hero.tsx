@@ -122,7 +122,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
         {/* 2. MIDDLE 2-COLUMN GRID (+15% WIDER SECTION CONTAINER) */}
         <div className="w-full max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center -mt-4 sm:-mt-8 md:-mt-10 relative z-20">
           
-          {/* MASCOT IN CENTER/LEFT WITH FLOATING ANTI-GRAVITY ELEMENTS (5 COLS) */}
+          {/* MASCOT IN CENTER/LEFT (5 COLS) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -130,18 +130,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
             className="lg:col-span-5 flex justify-center lg:justify-end items-center relative z-20 w-full"
           >
             <div className="relative w-full max-w-[440px] flex items-center justify-center">
-              {/* Apple-Level Minimalist Anti-Gravity Floating Objects */}
-              <AntiGravityElements isDarkMode={isDarkMode} />
               <KangarooMascot />
             </div>
           </motion.div>
 
-          {/* VERTICALLY CENTER-ALIGNED RIGHT COLUMN TEXT & BUTTON (7 COLS) */}
+          {/* VERTICALLY CENTER-ALIGNED RIGHT COLUMN TEXT, FLOATING PILLS & BUTTON (7 COLS) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-7 flex flex-col items-start justify-center text-left space-y-6 lg:pl-4 py-4"
+            className="lg:col-span-7 flex flex-col items-start justify-center text-left space-y-4 sm:space-y-5 lg:pl-4 py-4"
           >
             <p
               className={`text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-[645px] text-left transition-colors duration-500 ${
@@ -150,6 +148,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
             >
               Roos StudioX helps businesses build stronger brands, create high-performing digital experiences and develop scalable systems for growth. We combine strategy, design and technology to attract the right audience, strengthen customer trust and drive measurable business results. Our focus is simple: turning digital presence into sustainable growth.
             </p>
+
+            {/* ELEGANT FLOATING ANIMATED MICRO-PILLS (PLACED BETWEEN DESCRIPTION & BUTTON) */}
+            <AntiGravityElements isDarkMode={isDarkMode} />
 
             {/* ACTION BUTTON & CIRCULAR ROTATING TEXT DOWN ARROW BADGE */}
             <motion.div
