@@ -102,7 +102,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   return (
     <section
       id="process"
-      className={`relative py-20 sm:py-28 transition-colors duration-500 overflow-hidden ${
+      className={`relative pt-10 sm:pt-14 pb-16 sm:pb-24 transition-colors duration-500 overflow-hidden ${
         isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
@@ -118,9 +118,9 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
       {/* Ambient Radial Spotlight */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-radial from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 text-center">
         
-        {/* HEADER BLOCK (CALIBRATED STRICTLY TO 2 CLEAN LINES) */}
+        {/* HEADER BLOCK (REDUCED TOP PADDING & REMOVED FULL STOP) */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -135,7 +135,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
               Our 5-Phase Execution Methodology
             </span>
             <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
-              Built For High-Velocity Growth.
+              Built For High-Velocity Growth
             </span>
           </h2>
         </motion.div>
