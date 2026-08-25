@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Compass,
   Target,
@@ -25,7 +25,10 @@ import {
   BarChart2,
   Filter,
   Rocket,
+  ArrowRight,
+  ArrowLeft,
 } from 'lucide-react';
+import { AlphaRoosButton } from './AlphaRoosButton';
 
 interface ProcessSectionProps {
   onOpenInquiry?: () => void;
@@ -34,6 +37,7 @@ interface ProcessSectionProps {
 
 interface SubNode {
   title: string;
+  desc: string;
   icon: React.ElementType;
 }
 
@@ -41,12 +45,10 @@ interface ProcessColumnData {
   num: string;
   id: string;
   title: string;
-  taglineLine1: string;
-  taglineLine2: string;
-  descLine1: string;
-  descLine2: string;
-  descLine3: string;
-  descLine4: string;
+  tagline: string;
+  description: string;
+  impactMetric: string;
+  impactLabel: string;
   icon: React.ElementType;
   subNodes: SubNode[];
 }
@@ -56,103 +58,109 @@ const processColumnsData: ProcessColumnData[] = [
     num: '01',
     id: 'discover',
     title: 'Discover',
-    taglineLine1: 'We uncover',
-    taglineLine2: 'what others miss',
-    descLine1: 'We analyze your market,',
-    descLine2: 'audience and competitors to',
-    descLine3: 'uncover opportunities that',
-    descLine4: 'create competitive advantage.',
+    tagline: 'We Uncover What Others Miss',
+    description:
+      'Before writing code or designing pixels, we perform deep-dive architectural discovery. We analyze your market ecosystem, target customer friction points, and competitor positioning to map high-leverage growth opportunities.',
+    impactMetric: '+180%',
+    impactLabel: 'Market Opportunity Clarity',
     icon: Compass,
     subNodes: [
-      { title: 'Business Audit', icon: FileText },
-      { title: 'Market Intelligence', icon: PieChart },
-      { title: 'Audience Research', icon: Users },
-      { title: 'Opportunity Mapping', icon: MapPin },
+      { title: 'Business Audit', desc: 'Full infrastructure & revenue bottleneck analysis', icon: FileText },
+      { title: 'Market Intelligence', desc: 'Competitor gap & positioning teardowns', icon: PieChart },
+      { title: 'Audience Research', desc: 'ICP buyer friction & intent mapping', icon: Users },
+      { title: 'Opportunity Mapping', desc: 'High-ROI strategic execution blueprints', icon: MapPin },
     ],
   },
   {
     num: '02',
     id: 'define',
     title: 'Define',
-    taglineLine1: 'Strategy',
-    taglineLine2: 'before execution',
-    descLine1: 'We craft precise positioning',
-    descLine2: 'and strategic roadmaps so',
-    descLine3: 'every decision moves your',
-    descLine4: 'brand forward with clarity.',
+    tagline: 'Strategy Before Execution',
+    description:
+      'Execution without strategy is wasted momentum. We define razor-sharp brand positioning, value proposition frameworks, and strategic product roadmaps to ensure every asset drives measurable revenue outcomes.',
+    impactMetric: '100%',
+    impactLabel: 'Strategic Messaging Alignment',
     icon: Target,
     subNodes: [
-      { title: 'Positioning', icon: Flag },
-      { title: 'Messaging', icon: MessageSquare },
-      { title: 'Customer Journey', icon: Users },
-      { title: 'Strategic Roadmap', icon: Map },
+      { title: 'Brand Positioning', desc: 'Unfair market advantage formulation', icon: Flag },
+      { title: 'Messaging Framework', desc: 'High-converting value proposition copy', icon: MessageSquare },
+      { title: 'Customer Journey', desc: 'Frictionless conversion funnel design', icon: Users },
+      { title: 'Strategic Roadmap', desc: 'Milestone-driven execution timeline', icon: Map },
     ],
   },
   {
     num: '03',
     id: 'design',
     title: 'Design',
-    taglineLine1: 'Create experiences',
-    taglineLine2: 'people remember',
-    descLine1: 'We design iconic visual',
-    descLine2: 'identities and digital products',
-    descLine3: 'that build trust, communicate',
-    descLine4: 'authority, and convert.',
+    tagline: 'Create Experiences People Remember',
+    description:
+      'We craft world-class visual identity systems, spatial UI/UX interfaces, and interactive webGL motion design that command authority, inspire buyer trust, and elevate brand perception.',
+    impactMetric: '3.4x',
+    impactLabel: 'Brand Perception Elevation',
     icon: Palette,
     subNodes: [
-      { title: 'Brand Systems', icon: Layers },
-      { title: 'Website Design', icon: Layout },
-      { title: 'UI / UX Design', icon: Smartphone },
-      { title: 'Motion Design', icon: Video },
+      { title: 'Brand Systems', desc: 'Scalable design systems & guidelines', icon: Layers },
+      { title: 'Website Architecture', desc: 'High-converting digital flagship layouts', icon: Layout },
+      { title: 'UI / UX Design', desc: 'Intuitive spatial digital interfaces', icon: Smartphone },
+      { title: 'Motion & WebGL', desc: 'Immersive micro-interactions & shaders', icon: Video },
     ],
   },
   {
     num: '04',
     id: 'build',
     title: 'Build',
-    taglineLine1: 'Built for',
-    taglineLine2: 'performance',
-    descLine1: 'We engineer high-performance',
-    descLine2: 'platforms, modern web',
-    descLine3: 'architecture, and AI systems',
-    descLine4: 'built to scale effortlessly.',
+    tagline: 'Built For Sub-100ms Performance',
+    description:
+      'We engineer ultra-fast web platforms, headless CMS integrations, and custom AI automation workflows designed to scale effortlessly under high enterprise traffic volumes.',
+    impactMetric: '<100ms',
+    impactLabel: 'Sub-100ms Render Performance',
     icon: Code2,
     subNodes: [
-      { title: 'Development', icon: Code },
-      { title: 'Headless CMS', icon: Database },
-      { title: 'AI Systems', icon: Bot },
-      { title: 'Automation & Integrations', icon: Zap },
+      { title: 'Modern Web Stack', desc: 'React, Vite, Next & TypeScript build', icon: Code },
+      { title: 'Headless CMS', desc: 'Decoupled lightning-fast content engines', icon: Database },
+      { title: 'AI Automation', desc: 'Autonomous LLM agent & lead workflows', icon: Bot },
+      { title: 'System Integrations', desc: 'Custom API & CRM webhook pipelines', icon: Zap },
     ],
   },
   {
     num: '05',
     id: 'scale',
     title: 'Scale',
-    taglineLine1: 'Growth never',
-    taglineLine2: 'stops at launch',
-    descLine1: 'We deploy conversion engines,',
-    descLine2: 'search strategies, and',
-    descLine3: 'analytics systems that drive',
-    descLine4: 'continuous revenue growth.',
+    tagline: 'Growth Never Stops At Launch',
+    description:
+      'Post-launch is where momentum compounds. We deploy automated lead acquisition pipelines, SEO/GEO search engines, and real-time analytics to drive sustainable revenue growth.',
+    impactMetric: '24/7',
+    impactLabel: 'Automated Growth Engine',
     icon: TrendingUp,
     subNodes: [
-      { title: 'SEO & GEO', icon: Search },
-      { title: 'Analytics', icon: BarChart2 },
-      { title: 'Conversion Tuning', icon: Filter },
-      { title: 'Growth Systems', icon: Rocket },
+      { title: 'SEO & GEO Engine', desc: 'AI-search & generative engine optimization', icon: Search },
+      { title: 'Analytics Radar', desc: 'Real-time user telemetry & funnel tracking', icon: BarChart2 },
+      { title: 'Conversion Tuning', desc: 'Continuous A/B testing & UX refinement', icon: Filter },
+      { title: 'Growth Systems', desc: 'Predictable recurring lead pipelines', icon: Rocket },
     ],
   },
 ];
 
 export const ProcessSection: React.FC<ProcessSectionProps> = ({
+  onOpenInquiry,
   isDarkMode = false,
 }) => {
-  const [activeColumn, setActiveColumn] = useState<number>(0);
+  const [activeStep, setActiveStep] = useState<number>(0);
+
+  const currentStage = processColumnsData[activeStep];
+
+  const nextStep = () => {
+    setActiveStep((prev) => (prev + 1) % processColumnsData.length);
+  };
+
+  const prevStep = () => {
+    setActiveStep((prev) => (prev - 1 + processColumnsData.length) % processColumnsData.length);
+  };
 
   return (
     <section
       id="process"
-      className={`relative pt-6 pb-12 sm:pt-8 sm:pb-16 transition-colors duration-500 overflow-hidden ${
+      className={`relative py-16 sm:py-24 transition-colors duration-500 overflow-hidden ${
         isDarkMode ? 'bg-[#0A0A0A] text-white' : 'bg-white text-[#111111]'
       }`}
     >
@@ -165,177 +173,292 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         }`}
       />
 
-      {/* Ambient Radial Spotlight Backlight */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#F97316]/10 via-[#FB923C]/15 to-[#FDBA74]/10 rounded-full blur-[140px] pointer-events-none" />
+      {/* Dynamic Backlight Spotlight */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-radial from-[#F97316]/15 via-[#F97316]/5 to-transparent blur-[140px] pointer-events-none" />
 
-      <div className="max-w-[1750px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* HEADER BLOCK (PREMIUM METALLIC SILVER GRADIENT IN DARK MODE) */}
+        {/* HEADER BLOCK */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-4xl mx-auto mb-8 sm:mb-10 space-y-2"
+          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 space-y-3"
         >
-          {/* Main Headline with Metallic Silver Gradient in Dark Mode */}
           <h2
-            className={`font-display text-[33px] sm:text-[57px] md:text-[69px] font-bold tracking-tighter leading-[0.96] ${
+            className={`font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-[0.96] ${
               isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
             }`}
           >
             <span className="block leading-[0.96]">Growth Isn't an Event</span>
-            <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FDBA74] bg-clip-text text-transparent block leading-[0.96] mt-0.5">
-              It's a System
+            <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FDBA74] bg-clip-text text-transparent block leading-[0.96] mt-1">
+              It's a Strategic Blueprint
             </span>
           </h2>
 
-          {/* Subtitle Paragraph */}
           <p
-            className={`mt-3 text-[15px] sm:text-[20px] font-medium leading-snug max-w-3xl mx-auto transition-colors duration-500 ${
-              isDarkMode ? 'text-[#CBD5E1]' : 'text-[#52525B]'
+            className={`mt-4 text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto transition-colors duration-500 ${
+              isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
             }`}
           >
-            <span className="block">Discover opportunities. Define direction. Design experiences.</span>
-            <span className="block mt-0.5">Build foundations. Scale with confidence.</span>
+            Our 5-stage growth architecture turns complex brand challenges into predictable momentum.
           </p>
         </motion.div>
 
-        {/* 5-COLUMN SYSTEM PIPELINE GRID */}
-        <div className="relative">
+        {/* 1. HIGH-TECH LASER CONNECTED PIPELINE STEPPER BAR */}
+        <div className="mb-10 sm:mb-12 relative max-w-5xl mx-auto">
+          {/* Laser Progress Beam Background Line */}
+          <div
+            className={`absolute top-1/2 left-6 right-6 -translate-y-1/2 h-1 rounded-full pointer-events-none ${
+              isDarkMode ? 'bg-[#27272A]' : 'bg-[#E4E4E7]'
+            }`}
+          >
+            {/* Active Glowing Laser Progress Beam */}
+            <motion.div
+              className="h-full bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C] rounded-full shadow-[0_0_15px_rgba(249,115,22,0.6)]"
+              animate={{ width: `${((activeStep + 1) / processColumnsData.length) * 100}%` }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            />
+          </div>
 
-          {/* Mobile Interactive Step Selector Tabs (md:hidden) */}
-          <div className="md:hidden mb-6 flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-none snap-x">
-            {processColumnsData.map((col, idx) => {
-              const isActive = idx === activeColumn;
+          {/* Stepper Node Buttons */}
+          <div className="relative z-10 flex items-center justify-between">
+            {processColumnsData.map((step, idx) => {
+              const StepIcon = step.icon;
+              const isActive = idx === activeStep;
+              const isPassed = idx < activeStep;
+
               return (
                 <button
-                  key={col.id}
-                  onClick={() => setActiveColumn(idx)}
-                  className={`snap-start shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all border flex items-center gap-2 cursor-pointer ${
-                    isActive
-                      ? 'bg-[#F97316] text-white border-[#F97316] shadow-md shadow-[#F97316]/30'
-                      : isDarkMode
-                      ? 'bg-[#18181B] text-[#D4D4D8] border-[#27272A]'
-                      : 'bg-white text-[#111111] border-[#E4E4E7]'
-                  }`}
+                  key={step.id}
+                  onClick={() => setActiveStep(idx)}
+                  className="group flex flex-col items-center cursor-pointer focus:outline-none"
+                  aria-label={`Jump to stage ${step.num}: ${step.title}`}
                 >
-                  <span className="opacity-75">{col.num}</span>
-                  <span>{col.title}</span>
+                  {/* Step Icon Badge */}
+                  <div
+                    className={`w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center transition-all duration-300 relative border ${
+                      isActive
+                        ? 'bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white border-[#FDBA74] shadow-xl shadow-[#F97316]/40 scale-110'
+                        : isPassed
+                        ? isDarkMode
+                          ? 'bg-[#18181B] text-[#F97316] border-[#F97316]/40'
+                          : 'bg-orange-50 text-[#F97316] border-[#F97316]/30'
+                        : isDarkMode
+                        ? 'bg-[#111111] text-[#71717A] border-[#27272A] hover:border-[#F97316]/50 hover:text-white'
+                        : 'bg-white text-[#71717A] border-[#E4E4E7] hover:border-[#F97316]/50 hover:text-[#111111]'
+                    }`}
+                  >
+                    <StepIcon className="w-5 h-5 sm:w-7 sm:h-7" />
+                    
+                    {/* Active Halo Pulse */}
+                    {isActive && (
+                      <span className="absolute -inset-1 rounded-2xl bg-[#F97316]/30 blur-sm animate-pulse -z-10" />
+                    )}
+                  </div>
+
+                  {/* Step Title Label */}
+                  <div className="mt-2 text-center">
+                    <span
+                      className={`text-[10px] font-mono font-extrabold uppercase tracking-wider block ${
+                        isActive
+                          ? 'text-[#F97316]'
+                          : isDarkMode
+                          ? 'text-zinc-500'
+                          : 'text-zinc-400'
+                      }`}
+                    >
+                      Stage {step.num}
+                    </span>
+                    <span
+                      className={`text-xs sm:text-sm font-bold tracking-tight block transition-colors ${
+                        isActive
+                          ? isDarkMode
+                            ? 'text-white'
+                            : 'text-[#111111]'
+                          : isDarkMode
+                          ? 'text-[#A1A1AA] group-hover:text-white'
+                          : 'text-[#71717A] group-hover:text-[#111111]'
+                      }`}
+                    >
+                      {step.title}
+                    </span>
+                  </div>
                 </button>
               );
             })}
           </div>
+        </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5 items-stretch relative z-10">
-            {processColumnsData.map((col, idx) => {
-              const ColIcon = col.icon;
-              const isActive = idx === activeColumn;
+        {/* 2. MASTER STAGE SHOWCASE CONSOLE DECK */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentStage.id}
+            initial={{ opacity: 0, y: 25, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -25, scale: 0.98 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className={`rounded-3xl border p-6 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur-2xl transition-colors duration-500 ${
+              isDarkMode
+                ? 'bg-[#141417]/90 border-[#27272A] text-white shadow-black/60'
+                : 'bg-white border-[#E4E4E7] text-[#111111] shadow-black/10'
+            }`}
+          >
+            {/* Top Glowing Laser Border Line */}
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C]" />
 
-              return (
-                <motion.div
-                  key={col.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
-                  onMouseEnter={() => setActiveColumn(idx)}
-                  whileHover={{ y: -8, scale: 1.015 }}
-                  className={`group cursor-pointer rounded-3xl p-5 sm:p-6 transition-all duration-500 flex flex-col items-center text-center relative overflow-hidden backdrop-blur-2xl border ${
-                    isActive
-                      ? isDarkMode
-                        ? 'bg-[#18181B] text-white border-[#F97316] shadow-[0_20px_50px_-10px_rgba(249,115,22,0.3)] ring-1 ring-[#F97316]/50'
-                        : 'bg-white text-[#111111] border-[#F97316] shadow-[0_20px_50px_-12px_rgba(249,115,22,0.22)] ring-1 ring-[#F97316]/40'
-                      : isDarkMode
-                      ? 'bg-[#111111]/80 text-[#D4D4D8] border-[#27272A] hover:border-[#F97316]/60 hover:bg-[#18181B]'
-                      : 'bg-[#FAFAFA]/90 text-[#111111] border-[#E4E4E7] hover:border-[#F97316]/50 hover:bg-white shadow-xs'
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              {/* LEFT COLUMN: STRATEGY & NARRATIVE (6 COLS) */}
+              <div className="lg:col-span-6 space-y-6 text-left">
+                {/* Stage Badge & Index */}
+                <div className="flex items-center gap-3">
+                  <span className="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-widest bg-[#F97316]/15 text-[#F97316] border border-[#F97316]/30">
+                    Stage {currentStage.num} of 05 • Architecture
+                  </span>
+                </div>
+
+                {/* Main Stage Headline & Tagline */}
+                <div>
+                  <h3
+                    className={`font-display text-3xl sm:text-5xl font-black tracking-tight leading-none ${
+                      isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
+                    }`}
+                  >
+                    {currentStage.title}
+                  </h3>
+                  <div className="text-base sm:text-xl font-extrabold text-[#F97316] mt-2 tracking-tight">
+                    {currentStage.tagline}
+                  </div>
+                </div>
+
+                {/* Narrative Description */}
+                <p
+                  className={`text-sm sm:text-base leading-relaxed font-normal ${
+                    isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
                   }`}
                 >
-                  {/* TOP BRAND LASER BEAM HIGHLIGHT */}
-                  <div
-                    className={`absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FDBA74] transition-opacity duration-300 ${
-                      isActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                    }`}
-                  />
+                  {currentStage.description}
+                </p>
 
-                  {/* STEP 1: LUMINOUS 3D BRAND ORANGE ICON BADGE (h-[68px]) */}
-                  <div className="h-[68px] w-full flex items-center justify-center text-center mb-1 relative z-10">
-                    <div className="relative">
-                      {/* Outer Glow Halo Ring */}
-                      <div
-                        className={`absolute -inset-1.5 rounded-2xl bg-gradient-to-r from-[#F97316] to-[#FDBA74] blur-sm transition-opacity duration-300 ${
-                          isActive ? 'opacity-80' : 'opacity-20 group-hover:opacity-100'
+                {/* Impact Metric Radar Badge */}
+                <div
+                  className={`p-4 rounded-2xl border flex items-center gap-4 shadow-sm ${
+                    isDarkMode
+                      ? 'bg-[#18181B] border-[#27272A]'
+                      : 'bg-[#FAFAFA] border-[#E4E4E7]'
+                  }`}
+                >
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white font-black font-display text-base flex items-center justify-center shrink-0 shadow-md shadow-[#F97316]/30">
+                    {currentStage.impactMetric}
+                  </div>
+                  <div>
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#F97316] block">
+                      Target System Impact
+                    </span>
+                    <span
+                      className={`text-xs sm:text-sm font-semibold block ${
+                        isDarkMode ? 'text-white' : 'text-[#111111]'
+                      }`}
+                    >
+                      {currentStage.impactLabel}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Stage Controls */}
+                <div className="pt-2 flex items-center gap-3 flex-wrap">
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={prevStep}
+                      className={`p-3 rounded-xl border transition-all cursor-pointer ${
+                        isDarkMode
+                          ? 'bg-[#18181B] border-[#27272A] text-white hover:border-[#F97316]'
+                          : 'bg-white border-[#E4E4E7] text-[#111111] hover:border-[#F97316]'
+                      }`}
+                      aria-label="Previous Stage"
+                    >
+                      <ArrowLeft className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={nextStep}
+                      className={`p-3 rounded-xl border transition-all cursor-pointer ${
+                        isDarkMode
+                          ? 'bg-[#18181B] border-[#27272A] text-white hover:border-[#F97316]'
+                          : 'bg-white border-[#E4E4E7] text-[#111111] hover:border-[#F97316]'
+                      }`}
+                      aria-label="Next Stage"
+                    >
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  {onOpenInquiry && (
+                    <AlphaRoosButton
+                      text="Get Your Free Audit"
+                      onClick={onOpenInquiry}
+                      isDarkMode={isDarkMode}
+                      compact
+                    />
+                  )}
+                </div>
+              </div>
+
+              {/* RIGHT COLUMN: CAPABILITY TILES MATRIX (6 COLS) */}
+              <div className="lg:col-span-6 space-y-4">
+                <div className="flex items-center justify-between border-b pb-3 border-[#27272A]">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#F97316]">
+                    Execution Deliverables ({currentStage.subNodes.length})
+                  </span>
+                  <span className="text-xs font-mono opacity-60">Stage {currentStage.num}</span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {currentStage.subNodes.map((sub, sIdx) => {
+                    const SubIcon = sub.icon;
+
+                    return (
+                      <motion.div
+                        key={sIdx}
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.35, delay: sIdx * 0.06 }}
+                        whileHover={{ y: -4, scale: 1.02 }}
+                        className={`p-4 rounded-2xl border transition-all duration-300 text-left flex flex-col justify-between ${
+                          isDarkMode
+                            ? 'bg-[#18181B] border-[#27272A] hover:border-[#F97316] hover:shadow-lg hover:shadow-[#F97316]/20'
+                            : 'bg-[#FAFAFA] border-[#E4E4E7] hover:border-[#F97316] hover:bg-white hover:shadow-lg hover:shadow-[#F97316]/15'
                         }`}
-                      />
-                      
-                      <div className="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl flex items-center justify-center font-bold relative bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white shadow-lg shadow-[#F97316]/30 border border-[#FDBA74]/50 group-hover:rotate-6 group-hover:scale-105 transition-all duration-300">
-                        <ColIcon className="w-8 h-8 sm:w-9 sm:h-9 text-white drop-shadow-sm" />
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* STEP 2: COLUMN TITLE (Silver Gradient in Dark Mode) */}
-                  <div className="h-[42px] w-full flex items-center justify-center text-center my-1 relative z-10">
-                    <h3
-                      className={`font-display text-[26px] sm:text-[32px] font-black tracking-tight leading-none text-center block ${
-                        isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
-                      }`}
-                    >
-                      {col.title}
-                    </h3>
-                  </div>
-
-                  {/* STEP 3: VIBRANT BRAND ORANGE TAGLINE */}
-                  <div className="h-[44px] w-full flex items-center justify-center text-center mb-3 relative z-10">
-                    <h4 className="text-[17px] sm:text-[19px] font-black tracking-tight text-center block text-[#F97316] drop-shadow-2xs">
-                      <span className="block leading-none">{col.taglineLine1}</span>
-                      <span className="block leading-none mt-1">{col.taglineLine2}</span>
-                    </h4>
-                  </div>
-
-                  {/* STEP 4: BODY DESCRIPTION */}
-                  <div className="h-[80px] w-full flex flex-col items-center justify-center text-center mb-5 px-1 relative z-10">
-                    <p
-                      className={`text-[13px] sm:text-[15px] font-medium tracking-tight text-center ${
-                        isDarkMode ? 'text-[#CBD5E1]' : 'text-[#52525B]'
-                      }`}
-                    >
-                      <span className="block leading-[1.2]">{col.descLine1}</span>
-                      <span className="block leading-[1.2]">{col.descLine2}</span>
-                      <span className="block leading-[1.2]">{col.descLine3}</span>
-                      <span className="block leading-[1.2]">{col.descLine4}</span>
-                    </p>
-                  </div>
-
-                  {/* STEP 5: 2 ROWS x 2 COLUMNS HIGH-END CAPABILITIES MATRIX TILES */}
-                  <div className="grid grid-cols-2 gap-2 sm:gap-2.5 w-full relative z-10">
-                    {col.subNodes.map((sub, sIdx) => {
-                      const SubIcon = sub.icon;
-
-                      return (
-                        <div
-                          key={sIdx}
-                          className={`group/tile p-2.5 sm:p-3 rounded-2xl border flex flex-col items-center justify-center text-center transition-all duration-300 h-[78px] ${
-                            isDarkMode
-                              ? 'bg-[#111111] text-[#E2E8F0] border-[#27272A] hover:border-[#F97316] hover:bg-[#18181B] hover:shadow-md hover:shadow-[#F97316]/15'
-                              : 'bg-white text-[#111111] border-[#E4E4E7] hover:border-[#F97316] hover:bg-[#FFF7ED] hover:shadow-md hover:shadow-[#F97316]/15'
-                          }`}
-                        >
-                          <SubIcon className="w-5 h-5 sm:w-5.5 sm:h-5.5 mb-1 shrink-0 text-[#F97316] group-hover/tile:scale-110 transition-transform duration-300" />
-                          <span className="text-[13px] sm:text-[15px] font-bold tracking-tight text-center leading-tight whitespace-normal break-words">
+                      >
+                        <div className="flex items-center gap-3 mb-2">
+                          <div className="w-8 h-8 rounded-xl bg-[#F97316]/15 text-[#F97316] flex items-center justify-center shrink-0 border border-[#F97316]/30">
+                            <SubIcon className="w-4 h-4" />
+                          </div>
+                          <span
+                            className={`font-display text-sm font-bold tracking-tight ${
+                              isDarkMode ? 'text-white' : 'text-[#111111]'
+                            }`}
+                          >
                             {sub.title}
                           </span>
                         </div>
-                      );
-                    })}
-                  </div>
+                        <p
+                          className={`text-xs leading-relaxed font-medium ${
+                            isDarkMode ? 'text-[#A1A1AA]' : 'text-[#71717A]'
+                          }`}
+                        >
+                          {sub.desc}
+                        </p>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </div>
 
-                </motion.div>
-              );
-            })}
-          </div>
-
-        </div>
+            </div>
+          </motion.div>
+        </AnimatePresence>
 
       </div>
     </section>
