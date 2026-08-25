@@ -141,8 +141,8 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* LOCKED HEIGHT UNIFIED ELECTRIC ORANGE ACCORDION DECK */}
-        <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 max-w-7xl mx-auto h-[430px] sm:h-[450px] select-none">
+        {/* LOCKED HEIGHT UNIFIED ELECTRIC ORANGE ACCORDION DECK (REBALANCED FLEX RATIO) */}
+        <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 max-w-7xl mx-auto h-[430px] sm:h-[460px] select-none">
           {process5StepCards.map((card) => {
             const isActive = card.id === activeCardId;
             const IconComp = card.icon;
@@ -153,13 +153,13 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 onClick={() => setActiveCardId(card.id)}
                 onMouseEnter={() => setActiveCardId(card.id)}
                 animate={{
-                  flex: isActive ? (window.innerWidth > 1024 ? 3.2 : 1) : 1,
+                  flex: isActive ? (window.innerWidth > 1024 ? 2.3 : 1) : 1,
                 }}
                 transition={{ type: 'spring', stiffness: 220, damping: 24 }}
                 className={`rounded-3xl p-5 sm:p-6 border cursor-pointer relative overflow-hidden backdrop-blur-2xl transition-colors duration-500 flex flex-col justify-between text-left h-full ${
                   isActive
                     ? 'bg-[#121215] text-white border-[#FF7A1A] ring-2 ring-[#FF7A1A]/30 shadow-[0_20px_50px_rgba(255,122,26,0.3)]'
-                    : 'bg-[#0A0A0C] text-zinc-400 border-zinc-800/90 hover:border-zinc-700 opacity-80 hover:opacity-100'
+                    : 'bg-[#0A0A0C] text-zinc-400 border-zinc-800/90 hover:border-zinc-700 opacity-85 hover:opacity-100'
                 }`}
               >
                 {/* Top Number & Accent Bar */}
@@ -194,11 +194,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   </div>
 
                   {/* Title & Tagline */}
-                  <div className="space-y-0.5 shrink-0">
+                  <div className="space-y-1 shrink-0">
                     <h3 className="font-display text-lg sm:text-xl font-black text-white leading-tight">
                       {card.title}
                     </h3>
-                    <p className="text-xs text-zinc-300 leading-relaxed font-medium line-clamp-2">
+                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-medium">
                       {card.tagline}
                     </p>
                   </div>
@@ -211,23 +211,24 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.25 }}
-                        className="space-y-3 pt-2 border-t border-zinc-800 shrink-0"
+                        className="space-y-3 pt-3 border-t border-zinc-800 shrink-0"
                       >
-                        <p className="text-xs text-zinc-300 leading-relaxed line-clamp-2">
+                        {/* LARGER DESCRIPTION TEXT */}
+                        <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed font-normal">
                           {card.description}
                         </p>
 
                         <div className="space-y-1.5">
-                          <span className="text-[10px] font-mono font-bold uppercase tracking-wider block text-[#FF7A1A]">
+                          <span className="text-[11px] font-mono font-bold uppercase tracking-wider block text-[#FF7A1A]">
                             STAGE DELIVERABLES:
                           </span>
-                          <div className="space-y-1">
+                          <div className="space-y-1.5">
                             {card.deliverables.map((item, dIdx) => (
                               <div
                                 key={dIdx}
-                                className="text-xs font-semibold text-zinc-200 flex items-center gap-2"
+                                className="text-xs sm:text-sm font-semibold text-zinc-100 flex items-center gap-2.5"
                               >
-                                <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7A1A] shrink-0" />
+                                <CheckCircle2 className="w-4 h-4 text-[#FF7A1A] shrink-0" />
                                 <span className="truncate">{item}</span>
                               </div>
                             ))}
