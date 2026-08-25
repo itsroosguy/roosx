@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Search, Target, Pencil, Code, TrendingUp, CheckCircle2, ArrowRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Search, Target, Pencil, Code, TrendingUp, CheckCircle2, ArrowRight, Sparkles, Flame } from 'lucide-react';
 
 interface ProcessSectionProps {
   onOpenInquiry?: () => void;
@@ -16,8 +17,8 @@ interface StepCard {
   description: string;
   deliverables: string[];
   color: string;
-  borderColor: string;
   glowColor: string;
+  borderColor: string;
   bgCardGradient: string;
   bgActiveCardGradient: string;
 }
@@ -27,96 +28,96 @@ const process5StepCards: StepCard[] = [
     id: 'discover',
     num: '01',
     title: 'Discover',
-    tagline: 'Uncover opportunities.',
+    tagline: 'Uncover opportunities & market bottlenecks.',
     icon: Search,
-    headline: '01. Research & Strategic Audit',
+    headline: 'Research & Strategic Audit',
     description: 'We analyze your target market, buyer friction points, and competitor blind spots to locate immediate growth levers.',
     deliverables: [
-      '30-minute discovery & bottleneck audit',
-      'Locate immediate conversion leaks',
-      'Clear, prioritized action plan for launch',
+      '30-min bottleneck discovery audit',
+      'Conversion friction roadmap',
+      'Prioritized growth action plan',
     ],
-    color: '#FF3B30', // Vibrant Crimson Red
-    borderColor: 'border-red-500',
-    glowColor: 'rgba(255, 59, 48, 0.45)',
-    bgCardGradient: 'bg-gradient-to-b from-[#320A0A] via-[#1E0606] to-[#0F0303]',
-    bgActiveCardGradient: 'bg-gradient-to-b from-[#4A0D0D] via-[#2D0808] to-[#140404]',
+    color: '#EF4444', // Red
+    glowColor: 'rgba(239, 68, 68, 0.4)',
+    borderColor: 'border-red-500/60',
+    bgCardGradient: 'bg-gradient-to-b from-[#2A0B0B] via-[#1A0606] to-[#0A0202]',
+    bgActiveCardGradient: 'bg-gradient-to-b from-[#421010] via-[#280909] to-[#120404]',
   },
   {
     id: 'define',
     num: '02',
     title: 'Define',
-    tagline: 'Create the blueprint.',
+    tagline: 'Create the blueprint for brand authority.',
     icon: Target,
-    headline: '02. Positioning & Copy Strategy',
+    headline: 'Positioning & Copy Strategy',
     description: 'We craft sharp positioning headlines and value props so potential buyers grasp your unique advantage in under 3 seconds.',
     deliverables: [
-      'Conversion-focused headline & body copy',
-      'Distinct brand voice & market positioning',
-      'Frictionless customer navigation roadmap',
+      'Conversion-focused value props',
+      'Distinct brand voice guidelines',
+      'Frictionless user flow roadmap',
     ],
-    color: '#22C55E', // Emerald Green
-    borderColor: 'border-emerald-500',
-    glowColor: 'rgba(34, 197, 94, 0.45)',
-    bgCardGradient: 'bg-gradient-to-b from-[#0A3016] via-[#061C0D] to-[#030E06]',
-    bgActiveCardGradient: 'bg-gradient-to-b from-[#0E441F] via-[#092B14] to-[#041309]',
+    color: '#22C55E', // Green
+    glowColor: 'rgba(34, 197, 94, 0.4)',
+    borderColor: 'border-emerald-500/60',
+    bgCardGradient: 'bg-gradient-to-b from-[#0A2914] via-[#06180C] to-[#020A05]',
+    bgActiveCardGradient: 'bg-gradient-to-b from-[#0F4220] via-[#0A2A14] to-[#041108]',
   },
   {
     id: 'design',
     num: '03',
     title: 'Design',
-    tagline: 'Craft the experience.',
+    tagline: 'Craft the digital experience to convert.',
     icon: Pencil,
-    headline: '03. Meticulous UI/UX Systems',
+    headline: 'Meticulous UI/UX Systems',
     description: 'Bespoke design tokens, interactive prototypes, and pixel-perfect responsive layouts built for maximum conversion momentum.',
     deliverables: [
-      'Custom modern UI/UX design (No templates)',
+      'Bespoke modern UI/UX design',
       'Interactive Figma prototype',
-      'Design token system & responsive layout',
+      'Scalable design token system',
     ],
-    color: '#A855F7', // Violet Purple
-    borderColor: 'border-purple-500',
-    glowColor: 'rgba(168, 85, 247, 0.45)',
-    bgCardGradient: 'bg-gradient-to-b from-[#2A0A3A] via-[#190623] to-[#0C0312]',
-    bgActiveCardGradient: 'bg-gradient-to-b from-[#3B0E52] via-[#240833] to-[#12041A]',
+    color: '#A855F7', // Purple
+    glowColor: 'rgba(168, 85, 247, 0.4)',
+    borderColor: 'border-purple-500/60',
+    bgCardGradient: 'bg-gradient-to-b from-[#240A34] via-[#160620] to-[#0A020E]',
+    bgActiveCardGradient: 'bg-gradient-to-b from-[#3B0F55] via-[#240934] to-[#110419]',
   },
   {
     id: 'build',
     num: '04',
     title: 'Build',
-    tagline: 'Engineer the system.',
+    tagline: 'Engineer the high-velocity system.',
     icon: Code,
-    headline: '04. High-Velocity Code Sprint',
+    headline: 'High-Velocity Code Sprint',
     description: 'Bespoke React codebase engineered in parallel with Lighthouse 100/100 performance baseline and zero template bloat.',
     deliverables: [
-      'High-speed code with 99+ Google score',
-      'CMS integration & automated lead routing',
-      'Zero-latency edge CDN deployment',
+      'Bespoke React 99+ speed engine',
+      'Automated CRM webhook integration',
+      'Zero-latency edge CDN deploy',
     ],
-    color: '#007AFF', // Royal Blue
-    borderColor: 'border-blue-500',
-    glowColor: 'rgba(0, 122, 255, 0.45)',
-    bgCardGradient: 'bg-gradient-to-b from-[#0A1F38] via-[#061222] to-[#030911]',
-    bgActiveCardGradient: 'bg-gradient-to-b from-[#0E2E54] via-[#081B33] to-[#040D1A]',
+    color: '#3B82F6', // Blue
+    glowColor: 'rgba(59, 130, 246, 0.4)',
+    borderColor: 'border-blue-500/60',
+    bgCardGradient: 'bg-gradient-to-b from-[#091B33] via-[#05101F] to-[#02070E]',
+    bgActiveCardGradient: 'bg-gradient-to-b from-[#0E2D54] via-[#081C35] to-[#040E1B]',
   },
   {
     id: 'accelerate',
     num: '05',
     title: 'Accelerate',
-    tagline: 'Scale the momentum.',
+    tagline: 'Scale momentum and compound revenue.',
     icon: TrendingUp,
-    headline: '05. Rollout & Growth Tuning',
+    headline: 'Rollout & Growth Tuning',
     description: 'Continuous conversion rate telemetry monitoring, live A/B split testing, and revenue tuning for compounding momentum.',
     deliverables: [
-      'Zero-downtime deployment & DNS handoff',
-      'Active conversion tracking & lead analytics',
-      'Ongoing speed & conversion optimization',
+      'Zero-downtime DNS deployment',
+      'Lead telemetry analytics suite',
+      'Continuous conversion optimization',
     ],
-    color: '#FF9500', // Amber Orange
-    borderColor: 'border-amber-500',
-    glowColor: 'rgba(255, 149, 0, 0.45)',
-    bgCardGradient: 'bg-gradient-to-b from-[#38200A] via-[#221306] to-[#110903]',
-    bgActiveCardGradient: 'bg-gradient-to-b from-[#522F0E] via-[#331D09] to-[#1A0F04]',
+    color: '#F59E0B', // Amber
+    glowColor: 'rgba(245, 158, 11, 0.4)',
+    borderColor: 'border-amber-500/60',
+    bgCardGradient: 'bg-gradient-to-b from-[#311C09] via-[#1E1105] to-[#0D0702]',
+    bgActiveCardGradient: 'bg-gradient-to-b from-[#4A2B0D] via-[#2F1B08] to-[#150C03]',
   },
 ];
 
@@ -143,173 +144,217 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         }`}
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
+      {/* Dynamic Colored Spotlight behind Active Card */}
+      <div
+        style={{
+          background: `radial-gradient(circle, ${activeStep.glowColor} 0%, transparent 70%)`,
+        }}
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] blur-[150px] pointer-events-none transition-all duration-700"
+      />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
         
         {/* HEADER BLOCK (MATCHING IMAGE: ― OUR 5-PHASE ― EXECUTION METHODOLOGY) */}
-        <div className="space-y-3 max-w-4xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#FF3B30] uppercase tracking-widest">
-            <span className="w-8 h-px bg-[#FF3B30]/60" />
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="space-y-3 max-w-4xl mx-auto"
+        >
+          <div className="flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#EF4444] uppercase tracking-widest">
+            <span className="w-8 h-px bg-[#EF4444]/60" />
             <span>OUR 5-PHASE</span>
-            <span className="w-8 h-px bg-[#FF3B30]/60" />
+            <span className="w-8 h-px bg-[#EF4444]/60" />
           </div>
 
           <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08]">
             <span className="text-white">Execution </span>
-            <span className="text-[#FF3B30]">Methodology</span>
+            <span className="text-[#EF4444]">Methodology</span>
           </h2>
 
           <p className="text-base sm:text-xl font-medium text-zinc-400">
             Built For High-Velocity Growth
           </p>
-        </div>
+        </motion.div>
 
-        {/* SIDE-BY-SIDE LAYOUT: FULL-COLOR CARDS LEFT (55%) | RIGHT TEXT DELIVERABLES (45%) */}
-        <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-8 max-w-7xl mx-auto">
-          
-          {/* LEFT SIDE (55%): 5 FULL-COLOR RICH GRADIENT CARDS (Red, Green, Purple, Blue, Orange) */}
-          <div className="w-full lg:w-[55%] relative min-h-[380px] sm:min-h-[410px] flex items-center justify-start py-2 select-none overflow-x-auto sm:overflow-visible">
-            <div className="relative w-full h-[350px] flex items-center justify-start">
-              {process5StepCards.map((card, idx) => {
-                const isActive = card.id === activeCardId;
-                const IconComp = card.icon;
-                const activeIdx = process5StepCards.findIndex((c) => c.id === activeCardId);
-                const offsetFromActive = idx - activeIdx;
+        {/* HIGH-CRAFT EXPANDING HORIZONTAL ACCORDION DECK */}
+        <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 max-w-7xl mx-auto min-h-[460px] sm:min-h-[490px] select-none">
+          {process5StepCards.map((card) => {
+            const isActive = card.id === activeCardId;
+            const IconComp = card.icon;
 
-                return (
-                  <div
-                    key={card.id}
-                    onClick={() => setActiveCardId(card.id)}
-                    style={{
-                      transform: `translateX(${idx * (window.innerWidth > 640 ? 82 : 56)}px) translateY(${
-                        isActive ? -14 : idx * 2
-                      }px) scale(${isActive ? 1.04 : 0.96})`,
-                      zIndex: isActive ? 50 : 30 - Math.abs(offsetFromActive),
-                      boxShadow: isActive
-                        ? `0 20px 50px ${card.glowColor}, inset 0 1px 1px rgba(255,255,255,0.2)`
-                        : `0 8px 30px ${card.glowColor}`,
-                    }}
-                    className={`w-48 sm:w-56 h-[330px] sm:h-[350px] rounded-3xl p-5 border text-left cursor-pointer transition-all duration-300 backdrop-blur-2xl flex flex-col justify-between absolute left-0 ${
-                      isActive ? card.bgActiveCardGradient : card.bgCardGradient
-                    } ${card.borderColor} ${
-                      isActive ? 'ring-2 ring-white/40 opacity-100' : 'hover:opacity-100 opacity-95'
-                    }`}
-                  >
-                    {/* Top Step Number with Underline Accent */}
-                    <div className="space-y-1">
-                      <div
-                        style={{ color: card.color }}
-                        className="text-2xl sm:text-3xl font-mono font-black tracking-tight"
-                      >
-                        {card.num}
-                      </div>
-                      <div
-                        style={{ backgroundColor: card.color }}
-                        className="w-7 h-0.5 rounded-full"
-                      />
-                    </div>
-
-                    {/* Circular Icon Container */}
-                    <div className="my-auto py-2 flex justify-start">
-                      <div
-                        style={{
-                          borderColor: `${card.color}80`,
-                          backgroundColor: `${card.color}25`,
-                          color: card.color,
-                        }}
-                        className="w-14 h-14 rounded-full border-2 flex items-center justify-center shadow-inner"
-                      >
-                        <IconComp className="w-7 h-7" />
-                      </div>
-                    </div>
-
-                    {/* Title & Tagline */}
-                    <div className="space-y-1 pt-1">
-                      <h3 className="font-display text-lg sm:text-xl font-extrabold text-white leading-tight">
-                        {card.title}
-                      </h3>
-                      <p className="text-xs text-zinc-200 leading-relaxed font-medium line-clamp-2">
-                        {card.tagline}
-                      </p>
-                    </div>
-
-                    {/* Bottom 3 Colored Dots Accent (• • •) */}
-                    <div className="pt-2 flex items-center gap-1.5 justify-start">
-                      <div
-                        style={{ backgroundColor: card.color }}
-                        className="w-2.5 h-2.5 rounded-full"
-                      />
-                      <div
-                        style={{ backgroundColor: `${card.color}90` }}
-                        className="w-2.5 h-2.5 rounded-full"
-                      />
-                      <div
-                        style={{ backgroundColor: `${card.color}50` }}
-                        className="w-2.5 h-2.5 rounded-full"
-                      />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* RIGHT SIDE (45%): CLEAN STAGE TEXT & DELIVERABLES PANEL (NO DUPLICATE NUMBERS OR EYEBROWS) */}
-          <div className="w-full lg:w-[45%] flex flex-col justify-center text-left space-y-6 py-2">
-            
-            {/* Clean Stage Headline */}
-            <div className="space-y-2">
-              <h3 className="font-display text-2xl sm:text-3xl font-black text-white leading-tight">
-                {activeStep.headline}
-              </h3>
-
-              <p className="text-sm sm:text-base text-zinc-300 leading-relaxed pt-1">
-                {activeStep.description}
-              </p>
-            </div>
-
-            {/* Stage Deliverables Checklist */}
-            <div className="space-y-3 pt-1">
-              <div
-                style={{ color: activeStep.color }}
-                className="text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2"
-              >
-                <span>STAGE DELIVERABLES & OUTCOMES</span>
-              </div>
-
-              <div className="space-y-2.5">
-                {activeStep.deliverables.map((item, dIdx) => (
-                  <div
-                    key={dIdx}
-                    className="p-3.5 rounded-2xl bg-[#0B0B0E]/90 border border-zinc-800 text-xs sm:text-sm font-semibold text-zinc-200 flex items-center gap-3 shadow-md"
-                  >
-                    <CheckCircle2
-                      style={{ color: activeStep.color }}
-                      className="w-4.5 h-4.5 shrink-0"
-                    />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Action CTA Button */}
-            <div className="pt-2">
-              <button
-                onClick={onOpenInquiry}
-                style={{
-                  backgroundColor: activeStep.color,
-                  boxShadow: `0 10px 30px ${activeStep.glowColor}`,
+            return (
+              <motion.div
+                key={card.id}
+                onClick={() => setActiveCardId(card.id)}
+                onMouseEnter={() => setActiveCardId(card.id)}
+                animate={{
+                  flex: isActive ? (window.innerWidth > 1024 ? 3.5 : 1) : 1,
                 }}
-                className="w-full sm:w-auto px-6 py-3 rounded-full text-white text-xs font-mono font-bold flex items-center justify-center gap-2.5 hover:opacity-90 transition-opacity cursor-pointer shadow-lg"
+                transition={{ type: 'spring', stiffness: 200, damping: 22 }}
+                style={{
+                  boxShadow: isActive ? `0 20px 50px ${card.glowColor}` : 'none',
+                }}
+                className={`rounded-3xl p-6 border cursor-pointer relative overflow-hidden backdrop-blur-2xl transition-all duration-500 flex flex-col justify-between text-left ${
+                  isActive ? card.bgActiveCardGradient : card.bgCardGradient
+                } ${card.borderColor} ${
+                  isActive
+                    ? 'ring-2 ring-white/40 opacity-100'
+                    : 'opacity-75 hover:opacity-100 hover:border-zinc-700'
+                }`}
               >
-                <span>Book Phase Audit</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+                {/* Top Number & Active Flame Badge */}
+                <div className="flex items-center justify-between z-10 relative">
+                  <div className="space-y-1">
+                    <span
+                      style={{ color: card.color }}
+                      className="text-2xl sm:text-3xl font-mono font-black block tracking-tight"
+                    >
+                      {card.num}
+                    </span>
+                    <div
+                      style={{ backgroundColor: card.color }}
+                      className={`h-0.5 rounded-full transition-all ${
+                        isActive ? 'w-8' : 'w-4'
+                      }`}
+                    />
+                  </div>
 
-          </div>
+                  {isActive && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      style={{
+                        backgroundColor: `${card.color}25`,
+                        borderColor: `${card.color}60`,
+                        color: card.color,
+                      }}
+                      className="px-3 py-1 rounded-full border text-[10px] font-mono font-bold flex items-center gap-1.5 shadow-md"
+                    >
+                      <Flame className="w-3.5 h-3.5 animate-bounce" />
+                      <span className="tracking-wider uppercase">ACTIVE STAGE</span>
+                    </motion.div>
+                  )}
+                </div>
 
+                {/* Center Content: Icon + Title + Description + Deliverables (Expanded state vs Compact) */}
+                <div className="py-4 space-y-4 z-10 relative">
+                  {/* Circular Icon Container */}
+                  <div
+                    style={{
+                      borderColor: `${card.color}80`,
+                      backgroundColor: `${card.color}25`,
+                      color: card.color,
+                    }}
+                    className="w-14 h-14 rounded-full border-2 flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110"
+                  >
+                    <IconComp className="w-7 h-7" />
+                  </div>
+
+                  {/* Title & Tagline */}
+                  <div className="space-y-1">
+                    <h3 className="font-display text-xl sm:text-2xl font-black text-white leading-tight">
+                      {card.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-medium">
+                      {card.tagline}
+                    </p>
+                  </div>
+
+                  {/* Detailed Inner Content Revealed When Active */}
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.35 }}
+                        className="space-y-4 pt-3 border-t border-white/10"
+                      >
+                        <p className="text-xs text-zinc-200 leading-relaxed">
+                          {card.description}
+                        </p>
+
+                        <div className="space-y-2">
+                          <span
+                            style={{ color: card.color }}
+                            className="text-[10px] font-mono font-bold uppercase tracking-wider block"
+                          >
+                            KEY DELIVERABLES:
+                          </span>
+                          <div className="space-y-1.5">
+                            {card.deliverables.map((item, dIdx) => (
+                              <div
+                                key={dIdx}
+                                className="text-xs font-semibold text-zinc-200 flex items-center gap-2"
+                              >
+                                <CheckCircle2
+                                  style={{ color: card.color }}
+                                  className="w-4 h-4 shrink-0"
+                                />
+                                <span>{item}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div className="pt-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onOpenInquiry?.();
+                            }}
+                            style={{
+                              backgroundColor: card.color,
+                              boxShadow: `0 8px 25px ${card.glowColor}`,
+                            }}
+                            className="w-full sm:w-auto px-5 py-2.5 rounded-full text-white text-xs font-mono font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity cursor-pointer"
+                          >
+                            <span>Book Phase {card.num} Audit</span>
+                            <ArrowRight className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Bottom Micro Indicator Dots */}
+                <div className="flex items-center gap-1.5 pt-2 z-10 relative">
+                  <div
+                    style={{ backgroundColor: card.color }}
+                    className="w-2.5 h-2.5 rounded-full"
+                  />
+                  <div
+                    style={{ backgroundColor: `${card.color}90` }}
+                    className="w-2.5 h-2.5 rounded-full"
+                  />
+                  <div
+                    style={{ backgroundColor: `${card.color}50` }}
+                    className="w-2.5 h-2.5 rounded-full"
+                  />
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
+
+        {/* INSTRUCTION FOOTER CAPSULE */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="pt-2 flex justify-center text-center"
+        >
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#121215]/90 border border-[#EF4444]/40 text-xs sm:text-sm font-mono font-bold text-zinc-200 backdrop-blur-xl shadow-xl shadow-[#EF4444]/10 group hover:border-[#EF4444] transition-all">
+            <Sparkles className="w-4 h-4 text-[#EF4444] animate-pulse shrink-0" />
+            <span className="tracking-wide">
+              Hover or click any phase card to smoothly expand its full execution deliverables.
+            </span>
+          </div>
+        </motion.div>
 
       </div>
     </section>
