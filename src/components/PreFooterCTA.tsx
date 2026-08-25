@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
 
 interface PreFooterCTAProps {
   onOpenInquiry: () => void;
@@ -11,13 +11,61 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
   onOpenInquiry,
   isDarkMode = true,
 }) => {
+  const [emailInput, setEmailInput] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (emailInput.trim()) {
+      setIsSubmitted(true);
+      setTimeout(() => {
+        onOpenInquiry();
+        setIsSubmitted(false);
+      }, 800);
+    } else {
+      onOpenInquiry();
+    }
+  };
+
+  // Corner floating avatar headshots
+  const cornerAvatars = [
+    {
+      pos: 'top-6 left-6 sm:top-10 sm:left-12',
+      img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=160&auto=format&fit=crop&q=80',
+      name: 'Sarah K., Founder',
+      size: 'w-14 h-14 sm:w-20 sm:h-20',
+      delay: 0,
+    },
+    {
+      pos: 'top-6 right-6 sm:top-10 sm:right-12',
+      img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&auto=format&fit=crop&q=80',
+      name: 'Marcus V., Tech Lead',
+      size: 'w-14 h-14 sm:w-20 sm:h-20',
+      delay: 0.2,
+    },
+    {
+      pos: 'bottom-6 left-6 sm:bottom-10 sm:left-12',
+      img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=160&auto=format&fit=crop&q=80',
+      name: 'Elena R., Marketing VP',
+      size: 'w-14 h-14 sm:w-20 sm:h-20',
+      delay: 0.4,
+    },
+    {
+      pos: 'bottom-6 right-6 sm:bottom-10 sm:right-12',
+      img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160&auto=format&fit=crop&q=80',
+      name: 'David L., CEO',
+      size: 'w-14 h-14 sm:w-20 sm:h-20',
+      delay: 0.6,
+    },
+  ];
+
   return (
     <section
-      className={`relative py-24 sm:py-32 transition-colors duration-500 overflow-hidden ${
+      className={`relative py-20 sm:py-28 transition-colors duration-500 overflow-hidden ${
         isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
-      {/* Background Architectural Mesh */}
+      {/* Architectural Background Grid */}
       <div
         className={`absolute inset-0 bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none ${
           isDarkMode
@@ -26,29 +74,65 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
         }`}
       />
 
-      {/* Radiant Backdrop Radial Spotlight */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[550px] bg-radial from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none opacity-80" />
+      {/* Ambient Orange Backlight */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[500px] bg-radial from-[#FF7A1A]/16 via-[#FF7A1A]/3 to-transparent blur-[160px] pointer-events-none opacity-80" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 lg:gap-12">
+        {/* ROUNDED BANNER CONTAINER (1:1 MATCH TO REFERENCE IMAGE media_1787686160220.png) */}
+        <motion.div
+          initial={{ opacity: 0, y: 35, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          className={`rounded-[36px] p-8 sm:p-16 md:p-20 relative overflow-hidden backdrop-blur-2xl transition-colors duration-500 text-center shadow-2xl border ${
+            isDarkMode
+              ? 'bg-[#0A0A0C]/95 border-zinc-800/90 text-white shadow-black/80 ring-1 ring-zinc-800/50'
+              : 'bg-white border-zinc-200 text-[#111111] shadow-xl'
+          }`}
+        >
           
-          {/* LEFT: EXPANSIVE HIGH-IMPACT 2-LINE HEADLINE */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="space-y-4 text-left max-w-4xl"
-          >
-            {/* MICRO CAPSULE BADGE */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#121215] border border-[#FF7A1A]/40 text-xs font-mono font-bold text-zinc-200 shadow-lg shadow-[#FF7A1A]/5">
+          {/* 4 CORNER FLOATING CIRCULAR AVATAR PORTRAITS */}
+          {cornerAvatars.map((av, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, scale: 0.7 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: av.delay }}
+              animate={{
+                y: [0, -6, 0],
+              }}
+              style={{
+                animationDuration: `${4 + idx}s`,
+                animationIterationCount: 'infinite',
+                animationTimingFunction: 'ease-in-out',
+              }}
+              className={`absolute ${av.pos} z-20 pointer-events-none hidden sm:block`}
+            >
+              <div className="relative group">
+                <img
+                  src={av.img}
+                  alt={av.name}
+                  className={`${av.size} rounded-full object-cover border-2 shadow-2xl transition-transform duration-300 group-hover:scale-110 ${
+                    isDarkMode ? 'border-[#FF7A1A]/60 shadow-[#FF7A1A]/20' : 'border-[#FF7A1A]/80 shadow-black/10'
+                  }`}
+                />
+              </div>
+            </motion.div>
+          ))}
+
+          {/* CENTER COLUMN CONTENT */}
+          <div className="max-w-3xl mx-auto space-y-6 relative z-10">
+            
+            {/* MICRO BADGE */}
+            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#121215] border border-[#FF7A1A]/40 text-xs font-mono font-bold text-zinc-200 shadow-md">
               <Sparkles className="w-3.5 h-3.5 text-[#FF7A1A] animate-pulse" />
-              <span>START YOUR TRANSFORMATION</span>
+              <span>STAY AHEAD WITH ROOS STUDIOX</span>
             </div>
 
-            {/* 2-LINE MASSIVE TITLE */}
-            <h2 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.06]">
+            {/* CENTER HEADLINE */}
+            <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.08]">
               <span
                 className={
                   isDarkMode
@@ -63,44 +147,79 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
               </span>
             </h2>
 
-            <p className={`text-base sm:text-lg font-medium ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
-              Transform your digital presence into compounding market momentum.
+            {/* SUBHEAD DESCRIPTION */}
+            <p className={`text-sm sm:text-base md:text-lg font-medium max-w-xl mx-auto leading-relaxed ${
+              isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+            }`}>
+              Welcome to Roos StudioX. We build high-converting digital products, brand authority, and growth systems engineered for momentum.
             </p>
-          </motion.div>
 
-          {/* RIGHT: ELEGANT SIDE-BY-SIDE INLINE ACTION CLUSTER */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 shrink-0"
-          >
-            {/* PRIMARY BOOK DEMO BUTTON */}
-            <button
-              onClick={onOpenInquiry}
-              className="px-8 py-4.5 rounded-full bg-[#FF7A1A] text-white font-mono font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#FF8833] transition-all shadow-[0_12px_35px_rgba(255,122,26,0.4)] cursor-pointer flex items-center justify-center gap-3 group shrink-0"
+            {/* INTERACTIVE EMAIL / ACTION CAPSULE BAR */}
+            <form
+              onSubmit={handleSubmit}
+              className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 max-w-xl mx-auto"
             >
-              <Calendar className="w-4 h-4 text-white shrink-0" />
-              <span>Book A Demo</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </button>
+              <div className="relative w-full sm:w-auto flex-1">
+                <input
+                  type="email"
+                  value={emailInput}
+                  onChange={(e) => setEmailInput(e.target.value)}
+                  placeholder="Enter your email for growth audit..."
+                  className={`w-full px-6 py-4 rounded-full text-xs sm:text-sm font-medium transition-all outline-none border ${
+                    isDarkMode
+                      ? 'bg-[#121215] text-white border-zinc-800 focus:border-[#FF7A1A] placeholder:text-zinc-500'
+                      : 'bg-zinc-100 text-[#111111] border-zinc-300 focus:border-[#FF7A1A] placeholder:text-zinc-400'
+                  }`}
+                />
+              </div>
 
-            {/* SECONDARY FREE AUDIT BUTTON */}
-            <button
-              onClick={onOpenInquiry}
-              className={`px-8 py-4.5 rounded-full font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all border flex items-center justify-center gap-2.5 cursor-pointer shrink-0 ${
-                isDarkMode
-                  ? 'bg-[#121215] text-zinc-200 border-zinc-800 hover:border-[#FF7A1A] hover:text-white shadow-lg'
-                  : 'bg-white text-[#111111] border-zinc-300 hover:border-[#FF7A1A] hover:bg-zinc-50 shadow-sm'
-              }`}
-            >
-              <span>Get Free Audit</span>
-              <ArrowRight className="w-4 h-4 text-[#FF7A1A]" />
-            </button>
-          </motion.div>
+              <button
+                type="submit"
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#FF7A1A] text-white font-mono font-extrabold text-xs uppercase tracking-wider hover:bg-[#FF8833] transition-all shadow-[0_10px_30px_rgba(255,122,26,0.4)] cursor-pointer flex items-center justify-center gap-2 shrink-0 group"
+              >
+                {isSubmitted ? (
+                  <>
+                    <CheckCircle2 className="w-4 h-4 text-white" />
+                    <span>Booking...</span>
+                  </>
+                ) : (
+                  <>
+                    <span>Book A Demo</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </>
+                )}
+              </button>
+            </form>
 
-        </div>
+            {/* BOTTOM SOCIAL PROOF AVATAR STACK (+ 50+ Ambitious Founders Joined) */}
+            <div className="pt-4 flex items-center justify-center gap-3 flex-wrap">
+              <div className="flex -space-x-2.5">
+                {[
+                  'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
+                  'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80',
+                  'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=100&auto=format&fit=crop&q=80',
+                  'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&auto=format&fit=crop&q=80',
+                ].map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt="Founder avatar"
+                    className="w-8 h-8 rounded-full border-2 border-[#0A0A0C] object-cover shadow-md"
+                  />
+                ))}
+                <div className="w-8 h-8 rounded-full bg-[#FF7A1A] border-2 border-[#0A0A0C] flex items-center justify-center text-[10px] font-mono font-bold text-white shadow-md">
+                  +
+                </div>
+              </div>
+
+              <span className={`text-xs font-mono font-semibold ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>
+                50+ Ambitious Founders & Leaders Transformed
+              </span>
+            </div>
+
+          </div>
+
+        </motion.div>
 
       </div>
     </section>
