@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 interface PreFooterCTAProps {
   onOpenInquiry: () => void;
@@ -27,35 +27,43 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
     }
   };
 
-  // Corner floating avatar headshots
+  // Corner floating avatar headshots with custom motion vectors
   const cornerAvatars = [
     {
       pos: 'top-6 left-6 sm:top-10 sm:left-12',
       img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=160&auto=format&fit=crop&q=80',
       name: 'Sarah K., Founder',
       size: 'w-14 h-14 sm:w-20 sm:h-20',
-      delay: 0,
+      animateY: [0, -14, 0, 10, 0],
+      animateX: [0, 6, -4, 0],
+      duration: 7,
     },
     {
       pos: 'top-6 right-6 sm:top-10 sm:right-12',
       img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=160&auto=format&fit=crop&q=80',
       name: 'Marcus V., Tech Lead',
       size: 'w-14 h-14 sm:w-20 sm:h-20',
-      delay: 0.2,
+      animateY: [0, 12, -10, 0],
+      animateX: [0, -8, 5, 0],
+      duration: 8.5,
     },
     {
       pos: 'bottom-6 left-6 sm:bottom-10 sm:left-12',
       img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=160&auto=format&fit=crop&q=80',
       name: 'Elena R., Marketing VP',
       size: 'w-14 h-14 sm:w-20 sm:h-20',
-      delay: 0.4,
+      animateY: [0, -10, 14, 0],
+      animateX: [0, -5, 7, 0],
+      duration: 6.5,
     },
     {
       pos: 'bottom-6 right-6 sm:bottom-10 sm:right-12',
       img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=160&auto=format&fit=crop&q=80',
       name: 'David L., CEO',
       size: 'w-14 h-14 sm:w-20 sm:h-20',
-      delay: 0.6,
+      animateY: [0, 15, -8, 0],
+      animateX: [0, 6, -6, 0],
+      duration: 9,
     },
   ];
 
@@ -79,7 +87,7 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* ROUNDED BANNER CONTAINER (1:1 MATCH TO REFERENCE IMAGE media_1787686160220.png) */}
+        {/* ROUNDED BANNER CONTAINER */}
         <motion.div
           initial={{ opacity: 0, y: 35, scale: 0.97 }}
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -92,21 +100,19 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
           }`}
         >
           
-          {/* 4 CORNER FLOATING CIRCULAR AVATAR PORTRAITS */}
+          {/* 4 CORNER CONTINUOUSLY ANIMATED CIRCULAR AVATAR PORTRAITS */}
           {cornerAvatars.map((av, idx) => (
             <motion.div
               key={idx}
-              initial={{ opacity: 0, scale: 0.7 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: av.delay }}
               animate={{
-                y: [0, -6, 0],
+                y: av.animateY,
+                x: av.animateX,
+                scale: [1, 1.06, 1],
               }}
-              style={{
-                animationDuration: `${4 + idx}s`,
-                animationIterationCount: 'infinite',
-                animationTimingFunction: 'ease-in-out',
+              transition={{
+                duration: av.duration,
+                repeat: Infinity,
+                ease: 'easeInOut',
               }}
               className={`absolute ${av.pos} z-20 pointer-events-none hidden sm:block`}
             >
@@ -114,7 +120,7 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
                 <img
                   src={av.img}
                   alt={av.name}
-                  className={`${av.size} rounded-full object-cover border-2 shadow-2xl transition-transform duration-300 group-hover:scale-110 ${
+                  className={`${av.size} rounded-full object-cover border-2 shadow-2xl transition-transform duration-300 ${
                     isDarkMode ? 'border-[#FF7A1A]/60 shadow-[#FF7A1A]/20' : 'border-[#FF7A1A]/80 shadow-black/10'
                   }`}
                 />
@@ -123,14 +129,8 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
           ))}
 
           {/* CENTER COLUMN CONTENT */}
-          <div className="max-w-3xl mx-auto space-y-6 relative z-10">
+          <div className="max-w-3xl mx-auto space-y-6 relative z-10 pt-2">
             
-            {/* MICRO BADGE */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-[#121215] border border-[#FF7A1A]/40 text-xs font-mono font-bold text-zinc-200 shadow-md">
-              <Sparkles className="w-3.5 h-3.5 text-[#FF7A1A] animate-pulse" />
-              <span>STAY AHEAD WITH ROOS STUDIOX</span>
-            </div>
-
             {/* CENTER HEADLINE */}
             <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.08]">
               <span
