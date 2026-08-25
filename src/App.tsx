@@ -13,12 +13,14 @@ import { PreFooterCTA } from './components/PreFooterCTA';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
+import { ServicesPage } from './components/ServicesPage';
 import { Project } from './types';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
+  const [currentView, setCurrentView] = useState<'home' | 'services'>('home');
 
   return (
     <div
@@ -37,36 +39,55 @@ export function App() {
         onOpenInquiry={() => setIsInquiryOpen(true)}
         isDarkMode={isDarkMode}
         onToggleTheme={() => setIsDarkMode(!isDarkMode)}
+        onNavigateServices={() => {
+          setCurrentView('services');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
+        onNavigateHome={() => {
+          setCurrentView('home');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
 
-      {/* Main Page Sections */}
-      <main>
-        <Hero onOpenInquiry={() => setIsInquiryOpen(true)} isDarkMode={isDarkMode} />
-        <HeroMarquee isDarkMode={isDarkMode} />
-        <BrandPhilosophySection isDarkMode={isDarkMode} />
-        <CreativeServicesExperience
+      {/* Main View Switching */}
+      {currentView === 'services' ? (
+        <ServicesPage
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}
+          onNavigateHome={() => {
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
         />
-        <ProcessSection isDarkMode={isDarkMode} />
-        
-        {/* Case Studies & Featured Works Section (Positioned Directly Above FAQ) */}
-        <Portfolio
-          onSelectProject={(project) => setSelectedProject(project)}
-          isDarkMode={isDarkMode}
-        />
+      ) : (
+        <main>
+          <Hero onOpenInquiry={() => setIsInquiryOpen(true)} isDarkMode={isDarkMode} />
+          <HeroMarquee isDarkMode={isDarkMode} />
+          <BrandPhilosophySection isDarkMode={isDarkMode} />
+          <CreativeServicesExperience
+            onOpenInquiry={() => setIsInquiryOpen(true)}
+            isDarkMode={isDarkMode}
+          />
+          <ProcessSection isDarkMode={isDarkMode} />
+          
+          {/* Case Studies & Featured Works Section (Positioned Directly Above FAQ) */}
+          <Portfolio
+            onSelectProject={(project) => setSelectedProject(project)}
+            isDarkMode={isDarkMode}
+          />
 
-        <FAQSection
-          onOpenInquiry={() => setIsInquiryOpen(true)}
-          isDarkMode={isDarkMode}
-        />
+          <FAQSection
+            onOpenInquiry={() => setIsInquiryOpen(true)}
+            isDarkMode={isDarkMode}
+          />
 
-        {/* High-Impact Pre-Footer Demo Booking Banner */}
-        <PreFooterCTA
-          onOpenInquiry={() => setIsInquiryOpen(true)}
-          isDarkMode={isDarkMode}
-        />
-      </main>
+          {/* High-Impact Pre-Footer Demo Booking Banner */}
+          <PreFooterCTA
+            onOpenInquiry={() => setIsInquiryOpen(true)}
+            isDarkMode={isDarkMode}
+          />
+        </main>
+      )}
 
       {/* Global Studio Footer */}
       <Footer onOpenInquiry={() => setIsInquiryOpen(true)} isDarkMode={isDarkMode} />

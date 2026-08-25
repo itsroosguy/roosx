@@ -8,12 +8,16 @@ interface NavbarProps {
   onOpenInquiry: () => void;
   isDarkMode: boolean;
   onToggleTheme: () => void;
+  onNavigateServices?: () => void;
+  onNavigateHome?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onOpenInquiry,
   isDarkMode,
   onToggleTheme,
+  onNavigateServices,
+  onNavigateHome,
 }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -27,10 +31,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
-    { name: 'Services', href: '#services' },
-    { name: 'Process', href: '#process' },
-    { name: 'Works', href: '#portfolio' },
-    { name: 'FAQ', href: '#faq' },
+    { name: 'Services', href: '#services', action: onNavigateServices },
+    { name: 'Process', href: '#process', action: onNavigateHome },
+    { name: 'Works', href: '#portfolio', action: onNavigateHome },
+    { name: 'FAQ', href: '#faq', action: onNavigateHome },
   ];
 
   return (
@@ -50,9 +54,12 @@ export const Navbar: React.FC<NavbarProps> = ({
           }`}
         >
           {/* Logo (Swaps mark.png to logo.png on scroll) */}
-          <a href="#" className="flex items-center">
+          <button
+            onClick={() => onNavigateHome?.()}
+            className="flex items-center cursor-pointer bg-transparent border-none p-0"
+          >
             <Logo isScrolled={scrolled} isDarkMode={isDarkMode} />
-          </a>
+          </button>
 
           {/* Desktop Nav Links */}
           <nav
@@ -66,6 +73,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               <a
                 key={link.name}
                 href={link.href}
+                onClick={() => {
+                  if (link.action) {
+                    link.action();
+                  }
+                }}
                 className={`text-[13px] sm:text-[15px] font-semibold transition-colors relative py-0.5 tracking-tight group ${
                   isDarkMode
                     ? 'text-[#D4D4D8] hover:text-[#F97316]'
