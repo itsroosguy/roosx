@@ -66,39 +66,22 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* PINTEREST EDITORIAL ORGANIC DYNAMIC CANVAS ARTWORK */}
-        <div className="relative max-w-6xl mx-auto py-6 text-left">
+        {/* PINTEREST EDITORIAL CLEAN 2x2 CANVAS ARTWORK (100% READABLE, ZERO TEXT BREAKUP) */}
+        <div className="relative max-w-6xl mx-auto py-2 text-left">
           
-          {/* FLOWING DYNAMIC SVG WINDING VECTOR LINE */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none hidden md:block">
-            <svg
-              className="w-full h-full max-w-4xl overflow-visible"
-              viewBox="0 0 1000 600"
-              fill="none"
-            >
-              <path
-                d="M 150,120 C 450,40 550,280 850,160 C 950,220 850,480 500,450 C 250,420 150,520 850,500"
-                stroke="#F97316"
-                strokeWidth="2.5"
-                strokeDasharray="6 6"
-                className="opacity-60"
-              />
-            </svg>
-          </div>
-
-          {/* 4 ORGANICALLY STAGGERED EDITORIAL NODES */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 relative">
+          {/* 4 CLEAN EDITORIAL NODES IN A 2x2 GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14 relative">
             
-            {/* NODE 01: TOP LEFT (ORGANIC POSITIONING) */}
+            {/* NODE 01: TOP LEFT */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col items-start space-y-4 md:pr-6"
+              transition={{ duration: 0.5 }}
+              className="flex flex-col items-start space-y-4"
             >
               <div className="flex items-center gap-3">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-xl sm:text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
                   01
                 </div>
                 <div>
@@ -115,28 +98,28 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 <h3 className={`font-display text-2xl sm:text-3xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
                   We Step In Within 24 Hours
                 </h3>
-                <p className={`text-sm leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
-                  No 3-month onboarding delay. Within 24 hours of connecting, we dive straight into your site & messaging to locate exact lost revenue points.
+                <p className={`text-sm sm:text-base leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
+                  No 3-month onboarding delay. Within 24 hours of connecting, we dive straight into your website, messaging, and funnel to locate exact points of lost revenue.
                 </p>
               </div>
 
               {/* Floating Organic Callout Note */}
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] rotate-[-2deg] shadow-sm">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] shadow-sm">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>"30-min call • Zero fluff • Immediate clarity"</span>
               </div>
             </motion.div>
 
-            {/* NODE 02: TOP RIGHT (STAGGERED DOWN) */}
+            {/* NODE 02: TOP RIGHT */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="flex flex-col items-start space-y-4 md:pl-6 md:mt-12 lg:mt-16"
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="flex flex-col items-start space-y-4"
             >
               <div className="flex items-center gap-3">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-xl sm:text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
                   02
                 </div>
                 <div>
@@ -153,13 +136,13 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 <h3 className={`font-display text-2xl sm:text-3xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
                   Define What Makes You Unbeatable
                 </h3>
-                <p className={`text-sm leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
+                <p className={`text-sm sm:text-base leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
                   We craft sharp conversion messaging so potential buyers get your unique value in under 3 seconds and trust your brand immediately.
                 </p>
               </div>
 
               {/* Floating Organic Callout Note */}
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] rotate-[2deg] shadow-sm">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] shadow-sm">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>"All decisions explained, no black boxes x"</span>
               </div>
@@ -167,14 +150,14 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
             {/* NODE 03: BOTTOM LEFT */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col items-start space-y-4 md:pr-6 md:mt-6"
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex flex-col items-start space-y-4"
             >
               <div className="flex items-center gap-3">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-xl sm:text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
                   03
                 </div>
                 <div>
@@ -191,28 +174,28 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 <h3 className={`font-display text-2xl sm:text-3xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
                   Production Without The Friction
                 </h3>
-                <p className={`text-sm leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
+                <p className={`text-sm sm:text-base leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
                   Custom, ultra-fast interfaces built in parallel. Up to 2 rounds of rapid collaborative edits ensure absolute perfection.
                 </p>
               </div>
 
               {/* Floating Organic Callout Note */}
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] rotate-[-1deg] shadow-sm">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] shadow-sm">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>"Up to 2 rounds of rapid collaborative edits"</span>
               </div>
             </motion.div>
 
-            {/* NODE 04: BOTTOM RIGHT (STAGGERED DOWN) */}
+            {/* NODE 04: BOTTOM RIGHT */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.45 }}
-              className="flex flex-col items-start space-y-4 md:pl-6 md:mt-16 lg:mt-20"
+              transition={{ duration: 0.5, delay: 0.45 }}
+              className="flex flex-col items-start space-y-4"
             >
               <div className="flex items-center gap-3">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-xl sm:text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
                   04
                 </div>
                 <div>
@@ -229,13 +212,13 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 <h3 className={`font-display text-2xl sm:text-3xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
                   Go Live & Multiply Revenue
                 </h3>
-                <p className={`text-sm leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
+                <p className={`text-sm sm:text-base leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
                   Zero-downtime deployment with active conversion telemetry, analytics tracking, and continuous revenue tuning.
                 </p>
               </div>
 
               {/* Floating Organic Callout Note */}
-              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-xs font-semibold text-emerald-400 rotate-[1.5deg] shadow-sm">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-xs font-semibold text-emerald-400 shadow-sm">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>"Turn visitors into long-term revenue"</span>
               </div>
