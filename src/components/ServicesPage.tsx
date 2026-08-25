@@ -1,15 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Compass,
-  Palette,
-  Globe,
-  Layout,
-  Search,
-  Megaphone,
-  TrendingUp,
   CheckCircle2,
-  Bot,
   FileText,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
@@ -26,7 +18,6 @@ interface DetailedService {
   title: string;
   headline: string;
   copy: string;
-  icon: React.ElementType;
   imageUrl: string;
   deliverables: string[];
   includes?: string[];
@@ -42,7 +33,6 @@ const detailedServices: DetailedService[] = [
     title: 'Brand Strategy & Positioning',
     headline: 'Build a Brand People Remember',
     copy: 'A great logo isn\'t a brand. A strong brand is a clear promise, a unique market position, and a memorable identity that customers instantly recognize and trust. We help businesses uncover what makes them different and transform that advantage into a powerful brand strategy that stands out in crowded markets.',
-    icon: Compass,
     imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Brand Discovery Workshops',
@@ -68,7 +58,6 @@ const detailedServices: DetailedService[] = [
     title: 'Logo & Visual Identity Design',
     headline: 'Create A Brand That Looks As Good As It Performs',
     copy: 'Your visual identity shapes first impressions long before customers read a single word. We design memorable brand systems that communicate professionalism, credibility, and confidence across every customer touchpoint.',
-    icon: Palette,
     imageUrl: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Logo Design',
@@ -91,7 +80,6 @@ const detailedServices: DetailedService[] = [
     title: 'Website Design & Development',
     headline: 'Your Website Should Be Your Best Salesperson',
     copy: 'A website should do more than look beautiful. It should educate visitors, build trust, answer objections, and guide prospects toward taking action. We design and develop high-performance websites that combine exceptional user experience with conversion-focused strategy.',
-    icon: Globe,
     imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Business Websites',
@@ -123,7 +111,6 @@ const detailedServices: DetailedService[] = [
     title: 'UI/UX Design',
     headline: 'Design Experiences People Actually Enjoy Using',
     copy: 'Great user experiences feel effortless. We create intuitive interfaces that help users find what they need quickly while increasing engagement, satisfaction, and conversions.',
-    icon: Layout,
     imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'UX Strategy',
@@ -147,7 +134,6 @@ const detailedServices: DetailedService[] = [
     title: 'Search Engine Optimization (SEO)',
     headline: 'Get Found By The Right Customers',
     copy: 'If customers can\'t find you, they can\'t buy from you. Our SEO strategies improve visibility, increase qualified traffic, and position your business in front of people actively searching for your products and services.',
-    icon: Search,
     imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Technical SEO',
@@ -170,7 +156,6 @@ const detailedServices: DetailedService[] = [
     title: 'Digital Marketing',
     headline: 'Turn Attention Into Revenue',
     copy: 'Marketing isn\'t about generating clicks. It\'s about attracting the right audience and turning interest into measurable business growth. We develop data-driven campaigns that connect strategy, creativity, and performance.',
-    icon: Megaphone,
     imageUrl: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Growth Marketing Strategy',
@@ -193,7 +178,6 @@ const detailedServices: DetailedService[] = [
     title: 'Marketing Automation & AI Systems',
     headline: 'Scale Smarter, Not Harder',
     copy: 'Businesses lose time and revenue because of repetitive processes and disconnected systems. We implement automation and AI-driven workflows that improve efficiency, nurture leads, and support scalable growth.',
-    icon: Bot,
     imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Lead Automation',
@@ -215,7 +199,6 @@ const detailedServices: DetailedService[] = [
     title: 'Conversion Optimization',
     headline: 'Turn More Visitors Into Customers',
     copy: 'Getting traffic is only half the equation. The real opportunity comes from converting more of your existing visitors into paying customers. We identify friction points and optimize your digital experience to improve performance at every stage of the customer journey.',
-    icon: TrendingUp,
     imageUrl: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Conversion Audits',
@@ -323,7 +306,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         {/* 8 DETAILED SERVICE SECTIONS (REALISTIC STUDIO IMAGERY) */}
         <div className="space-y-24 sm:space-y-32">
           {detailedServices.map((service, idx) => {
-            const ServiceIcon = service.icon;
             const isLeft = service.align === 'left';
 
             return (
@@ -354,46 +336,34 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                     }`}
                   >
                     {/* Realistic High-Resolution Studio Image Background */}
-                    <div className="absolute inset-0 z-0 overflow-hidden">
+                    <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl">
                       <img
                         src={service.imageUrl}
                         alt={service.title}
-                        className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ${
-                          isDarkMode ? 'opacity-50 filter brightness-90 contrast-110' : 'opacity-85'
-                        }`}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-100 contrast-105"
                       />
                       <div
                         className={`absolute inset-0 bg-gradient-to-t ${
                           isDarkMode
-                            ? 'from-[#050505] via-[#050505]/70 to-transparent'
-                            : 'from-white via-white/80 to-transparent'
+                            ? 'from-[#050505]/90 via-[#050505]/30 to-transparent'
+                            : 'from-white/90 via-white/30 to-transparent'
                         }`}
                       />
                     </div>
 
-                    {/* Top Corner Number */}
+                    {/* Top Corner Number Badge */}
                     <div className="relative z-10 p-6 flex items-center justify-between">
-                      <span className="text-4xl font-mono font-black text-[#FF7A1A]">
+                      <span className="text-3xl sm:text-4xl font-mono font-black text-[#FF7A1A] px-3.5 py-1 rounded-2xl bg-[#050505]/70 border border-[#FF7A1A]/30 backdrop-blur-md shadow-lg">
                         {service.num}
                       </span>
-                    </div>
-
-                    {/* Central Icon Overlay */}
-                    <div className="relative z-10 py-6 flex flex-col items-center justify-center text-center">
-                      <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FF7A1A] to-[#EA580C] text-white flex items-center justify-center shadow-xl shadow-[#FF7A1A]/40 border border-[#FF944D]/50 mb-3 transform group-hover:scale-110 transition-transform">
-                        <ServiceIcon className="w-8 h-8" />
-                      </div>
-                      <div className={`text-xs font-mono font-bold uppercase tracking-wider ${isDarkMode ? 'text-zinc-200' : 'text-zinc-900'} drop-shadow-md`}>
-                        {service.title}
-                      </div>
                     </div>
 
                     {/* Momentum Created Result Banner */}
                     <div
                       className={`relative z-10 p-5 m-4 rounded-2xl border text-xs font-semibold text-[#FF7A1A] backdrop-blur-md ${
                         isDarkMode
-                          ? 'bg-[#050505]/90 border-[#FF7A1A]/40'
-                          : 'bg-white/90 border-[#FF7A1A]/40 shadow-sm'
+                          ? 'bg-[#050505]/85 border-[#FF7A1A]/40 shadow-2xl'
+                          : 'bg-white/85 border-[#FF7A1A]/40 shadow-lg'
                       }`}
                     >
                       <span className="font-bold uppercase font-mono block text-[10px] text-zinc-400 mb-0.5">
