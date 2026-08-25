@@ -27,7 +27,7 @@ export function App() {
       }`}
     >
       {/* 3-Second Circular Gauge Telemetry Preloader */}
-      <Preloader isDarkMode={isDarkMode} />
+      <Preloader />
 
       {/* Interactive Brand Ambient Glow Overlay */}
       <AmbientGlow />
