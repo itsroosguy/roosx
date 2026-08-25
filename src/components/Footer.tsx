@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
-import { ArrowUp, Send, Mail, Phone, Globe, Clock, Check, Copy, Github, Linkedin, Twitter, Dribbble } from 'lucide-react';
+import { ArrowUp, Send, Mail, Phone, Globe, Clock, Check, Copy, ShieldCheck, Github, Linkedin, Twitter, Dribbble } from 'lucide-react';
 
 interface FooterProps {
   onOpenInquiry?: () => void;
@@ -53,7 +53,7 @@ export const Footer: React.FC<FooterProps> = ({
 
   return (
     <footer
-      className={`relative z-10 w-full pt-20 pb-12 border-t transition-colors duration-500 overflow-hidden ${
+      className={`relative z-10 w-full pt-20 pb-12 border-t transition-colors duration-500 overflow-hidden font-sans ${
         isDarkMode
           ? 'bg-[#050505] text-[#D4D4D8] border-zinc-900'
           : 'bg-[#FAF9F6] text-[#111111] border-zinc-200'
@@ -78,16 +78,16 @@ export const Footer: React.FC<FooterProps> = ({
         </span>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-sans space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
         {/* 1. TOP LIVE TELEMETRY BAR */}
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#0A0A0C]/90 border border-zinc-800/90 backdrop-blur-xl flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#0A0A0C]/90 border border-zinc-800/90 backdrop-blur-xl flex flex-wrap items-center justify-between gap-4 text-xs font-sans">
           <div className="flex items-center gap-3">
             <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-            <span className="text-zinc-300 font-bold">STUDIO STATUS: ACCEPTING Q3/Q4 PROJECTS</span>
+            <span className="text-zinc-300 font-semibold tracking-wide">STUDIO STATUS: ACCEPTING Q3/Q4 PROJECTS</span>
           </div>
 
-          <div className="flex items-center gap-6 text-zinc-400">
+          <div className="flex items-center gap-6 text-zinc-400 font-medium">
             <div className="flex items-center gap-1.5">
               <Globe className="w-3.5 h-3.5 text-[#FF7A1A]" />
               <span>BLR, IND</span>
@@ -112,12 +112,12 @@ export const Footer: React.FC<FooterProps> = ({
               Roos StudioX helps ambitious businesses build authority, craft high-converting digital products, and engineer scalable growth engines.
             </p>
 
-            {/* DIRECT CONTACT CAPSULES WITH COPY ACTIONS */}
-            <div className="space-y-2 pt-2">
-              <div className="flex items-center gap-3 text-xs font-mono">
+            {/* DIRECT CONTACT CAPSULES WITH COPY ACTIONS & GST NUMBER */}
+            <div className="space-y-2.5 pt-2">
+              <div className="flex flex-wrap items-center gap-2.5 text-xs font-sans">
                 <button
                   onClick={() => copyToClipboard('praveen@roosstudiox.com', 'email')}
-                  className="px-3.5 py-2 rounded-xl bg-[#121215] border border-zinc-800 text-zinc-200 hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-3.5 py-2 rounded-xl bg-[#121215] border border-zinc-800 text-zinc-200 hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer font-medium"
                 >
                   <Mail className="w-3.5 h-3.5 text-[#FF7A1A]" />
                   <span>praveen@roosstudiox.com</span>
@@ -130,7 +130,7 @@ export const Footer: React.FC<FooterProps> = ({
 
                 <button
                   onClick={() => copyToClipboard('+919629026600', 'phone')}
-                  className="px-3.5 py-2 rounded-xl bg-[#121215] border border-zinc-800 text-zinc-200 hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer"
+                  className="px-3.5 py-2 rounded-xl bg-[#121215] border border-zinc-800 text-zinc-200 hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer font-medium"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#FF7A1A]" />
                   <span>+91 96290 26600</span>
@@ -140,20 +140,26 @@ export const Footer: React.FC<FooterProps> = ({
                     <Copy className="w-3 h-3 text-zinc-500" />
                   )}
                 </button>
+
+                {/* GST NUMBER CAPSULE */}
+                <div className="px-3.5 py-2 rounded-xl bg-[#121215] border border-zinc-800/90 text-zinc-300 font-medium flex items-center gap-2">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#FF7A1A]" />
+                  <span>GSTIN: 29ROOSX9629F1Z5</span>
+                </div>
               </div>
             </div>
           </div>
 
           {/* NAVIGATION LINKS (3 COLS) */}
           <div className="md:col-span-3 space-y-4">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7A1A]">
+            <h4 className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF7A1A]">
               SYSTEM MAP
             </h4>
             <ul className="space-y-3 text-sm font-medium text-zinc-300">
               <li>
                 <a href="#services2" className="hover:text-[#FF7A1A] transition-colors flex items-center gap-2">
                   <span>Service Architecture V2</span>
-                  <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#FF7A1A]/20 text-[#FF7A1A] font-bold">NEW</span>
+                  <span className="px-1.5 py-0.5 rounded text-[10px] font-sans bg-[#FF7A1A]/20 text-[#FF7A1A] font-bold">NEW</span>
                 </a>
               </li>
               <li>
@@ -182,7 +188,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* NEWSLETTER INTEL DISPATCH (4 COLS) */}
           <div className="md:col-span-4 space-y-4">
             {!subscribed ? (
-              <form onSubmit={handleNewsletter} className="flex gap-2 w-full pt-6 sm:pt-8">
+              <form onSubmit={handleNewsletter} className="flex gap-2 w-full pt-2 sm:pt-4">
                 <input
                   type="email"
                   required
@@ -193,14 +199,14 @@ export const Footer: React.FC<FooterProps> = ({
                 />
                 <button
                   type="submit"
-                  className="px-5 py-3 rounded-xl bg-[#FF7A1A] hover:bg-[#FF8833] text-white text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer shadow-lg shadow-[#FF7A1A]/30"
+                  className="px-5 py-3 rounded-xl bg-[#FF7A1A] hover:bg-[#FF8833] text-white text-xs font-sans font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer shadow-lg shadow-[#FF7A1A]/30"
                 >
                   <Send className="w-3.5 h-3.5" />
                   <span>Join</span>
                 </button>
               </form>
             ) : (
-              <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold flex items-center gap-2 mt-6">
+              <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-sans font-bold flex items-center gap-2 mt-2">
                 <Check className="w-4 h-4 text-emerald-400 shrink-0" />
                 <span>Subscribed!</span>
               </div>
@@ -234,9 +240,9 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* 3. BOTTOM COPYRIGHT & ELEVATOR TOP BUTTON */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-400">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-zinc-400 font-medium">
           <div>
-            © {new Date().getFullYear()} Roos StudioX Inc. All rights reserved.
+            © {new Date().getFullYear()} Roos StudioX. All rights reserved. • GSTIN: 29ROOSX9629F1Z5
           </div>
 
           <button
