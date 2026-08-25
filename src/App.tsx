@@ -14,13 +14,14 @@ import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
 import { ServicesPage } from './components/ServicesPage';
+import { AboutPage } from './components/AboutPage';
 import { Project } from './types';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'services'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'services' | 'about'>('home');
 
   return (
     <div
@@ -43,6 +44,10 @@ export function App() {
           setCurrentView('services');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onNavigateAbout={() => {
+          setCurrentView('about');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         onNavigateHome={() => {
           setCurrentView('home');
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -52,6 +57,15 @@ export function App() {
       {/* Main View Switching */}
       {currentView === 'services' ? (
         <ServicesPage
+          onOpenInquiry={() => setIsInquiryOpen(true)}
+          isDarkMode={isDarkMode}
+          onNavigateHome={() => {
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      ) : currentView === 'about' ? (
+        <AboutPage
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}
           onNavigateHome={() => {
