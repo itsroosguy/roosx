@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
-import { ArrowUp, Send, Mail, Phone, Globe, Clock, Check, Copy, Sparkles, Github, Linkedin, Twitter, Dribbble } from 'lucide-react';
+import { ArrowUp, Send, Mail, Phone, Globe, Clock, Check, Copy, Github, Linkedin, Twitter, Dribbble } from 'lucide-react';
 
 interface FooterProps {
   onOpenInquiry?: () => void;
@@ -172,16 +172,8 @@ export const Footer: React.FC<FooterProps> = ({
 
           {/* NEWSLETTER INTEL DISPATCH (4 COLS) */}
           <div className="md:col-span-4 space-y-4">
-            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7A1A] flex items-center gap-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#FF7A1A]" />
-              <span>DESIGN INTELLIGENCE DISPATCH</span>
-            </h4>
-            <p className="text-xs text-zinc-400 font-medium leading-relaxed">
-              Join 2,400+ tech leaders receiving bi-weekly breakdowns on conversion optimization, WebGL micro-interactions, and brand positioning.
-            </p>
-
             {!subscribed ? (
-              <form onSubmit={handleNewsletter} className="flex gap-2 w-full">
+              <form onSubmit={handleNewsletter} className="flex gap-2 w-full pt-6 sm:pt-8">
                 <input
                   type="email"
                   required
@@ -199,9 +191,9 @@ export const Footer: React.FC<FooterProps> = ({
                 </button>
               </form>
             ) : (
-              <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold flex items-center gap-2">
+              <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold flex items-center gap-2 mt-6">
                 <Check className="w-4 h-4 text-emerald-400 shrink-0" />
-                <span>Subscribed to Design Intelligence!</span>
+                <span>Subscribed!</span>
               </div>
             )}
 
@@ -235,7 +227,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* 3. BOTTOM COPYRIGHT & ELEVATOR TOP BUTTON */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-400">
           <div>
-            © {new Date().getFullYear()} Roos StudioX Inc. All rights reserved. • High-Velocity Growth Engine
+            © {new Date().getFullYear()} Roos StudioX Inc. All rights reserved.
           </div>
 
           <button
