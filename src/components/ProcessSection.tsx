@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Layers, ArrowUpRight, Compass, Code, Search, Zap, TrendingUp } from 'lucide-react';
+import { Layers, ArrowUpRight, Search, Compass, Code, Zap, TrendingUp } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
 interface ProcessSectionProps {
@@ -10,15 +10,15 @@ interface ProcessSectionProps {
 
 interface TeamMemberCard {
   id: string;
-  stepNum: string;
   role: string;
   name: string;
   description: string;
   avatarIcon: any;
   isFeatured?: boolean;
   ctaLabel: string;
-  jitterRotate: number;
-  jitterY: number;
+  collapsedX: number;
+  collapsedY: number;
+  collapsedRotate: number;
   spreadX: number;
   spreadY: number;
   spreadRotate: number;
@@ -27,73 +27,73 @@ interface TeamMemberCard {
 const process5StepCards: TeamMemberCard[] = [
   {
     id: 'research',
-    stepNum: '01',
     role: 'STAGE 01 • AUDIT & DISCOVERY',
     name: '01. Research & Audit',
     description: 'We analyze your target market, buyer friction points, and competitor blind spots to locate immediate growth levers.',
     avatarIcon: Search,
     ctaLabel: 'Audit Market',
-    jitterRotate: -8,
-    jitterY: -6,
-    spreadX: -360,
-    spreadY: 14,
+    collapsedX: -90,
+    collapsedY: 8,
+    collapsedRotate: -14,
+    spreadX: -340,
+    spreadY: 10,
     spreadRotate: -12,
   },
   {
     id: 'positioning',
-    stepNum: '02',
     role: 'STAGE 02 • STRATEGY & COPY',
-    name: '02. Strategy & Concepting',
+    name: '02. Strategy & Copy',
     description: 'We craft sharp positioning headlines and value props so potential buyers grasp your unique advantage in under 3 seconds.',
     avatarIcon: Compass,
     ctaLabel: 'Position Brand',
-    jitterRotate: -3,
-    jitterY: -2,
-    spreadX: -180,
+    collapsedX: -45,
+    collapsedY: 2,
+    collapsedRotate: -7,
+    spreadX: -170,
     spreadY: -4,
     spreadRotate: -5,
   },
   {
     id: 'build',
-    stepNum: '03',
     role: 'STAGE 03 • 99+ SPEED ENGINE',
     name: '03. Meticulous UI/UX & Build',
     description: 'Bespoke React codebase engineered in parallel with Lighthouse 100/100 performance baseline and zero template bloat.',
     avatarIcon: Code,
     isFeatured: true,
-    ctaLabel: 'Build React Code',
-    jitterRotate: 0,
-    jitterY: 0,
+    ctaLabel: 'Build Code',
+    collapsedX: 0,
+    collapsedY: -8,
+    collapsedRotate: 0,
     spreadX: 0,
     spreadY: -10,
     spreadRotate: 0,
   },
   {
     id: 'handoff',
-    stepNum: '04',
     role: 'STAGE 04 • RAPID PROTOCOL',
     name: '04. Developer Handoff & QA',
     description: 'We deploy infrastructure to edge CDNs, configure automated CRM webhooks, and complete strict pre-launch checklists.',
     avatarIcon: Zap,
-    ctaLabel: 'Deploy QA Engine',
-    jitterRotate: 4,
-    jitterY: 3,
-    spreadX: 180,
+    ctaLabel: 'Deploy QA',
+    collapsedX: 45,
+    collapsedY: 2,
+    collapsedRotate: 7,
+    spreadX: 170,
     spreadY: -4,
     spreadRotate: 5,
   },
   {
     id: 'scale',
-    stepNum: '05',
     role: 'STAGE 05 • 4.8X REVENUE TUNING',
     name: '05. Rollout & Growth Tuning',
     description: 'Continuous conversion rate telemetry monitoring, live A/B split testing, and revenue tuning for compounding momentum.',
     avatarIcon: TrendingUp,
     ctaLabel: 'Scale Revenue',
-    jitterRotate: 9,
-    jitterY: 8,
-    spreadX: 360,
-    spreadY: 14,
+    collapsedX: 90,
+    collapsedY: 8,
+    collapsedRotate: 14,
+    spreadX: 340,
+    spreadY: 10,
     spreadRotate: 12,
   },
 ];
@@ -102,7 +102,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   onOpenInquiry,
   isDarkMode = true,
 }) => {
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
   const [activeCardId, setActiveCardId] = useState<string>('build');
 
   return (
@@ -136,7 +136,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest backdrop-blur-md">
             <Layers className="w-3.5 h-3.5" />
-            <span>EXACT 5-STEP TEAM STACK PROCESS DECK</span>
+            <span>INTERACTIVE TEAM-STACK PROCESS DECK</span>
           </div>
 
           <h2
@@ -159,11 +159,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* 5-CARD TEAM STACK DECK CONTAINER (EXACT MATCHING UI.UNLUMEN.COM) */}
+        {/* 5-CARD TEAM STACK CONTAINER (EXACT MATCH TO UNLUMEN TEAM-STACK REFERENCE) */}
         <div
-          onMouseEnter={() => setIsExpanded(true)}
-          onMouseLeave={() => setIsExpanded(false)}
-          className="relative h-[440px] sm:h-[480px] max-w-6xl mx-auto flex items-center justify-center py-8"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className="relative h-[430px] sm:h-[470px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
         >
           {process5StepCards.map((card, idx) => {
             const isActive = card.id === activeCardId;
@@ -172,77 +172,74 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
             return (
               <motion.div
                 key={card.id}
-                onClick={() => {
-                  setActiveCardId(card.id);
-                  setIsExpanded(true);
-                }}
+                onClick={() => setActiveCardId(card.id)}
                 animate={
-                  isExpanded
+                  isHovered
                     ? {
-                        x: window.innerWidth > 1024 ? card.spreadX : (idx - 2) * 75,
+                        x: window.innerWidth > 1024 ? card.spreadX : (idx - 2) * 70,
                         y: card.spreadY,
                         rotate: card.spreadRotate,
                         scale: isActive ? 1.05 : 0.95,
                         zIndex: isActive ? 50 : 30 - Math.abs(idx - 2),
                       }
                     : {
-                        x: (idx - 2) * 22,
-                        y: card.jitterY,
-                        rotate: card.jitterRotate,
-                        scale: isActive ? 1.02 : 0.95,
+                        x: card.collapsedX,
+                        y: card.collapsedY,
+                        rotate: card.collapsedRotate,
+                        scale: isActive ? 1.05 : 0.96,
                         zIndex: isActive ? 50 : 30 - Math.abs(idx - 2),
                       }
                 }
-                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
-                className={`absolute w-64 sm:w-72 rounded-3xl p-5 border text-left cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl ${
-                  isActive || card.isFeatured
-                    ? 'bg-[#121215] text-white border-[#FF7A1A]/70 ring-1 ring-[#FF7A1A]/40 shadow-[0_0_40px_rgba(255,122,26,0.25)]'
+                transition={{ type: 'spring', stiffness: 220, damping: 20 }}
+                className={`absolute w-64 sm:w-72 h-[380px] sm:h-[410px] rounded-3xl p-5 border text-left cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl flex flex-col justify-between ${
+                  isActive || (card.isFeatured && isHovered)
+                    ? 'bg-[#18181C] text-white border-[#FF7A1A]/80 ring-1 ring-[#FF7A1A]/40 shadow-[0_10px_40px_rgba(255,122,26,0.3)]'
                     : isDarkMode
-                    ? 'bg-[#0A0A0C] text-zinc-200 border-zinc-800 hover:border-zinc-700'
-                    : 'bg-white text-zinc-900 border-zinc-200 shadow-lg'
+                    ? 'bg-[#121215] text-zinc-200 border-zinc-800 hover:border-zinc-700'
+                    : 'bg-white text-zinc-900 border-zinc-200 shadow-xl'
                 }`}
               >
-                {/* Top Avatar Canvas Box with Top-Right Spring CTA Button */}
-                <div className="relative mb-4">
-                  <div className={`w-full h-32 rounded-2xl flex items-center justify-center relative overflow-hidden ${
-                    isActive || card.isFeatured
-                      ? 'bg-zinc-800/80 border border-zinc-700'
-                      : 'bg-zinc-900/60 border border-zinc-800'
+                {/* Top Illustration Box with Top-Right Pill/Circle CTA */}
+                <div className="relative">
+                  <div className={`w-full h-36 rounded-2xl flex items-center justify-center relative transition-colors ${
+                    isActive
+                      ? 'bg-[#222228] border border-[#FF7A1A]/30'
+                      : 'bg-[#18181C] border border-zinc-800'
                   }`}>
-                    <IconComp className="w-12 h-12 text-[#FF7A1A] filter drop-shadow-[0_4px_12px_rgba(255,122,26,0.5)]" />
+                    <IconComp className={`w-14 h-14 transition-transform duration-300 ${
+                      isActive ? 'text-[#FF7A1A] scale-110' : 'text-zinc-400'
+                    }`} />
                   </div>
 
-                  {/* Top-Right Spring Animated Pill Button (Matching unlumen UI) */}
+                  {/* Top-Right Expanding CTA Button (Circle when collapsed, Pill when active/hovered) */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       onOpenInquiry?.();
                     }}
-                    className={`absolute top-2.5 right-2.5 flex items-center gap-1.5 px-3 py-1.5 rounded-full font-mono text-[11px] font-bold transition-all shadow-md cursor-pointer ${
+                    className={`absolute top-3 right-3 flex items-center justify-center gap-1.5 transition-all duration-300 shadow-md cursor-pointer ${
                       isActive
-                        ? 'bg-[#FF7A1A] text-white shadow-[#FF7A1A]/40'
-                        : 'bg-zinc-900/90 text-zinc-300 border border-zinc-700 hover:text-white hover:border-[#FF7A1A]'
+                        ? 'px-3 py-1.5 rounded-full bg-[#FF7A1A] text-white text-xs font-mono font-bold shadow-[#FF7A1A]/40'
+                        : 'w-8 h-8 rounded-full bg-[#27272A] text-white hover:bg-[#FF7A1A]'
                     }`}
                   >
-                    <span>{isActive ? card.ctaLabel : 'Connect'}</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
+                    {isActive && <span>{card.ctaLabel}</span>}
+                    <ArrowUpRight className="w-4 h-4 shrink-0" />
                   </button>
                 </div>
 
-                {/* Subtitle / Role Tag */}
-                <div className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider mb-1">
-                  {card.role}
+                {/* Text Content */}
+                <div className="space-y-1.5 pt-2">
+                  <div className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider">
+                    {card.role}
+                  </div>
+                  <h3 className="font-display text-lg sm:text-xl font-bold leading-tight text-white">
+                    {card.name}
+                  </h3>
+                  <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3">
+                    {card.description}
+                  </p>
                 </div>
-
-                {/* Card Title */}
-                <h3 className="font-display text-lg font-bold leading-snug mb-2 text-white">
-                  {card.name}
-                </h3>
-
-                {/* Description Copy */}
-                <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3">
-                  {card.description}
-                </p>
               </motion.div>
             );
           })}
