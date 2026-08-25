@@ -156,11 +156,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </h2>
 
           <p
-            className={`text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto transition-colors duration-500 ${
+            className={`text-base sm:text-xl font-medium leading-relaxed max-w-3xl mx-auto transition-colors duration-500 ${
               isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
             }`}
           >
-            Test our interactive execution engine below to experience how we eliminate friction and accelerate your launch.
+            From brand positioning and custom web development to growth marketing and automation—explore how we turn your vision into market momentum.
           </p>
         </motion.div>
 
