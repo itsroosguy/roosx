@@ -36,8 +36,8 @@ const process5StepCards: TeamMemberCard[] = [
     collapsedY: 22,
     collapsedRotate: -15,
     spreadX: -340,
-    spreadY: 0,
-    spreadRotate: -10,
+    spreadY: 70,
+    spreadRotate: -14,
   },
   {
     id: 'positioning',
@@ -50,8 +50,8 @@ const process5StepCards: TeamMemberCard[] = [
     collapsedY: 6,
     collapsedRotate: -7.5,
     spreadX: -170,
-    spreadY: 0,
-    spreadRotate: -5,
+    spreadY: 20,
+    spreadRotate: -7,
   },
   {
     id: 'build',
@@ -65,7 +65,7 @@ const process5StepCards: TeamMemberCard[] = [
     collapsedY: 0,
     collapsedRotate: 0,
     spreadX: 0,
-    spreadY: 0,
+    spreadY: -20,
     spreadRotate: 0,
   },
   {
@@ -79,8 +79,8 @@ const process5StepCards: TeamMemberCard[] = [
     collapsedY: 6,
     collapsedRotate: 7.5,
     spreadX: 170,
-    spreadY: 0,
-    spreadRotate: 5,
+    spreadY: 20,
+    spreadRotate: 7,
   },
   {
     id: 'scale',
@@ -93,8 +93,8 @@ const process5StepCards: TeamMemberCard[] = [
     collapsedY: 22,
     collapsedRotate: 15,
     spreadX: 340,
-    spreadY: 0,
-    spreadRotate: 10,
+    spreadY: 70,
+    spreadRotate: 14,
   },
 ];
 
@@ -136,7 +136,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest backdrop-blur-md">
             <Layers className="w-3.5 h-3.5" />
-            <span>TEAM-STACK PROCESS DECK</span>
+            <span>PERFECT EXPANDED ARC PROCESS STACK</span>
           </div>
 
           <h2
@@ -159,11 +159,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* 5-CARD TEAM STACK CONTAINER (RESET TO ORIGINAL BALANCED DECK SHAPE) */}
+        {/* 5-CARD TEAM STACK CONTAINER (INITIAL SHAPE PERFECT, EXPANDED FORMS PERFECT ARCHED CROWN ARC) */}
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="relative h-[430px] sm:h-[470px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
+          className="relative h-[460px] sm:h-[500px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
         >
           {process5StepCards.map((card, idx) => {
             const isActive = card.id === activeCardId;
@@ -217,7 +217,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                       e.stopPropagation();
                       onOpenInquiry?.();
                     }}
-                    className={`absolute top-3 right-3 flex items-center justify-center gap-1.5 transition-all duration-300 shadow-md cursor-pointer ${
+                    className={`absolute top-3 right-3 flex items-[#center] justify-center gap-1.5 transition-all duration-300 shadow-md cursor-pointer ${
                       isActive
                         ? 'px-3 py-1.5 rounded-full bg-[#FF7A1A] text-white text-xs font-mono font-bold shadow-[#FF7A1A]/40'
                         : 'w-8 h-8 rounded-full bg-[#27272A] text-white hover:bg-[#FF7A1A]'
