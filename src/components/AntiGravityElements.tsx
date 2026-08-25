@@ -73,8 +73,8 @@ export const AntiGravityElements: React.FC<AntiGravityElementsProps> = ({
 }) => {
   return (
     <div className="w-full pt-2 pb-1">
-      {/* PERFECTLY BALANCED 3x2 GRID CONTAINER (3 COLUMNS x 2 ROWS) */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 w-full max-w-[645px] text-left">
+      {/* NATURAL ORGANIC FLEX WRAP CONTAINER */}
+      <div className="flex flex-wrap items-center gap-2.5 sm:gap-3.5 max-w-[645px] text-left">
         {items.map((item) => {
           const IconComp = item.icon;
 
@@ -95,7 +95,7 @@ export const AntiGravityElements: React.FC<AntiGravityElementsProps> = ({
                   ease: 'easeInOut',
                   delay: item.delay,
                 }}
-                className={`group flex items-center justify-center sm:justify-start gap-2 px-3 py-2 rounded-full border backdrop-blur-md text-xs font-semibold tracking-tight transition-all duration-300 cursor-default select-none shadow-sm w-full ${
+                className={`group inline-flex items-center gap-2 px-3.5 py-1.5 sm:py-2 rounded-full border backdrop-blur-md text-xs font-semibold tracking-tight transition-all duration-300 cursor-default select-none shadow-sm ${
                   item.isGreen
                     ? 'bg-[#22C55E]/10 border-[#22C55E]/30 text-[#22C55E] hover:border-[#22C55E]'
                     : isDarkMode
