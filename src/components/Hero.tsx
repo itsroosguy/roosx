@@ -170,15 +170,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
                   <svg viewBox="0 0 100 100" className="w-full h-full">
                     <path
                       id="heroCirclePath"
-                      d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
+                      d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
                       fill="none"
                     />
-                    <text className="font-display font-bold uppercase text-[8.5px] tracking-[2.2px]">
+                    <text className="font-display font-bold uppercase text-[7.8px] tracking-[1.8px]">
                       <textPath
                         href="#heroCirclePath"
                         fill={isDarkMode ? '#F97316' : '#EA580C'}
+                        startOffset="0%"
                       >
-                        SCROLL DOWN • EXPLORE MORE • ROOS STUDIOX •
+                        DISCOVER THE SYSTEM • ROOS STUDIOX • 
                       </textPath>
                     </text>
                   </svg>
