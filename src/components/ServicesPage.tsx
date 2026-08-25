@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  Code2,
-  Target,
+  Compass,
+  Palette,
+  Globe,
+  Layout,
+  Search,
+  Megaphone,
   TrendingUp,
-  Bot,
-  Zap,
   CheckCircle2,
   ArrowLeft,
   Sparkles,
+  Bot,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -18,159 +21,234 @@ interface ServicesPageProps {
   onNavigateHome: () => void;
 }
 
-interface ServicePillar {
+interface DetailedService {
   id: string;
   num: string;
-  category: string;
   title: string;
-  tagline: string;
-  description: string;
+  headline: string;
+  copy: string;
   icon: React.ElementType;
-  accentColor: string;
-  capabilities: { title: string; desc: string }[];
   deliverables: string[];
+  includes?: string[];
+  outcome: string;
+  perfectFor?: string;
+  align: 'left' | 'right';
 }
 
-const servicePillars: ServicePillar[] = [
+const detailedServices: DetailedService[] = [
   {
-    id: 'web-engineering',
+    id: 'brand-strategy',
     num: '01',
-    category: 'ENGINEERING & DEVELOPMENT',
-    title: 'Custom Web Development & Engineering',
-    tagline: 'Custom Modern UI/UX Built For Speed & Conversion',
-    description:
-      'We engineer custom web applications and marketing sites with zero template bloat, 99+ Google speed scores, and fluid micro-interactions that make your brand feel exceptional.',
-    icon: Code2,
-    accentColor: '#F97316',
-    capabilities: [
-      {
-        title: 'High-Speed Web Applications',
-        desc: 'Built with React, Vite, and Tailwind for instant page loads under 0.6 seconds.',
-      },
-      {
-        title: 'Glassmorphic & Modern UI/UX',
-        desc: 'Apple-level minimalist design systems tailored specifically to your brand identity.',
-      },
-      {
-        title: '99+ Google Lighthouse Speed Score',
-        desc: 'Zero bloated plugins. Optimized assets, clean bundle size, and edge distribution.',
-      },
-      {
-        title: 'Headless CMS Integration',
-        desc: 'Seamless content management setups allowing your team to update text and media effortlessly.',
-      },
-    ],
+    title: 'Brand Strategy & Positioning',
+    headline: 'Build a Brand People Remember',
+    copy: 'A great logo isn\'t a brand. A strong brand is a clear promise, a unique market position, and a memorable identity that customers instantly recognize and trust. We help businesses uncover what makes them different and transform that advantage into a powerful brand strategy that stands out in crowded markets.',
+    icon: Compass,
     deliverables: [
-      'Custom React/Next.js Codebase',
-      '99+ Performance Guarantee',
-      'Mobile & Tablet Responsiveness',
-      'Full CMS Handoff & Training',
+      'Brand Discovery Workshops',
+      'Market Research',
+      'Competitor Analysis',
+      'Brand Positioning',
+      'Brand Messaging',
+      'Value Proposition Development',
+      'Customer Persona Mapping',
+      'Naming Consultation',
+      'Brand Architecture',
+      'Brand Guidelines',
     ],
+    perfectFor:
+      'Businesses struggling to differentiate themselves, attract premium customers, or communicate their value effectively.',
+    outcome:
+      'Stand out in crowded markets, attract premium customers, and clearly communicate your value.',
+    align: 'left',
   },
   {
-    id: 'brand-positioning',
+    id: 'visual-identity',
     num: '02',
-    category: 'STRATEGY & COPYWRITING',
-    title: 'Brand Positioning & Conversion Strategy',
-    tagline: 'Messaging That Makes Your Value Instantly Clear',
-    description:
-      'We audit your buyer friction and craft sharp conversion copy that positions your product as the unbeatable market choice in under 3 seconds.',
-    icon: Target,
-    accentColor: '#FB923C',
-    capabilities: [
-      {
-        title: 'Audience Friction Audit',
-        desc: 'Locate exact messaging leaks and friction points where potential buyers drop off.',
-      },
-      {
-        title: 'Conversion Copywriting',
-        desc: 'High-impact headlines, body copy, and value propositions that drive immediate trust.',
-      },
-      {
-        title: 'Brand Voice Framework',
-        desc: 'Establish a clear, memorable tone of voice that differentiates you from competitors.',
-      },
-      {
-        title: 'High-Converting Funnels',
-        desc: 'Strategic user journey mapping that guides visitors directly to booking or buying.',
-      },
-    ],
+    title: 'Logo & Visual Identity Design',
+    headline: 'Create A Brand That Looks As Good As It Performs',
+    copy: 'Your visual identity shapes first impressions long before customers read a single word. We design memorable brand systems that communicate professionalism, credibility, and confidence across every customer touchpoint.',
+    icon: Palette,
     deliverables: [
-      'Conversion Copy Deck',
-      'Strategic Positioning Matrix',
-      'User Journey Blueprint',
-      'Competitor Audit Report',
+      'Logo Design',
+      'Visual Identity Systems',
+      'Color Palette Development',
+      'Typography Selection',
+      'Brand Assets',
+      'Icon Systems',
+      'Social Media Assets',
+      'Brand Style Guides',
+      'Marketing Collateral',
     ],
+    outcome:
+      'A professional visual identity that builds trust, increases recognition, and creates consistency across your business.',
+    align: 'right',
   },
   {
-    id: 'growth-marketing',
+    id: 'website-development',
     num: '03',
-    category: 'GROWTH & TELEMETRY',
-    title: 'Digital Growth Marketing & Lead Analytics',
-    tagline: 'Continuous Conversion Telemetry & Revenue Tuning',
-    description:
-      'We turn your digital platform into an active lead engine with real-time conversion telemetry, analytics tracking, and continuous growth optimization.',
-    icon: TrendingUp,
-    accentColor: '#38BDF8',
-    capabilities: [
-      {
-        title: 'Real-Time Conversion Telemetry',
-        desc: 'Track visitor behavior, click maps, and lead funnel completion rates live.',
-      },
-      {
-        title: 'Conversion Rate Optimization (CRO)',
-        desc: 'Continuous testing of CTAs, forms, and layouts to maximize lead volume.',
-      },
-      {
-        title: 'Automated Lead Routing',
-        desc: 'Directly connect form submissions to your sales CRM with instant notification alerts.',
-      },
-      {
-        title: 'Multi-Channel Acquisition Strategy',
-        desc: 'Align your digital presence with paid search, social, and organic search campaigns.',
-      },
-    ],
+    title: 'Website Design & Development',
+    headline: 'Your Website Should Be Your Best Salesperson',
+    copy: 'A website should do more than look beautiful. It should educate visitors, build trust, answer objections, and guide prospects toward taking action. We design and develop high-performance websites that combine exceptional user experience with conversion-focused strategy.',
+    icon: Globe,
     deliverables: [
-      'Live Analytics Dashboard',
-      'Automated Lead Notifications',
-      'Monthly CRO Optimizations',
-      'Growth Trajectory Reports',
+      'Business Websites',
+      'Corporate Websites',
+      'Landing Pages',
+      'Service Websites',
+      'Portfolio Websites',
+      'Responsive Development',
+      'CMS Integration',
+      'Speed Optimization',
+      'SEO Foundations',
+      'Conversion Optimization',
     ],
+    includes: [
+      'Mobile-First Design',
+      'Fast Loading Performance (99+ Speed)',
+      'SEO-Friendly Structure',
+      'Accessibility Best Practices',
+      'Conversion-Focused UX',
+      'Analytics Integration',
+    ],
+    outcome:
+      'A digital experience that attracts, engages, and converts visitors into qualified leads.',
+    align: 'left',
+  },
+  {
+    id: 'ui-ux-design',
+    num: '04',
+    title: 'UI/UX Design',
+    headline: 'Design Experiences People Actually Enjoy Using',
+    copy: 'Great user experiences feel effortless. We create intuitive interfaces that help users find what they need quickly while increasing engagement, satisfaction, and conversions.',
+    icon: Layout,
+    deliverables: [
+      'UX Strategy',
+      'User Research',
+      'User Flows',
+      'Wireframes',
+      'Interface Design',
+      'Design Systems',
+      'Dashboard Design',
+      'Mobile App Design',
+      'SaaS Product Design',
+      'Prototype Development',
+    ],
+    outcome:
+      'Digital products that are easier to use, more enjoyable to interact with, and designed for long-term growth.',
+    align: 'right',
+  },
+  {
+    id: 'seo-optimization',
+    num: '05',
+    title: 'Search Engine Optimization (SEO)',
+    headline: 'Get Found By The Right Customers',
+    copy: 'If customers can\'t find you, they can\'t buy from you. Our SEO strategies improve visibility, increase qualified traffic, and position your business in front of people actively searching for your products and services.',
+    icon: Search,
+    deliverables: [
+      'Technical SEO',
+      'On-Page SEO',
+      'Keyword Research',
+      'Content Optimization',
+      'Local SEO',
+      'SEO Audits',
+      'Competitor Analysis',
+      'Website Structure Optimization',
+      'Performance Improvements',
+    ],
+    outcome:
+      'More visibility, more organic traffic, and more opportunities to generate revenue.',
+    align: 'left',
+  },
+  {
+    id: 'digital-marketing',
+    num: '06',
+    title: 'Digital Marketing',
+    headline: 'Turn Attention Into Revenue',
+    copy: 'Marketing isn\'t about generating clicks. It\'s about attracting the right audience and turning interest into measurable business growth. We develop data-driven campaigns that connect strategy, creativity, and performance.',
+    icon: Megaphone,
+    deliverables: [
+      'Growth Marketing Strategy',
+      'Paid Advertising',
+      'Social Media Marketing',
+      'Content Marketing',
+      'Funnel Development',
+      'Campaign Management',
+      'Retargeting Campaigns',
+      'Conversion Tracking',
+      'Performance Reporting',
+    ],
+    outcome:
+      'More qualified leads, stronger customer acquisition, and predictable growth.',
+    align: 'right',
   },
   {
     id: 'automation-ai',
-    num: '04',
-    category: 'AUTOMATION & WORKFLOWS',
-    title: 'CMS Automation & AI Workflows',
-    tagline: 'Automated Systems That Work 24/7 For Your Business',
-    description:
-      'We build custom automation pipelines connecting your website directly to your CRM, email platforms, and AI micro-tools to eliminate manual tasks.',
+    num: '07',
+    title: 'Marketing Automation & AI Systems',
+    headline: 'Scale Smarter, Not Harder',
+    copy: 'Businesses lose time and revenue because of repetitive processes and disconnected systems. We implement automation and AI-driven workflows that improve efficiency, nurture leads, and support scalable growth.',
     icon: Bot,
-    accentColor: '#10B981',
-    capabilities: [
-      {
-        title: 'Custom Webhooks & API Pipelines',
-        desc: 'Connect your site seamlessly with HubSpot, Salesforce, Zapier, and custom APIs.',
-      },
-      {
-        title: 'AI-Powered Auto-Responders',
-        desc: 'Instant lead scoring and automated custom follow-ups for high-intent leads.',
-      },
-      {
-        title: 'Interactive Calculators & Estimators',
-        desc: 'Build custom interactive tools on your site that capture lead preferences automatically.',
-      },
-      {
-        title: 'Headless Publishing Workflows',
-        desc: 'Automate content publishing across multiple platforms with zero manual copy-pasting.',
-      },
-    ],
     deliverables: [
-      'Custom Webhook Integrations',
-      'AI Lead Qualification Setup',
-      'Interactive Web Tools',
-      'Workflow Documentation',
+      'Lead Automation',
+      'CRM Integration',
+      'Email Automation',
+      'Customer Journey Automation',
+      'AI Workflows',
+      'Internal Process Automation',
+      'Sales Pipeline Automation',
+      'Reporting Dashboards',
     ],
+    outcome:
+      'Less manual work, faster execution, and more time focused on growth.',
+    align: 'left',
+  },
+  {
+    id: 'conversion-optimization',
+    num: '08',
+    title: 'Conversion Optimization',
+    headline: 'Turn More Visitors Into Customers',
+    copy: 'Getting traffic is only half the equation. The real opportunity comes from converting more of your existing visitors into paying customers. We identify friction points and optimize your digital experience to improve performance at every stage of the customer journey.',
+    icon: TrendingUp,
+    deliverables: [
+      'Conversion Audits',
+      'Landing Page Optimization',
+      'Funnel Optimization',
+      'User Behavior Analysis',
+      'Heatmap Reviews',
+      'CTA Optimization',
+      'A/B Testing Strategy',
+      'Performance Analysis',
+    ],
+    outcome:
+      'Higher conversion rates, improved ROI, and more revenue from existing traffic.',
+    align: 'right',
+  },
+];
+
+const growthFramework = [
+  { step: '01', title: 'Discover', desc: 'Research your market, audience, competitors, and opportunities.' },
+  { step: '02', title: 'Position', desc: 'Define a unique market position and messaging strategy.' },
+  { step: '03', title: 'Build', desc: 'Create the brand, website, systems, and digital foundation.' },
+  { step: '04', title: 'Launch', desc: 'Deploy campaigns and growth initiatives.' },
+  { step: '05', title: 'Optimize', desc: 'Measure performance, refine strategy, and scale what works.' },
+];
+
+const whyUsPillars = [
+  {
+    title: 'Strategy Before Execution',
+    desc: 'We don\'t jump into design, development, or marketing without understanding your business objectives first.',
+  },
+  {
+    title: 'Built Around Growth',
+    desc: 'Every decision is measured against one question: Will this help the business grow?',
+  },
+  {
+    title: 'One Integrated Partner',
+    desc: 'Branding, websites, technology, automation, and marketing working together under one growth-focused system.',
+  },
+  {
+    title: 'Designed For Long-Term Momentum',
+    desc: 'We\'re not interested in short-term wins. We build foundations that continue generating results long after launch.',
   },
 ];
 
@@ -179,269 +257,215 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
   isDarkMode,
   onNavigateHome,
 }) => {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
-
-  const filteredPillars =
-    selectedCategory === 'all'
-      ? servicePillars
-      : servicePillars.filter((p) => p.id === selectedCategory);
-
   return (
     <div
-      className={`min-h-screen pt-28 pb-20 transition-colors duration-500 relative overflow-hidden ${
-        isDarkMode ? 'bg-[#0A0A0A] text-white' : 'bg-[#FAF9F6] text-[#111111]'
+      className={`min-h-screen pt-24 pb-20 transition-colors duration-500 relative overflow-hidden ${
+        isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
-      {/* Background Architectural Mesh */}
+      {/* Subtle Background Mesh Grid */}
       <div
-        className={`absolute inset-0 bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none ${
+        className={`absolute inset-0 bg-[size:5rem_5rem] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none ${
           isDarkMode
-            ? 'bg-[linear-gradient(to_right,#27272A20_1px,transparent_1px),linear-gradient(to_bottom,#27272A20_1px,transparent_1px)]'
-            : 'bg-[linear-gradient(to_right,#E4E4E760_1px,transparent_1px),linear-gradient(to_bottom,#E4E4E760_1px,transparent_1px)]'
+            ? 'bg-[linear-gradient(to_right,#27272A15_1px,transparent_1px),linear-gradient(to_bottom,#27272A15_1px,transparent_1px)]'
+            : 'bg-[linear-gradient(to_right,#E4E4E750_1px,transparent_1px),linear-gradient(to_bottom,#E4E4E750_1px,transparent_1px)]'
         }`}
       />
 
-      {/* Radiant Spotlight */}
-      <div className="absolute top-20 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-radial from-[#F97316]/15 via-[#FB923C]/5 to-transparent blur-[160px] pointer-events-none" />
+      {/* Brand Orange Radial Spotlight (15% Max Glow) */}
+      <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-radial from-[#FF7A1A]/15 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* BACK TO HOME BUTTON */}
-        <div className="mb-8 text-left">
+        {/* BACK TO HOME NAVIGATION */}
+        <div className="mb-10 text-left">
           <button
             onClick={onNavigateHome}
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-mono font-bold transition-all cursor-pointer ${
               isDarkMode
-                ? 'bg-[#18181B] border-[#27272A] text-zinc-300 hover:border-[#F97316] hover:text-white'
-                : 'bg-white border-[#E4E4E7] text-zinc-700 hover:border-[#F97316] hover:text-zinc-900 shadow-sm'
+                ? 'bg-[#0C0C0C] border-zinc-800 text-zinc-300 hover:border-[#FF7A1A] hover:text-white'
+                : 'bg-white border-zinc-200 text-zinc-700 hover:border-[#FF7A1A] hover:text-zinc-900 shadow-sm'
             }`}
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
-            <span>BACK TO HOME</span>
+            <ArrowLeft className="w-3.5 h-3.5 text-[#FF7A1A]" />
+            <span>RETURN TO HOME</span>
           </button>
         </div>
 
-        {/* PAGE HERO HEADER */}
+        {/* HERO SECTION - GROWTH STARTS WITH THE RIGHT MOMENTUM */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-4xl mx-auto mb-16 space-y-4"
+          className="text-center max-w-4xl mx-auto mb-28 space-y-6"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/30 text-xs font-mono font-bold text-[#F97316] uppercase tracking-widest">
-            <Zap className="w-3.5 h-3.5" />
-            <span>Comprehensive Studio Capabilities</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>ROOS STUDIOX • SERVICES</span>
           </div>
 
           <h1
-            className={`font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-[1.08] ${
-              isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
+            className={`font-display text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[1.05] ${
+              isDarkMode ? 'text-white' : 'text-[#111111]'
             }`}
           >
-            <span className="block">Our Core Services &</span>
-            <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
-              Detailed Capabilities
+            <span className="block">Growth Starts With</span>
+            <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2">
+              The Right Momentum.
             </span>
           </h1>
 
-          <p
-            className={`text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto ${
-              isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
+          <div
+            className={`text-lg sm:text-2xl font-medium leading-relaxed max-w-3xl mx-auto space-y-3 ${
+              isDarkMode ? 'text-[#B8B8B8]' : 'text-[#52525B]'
             }`}
           >
-            We combine high-speed web development, strategic brand positioning, digital growth marketing, and AI automation into a single high-velocity system.
-          </p>
-
-          {/* Micro Telemetry Pills */}
-          <div className="pt-2 flex items-center justify-center gap-3 flex-wrap text-xs font-mono">
-            <span className="px-3 py-1 rounded-full bg-[#F97316]/10 border border-[#F97316]/30 text-[#F97316] font-bold">
-              4 Core Disciplines
-            </span>
-            <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-bold">
-              99+ Speed Guarantee
-            </span>
-            <span className="px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/30 text-sky-400 font-bold">
-              Zero Template Fluff
-            </span>
+            <p className="font-semibold text-white">
+              Most businesses don't have a product problem.
+            </p>
+            <p>
+              They have a <strong className="text-[#FF7A1A]">positioning problem</strong>, a{' '}
+              <strong className="text-[#FF7A1A]">visibility problem</strong>, a{' '}
+              <strong className="text-[#FF7A1A]">conversion problem</strong>, or a{' '}
+              <strong className="text-[#FF7A1A]">growth problem</strong>.
+            </p>
+            <p className="text-base sm:text-lg pt-2 text-[#7D7D7D]">
+              At Roos StudioX, we combine strategy, branding, design, technology, and marketing to build digital ecosystems that attract the right audience, create trust, and generate measurable business growth.
+            </p>
           </div>
         </motion.div>
 
-        {/* SERVICE CATEGORY FILTER PILLS */}
-        <div className="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mb-14">
-          <button
-            onClick={() => setSelectedCategory('all')}
-            className={`px-4 py-2 rounded-full border text-xs font-mono font-bold transition-all cursor-pointer ${
-              selectedCategory === 'all'
-                ? 'bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white border-[#FDBA74] shadow-lg shadow-[#F97316]/30'
-                : isDarkMode
-                ? 'bg-[#141417] text-zinc-400 border-zinc-800 hover:text-white'
-                : 'bg-white text-zinc-600 border-zinc-200 hover:text-zinc-900 shadow-sm'
-            }`}
-          >
-            ALL SERVICES (4)
-          </button>
-
-          {servicePillars.map((pillar) => (
-            <button
-              key={pillar.id}
-              onClick={() => setSelectedCategory(pillar.id)}
-              className={`px-4 py-2 rounded-full border text-xs font-mono font-bold transition-all cursor-pointer ${
-                selectedCategory === pillar.id
-                  ? 'bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white border-[#FDBA74] shadow-lg shadow-[#F97316]/30'
-                  : isDarkMode
-                  ? 'bg-[#141417] text-zinc-400 border-zinc-800 hover:text-white'
-                  : 'bg-white text-zinc-600 border-zinc-200 hover:text-zinc-900 shadow-sm'
-              }`}
-            >
-              {pillar.num} • {pillar.title.split('&')[0]}
-            </button>
-          ))}
-        </div>
-
-        {/* DETAILED SERVICE PILLARS STACK */}
-        <div className="space-y-16">
-          {filteredPillars.map((pillar, idx) => {
-            const PillarIcon = pillar.icon;
+        {/* 8 DETAILED SERVICE SECTIONS (ALTERNATING FLOATING 3D OBJECT CANVASES) */}
+        <div className="space-y-28">
+          {detailedServices.map((service, idx) => {
+            const ServiceIcon = service.icon;
+            const isLeft = service.align === 'left';
 
             return (
               <motion.div
-                key={pillar.id}
-                initial={{ opacity: 0, y: 30 }}
+                key={service.id}
+                initial={{ opacity: 0, y: 35 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.6, delay: idx * 0.1 }}
-                className={`rounded-3xl border p-6 sm:p-10 shadow-2xl relative overflow-hidden text-left transition-colors duration-500 ${
-                  isDarkMode
-                    ? 'bg-[#141417]/95 border-zinc-800 text-white shadow-black/80'
-                    : 'bg-white border-zinc-200 text-zinc-900 shadow-xl'
+                transition={{ duration: 0.7, delay: idx * 0.08 }}
+                className={`grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center text-left ${
+                  isLeft ? '' : 'lg:flex-row-reverse'
                 }`}
               >
-                {/* Top Accent Line */}
+                
+                {/* FLOATING ANTI-GRAVITY SERVICE OBJECT CANVAS (5 COLS) */}
                 <div
-                  className="absolute top-0 left-0 right-0 h-1.5"
-                  style={{ backgroundColor: pillar.accentColor }}
-                />
-
-                {/* Header & Icon */}
-                <div className="flex items-start justify-between gap-4 pb-6 border-b border-zinc-800/80 flex-wrap">
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl text-white flex items-center justify-center shadow-lg shrink-0"
-                      style={{
-                        backgroundColor: pillar.accentColor,
-                        boxShadow: `0 0 20px ${pillar.accentColor}50`,
-                      }}
-                    >
-                      <PillarIcon className="w-7 h-7" />
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <span className="text-2xl font-mono font-black text-[#F97316]">
-                          {pillar.num}
-                        </span>
-                        <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
-                          {pillar.category}
-                        </span>
-                      </div>
-                      <h2 className="font-display text-2xl sm:text-4xl font-extrabold tracking-tight">
-                        {pillar.title}
-                      </h2>
-                    </div>
-                  </div>
-
-                  <span
-                    className="text-xs font-mono font-bold px-3.5 py-1.5 rounded-full border uppercase tracking-wider"
-                    style={{
-                      backgroundColor: `${pillar.accentColor}15`,
-                      color: pillar.accentColor,
-                      borderColor: `${pillar.accentColor}40`,
-                    }}
-                  >
-                    {pillar.tagline}
-                  </span>
-                </div>
-
-                {/* Description Paragraph */}
-                <p
-                  className={`text-base sm:text-lg leading-relaxed py-6 ${
-                    isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+                  className={`lg:col-span-5 ${
+                    isLeft ? 'lg:order-1' : 'lg:order-2'
                   }`}
                 >
-                  {pillar.description}
-                </p>
-
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-2">
-                  
-                  {/* LEFT: 4 SPECIFIC CAPABILITIES (8 COLS) */}
-                  <div className="lg:col-span-8 space-y-4">
-                    <div className="text-xs font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-2">
-                      <Sparkles className="w-3.5 h-3.5 text-[#F97316]" />
-                      <span>Deep Engineering & Strategy Breakdown:</span>
+                  <motion.div
+                    animate={{ y: [-6, 6, -6], rotate: isLeft ? [-1.5, 1.5, -1.5] : [1.5, -1.5, 1.5] }}
+                    transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+                    className={`rounded-3xl p-8 sm:p-10 border shadow-2xl relative overflow-hidden flex flex-col justify-between h-full min-h-[320px] transition-all ${
+                      isDarkMode
+                        ? 'bg-[#0C0C0C] border-zinc-800 text-white shadow-black/80'
+                        : 'bg-white border-zinc-200 text-zinc-900 shadow-xl'
+                    }`}
+                  >
+                    {/* Corner Number */}
+                    <div className="flex items-center justify-between">
+                      <span className="text-4xl font-mono font-black text-[#FF7A1A]">
+                        {service.num}
+                      </span>
+                      <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/30 uppercase">
+                        MOMENTUM ENGINE
+                      </span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {pillar.capabilities.map((cap, cIdx) => (
-                        <div
-                          key={cIdx}
-                          className={`p-4 rounded-2xl border transition-all ${
-                            isDarkMode
-                              ? 'bg-[#0E0E11] border-zinc-800'
-                              : 'bg-zinc-50 border-zinc-200 shadow-sm'
-                          }`}
-                        >
-                          <div className="text-sm font-bold font-display text-white mb-1 flex items-center gap-2">
-                            <span
-                              className="w-2 h-2 rounded-full shrink-0"
-                              style={{ backgroundColor: pillar.accentColor }}
-                            />
-                            <span>{cap.title}</span>
-                          </div>
-                          <p className="text-xs text-zinc-400 leading-relaxed">
-                            {cap.desc}
-                          </p>
+                    {/* Central Floating 3D Service Object Icon */}
+                    <div className="py-8 flex flex-col items-center justify-center text-center">
+                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-3xl bg-gradient-to-br from-[#FF7A1A] to-[#EA580C] text-white flex items-center justify-center shadow-2xl shadow-[#FF7A1A]/40 border-2 border-[#FF944D]/50 mb-4 transform group-hover:scale-110 transition-transform">
+                        <ServiceIcon className="w-10 h-10 sm:w-12 sm:h-12" />
+                      </div>
+                      <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
+                        {service.title}
+                      </div>
+                    </div>
+
+                    {/* Momentum Created Result Banner */}
+                    <div className="p-3.5 rounded-2xl bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-semibold text-[#FF7A1A]">
+                      <span className="font-bold uppercase font-mono block text-[10px] text-zinc-400 mb-0.5">
+                        MOMENTUM CREATED:
+                      </span>
+                      "{service.outcome}"
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* CONTENT & DELIVERABLES BREAKDOWN (7 COLS) */}
+                <div
+                  className={`lg:col-span-7 space-y-6 ${
+                    isLeft ? 'lg:order-2' : 'lg:order-1'
+                  }`}
+                >
+                  <div>
+                    <div className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest mb-1">
+                      {service.num} • {service.title}
+                    </div>
+                    <h2 className={`font-display text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
+                      {service.headline}
+                    </h2>
+                  </div>
+
+                  <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-600'}`}>
+                    {service.copy}
+                  </p>
+
+                  {/* Perfect For Banner (If Applicable) */}
+                  {service.perfectFor && (
+                    <div className="p-4 rounded-2xl bg-[#0C0C0C] border border-zinc-800 text-xs text-zinc-300">
+                      <strong className="text-[#FF7A1A] uppercase font-mono block mb-0.5">PERFECT FOR:</strong>
+                      {service.perfectFor}
+                    </div>
+                  )}
+
+                  {/* Deliverables List */}
+                  <div className="space-y-3 pt-2">
+                    <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
+                      WHAT WE DELIVER:
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {service.deliverables.map((item, dIdx) => (
+                        <div key={dIdx} className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold">
+                          <CheckCircle2 className="w-4 h-4 text-[#FF7A1A] shrink-0" />
+                          <span className={isDarkMode ? 'text-zinc-200' : 'text-zinc-800'}>{item}</span>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  {/* RIGHT: EXACT DELIVERABLES (4 COLS) */}
-                  <div className="lg:col-span-4">
-                    <div
-                      className={`p-5 rounded-2xl border text-left space-y-3.5 h-full flex flex-col justify-between ${
-                        isDarkMode
-                          ? 'bg-[#0E0E11] border-zinc-800'
-                          : 'bg-zinc-50 border-zinc-200 shadow-sm'
-                      }`}
-                    >
-                      <div className="text-xs font-bold uppercase tracking-wider text-zinc-400 pb-2 border-b border-zinc-800">
-                        Guaranteed Deliverables:
+                  {/* Every Website Includes (For Web Dev) */}
+                  {service.includes && (
+                    <div className="pt-3 border-t border-zinc-800 space-y-2">
+                      <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7A1A]">
+                        EVERY WEBSITE INCLUDES:
                       </div>
-
-                      <div className="space-y-2.5 flex-1">
-                        {pillar.deliverables.map((del, dIdx) => (
-                          <div key={dIdx} className="flex items-center gap-2.5 text-xs font-semibold">
-                            <CheckCircle2
-                              className="w-4 h-4 shrink-0"
-                              style={{ color: pillar.accentColor }}
-                            />
-                            <span className={isDarkMode ? 'text-zinc-200' : 'text-zinc-800'}>
-                              {del}
-                            </span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-zinc-300">
+                        {service.includes.map((inc, iIdx) => (
+                          <div key={iIdx} className="flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A1A]" />
+                            <span>{inc}</span>
                           </div>
                         ))}
                       </div>
-
-                      <div className="pt-3 border-t border-zinc-800">
-                        <AlphaRoosButton
-                          text="Inquire This Service"
-                          onClick={onOpenInquiry}
-                          isDarkMode={isDarkMode}
-                          compact
-                        />
-                      </div>
                     </div>
-                  </div>
+                  )}
 
+                  {/* Action Button */}
+                  <div className="pt-2">
+                    <AlphaRoosButton
+                      text="Inquire This Service"
+                      onClick={onOpenInquiry}
+                      isDarkMode={isDarkMode}
+                      compact
+                    />
+                  </div>
                 </div>
 
               </motion.div>
@@ -449,35 +473,111 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           })}
         </div>
 
-        {/* BOTTOM CTA INQUIRY BANNER */}
+        {/* WHY BUSINESSES CHOOSE ROOS STUDIOX */}
         <motion.div
-          initial={{ opacity: 0, y: 25 }}
+          initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-20 text-center space-y-5 max-w-3xl mx-auto"
+          transition={{ duration: 0.7 }}
+          className="mt-36 py-16 px-6 sm:px-12 rounded-3xl border border-zinc-800 bg-[#0C0C0C] text-left relative overflow-hidden"
         >
-          <h2 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight">
-            Ready to build your high-velocity digital presence?
-          </h2>
-          <p className="text-base text-zinc-400">
-            Tell us about your project requirements and we'll craft a customized execution roadmap within 24 hours.
-          </p>
-          <div className="pt-2 flex items-center justify-center gap-4 flex-wrap">
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C]" />
+
+          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
+            <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+              THE ROOS ADVANTAGE
+            </span>
+            <h2 className="font-display text-4xl sm:text-6xl font-extrabold tracking-tight">
+              Why Businesses Choose Roos StudioX
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+            {whyUsPillars.map((pillar, pIdx) => (
+              <div key={pIdx} className="p-6 rounded-2xl bg-[#050505] border border-zinc-800 space-y-2">
+                <div className="text-[#FF7A1A] text-xs font-mono font-bold uppercase">
+                  0{pIdx + 1} • PILLAR
+                </div>
+                <h3 className="font-display text-xl font-bold text-white">
+                  {pillar.title}
+                </h3>
+                <p className="text-sm text-[#B8B8B8] leading-relaxed">
+                  {pillar.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* THE ROOS GROWTH FRAMEWORK */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="mt-28 text-left space-y-12"
+        >
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+              STEP-BY-STEP LEAP
+            </span>
+            <h2 className="font-display text-4xl sm:text-6xl font-extrabold tracking-tight">
+              The Roos Growth Framework
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {growthFramework.map((fStep, fIdx) => (
+              <div
+                key={fIdx}
+                className="p-5 rounded-2xl bg-[#0C0C0C] border border-zinc-800 flex flex-col justify-between space-y-3"
+              >
+                <span className="text-2xl font-mono font-black text-[#FF7A1A]">
+                  {fStep.step}
+                </span>
+                <div>
+                  <div className="font-display text-lg font-bold text-white mb-1">
+                    {fStep.title}
+                  </div>
+                  <p className="text-xs text-[#7D7D7D] leading-relaxed">
+                    {fStep.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* FINAL FULL SCREEN CTA - READY TO BUILD MOMENTUM? */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.96 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mt-36 py-20 text-center space-y-8 max-w-4xl mx-auto relative"
+        >
+          <div className="space-y-4">
+            <h2 className="font-display text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none text-white">
+              Ready To Build Momentum?
+            </h2>
+            <div className="text-xl sm:text-3xl font-semibold text-[#B8B8B8] space-y-1">
+              <p>You Bring The Ambition.</p>
+              <p className="text-[#FF7A1A] font-bold">We'll Build The Momentum.</p>
+            </div>
+          </div>
+
+          <div className="pt-4 flex flex-col items-center justify-center gap-4">
             <AlphaRoosButton
-              text="Book A Demo"
+              text="Get Your Free Growth Audit"
               onClick={onOpenInquiry}
               isDarkMode={isDarkMode}
             />
+
             <button
               onClick={onNavigateHome}
-              className={`px-6 py-3 rounded-full border text-xs font-mono font-bold transition-all cursor-pointer ${
-                isDarkMode
-                  ? 'bg-[#18181B] border-zinc-800 text-zinc-300 hover:border-[#F97316] hover:text-white'
-                  : 'bg-white border-zinc-200 text-zinc-700 hover:border-[#F97316] hover:text-zinc-900'
-              }`}
+              className="text-xs font-mono font-bold text-zinc-500 hover:text-zinc-300 uppercase tracking-widest pt-2 cursor-pointer transition-colors"
             >
-              RETURN TO HOMEPAGE
+              ← Return to Main Homepage
             </button>
           </div>
         </motion.div>
