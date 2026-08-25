@@ -41,7 +41,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       description: "A kangaroo's powerful legs make every leap possible. We build the strong basement for your business — strategy, branding, systems and structure that support long-term growth.",
       tag: 'BASEMENT & STRUCTURE',
       icon: Shield,
-      position: 'top-10 left-0 lg:left-8 max-w-sm',
+      side: 'left',
     },
     {
       num: '02',
@@ -49,7 +49,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       description: 'Every business begins as a small idea with big potential. We nurture that potential with care, guidance and expertise — shaping, building and polishing until you\'re ready to take on the world.',
       tag: 'STARTUP NURTURING',
       icon: Sparkles,
-      position: 'top-64 left-10 lg:left-1/4 max-w-sm',
+      side: 'right',
     },
     {
       num: '03',
@@ -57,7 +57,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       description: 'A kangaroo can leap up to 30 feet in one bound — that\'s 4x to 8x more progress in a single move. We create strategies and systems that deliver the kind of growth that multiplies your brand\'s impact.',
       tag: 'MULTIPLIED GROWTH',
       icon: Flame,
-      position: 'top-20 left-1/2 -translate-x-1/2 max-w-sm',
+      side: 'left',
     },
     {
       num: '04',
@@ -65,7 +65,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       description: 'The tail keeps a kangaroo balanced and in control. We bring balance to your brand — aligning creativity, technology and marketing so every move is stable, smart and sustainable.',
       tag: 'STABLE & SUSTAINABLE',
       icon: Scale,
-      position: 'top-80 left-1/2 lg:left-3/5 max-w-sm',
+      side: 'right',
     },
     {
       num: '05',
@@ -73,7 +73,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       description: 'Kangaroos move in mobs, looking out for each other. We work as an extension of your team — collaborating, challenging and supporting you at every stage of your growth journey.',
       tag: 'TEAM MOB COLLABORATION',
       icon: Users,
-      position: 'top-16 right-0 lg:right-12 max-w-sm',
+      side: 'left',
     },
     {
       num: '06',
@@ -81,7 +81,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       description: 'Kangaroos are always alert and aware of what\'s ahead. We stay ahead of trends, technology and market shifts — so your brand is always future-ready.',
       tag: 'FUTURE READY',
       icon: Target,
-      position: 'top-[420px] right-4 lg:right-24 max-w-sm',
+      side: 'right',
     },
   ];
 
@@ -103,17 +103,24 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       {/* 3. CINEMATIC SUNSET HORIZON BACKLIGHT ORB */}
       <div className="absolute top-20 right-10 w-[700px] h-[400px] bg-gradient-to-l from-[#FF6B00]/25 via-[#FF8F3A]/10 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
         {/* ========================================================================= */}
-        {/* HEADER SECTION */}
+        {/* HEADER SECTION WITH TINY ELEGANT KANGAROO AVATAR */}
         {/* ========================================================================= */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="text-center max-w-4xl mx-auto space-y-4"
+          className="text-center max-w-4xl mx-auto space-y-4 relative"
         >
+          {/* TINY ELEGANT KANGAROO AVATAR BADGE */}
+          <div className="flex justify-center mb-2">
+            <div className="w-16 h-16 rounded-2xl bg-[#121215] border border-[#FF6B00]/40 p-2 flex items-center justify-center shadow-lg shadow-[#FF6B00]/20">
+              <KangarooMascot />
+            </div>
+          </div>
+
           {/* EYEBROW BADGE */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121215] border border-[#FF6B00]/40 text-xs font-mono font-bold text-[#FF6B00] shadow-lg shadow-[#FF6B00]/10 tracking-widest uppercase">
             <Sparkles className="w-3.5 h-3.5 text-[#FF6B00] animate-pulse" />
@@ -135,117 +142,91 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         </motion.div>
 
         {/* ========================================================================= */}
-        {/* ORGANIC CREATIVE WINDING PATHWAY & FLOATING UNBOXED NODES (NO CARDS/BOXES) */}
+        {/* FLAWLESS ALTERNATING S-CURVE TIMELINE (ZERO OVERLAP, PERFECT FLOW) */}
         {/* ========================================================================= */}
-        <div className="relative min-h-[750px] lg:min-h-[850px] py-8">
+        <div className="relative py-8">
           
-          {/* BACKGROUND CINEMATIC KANGAROO ARTWORK */}
-          <div className="hidden lg:block absolute top-0 left-0 w-80 h-80 opacity-85 pointer-events-none -z-10">
-            <div className="relative w-full h-full flex items-center justify-center">
-              <div className="absolute inset-0 bg-[#FF6B00]/20 rounded-full blur-3xl" />
-              <KangarooMascot />
-            </div>
+          {/* CENTRAL GLOWING ROAD LINE (DESKTOP & MOBILE) */}
+          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-1 bg-gradient-to-b from-[#FF6B00]/20 via-[#FF6B00]/70 to-[#FF6B00]/20 pointer-events-none z-0 hidden md:block">
+            <div className="absolute inset-0 bg-[#FF6B00] blur-[4px] opacity-60" />
           </div>
 
-          {/* S-CURVE GLOWING ROAD SVG PATH */}
-          <div className="hidden lg:block absolute inset-0 pointer-events-none -z-10">
-            <svg className="w-full h-full" viewBox="0 0 1200 800" fill="none">
-              <path
-                d="M 80,140 Q 300,260 520,180 T 920,240 T 1120,480 T 820,720 T 280,730"
-                stroke="#FF6B00"
-                strokeWidth="5"
-                strokeDasharray="10 10"
-                className="opacity-40 animate-pulse"
-              />
-              <path
-                d="M 80,140 Q 300,260 520,180 T 920,240 T 1120,480 T 820,720 T 280,730"
-                stroke="url(#glowGradientRoad)"
-                strokeWidth="10"
-                strokeLinecap="round"
-                className="opacity-75 blur-[4px]"
-              />
-              <defs>
-                <linearGradient id="glowGradientRoad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#FF6B00" />
-                  <stop offset="50%" stopColor="#FF8F3A" />
-                  <stop offset="100%" stopColor="#EA580C" />
-                </linearGradient>
-              </defs>
-            </svg>
-          </div>
-
-          {/* ORGANIC FLOATING UNBOXED PILLAR NODES (RESPONSIVE & DESKTOP STAGGERED) */}
-          <div className="space-y-12 lg:space-y-0 lg:relative lg:h-[800px]">
+          {/* 6 UNBOXED PILLAR NODES IN PERFECT ALTERNATING SEQUENCE */}
+          <div className="space-y-16 md:space-y-24 relative z-10">
             {pillars.map((pil, idx) => {
               const pNum = idx + 1;
               const isActive = activePillar === pNum;
               const IconComp = pil.icon;
+              const isLeft = pil.side === 'left';
 
               return (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, delay: idx * 0.08 }}
                   onMouseEnter={() => setActivePillar(pNum)}
                   onClick={() => setActivePillar(pNum)}
-                  className={`lg:absolute ${pil.position} text-left space-y-3 cursor-pointer transition-all duration-500 z-10`}
+                  className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 cursor-pointer ${
+                    isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+                  }`}
                 >
-                  {/* NODE NUMBER & CIRCULAR GLOWING ICON */}
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
-                        isActive
-                          ? 'bg-[#FF6B00] text-white shadow-[0_0_35px_#FF6B00] scale-110'
-                          : 'bg-[#121215] text-[#FF6B00] border border-[#FF6B00]/40'
-                      }`}
-                    >
-                      <IconComp className="w-5 h-5" />
+                  {/* TEXT CONTENT COLUMN */}
+                  <div className={`w-full md:w-1/2 space-y-3 ${isLeft ? 'md:text-right' : 'md:text-left'}`}>
+                    {/* NODE NUMBER & CAPSULE */}
+                    <div className={`flex items-center gap-3 ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}>
+                      <span className="font-mono text-3xl sm:text-4xl font-black text-[#FF6B00]">
+                        {pil.num}
+                      </span>
+                      <span
+                        className={`inline-block px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider ${
+                          isActive
+                            ? 'bg-[#FF6B00]/20 text-[#FF6B00] border border-[#FF6B00]/60'
+                            : 'bg-[#121215] text-zinc-400 border border-zinc-800'
+                        }`}
+                      >
+                        {pil.tag}
+                      </span>
                     </div>
 
-                    <span
-                      className={`font-mono text-3xl font-black ${
-                        isActive ? 'text-[#FF6B00]' : 'text-zinc-500'
-                      }`}
-                    >
-                      {pil.num}
-                    </span>
-                  </div>
-
-                  {/* UNBOXED FLOATING TITLE & TEXT (NO RECTANGULAR BOX) */}
-                  <div className="space-y-2 max-w-sm">
-                    <h3 className="font-display text-xl sm:text-2xl font-black text-white leading-tight">
+                    {/* TITLE */}
+                    <h3 className="font-display text-2xl sm:text-3xl font-black text-white leading-tight">
                       {pil.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-300 font-medium leading-relaxed">
+
+                    {/* DESCRIPTION */}
+                    <p className="text-sm sm:text-base text-zinc-300 font-medium leading-relaxed max-w-lg">
                       {pil.description}
                     </p>
                   </div>
 
-                  {/* CAPSULE TAG */}
-                  <div>
-                    <span
-                      className={`inline-block px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider ${
+                  {/* CENTRAL CIRCULAR GLOWING NODE ICON */}
+                  <div className="relative shrink-0 z-20 my-2 md:my-0">
+                    <div
+                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
                         isActive
-                          ? 'bg-[#FF6B00]/20 text-[#FF6B00] border border-[#FF6B00]/60'
-                          : 'text-zinc-400 border border-zinc-800'
+                          ? 'bg-[#FF6B00] text-white shadow-[0_0_40px_#FF6B00] scale-110'
+                          : 'bg-[#121215] text-[#FF6B00] border border-[#FF6B00]/50 shadow-md'
                       }`}
                     >
-                      {pil.tag}
-                    </span>
+                      <IconComp className="w-6 h-6" />
+                    </div>
                   </div>
+
+                  {/* EMPTY BALANCING COLUMN FOR PERFECT GRID S-CURVE ALIGNMENT */}
+                  <div className="hidden md:block w-1/2" />
                 </motion.div>
               );
             })}
           </div>
 
-          {/* NEXT LEAP WAYPOINT MILESTONE (BOTTOM RIGHT) */}
-          <div className="pt-16 lg:pt-0 flex justify-end">
+          {/* NEXT LEAP WAYPOINT MILESTONE (BOTTOM CENTER) */}
+          <div className="pt-20 flex justify-center">
             <motion.div
               animate={{ scale: [1, 1.06, 1] }}
               transition={{ duration: 2.5, repeat: Infinity }}
-              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#FF6B00] text-white font-mono text-xs font-black uppercase tracking-widest shadow-[0_0_35px_rgba(255,107,0,0.6)] border border-[#FF8F3A]"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#FF6B00] text-white font-mono text-xs font-black uppercase tracking-widest shadow-[0_0_40px_rgba(255,107,0,0.6)] border border-[#FF8F3A]"
             >
               <div className="w-3.5 h-3.5 rounded-full bg-white animate-ping" />
               <span>NEXT LEAP WAYPOINT</span>
@@ -255,7 +236,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         </div>
 
         {/* ========================================================================= */}
-        {/* BOTTOM STATEMENT NARRATIVE (UNBOXED OPEN FEEL) */}
+        {/* BOTTOM STATEMENT NARRATIVE (UNBOXED OPEN ATMOSPHERIC FEEL) */}
         {/* ========================================================================= */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
