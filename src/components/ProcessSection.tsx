@@ -120,16 +120,16 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
         
-        {/* HEADER BLOCK (PREMIUM WORLD-CLASS AGENCY HEADLINE) */}
+        {/* HEADER BLOCK (CALIBRATED STRICTLY TO 2 CLEAN LINES) */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="space-y-4 max-w-4xl mx-auto"
+          className="space-y-2 max-w-5xl mx-auto px-2"
         >
           <h2
-            className={`font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08]`}
+            className={`font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.12]`}
           >
             <span className="bg-gradient-to-r from-white via-zinc-300 to-zinc-400 bg-clip-text text-transparent block pb-1">
               Our 5-Phase Execution Methodology
@@ -209,7 +209,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   </button>
                 </div>
 
-                {/* Card Title (Metallic Silver Gradient Title) */}
+                {/* Card Title */}
                 <div className="space-y-2 pt-2">
                   <h3 className="font-display text-lg sm:text-xl font-extrabold leading-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
                     {card.name}
