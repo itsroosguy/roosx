@@ -117,7 +117,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
         
-        {/* HEADER BLOCK: THE MOMENTUM ENGINE (NO BADGE, SILVER WHITE & ORANGE TITLE + NEW DESCRIPTION) */}
+        {/* HEADER BLOCK: THE MOMENTUM ENGINE (2-LINE SUBHEAD FORMATTING) */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -133,7 +133,8 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </h2>
 
           <p className="text-base sm:text-lg md:text-xl font-medium text-zinc-400 max-w-3xl mx-auto">
-            Five strategic phases designed to discover opportunities, build authority, and accelerate sustainable growth.
+            <span className="block">Five strategic phases designed to discover opportunities,</span>
+            <span className="block">build authority and accelerate sustainable growth.</span>
           </p>
         </motion.div>
 
