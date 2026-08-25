@@ -14,6 +14,7 @@ import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
 import { ServicesPage } from './components/ServicesPage';
+import { ServicesV2Page } from './components/ServicesV2Page';
 import { AboutPage } from './components/AboutPage';
 import { PhilosophyPage } from './components/PhilosophyPage';
 import { Project } from './types';
@@ -22,10 +23,11 @@ export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'services' | 'about' | 'philosophy'>(() => {
+  const [currentView, setCurrentView] = useState<'home' | 'services' | 'services2' | 'about' | 'philosophy'>(() => {
     const hash = window.location.hash;
     if (hash === '#about') return 'about';
     if (hash === '#services') return 'services';
+    if (hash === '#services2' || hash === '#service2') return 'services2';
     if (hash === '#philosophy') return 'philosophy';
     return 'home';
   });
@@ -37,6 +39,8 @@ export function App() {
         setCurrentView('about');
       } else if (hash === '#services') {
         setCurrentView('services');
+      } else if (hash === '#services2' || hash === '#service2') {
+        setCurrentView('services2');
       } else if (hash === '#philosophy') {
         setCurrentView('philosophy');
       } else {
@@ -50,7 +54,7 @@ export function App() {
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-500 relative bg-noise selection:bg-[#F97316] selection:text-white ${
+      className={`min-h-screen transition-colors duration-500 relative bg-noise selection:bg-[#FF7A1A] selection:text-white ${
         isDarkMode ? 'dark bg-[#0A0A0A] text-[#D4D4D8]' : 'bg-white text-[#111111]'
       }`}
     >
@@ -66,8 +70,8 @@ export function App() {
         isDarkMode={isDarkMode}
         onToggleTheme={() => setIsDarkMode(!isDarkMode)}
         onNavigateServices={() => {
-          window.location.hash = '#services';
-          setCurrentView('services');
+          window.location.hash = '#services2';
+          setCurrentView('services2');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onNavigateAbout={() => {
@@ -88,7 +92,17 @@ export function App() {
       />
 
       {/* Main View Switching */}
-      {currentView === 'services' ? (
+      {currentView === 'services2' ? (
+        <ServicesV2Page
+          onOpenInquiry={() => setIsInquiryOpen(true)}
+          isDarkMode={isDarkMode}
+          onNavigateHome={() => {
+            window.location.hash = '';
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      ) : currentView === 'services' ? (
         <ServicesPage
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}
