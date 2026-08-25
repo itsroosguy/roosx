@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight, Search, Compass, Code, Zap, TrendingUp } from 'lucide-react';
-import { AlphaRoosButton } from './AlphaRoosButton';
+import { ArrowUpRight, Search, Compass, Code, Zap, TrendingUp, Sparkles } from 'lucide-react';
 
 interface ProcessSectionProps {
   onOpenInquiry?: () => void;
@@ -108,7 +107,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   return (
     <section
       id="process"
-      className={`relative pt-10 sm:pt-14 pb-16 sm:pb-24 transition-colors duration-500 overflow-hidden ${
+      className={`relative pt-10 sm:pt-14 pb-16 sm:pb-20 transition-colors duration-500 overflow-hidden ${
         isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
@@ -215,7 +214,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   </button>
                 </div>
 
-                {/* Card Number, Title & Paragraph (Tightly Spaced) */}
+                {/* Card Number, Title & Paragraph */}
                 <div className="space-y-1 text-center">
                   <div className="text-sm font-mono font-extrabold text-[#FF7A1A] tracking-wider">
                     {card.num}
@@ -232,27 +231,21 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           })}
         </div>
 
-        {/* DESCRIPTION PARAGRAPH POSITIONED BELOW THE ARC */}
-        <motion.p
+        {/* HIGH-CRAFT ELEVATED INSTRUCTION CAPSULE (POSITIONED BELOW DECK ARC) */}
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className={`text-base sm:text-lg font-medium max-w-2xl mx-auto pt-2 ${
-            isDarkMode ? 'text-[#B8B8B8]' : 'text-[#52525B]'
-          }`}
+          className="pt-2 flex justify-center"
         >
-          Hover or tap the 5-card deck to fan out and explore our studio execution methodology.
-        </motion.p>
-
-        {/* BOTTOM ACTION CTA BUTTON */}
-        <div className="pt-2 text-center">
-          <AlphaRoosButton
-            text="Get Your Free Growth Audit"
-            onClick={() => onOpenInquiry?.()}
-            isDarkMode={isDarkMode}
-          />
-        </div>
+          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#121215]/90 border border-[#FF7A1A]/40 text-xs sm:text-sm font-mono font-bold text-zinc-200 backdrop-blur-xl shadow-xl shadow-[#FF7A1A]/10 group hover:border-[#FF7A1A] transition-all">
+            <Sparkles className="w-4 h-4 text-[#FF7A1A] animate-pulse shrink-0" />
+            <span className="tracking-wide">
+              Hover or tap the 5-card deck to fan out and explore our studio execution methodology.
+            </span>
+          </div>
+        </motion.div>
 
       </div>
     </section>
