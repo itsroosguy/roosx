@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface ServicePageProps {
@@ -34,6 +34,74 @@ export const ServicePage: React.FC<ServicePageProps> = ({
     });
   };
 
+  // ALL 8 CORE SERVICES EXPLICITLY REPRESENTED & TRANSFORMATION-MAPPED
+  const allServices = [
+    {
+      num: '01',
+      title: 'Brand Strategy & Positioning',
+      subtitle: 'Extracting Your Category Dominance',
+      desc: 'Defining your unfair advantage, value proposition, and messaging framework so clients choose you first.',
+      tag: 'STRATEGY',
+      outcomes: ['Unshakeable Brand Authority', 'Higher Value Pricing Power', 'Unified Strategic Messaging'],
+    },
+    {
+      num: '02',
+      title: 'Visual Identity & Design Systems',
+      subtitle: 'Designing Enterprise Trust',
+      desc: 'Digital-first logos, typography scales, color tokens, and design guidelines built to project market leadership.',
+      tag: 'BRANDING',
+      outcomes: ['Instant Market Trust', 'Cohesive Design Tokens', 'Faster Design Execution'],
+    },
+    {
+      num: '03',
+      title: 'Website Design & UI/UX',
+      subtitle: 'Conversion-Engineered User Journeys',
+      desc: 'Creating high-fidelity UI/UX, micro-interactions, and visual storytelling that convert visitors into booked pipeline.',
+      tag: 'WEB DESIGN',
+      outcomes: ['Sub-100ms UX Interactions', 'Increased Conversion Rates', 'Editorial Studio Polish'],
+    },
+    {
+      num: '04',
+      title: 'Web Development & Next.js Architecture',
+      subtitle: 'Sub-100ms Code Execution',
+      desc: 'Building lightning-fast, SEO-optimized web applications with 100/100 Lighthouse performance benchmarks.',
+      tag: 'WEB DEV',
+      outcomes: ['100/100 Lighthouse Benchmark', 'Sub-Second Page Loads', 'Zero Technical Debt'],
+    },
+    {
+      num: '05',
+      title: 'SEO & Organic Search Dominance',
+      subtitle: 'Capturing High-Intent Buyer Traffic',
+      desc: 'Technical SEO audits, programmatic content architecture, and keyword authority strategies for organic dominance.',
+      tag: 'SEO',
+      outcomes: ['Page #1 Google Rankings', 'High-Intent Pipeline Traffic', 'Compounding Organic ROI'],
+    },
+    {
+      num: '06',
+      title: 'Digital Marketing & Performance Growth',
+      subtitle: 'Systematic Revenue Acquisition',
+      desc: 'Multi-channel acquisition campaigns, high-converting landers, and targeted funnels built for payback efficiency.',
+      tag: 'DIGITAL MARKETING',
+      outcomes: ['Lower Acquisition Costs (CAC)', 'Higher Intent Lead Volume', 'Transparent ROI Telemetry'],
+    },
+    {
+      num: '07',
+      title: 'AI & Operations Automation',
+      subtitle: 'Scale Without Operational Overhead',
+      desc: 'Architecting custom AI agents, automated lead routing, and CRM pipeline workflows that eliminate repetitive friction.',
+      tag: 'AUTOMATION',
+      outcomes: ['85% Manual Tasks Saved', 'Instant Lead Response Acceleration', 'Exponential Output'],
+    },
+    {
+      num: '08',
+      title: 'Digital Product Experience',
+      subtitle: 'SaaS Platforms & Interactive Web Apps',
+      desc: 'End-to-end product design and frontend development for SaaS tools, portals, and interactive digital products.',
+      tag: 'DIGITAL PRODUCT',
+      outcomes: ['Intuitive User Onboarding', 'Reduced Customer Churn', 'Scalable React Architecture'],
+    },
+  ];
+
   const evolutions = [
     {
       from: 'UNKNOWN',
@@ -46,7 +114,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
     {
       from: 'INVISIBLE',
       to: 'CONVERSION MAGNET',
-      capability: 'Web Experience & Next.js Engine',
+      capability: 'Website Design & Next.js Engine',
       beforeText: 'Slow, static website with high bounce rates, vague positioning, and broken conversion pathways.',
       afterText: 'Lightning-fast Sub-100ms digital product with interactive WebGL story reveals that turn visitors into booked pipeline.',
       metric: '+380% Qualified Lead Volume',
@@ -54,48 +122,10 @@ export const ServicePage: React.FC<ServicePageProps> = ({
     {
       from: 'MANUAL',
       to: 'AUTOMATED SCALE',
-      capability: 'AI Workflows & Neural Systems',
+      capability: 'AI Workflows & Operations Automation',
       beforeText: 'Repetitive operational bottlenecks, lost lead follow-ups, and manual team friction capping scale.',
       afterText: 'Autonomous neural workflows, instant CRM lead routing, and 24/7 automated business operations.',
       metric: '85% Operational Overhead Saved',
-    },
-  ];
-
-  const momentumTransforms = [
-    {
-      num: '01',
-      title: 'Positioning Transformation',
-      subtitle: 'Extracting Your Unfair Advantage',
-      desc: 'We rebuild your market narrative so customers immediately understand why you are the only choice.',
-      tag: 'STRATEGY',
-    },
-    {
-      num: '02',
-      title: 'Visual Authority Transformation',
-      subtitle: 'Designing Enterprise Trust',
-      desc: 'Digital-first visual systems, typography scale, and design tokens crafted to project market dominance.',
-      tag: 'IDENTITY',
-    },
-    {
-      num: '03',
-      title: 'Digital Product Transformation',
-      subtitle: 'Sub-100ms Performance Engine',
-      desc: 'High-conversion Next.js applications engineered with WebGL micro-interactions and seamless UX.',
-      tag: 'EXPERIENCE',
-    },
-    {
-      num: '04',
-      title: 'Demand Engine Transformation',
-      subtitle: 'Systematic Revenue Acquisition',
-      desc: 'Multi-channel acquisition funnels aligned specifically for payback efficiency and scalable pipeline.',
-      tag: 'GROWTH',
-    },
-    {
-      num: '05',
-      title: 'Neural Systems Transformation',
-      subtitle: 'Scale Without Scaling Friction',
-      desc: 'Custom AI agents and CRM automation routines that execute repetitive workflows effortlessly.',
-      tag: 'AUTOMATION',
     },
   ];
 
@@ -117,7 +147,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-36">
         
         {/* ========================================================================= */}
-        {/* ERA 01: THE TRANSFORMATION HERO (NO BOXES / NO CARDS / EDITORIAL SCALE) */}
+        {/* ERA 01: THE TRANSFORMATION HERO */}
         {/* ========================================================================= */}
         <section className="text-center max-w-5xl mx-auto space-y-8 pt-6">
           
@@ -172,7 +202,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
             <p className="text-base sm:text-2xl font-medium text-zinc-300 max-w-3xl mx-auto leading-relaxed">
               {transformationState === 'before'
                 ? 'Relying on fragmented vendors, outdated websites, and manual workflows that choke business momentum.'
-                : 'We partner with ambitious brands to engineer authority, high-converting digital products, and automated growth engines.'}
+                : 'We partner with ambitious brands to engineer authority, high-converting digital products, SEO dominance, digital marketing, and automated growth engines.'}
             </p>
           </motion.div>
 
@@ -191,7 +221,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* ERA 02: THE 3 BUSINESS EVOLUTIONS (INTERACTIVE SIDE-BY-SIDE MORPHING) */}
+        {/* ERA 02: THE 3 BUSINESS EVOLUTIONS */}
         {/* ========================================================================= */}
         <section className="space-y-16">
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -216,7 +246,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
             ))}
           </div>
 
-          {/* EVOLUTION DISPLAY (UNBOXED OPEN METAPHOR LAYOUT) */}
+          {/* EVOLUTION DISPLAY */}
           <div className="relative pt-6">
             {(() => {
               const activeEv = evolutions[activeEvolution];
@@ -273,19 +303,20 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* ERA 03: THE CONTINUOUS MOMENTUM STREAM (5 TRANSFORMS, NO CARDS/BOXES) */}
+        {/* ERA 03: ALL 8 CORE SERVICES (UNBOXED CONTINUOUS MOMENTUM STREAM) */}
         {/* ========================================================================= */}
         <section className="space-y-16 pt-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#FF6B00]">THE 5 MOMENTUM TRANSFORMS</span>
-            <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black text-white">The Transformation Journey</h2>
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#FF6B00]">COMPLETE CAPABILITY SUITE</span>
+            <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black text-white">Our 8 Core Growth Services</h2>
+            <p className="text-zinc-400 text-sm sm:text-base font-medium">Every capability connects directly to the next, building compounding brand momentum.</p>
           </div>
 
           {/* CONTINUOUS LASER STREAM LINE */}
-          <div className="relative space-y-20">
+          <div className="relative space-y-24">
             <div className="absolute left-6 md:left-1/2 top-0 bottom-0 -translate-x-1/2 w-1 bg-gradient-to-b from-[#FF6B00]/20 via-[#FF6B00] to-[#FF6B00]/20 pointer-events-none z-0" />
 
-            {momentumTransforms.map((tf, idx) => {
+            {allServices.map((srv, idx) => {
               const isEven = idx % 2 === 0;
               return (
                 <motion.div
@@ -293,31 +324,41 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  transition={{ duration: 0.6, delay: idx * 0.08 }}
                   className={`flex flex-col md:flex-row items-center gap-8 ${
                     isEven ? 'md:flex-row' : 'md:flex-row-reverse'
                   }`}
                 >
                   {/* TEXT COLUMN */}
-                  <div className={`w-full md:w-1/2 space-y-3 pl-12 md:pl-0 ${isEven ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
+                  <div className={`w-full md:w-1/2 space-y-4 pl-12 md:pl-0 ${isEven ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
                     <div className={`flex items-center gap-3 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
-                      <span className="font-mono text-3xl font-black text-[#FF6B00]">{tf.num}</span>
+                      <span className="font-mono text-3xl font-black text-[#FF6B00]">{srv.num}</span>
                       <span className="px-3 py-1 rounded-full bg-[#FF6B00]/15 text-[#FF6B00] font-mono text-[10px] font-bold border border-[#FF6B00]/30 uppercase">
-                        {tf.tag}
+                        {srv.tag}
                       </span>
                     </div>
                     <h3 className="font-display text-2xl sm:text-4xl font-black text-white leading-tight">
-                      {tf.title}
+                      {srv.title}
                     </h3>
-                    <p className="text-sm font-mono font-bold text-[#FF8F3A]">{tf.subtitle}</p>
+                    <p className="text-sm font-mono font-bold text-[#FF8F3A]">{srv.subtitle}</p>
                     <p className="text-sm sm:text-base text-zinc-300 font-medium leading-relaxed max-w-lg">
-                      {tf.desc}
+                      {srv.desc}
                     </p>
+
+                    {/* OUTCOMES BADGES */}
+                    <div className={`flex flex-wrap gap-2 pt-2 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
+                      {srv.outcomes.map((out, oIdx) => (
+                        <div key={oIdx} className="px-3 py-1 rounded-lg bg-[#121215] border border-zinc-800 text-[11px] font-mono text-zinc-300 flex items-center gap-1.5">
+                          <CheckCircle2 className="w-3 h-3 text-[#FF6B00]" />
+                          <span>{out}</span>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   {/* CENTRAL GLOWING NODE */}
                   <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#FF6B00] text-white flex items-center justify-center font-mono font-black text-sm shadow-[0_0_35px_#FF6B00] shrink-0 z-10">
-                    {tf.num}
+                    {srv.num}
                   </div>
 
                   {/* BALANCING SPACE */}
