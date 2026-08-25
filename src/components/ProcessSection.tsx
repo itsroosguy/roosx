@@ -117,28 +117,24 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
         
-        {/* HEADER BLOCK (UNIFIED BRAND ORANGE) */}
+        {/* HEADER BLOCK (RESTORED PROPER TITLE WITH METALLIC SILVER TOP LINE & ELECTRIC ORANGE BOTTOM LINE) */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="space-y-3 max-w-4xl mx-auto"
+          className="space-y-4 max-w-5xl mx-auto px-2 text-center"
         >
-          <div className="flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
-            <span className="w-8 h-px bg-[#FF7A1A]/60" />
-            <span>OUR 5-PHASE</span>
-            <span className="w-8 h-px bg-[#FF7A1A]/60" />
-          </div>
-
-          <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08]">
-            <span className="text-white">Execution </span>
-            <span className="text-[#FF7A1A]">Methodology</span>
+          <h2
+            className={`font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1]`}
+          >
+            <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent block pb-1">
+              You Bring Ambition.
+            </span>
+            <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
+              We’ll Build The Win.
+            </span>
           </h2>
-
-          <p className="text-base sm:text-xl font-medium text-zinc-400">
-            Built For High-Velocity Growth
-          </p>
         </motion.div>
 
         {/* LOCKED HEIGHT UNIFIED ELECTRIC ORANGE ACCORDION DECK */}
