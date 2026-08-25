@@ -127,9 +127,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
             initial={{ opacity: 0, scale: 0.92, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 flex justify-center lg:justify-end items-center relative z-20"
+            className="lg:col-span-5 flex justify-center lg:justify-end items-center relative z-20 w-full"
           >
-            <div className="relative">
+            <div className="relative w-full max-w-[440px] flex items-center justify-center">
               {/* Apple-Level Minimalist Anti-Gravity Floating Objects */}
               <AntiGravityElements isDarkMode={isDarkMode} />
               <KangarooMascot />
