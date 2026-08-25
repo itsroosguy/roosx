@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Zap,
   Sparkles,
   CheckCircle2,
   Gauge,
@@ -119,7 +118,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   return (
     <section
       id="process"
-      className={`relative py-24 sm:py-32 transition-colors duration-500 overflow-hidden ${
+      className={`relative py-12 sm:py-16 transition-colors duration-500 overflow-hidden ${
         isDarkMode ? 'bg-[#0A0A0A] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
@@ -143,13 +142,8 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-4xl mx-auto mb-16 sm:mb-20 space-y-4"
+          className="text-center max-w-4xl mx-auto mb-8 sm:mb-10 space-y-3"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/30 text-xs font-mono font-bold text-[#F97316] uppercase tracking-widest">
-            <Zap className="w-3.5 h-3.5" />
-            <span>Interactive Velocity Simulator</span>
-          </div>
-
           <h2
             className={`font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-[1.08] ${
               isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
@@ -157,7 +151,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           >
             <span className="block">How We Step In & Get You</span>
             <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
-              To The Goal — Fast.
+              To The Goal Fast.
             </span>
           </h2>
 
@@ -171,7 +165,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         </motion.div>
 
         {/* KINETIC PHASE SELECTOR BAR */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto mb-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto mb-6">
           {simulatorSteps.map((step, idx) => {
             const isSelected = idx === activeStepIdx;
             return (
@@ -493,7 +487,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-16 flex flex-col items-center justify-center text-center space-y-4"
+            className="mt-8 sm:mt-10 flex flex-col items-center justify-center text-center space-y-4"
           >
             <AlphaRoosButton
               text="Get Your Free Audit"
