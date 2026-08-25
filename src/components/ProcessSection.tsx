@@ -10,7 +10,6 @@ interface ProcessSectionProps {
 
 interface TeamMemberCard {
   id: string;
-  role: string;
   name: string;
   description: string;
   avatarIcon: any;
@@ -27,7 +26,6 @@ interface TeamMemberCard {
 const process5StepCards: TeamMemberCard[] = [
   {
     id: 'research',
-    role: 'STAGE 01 • AUDIT & DISCOVERY',
     name: '01. Research & Audit',
     description: 'We analyze your target market, buyer friction points, and competitor blind spots to locate immediate growth levers.',
     avatarIcon: Search,
@@ -41,7 +39,6 @@ const process5StepCards: TeamMemberCard[] = [
   },
   {
     id: 'positioning',
-    role: 'STAGE 02 • STRATEGY & COPY',
     name: '02. Strategy & Copy',
     description: 'We craft sharp positioning headlines and value props so potential buyers grasp your unique advantage in under 3 seconds.',
     avatarIcon: Compass,
@@ -55,7 +52,6 @@ const process5StepCards: TeamMemberCard[] = [
   },
   {
     id: 'build',
-    role: 'STAGE 03 • 99+ SPEED ENGINE',
     name: '03. Meticulous UI/UX & Build',
     description: 'Bespoke React codebase engineered in parallel with Lighthouse 100/100 performance baseline and zero template bloat.',
     avatarIcon: Code,
@@ -70,7 +66,6 @@ const process5StepCards: TeamMemberCard[] = [
   },
   {
     id: 'handoff',
-    role: 'STAGE 04 • RAPID PROTOCOL',
     name: '04. Developer Handoff & QA',
     description: 'We deploy infrastructure to edge CDNs, configure automated CRM webhooks, and complete strict pre-launch checklists.',
     avatarIcon: Zap,
@@ -84,7 +79,6 @@ const process5StepCards: TeamMemberCard[] = [
   },
   {
     id: 'scale',
-    role: 'STAGE 05 • 4.8X REVENUE TUNING',
     name: '05. Rollout & Growth Tuning',
     description: 'Continuous conversion rate telemetry monitoring, live A/B split testing, and revenue tuning for compounding momentum.',
     avatarIcon: TrendingUp,
@@ -126,7 +120,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
         
-        {/* HEADER BLOCK (NO BADGE, METALLIC SILVER GRADIENT TITLE, GENERIC CLEAR HEADLINE) */}
+        {/* HEADER BLOCK (RESTORED ORIGINAL SECTION TITLE WITH SILVER SHADE) */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -138,10 +132,10 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
             className={`font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08]`}
           >
             <span className="bg-gradient-to-r from-white via-zinc-300 to-zinc-400 bg-clip-text text-transparent block pb-1">
-              Our Methodical Studio Process
+              How We Step In & Get You
             </span>
             <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
-              From Vision To Market Momentum.
+              To The Goal Fast.
             </span>
           </h2>
         </motion.div>
@@ -215,12 +209,9 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   </button>
                 </div>
 
-                {/* Text Content */}
-                <div className="space-y-1.5 pt-2">
-                  <div className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider">
-                    {card.role}
-                  </div>
-                  <h3 className="font-display text-lg sm:text-xl font-bold leading-tight text-white">
+                {/* Card Title (Metallic Silver Gradient Title, Badge Removed) */}
+                <div className="space-y-2 pt-2">
+                  <h3 className="font-display text-lg sm:text-xl font-extrabold leading-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
                     {card.name}
                   </h3>
                   <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3">
