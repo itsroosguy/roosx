@@ -97,25 +97,25 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
 
       <div className="max-w-[1750px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
         
-        {/* 1. TOP CENTER: 2-LINE HEADLINE (1:1 MATCH TO REFERENCE IMAGE media_1787682552969.png) */}
+        {/* 1. TOP CENTER: REFINED 2-LINE HEADLINE WITH BALANCED FONT SIZE */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-center max-w-6xl mx-auto flex flex-col items-center mb-2 sm:mb-4 px-2"
+          className="text-center max-w-4xl mx-auto flex flex-col items-center mb-1 sm:mb-2 px-2"
         >
           <motion.h2
             variants={itemVariants}
-            className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight leading-[1.06] text-center"
+            className="font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.08] text-center"
           >
-            <span className="text-white block pb-1">
+            <span className="text-white block pb-0.5">
               You bring ambition.
             </span>
-            <span className="block pt-1">
+            <span className="block pt-0.5 whitespace-nowrap">
               <span className="bg-gradient-to-r from-zinc-100 via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
                 We’ll build the{' '}
               </span>
-              <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent font-extrabold">
                 momentum
               </span>
             </span>
@@ -123,7 +123,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
         </motion.div>
 
         {/* 2. MIDDLE 2-COLUMN GRID (+15% WIDER SECTION CONTAINER) */}
-        <div className="w-full max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center -mt-2 sm:-mt-4 md:-mt-6 relative z-20">
+        <div className="w-full max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center -mt-3 sm:-mt-6 md:-mt-8 relative z-20">
           
           {/* MASCOT IN CENTER/LEFT (5 COLS) */}
           <motion.div
