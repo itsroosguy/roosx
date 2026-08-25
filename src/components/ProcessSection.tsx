@@ -1,36 +1,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  Compass,
-  Target,
-  Palette,
-  Code2,
-  TrendingUp,
-  FileText,
-  PieChart,
-  Users,
-  MapPin,
-  Flag,
-  MessageSquare,
-  Map,
-  Layers,
-  Layout,
-  Smartphone,
-  Video,
-  Code,
-  Database,
-  Bot,
   Zap,
-  Search,
-  BarChart2,
-  Filter,
-  Rocket,
+  Target,
+  CheckCircle2,
   ArrowRight,
   ArrowLeft,
-  CheckCircle2,
-  Activity,
-  Cpu,
   Sparkles,
+  PhoneCall,
+  Code2,
+  TrendingUp,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -39,96 +18,86 @@ interface ProcessSectionProps {
   isDarkMode?: boolean;
 }
 
-interface SubNode {
-  title: string;
-  desc: string;
-  icon: React.ElementType;
-}
-
-interface ProcessColumnData {
-  num: string;
+interface ProcessStep {
   id: string;
+  num: string;
+  timeframe: string;
   title: string;
-  tagline: string;
+  headline: string;
   description: string;
+  annotation: string;
+  badgeText: string;
   icon: React.ElementType;
-  subNodes: SubNode[];
+  keyPoints: string[];
 }
 
-const processColumnsData: ProcessColumnData[] = [
+const fastTrackSteps: ProcessStep[] = [
   {
+    id: 'step-1',
     num: '01',
-    id: 'discover',
-    title: 'Discover',
-    tagline: 'Uncover What Makes You Stand Out',
+    timeframe: 'DAY 01',
+    title: 'Rapid Audit & Entry',
+    headline: 'We Step In Within 24 Hours',
     description:
-      'We analyze your business, target audience, and competitors to identify clear opportunities that help your brand stand out and attract the right customers.',
-    icon: Compass,
-    subNodes: [
-      { title: 'Business Audit', desc: 'Evaluate brand & growth blockers', icon: FileText },
-      { title: 'Market Research', desc: 'Understand competitor positioning', icon: PieChart },
-      { title: 'Audience Insights', desc: 'Identify ideal buyer profiles', icon: Users },
-      { title: 'Growth Roadmap', desc: 'Action plan tailored to goals', icon: MapPin },
+      'No bloated agency onboarding. Within 24 hours of connecting, we dive deep into your current website, messaging, and funnel bottlenecks to locate exact points of lost revenue.',
+    annotation: '30-min call. Zero fluff. Immediate clarity.',
+    badgeText: 'Instant Traction',
+    icon: PhoneCall,
+    keyPoints: [
+      '30-minute discovery & bottleneck audit',
+      'Identify immediate lost conversion points',
+      'Clear, prioritized action plan for launch',
     ],
   },
   {
+    id: 'step-2',
     num: '02',
-    id: 'define',
-    title: 'Define',
-    tagline: 'Clarity Before Execution',
+    timeframe: 'DAYS 02–05',
+    title: 'Strategy & Copy',
+    headline: 'Define What Makes You Unbeatable',
     description:
-      'We refine your brand positioning and messaging so potential customers understand your value immediately and trust your business.',
+      'We craft sharp, high-converting messaging and brand positioning so visitors understand your value in under 3 seconds and trust your business instantly.',
+    annotation: 'All decisions explained, no black boxes.',
+    badgeText: 'Positioned To Win',
     icon: Target,
-    subNodes: [
-      { title: 'Brand Positioning', desc: 'Define unique value proposition', icon: Flag },
-      { title: 'Messaging Strategy', desc: 'Persuasive conversion copy', icon: MessageSquare },
-      { title: 'Customer Journey', desc: 'Direct path to conversion', icon: Users },
-      { title: 'Action Plan', desc: 'Prioritized high-impact steps', icon: Map },
+    keyPoints: [
+      'Conversion-focused headline & body copy',
+      'Distinct brand voice & customer positioning',
+      'Frictionless user navigation roadmap',
     ],
   },
   {
+    id: 'step-3',
     num: '03',
-    id: 'design',
-    title: 'Design',
-    tagline: 'Build Trust & Visual Authority',
+    timeframe: 'DAYS 06–15',
+    title: 'High-Velocity Build',
+    headline: 'Production Without The Friction',
     description:
-      'We design memorable visual identities, websites, and user experiences that build trust, look professional, and drive real business results.',
-    icon: Palette,
-    subNodes: [
-      { title: 'Brand Identity', desc: 'Logos, colors & visual assets', icon: Layers },
-      { title: 'Website Design', desc: 'Modern high-converting design', icon: Layout },
-      { title: 'UI / UX Design', desc: 'Intuitive user interface flow', icon: Smartphone },
-      { title: 'Motion & Visuals', desc: 'Engaging interactive motion', icon: Video },
-    ],
-  },
-  {
-    num: '04',
-    id: 'build',
-    title: 'Build',
-    tagline: 'Fast, Reliable & Built To Scale',
-    description:
-      'We build custom, high-speed websites and digital systems engineered to perform effortlessly across all devices.',
+      'We design and build custom, ultra-fast interfaces in parallel. Up to 2 rounds of collaborative revisions ensure the final product exceeds your standards.',
+    annotation: 'Up to 2 rounds of rapid collaborative edits.',
+    badgeText: '99+ Speed Score',
     icon: Code2,
-    subNodes: [
-      { title: 'Web Development', desc: 'High-speed frontend & backend', icon: Code },
-      { title: 'Content Management', desc: 'Flexible CMS architecture', icon: Database },
-      { title: 'Workflow Automation', desc: 'Smart automated workflows', icon: Bot },
-      { title: 'Integrations', desc: 'CRM & API connection nodes', icon: Zap },
+    keyPoints: [
+      'Custom modern UI/UX design (No templates)',
+      'High-speed code with 99+ Google performance',
+      'CMS integration & automated lead routing',
     ],
   },
   {
-    num: '05',
-    id: 'scale',
-    title: 'Scale',
-    tagline: 'Turn Visitors Into Long-Term Growth',
+    id: 'step-4',
+    num: '04',
+    timeframe: 'DAY 16+',
+    title: 'Launch & Scale',
+    headline: 'Go Live & Multiply Revenue',
     description:
-      'We optimize your digital presence, search visibility, and conversion flow to keep attracting new customers and growing your revenue.',
+      'We launch your new digital experience with active lead tracking, analytics telemetry, and continuous conversion tuning to keep turning traffic into pipeline.',
+    annotation: 'Turn visitors into long-term revenue.',
+    badgeText: 'Continuous Momentum',
     icon: TrendingUp,
-    subNodes: [
-      { title: 'SEO & Visibility', desc: 'High Google search ranking', icon: Search },
-      { title: 'Performance Analytics', desc: 'Real-time telemetry insights', icon: BarChart2 },
-      { title: 'Conversion Tuning', desc: 'CRO & funnel optimization', icon: Filter },
-      { title: 'Growth Optimization', desc: 'Continuous scaling iterations', icon: Rocket },
+    keyPoints: [
+      'Zero-downtime deployment & DNS handoff',
+      'Active conversion tracking & lead analytics',
+      'Ongoing speed & conversion optimization',
     ],
   },
 ];
@@ -138,134 +107,109 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   isDarkMode = false,
 }) => {
   const [activeStep, setActiveStep] = useState<number>(0);
-  const [activeTheme, setActiveTheme] = useState<'orange' | 'dark' | 'glass'>('orange');
 
-  const currentStage = processColumnsData[activeStep];
-
-  const nextStep = () => {
-    setActiveStep((prev) => (prev + 1) % processColumnsData.length);
-  };
-
-  const prevStep = () => {
-    setActiveStep((prev) => (prev - 1 + processColumnsData.length) % processColumnsData.length);
-  };
+  const currentStep = fastTrackSteps[activeStep];
 
   return (
     <section
       id="process"
-      className={`relative py-16 sm:py-24 transition-colors duration-500 overflow-hidden ${
-        isDarkMode ? 'bg-[#0A0A0A] text-white' : 'bg-white text-[#111111]'
+      className={`relative py-20 sm:py-28 transition-colors duration-500 overflow-hidden ${
+        isDarkMode ? 'bg-[#0A0A0A] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
-      {/* Background Architectural Mesh */}
+      {/* Background Architectural Grid Pattern */}
       <div
         className={`absolute inset-0 bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none ${
           isDarkMode
             ? 'bg-[linear-gradient(to_right,#27272A25_1px,transparent_1px),linear-gradient(to_bottom,#27272A25_1px,transparent_1px)]'
-            : 'bg-[linear-gradient(to_right,#E4E4E760_1px,transparent_1px),linear-gradient(to_bottom,#E4E4E760_1px,transparent_1px)]'
+            : 'bg-[linear-gradient(to_right,#E4E4E780_1px,transparent_1px),linear-gradient(to_bottom,#E4E4E780_1px,transparent_1px)]'
         }`}
       />
 
-      {/* Dynamic Backlight Spotlight */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[850px] h-[400px] bg-radial from-[#F97316]/15 via-[#F97316]/5 to-transparent blur-[140px] pointer-events-none" />
+      {/* Ambient Orange Glow Accent */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[900px] h-[450px] bg-radial from-[#F97316]/15 via-[#F97316]/5 to-transparent blur-[140px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* HEADER BLOCK */}
+        {/* EDITORIAL HEADER BLOCK */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 space-y-3"
+          className="text-center max-w-4xl mx-auto mb-14 sm:mb-20 space-y-4"
         >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/30 text-xs font-mono font-bold text-[#F97316] uppercase tracking-widest">
+            <Zap className="w-3.5 h-3.5" />
+            <span>High-Velocity Execution Engine</span>
+          </div>
+
           <h2
-            className={`font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-[1.12] sm:leading-[1.1] pb-2 sm:pb-3 ${
+            className={`font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-[1.08] ${
               isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
             }`}
           >
-            <span className="block">Growth Isn't Luck</span>
-            <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FDBA74] bg-clip-text text-transparent inline-block pb-2 pt-1">
-              It's a Strategic Blueprint
+            <span className="block">How We Step In & Get You</span>
+            <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
+              To The Goal — Fast.
             </span>
           </h2>
 
           <p
-            className={`mt-2 text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto transition-colors duration-500 ${
+            className={`text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto transition-colors duration-500 ${
               isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
             }`}
           >
-            Experience our interactive strategy engine—how we transform ambitious ideas into category-defining digital brands.
+            No bloated 3-month agency timelines or confusing jargon. We plug in within 24 hours, eliminate friction, and execute with extreme speed.
           </p>
         </motion.div>
 
-        {/* 1. HIGH-TECH LASER CONNECTED PIPELINE STEPPER BAR */}
-        <div className="mb-10 sm:mb-12 relative max-w-5xl mx-auto">
-          {/* Laser Progress Beam Background Line */}
+        {/* PINTEREST-INSPIRED EDITORIAL TIMELINE STEPPER (4 STEPS) */}
+        <div className="mb-12 relative max-w-5xl mx-auto">
+          {/* Flowing Connector Beam */}
           <div
-            className={`absolute top-1/2 left-6 right-6 -translate-y-1/2 h-1 rounded-full pointer-events-none ${
+            className={`absolute top-1/2 left-8 right-8 -translate-y-1/2 h-1 rounded-full pointer-events-none hidden sm:block ${
               isDarkMode ? 'bg-[#27272A]' : 'bg-[#E4E4E7]'
             }`}
           >
-            {/* Active Glowing Laser Progress Beam */}
             <motion.div
               className="h-full bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C] rounded-full shadow-[0_0_15px_rgba(249,115,22,0.6)]"
-              animate={{ width: `${((activeStep + 1) / processColumnsData.length) * 100}%` }}
+              animate={{ width: `${((activeStep + 1) / fastTrackSteps.length) * 100}%` }}
               transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             />
           </div>
 
           {/* Stepper Node Buttons */}
-          <div className="relative z-10 flex items-center justify-between">
-            {processColumnsData.map((step, idx) => {
-              const StepIcon = step.icon;
+          <div className="relative z-10 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {fastTrackSteps.map((step, idx) => {
               const isActive = idx === activeStep;
-              const isPassed = idx < activeStep;
 
               return (
                 <button
                   key={step.id}
                   onClick={() => setActiveStep(idx)}
-                  className="group flex flex-col items-center cursor-pointer focus:outline-none"
-                  aria-label={`Jump to stage: ${step.title}`}
+                  className={`group flex flex-col items-center p-4 rounded-2xl border transition-all duration-300 cursor-pointer text-center relative ${
+                    isActive
+                      ? 'bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white border-[#FDBA74] shadow-xl shadow-[#F97316]/30 scale-105'
+                      : isDarkMode
+                      ? 'bg-[#141417] text-[#A1A1AA] border-[#27272A] hover:border-[#F97316]/50 hover:text-white'
+                      : 'bg-white text-[#52525B] border-[#E4E4E7] hover:border-[#F97316]/50 hover:text-[#111111] shadow-sm'
+                  }`}
                 >
-                  {/* Step Icon Badge */}
-                  <div
-                    className={`w-12 h-12 sm:w-16 sm:h-16 rounded-2xl flex items-center justify-center transition-all duration-300 relative border ${
-                      isActive
-                        ? 'bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white border-[#FDBA74] shadow-xl shadow-[#F97316]/40 scale-110'
-                        : isPassed
-                        ? isDarkMode
-                          ? 'bg-[#18181B] text-[#F97316] border-[#F97316]/40'
-                          : 'bg-orange-50 text-[#F97316] border-[#F97316]/30'
-                        : isDarkMode
-                        ? 'bg-[#111111] text-[#71717A] border-[#27272A] hover:border-[#F97316]/50 hover:text-white'
-                        : 'bg-white text-[#71717A] border-[#E4E4E7] hover:border-[#F97316]/50 hover:text-[#111111]'
-                    }`}
-                  >
-                    <StepIcon className="w-5 h-5 sm:w-7 sm:h-7" />
-                    
-                    {/* Active Halo Pulse */}
-                    {isActive && (
-                      <span className="absolute -inset-1 rounded-2xl bg-[#F97316]/30 blur-sm animate-pulse -z-10" />
-                    )}
-                  </div>
-
-                  {/* Step Title Label */}
-                  <div className="mt-2.5 text-center">
+                  <div className="flex items-center gap-2 mb-1.5">
                     <span
-                      className={`text-xs sm:text-sm font-bold tracking-tight block transition-colors ${
+                      className={`text-xs font-mono font-bold px-2 py-0.5 rounded-md ${
                         isActive
-                          ? isDarkMode
-                            ? 'text-white'
-                            : 'text-[#111111]'
-                          : isDarkMode
-                          ? 'text-[#A1A1AA] group-hover:text-white'
-                          : 'text-[#71717A] group-hover:text-[#111111]'
+                          ? 'bg-white/20 text-white'
+                          : 'bg-[#F97316]/10 text-[#F97316]'
                       }`}
                     >
-                      {step.title}
+                      {step.timeframe}
                     </span>
+                  </div>
+
+                  <div className="font-display text-sm font-extrabold tracking-tight mt-1">
+                    {step.title}
                   </div>
                 </button>
               );
@@ -273,100 +217,93 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </div>
         </div>
 
-        {/* 2. MASTER STAGE INTERACTIVE BLUEPRINT ENGINE */}
+        {/* MASTER EDITORIAL WORKFLOW CANVAS DECK */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={currentStage.id}
-            initial={{ opacity: 0, y: 25, scale: 0.98 }}
+            key={currentStep.id}
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -25, scale: 0.98 }}
-            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            className={`rounded-3xl border p-6 sm:p-10 shadow-2xl relative overflow-hidden backdrop-blur-2xl transition-colors duration-500 ${
+            exit={{ opacity: 0, y: -20, scale: 0.98 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className={`rounded-3xl border p-6 sm:p-10 shadow-2xl relative overflow-hidden transition-colors duration-500 ${
               isDarkMode
-                ? 'bg-[#141417]/90 border-[#27272A] text-white shadow-black/60'
+                ? 'bg-[#141417]/95 border-[#27272A] text-white shadow-black/60'
                 : 'bg-white border-[#E4E4E7] text-[#111111] shadow-black/10'
             }`}
           >
-            {/* Top Glowing Laser Border Line */}
+            {/* Top Accent Line */}
             <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C]" />
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
-              {/* LEFT COLUMN: STRATEGY & NARRATIVE (5 COLS) */}
-              <div className="lg:col-span-5 space-y-6 text-left">
+              {/* LEFT COLUMN: HUMAN EXPLICIT NARRATIVE (6 COLS) */}
+              <div className="lg:col-span-6 space-y-6 text-left">
+                
+                {/* Stage Header */}
                 <div>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F97316]/10 border border-[#F97316]/30 text-xs font-mono font-bold text-[#F97316] uppercase tracking-widest mb-3">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span>Phase {currentStage.num} • Blueprint Engine</span>
+                  <div className="flex items-center gap-3 mb-2">
+                    <span className="text-3xl font-mono font-black text-[#F97316]">
+                      {currentStep.num}
+                    </span>
+                    <div className="h-4 w-px bg-zinc-700" />
+                    <span className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400">
+                      {currentStep.timeframe} • ACCELERATED PHASE
+                    </span>
                   </div>
+
                   <h3
-                    className={`font-display text-3xl sm:text-5xl font-black tracking-tight leading-none ${
-                      isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
+                    className={`font-display text-3xl sm:text-5xl font-black tracking-tight leading-tight ${
+                      isDarkMode ? 'text-white' : 'text-[#111111]'
                     }`}
                   >
-                    {currentStage.title}
+                    {currentStep.headline}
                   </h3>
-                  <div className="text-base sm:text-xl font-extrabold text-[#F97316] mt-2 tracking-tight">
-                    {currentStage.tagline}
-                  </div>
                 </div>
 
                 {/* Narrative Description */}
                 <p
-                  className={`text-sm sm:text-base leading-relaxed font-normal ${
+                  className={`text-base leading-relaxed font-normal ${
                     isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
                   }`}
                 >
-                  {currentStage.description}
+                  {currentStep.description}
                 </p>
 
-                {/* Sub-Deliverables Interactive Chips */}
-                <div className="space-y-2 pt-2">
-                  <div className="text-xs font-bold uppercase tracking-wider text-[#F97316]">
-                    Key Deliverables Architecture
-                  </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    {currentStage.subNodes.map((sub, idx) => {
-                      const SubIcon = sub.icon;
-                      return (
-                        <div
-                          key={idx}
-                          className={`flex items-center gap-2.5 px-3 py-2 rounded-xl border text-xs font-semibold transition-all ${
-                            isDarkMode
-                              ? 'bg-[#18181B] border-[#27272A] text-zinc-200 hover:border-[#F97316]/50'
-                              : 'bg-zinc-50 border-[#E4E4E7] text-zinc-800 hover:border-[#F97316]/50'
-                          }`}
-                        >
-                          <SubIcon className="w-3.5 h-3.5 text-[#F97316] shrink-0" />
-                          <span className="truncate">{sub.title}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
+                {/* Human Editorial Callout Note (Pinterest Style) */}
+                <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#F97316]/10 border border-[#F97316]/30 text-xs font-semibold text-[#F97316] rotate-[-1deg] shadow-sm">
+                  <Sparkles className="w-4 h-4 shrink-0" />
+                  <span>"{currentStep.annotation}"</span>
                 </div>
 
-                {/* Stage Controls */}
-                <div className="pt-4 flex items-center gap-3 flex-wrap">
+                {/* Action Buttons */}
+                <div className="pt-3 flex items-center gap-3 flex-wrap">
                   <div className="flex items-center gap-2">
                     <button
-                      onClick={prevStep}
+                      onClick={() =>
+                        setActiveStep(
+                          (prev) => (prev - 1 + fastTrackSteps.length) % fastTrackSteps.length
+                        )
+                      }
                       className={`p-3 rounded-xl border transition-all cursor-pointer ${
                         isDarkMode
                           ? 'bg-[#18181B] border-[#27272A] text-white hover:border-[#F97316]'
                           : 'bg-white border-[#E4E4E7] text-[#111111] hover:border-[#F97316]'
                       }`}
-                      aria-label="Previous Stage"
+                      aria-label="Previous Step"
                     >
                       <ArrowLeft className="w-4 h-4" />
                     </button>
+
                     <button
-                      onClick={nextStep}
+                      onClick={() =>
+                        setActiveStep((prev) => (prev + 1) % fastTrackSteps.length)
+                      }
                       className={`p-3 rounded-xl border transition-all cursor-pointer ${
                         isDarkMode
                           ? 'bg-[#18181B] border-[#27272A] text-white hover:border-[#F97316]'
                           : 'bg-white border-[#E4E4E7] text-[#111111] hover:border-[#F97316]'
                       }`}
-                      aria-label="Next Stage"
+                      aria-label="Next Step"
                     >
                       <ArrowRight className="w-4 h-4" />
                     </button>
@@ -383,221 +320,64 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 </div>
               </div>
 
-              {/* RIGHT COLUMN: INTERACTIVE TACTILE PROTOTYPE CANVAS DECK (7 COLS) */}
-              <div className="lg:col-span-7">
+              {/* RIGHT COLUMN: PINTEREST-INSPIRED ORGANIC ROADMAP DECK (6 COLS) */}
+              <div className="lg:col-span-6">
                 <div
-                  className={`rounded-2xl border p-5 sm:p-6 relative overflow-hidden transition-all duration-500 shadow-inner ${
+                  className={`rounded-2xl border p-6 sm:p-8 relative text-left shadow-xl transition-all duration-500 ${
                     isDarkMode
-                      ? 'bg-[#0E0E11] border-[#27272A]'
-                      : 'bg-zinc-900 border-zinc-800 text-white'
+                      ? 'bg-[#0E0E11] border-[#27272A] text-white'
+                      : 'bg-[#FAFAFA] border-[#E4E4E7] text-[#111111]'
                   }`}
                 >
-                  {/* Top Canvas Bar */}
-                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-zinc-800 text-xs font-mono text-zinc-400">
-                    <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
-                      <span className="ml-2 font-bold text-zinc-300">ROOS_CANVAS // {currentStage.id.toUpperCase()}</span>
+                  {/* Organic Badge & Icon Header */}
+                  <div className="flex items-center justify-between pb-4 border-b border-zinc-800">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white flex items-center justify-center shadow-lg shadow-[#F97316]/30">
+                        <currentStep.icon className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-mono font-bold text-[#F97316] uppercase">
+                          {currentStep.badgeText}
+                        </div>
+                        <div className="text-sm font-bold">{currentStep.title}</div>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Activity className="w-3.5 h-3.5 text-[#F97316] animate-pulse" />
-                      <span className="text-[#F97316] font-bold uppercase">LIVE ENGINE</span>
+                    <span className="text-xs font-mono px-2.5 py-1 rounded-md bg-[#F97316]/10 text-[#F97316] font-bold">
+                      {currentStep.timeframe}
+                    </span>
+                  </div>
+
+                  {/* Tactile Execution Checklist */}
+                  <div className="py-6 space-y-4">
+                    <div className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+                      Exact Deliverables & Speed Milestones:
+                    </div>
+
+                    <div className="space-y-3">
+                      {currentStep.keyPoints.map((point, pIdx) => (
+                        <motion.div
+                          key={pIdx}
+                          initial={{ opacity: 0, x: -10 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.3, delay: pIdx * 0.1 }}
+                          className={`flex items-start gap-3 p-3 rounded-xl border text-sm font-medium transition-all ${
+                            isDarkMode
+                              ? 'bg-[#18181B] border-[#27272A] text-zinc-200'
+                              : 'bg-white border-[#E4E4E7] text-zinc-800 shadow-sm'
+                          }`}
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-[#F97316] shrink-0 mt-0.5" />
+                          <span>{point}</span>
+                        </motion.div>
+                      ))}
                     </div>
                   </div>
 
-                  {/* DYNAMIC STAGE PROTOTYPE WIDGET CANVAS */}
-                  {currentStage.id === 'discover' && (
-                    <div className="space-y-4 py-2">
-                      {/* Radar Sweep & Opportunity Scanner */}
-                      <div className="relative h-44 rounded-xl bg-black/60 border border-zinc-800 flex items-center justify-center overflow-hidden">
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15)_0%,transparent_70%)]" />
-                        <div className="w-32 h-32 rounded-full border border-[#F97316]/30 flex items-center justify-center relative">
-                          <div className="w-20 h-20 rounded-full border border-[#F97316]/20 flex items-center justify-center">
-                            <Compass className="w-8 h-8 text-[#F97316] animate-spin-slow" />
-                          </div>
-                          <motion.div
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
-                            className="absolute inset-0 rounded-full border-t-2 border-[#F97316]"
-                          />
-                        </div>
-                        {/* Floating Opportunity Metrics */}
-                        <div className="absolute top-3 left-4 bg-[#18181B]/90 border border-zinc-700 px-2.5 py-1 rounded-lg text-[10px] font-mono text-zinc-300">
-                          <span className="text-[#F97316] font-bold">AUDIENCE GAP:</span> 94% ALIGNED
-                        </div>
-                        <div className="absolute bottom-3 right-4 bg-[#18181B]/90 border border-zinc-700 px-2.5 py-1 rounded-lg text-[10px] font-mono text-zinc-300">
-                          <span className="text-emerald-400 font-bold">GROWTH POTENTIAL:</span> 3.4X
-                        </div>
-                      </div>
-
-                      {/* Interactive Audit Telemetry Bar */}
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="p-3 rounded-xl bg-zinc-800/40 border border-zinc-700/50 text-left">
-                          <div className="text-[10px] font-mono text-zinc-400">COMPETITOR BENCHMARK</div>
-                          <div className="text-lg font-bold text-white mt-0.5">Top 5% Category</div>
-                        </div>
-                        <div className="p-3 rounded-xl bg-zinc-800/40 border border-zinc-700/50 text-left">
-                          <div className="text-[10px] font-mono text-zinc-400">BRAND REASONING</div>
-                          <div className="text-lg font-bold text-[#F97316] mt-0.5">High Clarity</div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {currentStage.id === 'define' && (
-                    <div className="space-y-4 py-2">
-                      {/* Strategic 2x2 Positioning Matrix */}
-                      <div className="relative h-44 rounded-xl bg-black/60 border border-zinc-800 p-4 flex flex-col justify-between overflow-hidden">
-                        <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 divide-x divide-y divide-zinc-800/60 pointer-events-none" />
-                        <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500 z-10">
-                          <span>HIGH IMPACT</span>
-                          <span className="text-[#F97316] font-bold">YOUR BRAND PEAK ZONE</span>
-                        </div>
-                        
-                        {/* Target Node */}
-                        <div className="relative z-10 flex items-center justify-center">
-                          <motion.div
-                            animate={{ scale: [1, 1.1, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                            className="flex items-center gap-2 bg-[#F97316] text-white px-3 py-1.5 rounded-full font-bold text-xs shadow-lg shadow-[#F97316]/50"
-                          >
-                            <Target className="w-4 h-4" />
-                            <span>Optimal Positioning</span>
-                          </motion.div>
-                        </div>
-
-                        <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500 z-10">
-                          <span>LOW CLARITY</span>
-                          <span>MAXIMUM CLARITY</span>
-                        </div>
-                      </div>
-
-                      {/* Positioning Pillars */}
-                      <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-800/40 border border-zinc-700/50 text-xs font-mono">
-                        <span className="text-zinc-400">CORE VALUE:</span>
-                        <span className="text-white font-bold">Sustainable Brand Authority</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {currentStage.id === 'design' && (
-                    <div className="space-y-4 py-2">
-                      {/* Live Design Sandbox & Theme Switcher */}
-                      <div className="p-4 rounded-xl bg-black/60 border border-zinc-800 space-y-3">
-                        <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-                          <span>LIVE COMPONENT SANDBOX</span>
-                          <div className="flex items-center gap-1.5">
-                            <button
-                              onClick={() => setActiveTheme('orange')}
-                              className={`w-4 h-4 rounded-full bg-[#F97316] ring-2 transition-all ${
-                                activeTheme === 'orange' ? 'ring-white scale-110' : 'ring-transparent'
-                              }`}
-                            />
-                            <button
-                              onClick={() => setActiveTheme('dark')}
-                              className={`w-4 h-4 rounded-full bg-zinc-800 ring-2 transition-all ${
-                                activeTheme === 'dark' ? 'ring-white scale-110' : 'ring-transparent'
-                              }`}
-                            />
-                            <button
-                              onClick={() => setActiveTheme('glass')}
-                              className={`w-4 h-4 rounded-full bg-emerald-500 ring-2 transition-all ${
-                                activeTheme === 'glass' ? 'ring-white scale-110' : 'ring-transparent'
-                              }`}
-                            />
-                          </div>
-                        </div>
-
-                        {/* Interactive Dynamic Theme Card Preview */}
-                        <div
-                          className={`p-4 rounded-xl border transition-all duration-500 text-left ${
-                            activeTheme === 'orange'
-                              ? 'bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white border-[#FDBA74]'
-                              : activeTheme === 'dark'
-                              ? 'bg-zinc-900 border-zinc-700 text-white'
-                              : 'bg-emerald-950 border-emerald-700 text-emerald-100'
-                          }`}
-                        >
-                          <div className="text-xs font-bold uppercase tracking-wider opacity-80">
-                            Design System Specimen
-                          </div>
-                          <div className="text-lg font-black mt-1">Conversion Architecture</div>
-                          <div className="mt-2 text-xs opacity-90">
-                            Built with precision typography and micro-interactions.
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
-                  {currentStage.id === 'build' && (
-                    <div className="space-y-4 py-2">
-                      {/* Code Execution & High-Speed Telemetry Terminal */}
-                      <div className="p-4 rounded-xl bg-black/80 border border-zinc-800 font-mono text-xs text-left space-y-2">
-                        <div className="flex items-center justify-between text-zinc-500 border-b border-zinc-800 pb-2">
-                          <span>SYSTEM TELEMETRY</span>
-                          <span className="text-emerald-400 font-bold">100% HEALTHY</span>
-                        </div>
-                        <div className="text-emerald-400">✓ Compiling React 18 + Vite 6.0 Build...</div>
-                        <div className="text-zinc-300">✓ LCP Speed Score: 0.4s (Ultra Fast)</div>
-                        <div className="text-zinc-300">✓ Server Response: 12ms Edge Response</div>
-                        <div className="text-[#F97316] font-bold">⚡ Performance Score: 99 / 100</div>
-                      </div>
-
-                      {/* Code Architecture Badge */}
-                      <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-800/40 border border-zinc-700/50 text-xs font-mono text-zinc-300">
-                        <span className="flex items-center gap-2">
-                          <Cpu className="w-4 h-4 text-[#F97316]" />
-                          <span>Clean Architecture</span>
-                        </span>
-                        <span className="text-emerald-400 font-bold">Ready For Production</span>
-                      </div>
-                    </div>
-                  )}
-
-                  {currentStage.id === 'scale' && (
-                    <div className="space-y-4 py-2">
-                      {/* Growth Trajectory Curve Graph */}
-                      <div className="relative h-44 rounded-xl bg-black/60 border border-zinc-800 p-4 flex flex-col justify-between overflow-hidden">
-                        <div className="flex justify-between items-center text-xs font-mono">
-                          <span className="text-zinc-400">REVENUE TRAJECTORY</span>
-                          <span className="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
-                            +180% IMPACT
-                          </span>
-                        </div>
-
-                        {/* Animated SVG Ascending Curve */}
-                        <div className="relative h-20 w-full flex items-end">
-                          <svg className="w-full h-full" viewBox="0 0 300 80">
-                            <motion.path
-                              initial={{ pathLength: 0 }}
-                              animate={{ pathLength: 1 }}
-                              transition={{ duration: 1.5, ease: 'easeOut' }}
-                              d="M0,70 Q75,60 150,35 T300,10"
-                              fill="none"
-                              stroke="#22C55E"
-                              strokeWidth="3"
-                            />
-                          </svg>
-                        </div>
-
-                        <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500">
-                          <span>MONTH 01</span>
-                          <span>MONTH 03</span>
-                          <span className="text-white font-bold">SCALE PEAK</span>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-800/40 border border-zinc-700/50 text-xs font-mono text-zinc-300">
-                        <span className="flex items-center gap-2">
-                          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                          <span>Continuous Funnel Tuning</span>
-                        </span>
-                        <span className="text-[#F97316] font-bold">Active Engine</span>
-                      </div>
-                    </div>
-                  )}
+                  {/* Organic Winding Flow Path Graphic */}
+                  <div className="pt-2 border-t border-zinc-800/80 flex items-center justify-between text-xs font-mono text-zinc-400">
+                    <span>AGILE SPEED: <strong className="text-emerald-400">NO DELAYS</strong></span>
+                    <span className="text-[#F97316] font-bold">ROOS QUALITY GUARANTEE</span>
+                  </div>
 
                 </div>
               </div>
