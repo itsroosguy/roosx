@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
 import { ArrowUp, Send, Mail, Phone, Globe, Clock, Check, Copy, Sparkles, Github, Linkedin, Twitter, Dribbble } from 'lucide-react';
-import { AlphaRoosButton } from './AlphaRoosButton';
 
 interface FooterProps {
   onOpenInquiry?: () => void;
@@ -9,7 +8,6 @@ interface FooterProps {
 }
 
 export const Footer: React.FC<FooterProps> = ({
-  onOpenInquiry,
   isDarkMode = true,
 }) => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
@@ -135,17 +133,6 @@ export const Footer: React.FC<FooterProps> = ({
                 </button>
               </div>
             </div>
-
-            {/* CTA BUTTON */}
-            {onOpenInquiry && (
-              <div className="pt-2">
-                <AlphaRoosButton
-                  text="Get Your Free Audit"
-                  onClick={onOpenInquiry}
-                  isDarkMode={isDarkMode}
-                />
-              </div>
-            )}
           </div>
 
           {/* NAVIGATION LINKS (3 COLS) */}
@@ -253,7 +240,7 @@ export const Footer: React.FC<FooterProps> = ({
 
           <button
             onClick={scrollToTop}
-            className="px-4 py-2.5 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer shadow-md group"
+            className="px-4 py-2.5 rounded-full bg-[#121215] border border-zinc-800 text-[#D4D4D8] hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer shadow-md group"
             aria-label="Back to top"
           >
             <ArrowUp className="w-4 h-4 text-[#FF7A1A] group-hover:-translate-y-0.5 transition-transform" />
