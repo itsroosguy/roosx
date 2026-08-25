@@ -10,6 +10,7 @@ interface ProcessSectionProps {
 
 interface TeamMemberCard {
   id: string;
+  num: string;
   name: string;
   description: string;
   avatarIcon: any;
@@ -26,7 +27,8 @@ interface TeamMemberCard {
 const process5StepCards: TeamMemberCard[] = [
   {
     id: 'research',
-    name: '01. Research & Audit',
+    num: '01',
+    name: 'Research & Audit',
     description: 'We analyze your target market, buyer friction points, and competitor blind spots to locate immediate growth levers.',
     avatarIcon: Search,
     ctaLabel: 'Audit Market',
@@ -39,7 +41,8 @@ const process5StepCards: TeamMemberCard[] = [
   },
   {
     id: 'positioning',
-    name: '02. Strategy & Copy',
+    num: '02',
+    name: 'Strategy & Copy',
     description: 'We craft sharp positioning headlines and value props so potential buyers grasp your unique advantage in under 3 seconds.',
     avatarIcon: Compass,
     ctaLabel: 'Position Brand',
@@ -52,7 +55,8 @@ const process5StepCards: TeamMemberCard[] = [
   },
   {
     id: 'build',
-    name: '03. Meticulous UI/UX & Build',
+    num: '03',
+    name: 'Meticulous UI/UX & Build',
     description: 'Bespoke React codebase engineered in parallel with Lighthouse 100/100 performance baseline and zero template bloat.',
     avatarIcon: Code,
     isFeatured: true,
@@ -66,7 +70,8 @@ const process5StepCards: TeamMemberCard[] = [
   },
   {
     id: 'handoff',
-    name: '04. Developer Handoff & QA',
+    num: '04',
+    name: 'Developer Handoff & QA',
     description: 'We deploy infrastructure to edge CDNs, configure automated CRM webhooks, and complete strict pre-launch checklists.',
     avatarIcon: Zap,
     ctaLabel: 'Deploy QA',
@@ -79,7 +84,8 @@ const process5StepCards: TeamMemberCard[] = [
   },
   {
     id: 'scale',
-    name: '05. Rollout & Growth Tuning',
+    num: '05',
+    name: 'Rollout & Growth Tuning',
     description: 'Continuous conversion rate telemetry monitoring, live A/B split testing, and revenue tuning for compounding momentum.',
     avatarIcon: TrendingUp,
     ctaLabel: 'Scale Revenue',
@@ -209,8 +215,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   </button>
                 </div>
 
-                {/* Card Title & Paragraph (Center Aligned) */}
-                <div className="space-y-2 pt-2 text-center">
+                {/* Card Number, Title & Paragraph (Centered Orange Number, Silver Title, Body Text) */}
+                <div className="space-y-1 pt-1 text-center">
+                  <div className="text-sm font-mono font-extrabold text-[#FF7A1A] tracking-wider">
+                    {card.num}
+                  </div>
                   <h3 className="font-display text-lg sm:text-xl font-extrabold leading-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mx-auto">
                     {card.name}
                   </h3>
