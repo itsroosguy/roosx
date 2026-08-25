@@ -204,6 +204,29 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         {/* 5-COLUMN SYSTEM PIPELINE GRID */}
         <div className="relative">
 
+          {/* Mobile Interactive Step Selector Tabs (md:hidden) */}
+          <div className="md:hidden mb-6 flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-none snap-x">
+            {processColumnsData.map((col, idx) => {
+              const isActive = idx === activeColumn;
+              return (
+                <button
+                  key={col.id}
+                  onClick={() => setActiveColumn(idx)}
+                  className={`snap-start shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all border flex items-center gap-2 cursor-pointer ${
+                    isActive
+                      ? 'bg-[#F97316] text-white border-[#F97316] shadow-md shadow-[#F97316]/30'
+                      : isDarkMode
+                      ? 'bg-[#18181B] text-[#D4D4D8] border-[#27272A]'
+                      : 'bg-white text-[#111111] border-[#E4E4E7]'
+                  }`}
+                >
+                  <span className="opacity-75">{col.num}</span>
+                  <span>{col.title}</span>
+                </button>
+              );
+            })}
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5 items-stretch relative z-10">
             {processColumnsData.map((col, idx) => {
               const ColIcon = col.icon;

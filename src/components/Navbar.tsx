@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from './Logo';
 import { Menu, X, Sun, Moon, Sparkles } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
@@ -127,45 +127,52 @@ export const Navbar: React.FC<NavbarProps> = ({
 
         </div>
 
-        {/* Mobile Dropdown Drawer */}
-        {mobileMenuOpen && (
-          <div
-            className={`md:hidden mt-3 p-6 rounded-2xl border flex flex-col gap-4 shadow-xl ${
-              isDarkMode
-                ? 'bg-[#18181B] border-[#27272A] text-white'
-                : 'glass-card border-[#E4E4E7] text-[#111111]'
-            }`}
-          >
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={`text-lg font-medium py-2 border-b transition-colors ${
-                  isDarkMode
-                    ? 'border-[#27272A] text-[#D4D4D8] hover:text-[#F97316]'
-                    : 'border-[#E4E4E7] text-[#111111] hover:text-[#F97316]'
-                }`}
-              >
-                {link.name}
-              </a>
-            ))}
-            <div className="pt-2">
-              <AlphaRoosButton
-                text="Get Your Free Audit"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenInquiry();
-                }}
-                isDarkMode={isDarkMode}
-                reverse={true}
-                showArrow={false}
-                leadingIcon={<Sparkles className="w-4 h-4" />}
-                className="w-full justify-center"
-              />
-            </div>
-          </div>
-        )}
+        {/* Mobile Dropdown Drawer with AnimatePresence */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -15, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -15, scale: 0.96 }}
+              transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+              className={`md:hidden mt-3 p-6 rounded-2xl border flex flex-col gap-4 shadow-2xl backdrop-blur-xl ${
+                isDarkMode
+                  ? 'bg-[#0A0A0A]/95 border-[#27272A] text-white shadow-black/60'
+                  : 'bg-white/95 border-[#E4E4E7] text-[#111111] shadow-black/10'
+              }`}
+            >
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`text-lg font-bold py-2.5 border-b transition-colors flex items-center justify-between ${
+                    isDarkMode
+                      ? 'border-[#27272A] text-[#D4D4D8] hover:text-[#F97316]'
+                      : 'border-[#E4E4E7] text-[#111111] hover:text-[#F97316]'
+                  }`}
+                >
+                  <span>{link.name}</span>
+                  <span className="text-xs font-semibold text-[#F97316] opacity-70">→</span>
+                </a>
+              ))}
+              <div className="pt-2">
+                <AlphaRoosButton
+                  text="Get Your Free Audit"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenInquiry();
+                  }}
+                  isDarkMode={isDarkMode}
+                  reverse={true}
+                  showArrow={false}
+                  leadingIcon={<Sparkles className="w-4 h-4" />}
+                  className="w-full justify-center"
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       </div>
     </header>

@@ -64,9 +64,9 @@ export const Portfolio: React.FC<PortfolioProps> = ({
             </h2>
           </div>
 
-          {/* Category Filter Pills */}
+          {/* Category Filter Pills (Mobile Swipeable) */}
           <div
-            className={`flex flex-wrap gap-2 p-1.5 rounded-2xl border backdrop-blur-xl ${
+            className={`flex items-center gap-2 p-1.5 rounded-2xl border backdrop-blur-xl overflow-x-auto scrollbar-none max-w-full -mx-2 px-2 sm:mx-0 sm:px-1 shrink-0 ${
               isDarkMode
                 ? 'bg-[#18181B]/80 border-[#27272A]'
                 : 'bg-[#FAFAFA] border-[#E4E4E7]'

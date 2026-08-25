@@ -32,8 +32,21 @@ export const KangarooMascot: React.FC<KangarooMascotProps> = ({ className = '' }
       targetNormPointer.y = -(e.clientY / window.innerHeight) * 2 + 1;
     };
 
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches && e.touches[0]) {
+        const touch = e.touches[0];
+        pointer.x = touch.clientX;
+        pointer.y = touch.clientY;
+
+        targetNormPointer.x = (touch.clientX / window.innerWidth) * 2 - 1;
+        targetNormPointer.y = -(touch.clientY / window.innerHeight) * 2 + 1;
+      }
+    };
+
     window.addEventListener('pointermove', handlePointerMove);
     window.addEventListener('mousemove', handlePointerMove);
+    window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    window.addEventListener('touchstart', handleTouchMove, { passive: true });
 
     const calculateEyeballClampedVector = () => {
       if (!socketLeftRef.current || !socketRightRef.current) return { x: 0, y: 0 };
@@ -106,6 +119,8 @@ export const KangarooMascot: React.FC<KangarooMascotProps> = ({ className = '' }
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('mousemove', handlePointerMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchstart', handleTouchMove);
       cancelAnimationFrame(animFrameId);
     };
   }, []);

@@ -243,6 +243,29 @@ export const CreativeServicesExperience: React.FC<CreativeServicesExperienceProp
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
+        {/* Mobile Interactive Horizontal Swipeable Capability Bar (lg:hidden) */}
+        <div className="lg:hidden mb-6 flex items-center gap-2 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-none snap-x">
+          {servicesList.map((service, idx) => {
+            const isSelected = idx === activeIndex;
+            return (
+              <button
+                key={service.id}
+                onClick={() => setActiveIndex(idx)}
+                className={`snap-start shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all border flex items-center gap-2 cursor-pointer ${
+                  isSelected
+                    ? 'bg-[#F97316] text-white border-[#F97316] shadow-md shadow-[#F97316]/30'
+                    : isDarkMode
+                    ? 'bg-[#18181B] text-[#D4D4D8] border-[#27272A]'
+                    : 'bg-white text-[#111111] border-[#E4E4E7]'
+                }`}
+              >
+                <span className="opacity-75">{service.num}</span>
+                <span>{service.title}</span>
+              </button>
+            );
+          })}
+        </div>
+
         {/* Split Editorial Interactive Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
           
