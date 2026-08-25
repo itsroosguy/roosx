@@ -311,11 +311,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
               Most businesses don't have a product problem.
             </p>
-            <p>
-              They have a <strong className="text-[#FF7A1A]">positioning problem</strong>, a{' '}
-              <strong className="text-[#FF7A1A]">visibility problem</strong>, a{' '}
-              <strong className="text-[#FF7A1A]">conversion problem</strong>, or a{' '}
-              <strong className="text-[#FF7A1A]">growth problem</strong>.
+            <p className={`font-semibold ${isDarkMode ? 'text-zinc-200' : 'text-zinc-800'}`}>
+              They have a positioning problem, a visibility problem, a conversion problem, or a growth problem.
             </p>
             <p className={`text-base sm:text-lg pt-2 ${isDarkMode ? 'text-[#7D7D7D]' : 'text-zinc-600'}`}>
               At Roos StudioX, we combine strategy, branding, design, technology, and marketing to build digital ecosystems that attract the right audience, create trust, and generate measurable business growth.
@@ -415,11 +412,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 >
                   <div>
                     <div className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest mb-1">
-                      {service.num} • {service.title}
+                      SERVICE {service.num}
                     </div>
-                    <h2 className={`font-display text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
-                      {service.headline}
+                    <h2 className={`font-display text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-2 ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
+                      {service.title}
                     </h2>
+                    <p className="text-base sm:text-xl font-bold text-[#FF7A1A] font-display">
+                      {service.headline}
+                    </p>
                   </div>
 
                   <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-700'}`}>
