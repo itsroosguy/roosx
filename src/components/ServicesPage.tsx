@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   CheckCircle2,
@@ -15,6 +15,7 @@ import {
   Smartphone,
   Code,
   Zap,
+  Award,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -27,9 +28,11 @@ interface ServicesPageProps {
 interface DetailedService {
   id: string;
   num: string;
+  category: 'branding' | 'engineering' | 'marketing';
   title: string;
   headline: string;
   copy: string;
+  subTags: string[];
   deliverables: string[];
   includes?: string[];
   outcome: string;
@@ -42,9 +45,11 @@ const detailedServices: DetailedService[] = [
   {
     id: 'brand-strategy',
     num: '01',
+    category: 'branding',
     title: 'Brand Strategy & Positioning',
     headline: 'Build a Brand People Remember',
     copy: 'A great logo isn\'t a brand. A strong brand is a clear promise, a unique market position, and a memorable identity that customers instantly recognize and trust. We help businesses uncover what makes them different and transform that advantage into a powerful brand strategy that stands out in crowded markets.',
+    subTags: ['Market Discovery', 'Brand Positioning', 'Value Prop', 'Persona Mapping', 'Brand Architecture'],
     deliverables: [
       'Brand Discovery Workshops',
       'Market Research',
@@ -67,7 +72,7 @@ const detailedServices: DetailedService[] = [
         <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div className="flex items-center gap-2">
             <Compass className="w-5 h-5 text-[#FF7A1A]" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">BRAND POSITIONING MATRIX</span>
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">POSITIONING MATRIX</span>
           </div>
           <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/30">UNBEATABLE CLARITY</span>
         </div>
@@ -89,12 +94,7 @@ const detailedServices: DetailedService[] = [
               <span className="text-[#FF7A1A] font-bold">100% Market Differentiation</span>
             </div>
             <div className="w-full h-2.5 rounded-full bg-zinc-800 overflow-hidden">
-              <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: '100%' }}
-                transition={{ duration: 1.5 }}
-                className="h-full bg-gradient-to-r from-[#FF7A1A] to-[#EA580C]"
-              />
+              <div className="h-full bg-gradient-to-r from-[#FF7A1A] to-[#EA580C] w-full" />
             </div>
           </div>
         </div>
@@ -109,9 +109,11 @@ const detailedServices: DetailedService[] = [
   {
     id: 'visual-identity',
     num: '02',
+    category: 'branding',
     title: 'Logo & Visual Identity Design',
     headline: 'Create A Brand That Looks As Good As It Performs',
     copy: 'Your visual identity shapes first impressions long before customers read a single word. We design memorable brand systems that communicate professionalism, credibility, and confidence across every customer touchpoint.',
+    subTags: ['Logo System', 'Color Palette', 'Typography Specs', 'Iconography', 'Brand Guidelines'],
     deliverables: [
       'Logo Design',
       'Visual Identity Systems',
@@ -131,7 +133,7 @@ const detailedServices: DetailedService[] = [
         <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div className="flex items-center gap-2">
             <Palette className="w-5 h-5 text-[#FF7A1A]" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">STUDIO DESIGN SYSTEM</span>
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">DESIGN SYSTEM ASSETS</span>
           </div>
           <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/30">BRAND ASSET KIT</span>
         </div>
@@ -164,9 +166,11 @@ const detailedServices: DetailedService[] = [
   {
     id: 'website-development',
     num: '03',
+    category: 'engineering',
     title: 'Website Design & Development',
     headline: 'Your Website Should Be Your Best Salesperson',
     copy: 'A website should do more than look beautiful. It should educate visitors, build trust, answer objections, and guide prospects toward taking action. We design and develop high-performance websites that combine exceptional user experience with conversion-focused strategy.',
+    subTags: ['Landing Pages', 'Corporate Sites', 'Brochure Site', 'E-Commerce', 'Custom React'],
     deliverables: [
       'Business Websites',
       'Corporate Websites',
@@ -195,7 +199,7 @@ const detailedServices: DetailedService[] = [
         <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div className="flex items-center gap-2">
             <Globe className="w-5 h-5 text-[#FF7A1A]" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">HIGH-SPEED BROWSER ENGINE</span>
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">HIGH-SPEED REACT ENGINE</span>
           </div>
           <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">99+ SPEED GUARANTEE</span>
         </div>
@@ -203,7 +207,7 @@ const detailedServices: DetailedService[] = [
         <div className="p-4 rounded-xl bg-[#09090B] border border-zinc-800 font-mono text-xs space-y-2">
           <div className="flex items-center gap-2 text-zinc-500 border-b border-zinc-800 pb-2 text-[11px]">
             <Code className="w-3.5 h-3.5 text-[#FF7A1A]" />
-            <span>App.tsx • High-Performance React Engine</span>
+            <span>App.tsx • High-Performance Codebase</span>
           </div>
           <div className="text-emerald-400 font-bold">✓ Lighthouse Performance: 100/100</div>
           <div className="text-zinc-400">✓ LCP (Largest Contentful Paint): 0.48s</div>
@@ -220,9 +224,11 @@ const detailedServices: DetailedService[] = [
   {
     id: 'ui-ux-design',
     num: '04',
+    category: 'engineering',
     title: 'UI/UX Design',
     headline: 'Design Experiences People Actually Enjoy Using',
     copy: 'Great user experiences feel effortless. We create intuitive interfaces that help users find what they need quickly while increasing engagement, satisfaction, and conversions.',
+    subTags: ['User Flows', 'Wireframes', 'SaaS Dashboards', 'Mobile Apps', 'Design Systems'],
     deliverables: [
       'UX Strategy',
       'User Research',
@@ -243,7 +249,7 @@ const detailedServices: DetailedService[] = [
         <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div className="flex items-center gap-2">
             <Layout className="w-5 h-5 text-[#FF7A1A]" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">APP INTERFACE & DASHBOARD UX</span>
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">APP INTERFACE & DASHBOARD</span>
           </div>
           <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/30">USER CENTRIC UX</span>
         </div>
@@ -275,9 +281,11 @@ const detailedServices: DetailedService[] = [
   {
     id: 'seo-optimization',
     num: '05',
+    category: 'marketing',
     title: 'Search Engine Optimization (SEO)',
     headline: 'Get Found By The Right Customers',
     copy: 'If customers can\'t find you, they can\'t buy from you. Our SEO strategies improve visibility, increase qualified traffic, and position your business in front of people actively searching for your products and services.',
+    subTags: ['Technical SEO', 'On-Page SEO', 'Keyword Strategy', 'Local SEO', 'SEO Audits'],
     deliverables: [
       'Technical SEO',
       'On-Page SEO',
@@ -323,9 +331,11 @@ const detailedServices: DetailedService[] = [
   {
     id: 'digital-marketing',
     num: '06',
+    category: 'marketing',
     title: 'Digital Marketing',
     headline: 'Turn Attention Into Revenue',
     copy: 'Marketing isn\'t about generating clicks. It\'s about attracting the right audience and turning interest into measurable business growth. We develop data-driven campaigns that connect strategy, creativity, and performance.',
+    subTags: ['Growth Strategy', 'Paid Ads', 'Social Marketing', 'Funnels', 'ROAS Tuning'],
     deliverables: [
       'Growth Marketing Strategy',
       'Paid Advertising',
@@ -345,7 +355,7 @@ const detailedServices: DetailedService[] = [
         <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div className="flex items-center gap-2">
             <Megaphone className="w-5 h-5 text-[#FF7A1A]" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">ACQUISITION FUNNEL TELEMETRY</span>
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">ACQUISITION FUNNEL</span>
           </div>
           <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/30">4.8X ROAS MULTIPLIER</span>
         </div>
@@ -366,7 +376,7 @@ const detailedServices: DetailedService[] = [
         </div>
 
         <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono flex items-center justify-between">
-          <span className="text-zinc-400">CAMPAIGN RETURN ON AD SPEND:</span>
+          <span className="text-zinc-400">RETURN ON AD SPEND:</span>
           <span className="text-[#FF7A1A] font-bold">4.8X RETURN</span>
         </div>
       </div>
@@ -375,9 +385,11 @@ const detailedServices: DetailedService[] = [
   {
     id: 'automation-ai',
     num: '07',
+    category: 'marketing',
     title: 'Marketing Automation & AI Systems',
     headline: 'Scale Smarter, Not Harder',
     copy: 'Businesses lose time and revenue because of repetitive processes and disconnected systems. We implement automation and AI-driven workflows that improve efficiency, nurture leads, and support scalable growth.',
+    subTags: ['Lead Automation', 'HubSpot / CRM Sync', 'AI Workflows', 'Email Sequences', 'Webhooks'],
     deliverables: [
       'Lead Automation',
       'CRM Integration',
@@ -396,7 +408,7 @@ const detailedServices: DetailedService[] = [
         <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div className="flex items-center gap-2">
             <Bot className="w-5 h-5 text-[#FF7A1A]" />
-            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">AUTOMATED WORKFLOW PIPELINE</span>
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">WORKFLOW AUTOMATION</span>
           </div>
           <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">24/7 AI AUTOPILOT</span>
         </div>
@@ -418,9 +430,11 @@ const detailedServices: DetailedService[] = [
   {
     id: 'conversion-optimization',
     num: '08',
+    category: 'marketing',
     title: 'Conversion Optimization',
     headline: 'Turn More Visitors Into Customers',
     copy: 'Getting traffic is only half the equation. The real opportunity comes from converting more of your existing visitors into paying customers. We identify friction points and optimize your digital experience to improve performance at every stage of the customer journey.',
+    subTags: ['A/B Testing', 'Landing Page Tuning', 'Heatmaps', 'Funnel Audits', 'CTA Strategy'],
     deliverables: [
       'Conversion Audits',
       'Landing Page Optimization',
@@ -464,31 +478,46 @@ const detailedServices: DetailedService[] = [
   },
 ];
 
-const growthFramework = [
-  { step: '01', title: 'Discover', desc: 'Research your market, audience, competitors, and opportunities.' },
-  { step: '02', title: 'Position', desc: 'Define a unique market position and messaging strategy.' },
-  { step: '03', title: 'Build', desc: 'Create the brand, website, systems, and digital foundation.' },
-  { step: '04', title: 'Launch', desc: 'Deploy campaigns and growth initiatives.' },
-  { step: '05', title: 'Optimize', desc: 'Measure performance, refine strategy, and scale what works.' },
+const agencyStats = [
+  { metric: '99+', label: 'Google Speed Score', sub: 'Lighthouse Performance Guaranteed' },
+  { metric: '0.48s', label: 'Page Load Speed', sub: 'Instant LCP Render Baseline' },
+  { metric: '4.8X', label: 'Average ROAS Return', sub: 'Data-Driven Acquisition Funnels' },
+  { metric: '100%', label: 'Bespoke Engineering', sub: 'Zero Slow Template Bloat' },
 ];
 
-const whyUsPillars = [
+const ddProcessSteps = [
   {
-    title: 'Strategy Before Execution',
-    desc: 'We don\'t jump into design, development, or marketing without understanding your business objectives first.',
+    step: '01',
+    title: 'Research & Strategic Audit',
+    desc: 'Analyzing competitors, audience demographics, and design trends to formulate an unbeatable positioning strategy.',
   },
   {
-    title: 'Built Around Growth',
-    desc: 'Every decision is measured against one question: Will this help the business grow?',
+    step: '02',
+    title: 'Discovery & Concepting',
+    desc: 'Devising bespoke UI/UX visual directions and brand concepts for collaborative review and client alignment.',
   },
   {
-    title: 'One Integrated Partner',
-    desc: 'Branding, websites, technology, automation, and marketing working together under one growth-focused system.',
+    step: '03',
+    title: 'Meticulous UI/UX & Prototyping',
+    desc: 'Applying selected design systems across all responsive device breakpoints before code engineering begins.',
   },
   {
-    title: 'Designed For Long-Term Momentum',
-    desc: 'We\'re not interested in short-term wins. We build foundations that continue generating results long after launch.',
+    step: '04',
+    title: 'Development Handoff & QA',
+    desc: 'Building high-performance React codebases, testing cross-browser compatibility, and setting up automated webhooks.',
   },
+  {
+    step: '05',
+    title: 'Rollout & Growth Tuning',
+    desc: 'Following a strict launch protocol, monitoring live telemetry, and optimizing conversion rates for long-term ROI.',
+  },
+];
+
+const studioRecognitions = [
+  { title: 'Google Lighthouse 100/100', desc: 'Certified top tier web performance & accessibility excellence.' },
+  { title: 'Custom React Architecture', desc: 'Bespoke codebase engineering engineered without slow template plugins.' },
+  { title: 'Clutch Gold Standard Quality', desc: 'Consistently rated 5-stars for client satisfaction and project execution.' },
+  { title: '24h Rapid Onboarding', desc: 'Direct access to senior strategists and engineering leads from day one.' },
 ];
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({
@@ -496,13 +525,19 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
   isDarkMode,
   onNavigateHome,
 }) => {
+  const [selectedCategory, setSelectedCategory] = useState<'all' | 'branding' | 'engineering' | 'marketing'>('all');
+
+  const filteredServices = detailedServices.filter(
+    (service) => selectedCategory === 'all' || service.category === selectedCategory
+  );
+
   return (
     <div
       className={`min-h-screen pt-28 pb-20 transition-colors duration-500 relative overflow-hidden ${
         isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
-      {/* Subtle Background Mesh Grid */}
+      {/* Background Architectural Mesh Grid */}
       <div
         className={`absolute inset-0 bg-[size:5rem_5rem] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none ${
           isDarkMode
@@ -511,27 +546,27 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
         }`}
       />
 
-      {/* Brand Orange Radial Spotlight (15% Max Glow) */}
-      <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-radial from-[#FF7A1A]/15 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none" />
+      {/* Brand Orange Radial Spotlight */}
+      <div className="absolute top-24 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-radial from-[#FF7A1A]/18 via-[#FF7A1A]/5 to-transparent blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-24 sm:space-y-32">
         
-        {/* HERO SECTION - REVAMPED HIGH-ENGAGING MOMENTUM ENGINE */}
+        {/* HERO SECTION - DD.NYC STYLE HIGH-END AGENCY HEADER */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-4xl mx-auto mb-16 sm:mb-24 space-y-6"
+          className="text-center max-w-4xl mx-auto space-y-6"
         >
           {/* Eyebrow Pill */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest backdrop-blur-md">
             <Zap className="w-3.5 h-3.5" />
-            <span>EXECUTIVE CAPABILITIES BRIEFING</span>
+            <span>ROOS STUDIOX • AGENCY CAPABILITIES</span>
           </div>
 
           {/* Guaranteed 2-Line Headline */}
           <h1
-            className={`font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] ${
+            className={`font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] ${
               isDarkMode ? 'text-white' : 'text-[#111111]'
             }`}
           >
@@ -547,29 +582,87 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
               isDarkMode ? 'text-[#B8B8B8]' : 'text-[#52525B]'
             }`}
           >
-            Most businesses don't have a product problem—they have a growth bottleneck. We combine strategy, engineering, and marketing to build ecosystems that scale.
+            We combine strategy, bespoke engineering, and growth marketing to build high-converting digital ecosystems.
           </p>
 
-          {/* High-Engaging Interactive Bottleneck Eliminator Badges */}
-          <div className="pt-2 flex items-center justify-center gap-2.5 sm:gap-4 flex-wrap">
-            <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
-              <span>Positioning Friction</span>
-            </div>
-            <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
-              <span>Visibility Leaks</span>
-            </div>
-            <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
-              <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
-              <span>Conversion Bottlenecks</span>
-            </div>
+          {/* dd.nyc Style Interactive Category Filter Buttons */}
+          <div className="pt-4 flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
+            <button
+              onClick={() => setSelectedCategory('all')}
+              className={`px-4 py-2 rounded-full text-xs font-mono font-bold border transition-all cursor-pointer ${
+                selectedCategory === 'all'
+                  ? 'bg-gradient-to-r from-[#FF7A1A] to-[#EA580C] text-white border-[#FF944D] shadow-lg shadow-[#FF7A1A]/30'
+                  : 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:text-white'
+              }`}
+            >
+              ALL SERVICES (8)
+            </button>
+            <button
+              onClick={() => setSelectedCategory('branding')}
+              className={`px-4 py-2 rounded-full text-xs font-mono font-bold border transition-all cursor-pointer ${
+                selectedCategory === 'branding'
+                  ? 'bg-gradient-to-r from-[#FF7A1A] to-[#EA580C] text-white border-[#FF944D] shadow-lg shadow-[#FF7A1A]/30'
+                  : 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:text-white'
+              }`}
+            >
+              BRANDING & STRATEGY
+            </button>
+            <button
+              onClick={() => setSelectedCategory('engineering')}
+              className={`px-4 py-2 rounded-full text-xs font-mono font-bold border transition-all cursor-pointer ${
+                selectedCategory === 'engineering'
+                  ? 'bg-gradient-to-r from-[#FF7A1A] to-[#EA580C] text-white border-[#FF944D] shadow-lg shadow-[#FF7A1A]/30'
+                  : 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:text-white'
+              }`}
+            >
+              WEB ENGINEERING & UI/UX
+            </button>
+            <button
+              onClick={() => setSelectedCategory('marketing')}
+              className={`px-4 py-2 rounded-full text-xs font-mono font-bold border transition-all cursor-pointer ${
+                selectedCategory === 'marketing'
+                  ? 'bg-gradient-to-r from-[#FF7A1A] to-[#EA580C] text-white border-[#FF944D] shadow-lg shadow-[#FF7A1A]/30'
+                  : 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:text-white'
+              }`}
+            >
+              GROWTH MARKETING & AI
+            </button>
           </div>
         </motion.div>
 
-        {/* 8 DETAILED SERVICE SECTIONS (TOPIC-SPECIFIC STUDIO VISUALS) */}
+        {/* AGENCY KEY STATISTICS COUNTER BAR (DD.NYC PATTERN) */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
+          {agencyStats.map((stat, sIdx) => (
+            <div
+              key={sIdx}
+              className={`p-6 rounded-2xl border text-left space-y-2 relative overflow-hidden ${
+                isDarkMode
+                  ? 'bg-[#0C0C0C] border-zinc-800 text-white'
+                  : 'bg-white border-zinc-200 text-zinc-900 shadow-md'
+              }`}
+            >
+              <div className="text-3xl sm:text-4xl font-mono font-black text-[#FF7A1A]">
+                {stat.metric}
+              </div>
+              <div className="font-display text-base font-bold">
+                {stat.label}
+              </div>
+              <div className="text-xs font-mono text-zinc-500">
+                {stat.sub}
+              </div>
+            </div>
+          ))}
+        </motion.div>
+
+        {/* 8 DETAILED SERVICE SECTIONS WITH DD.NYC SUB-TAG PILLS */}
         <div className="space-y-24 sm:space-y-32">
-          {detailedServices.map((service, idx) => {
+          {filteredServices.map((service, idx) => {
             const isLeft = service.align === 'left';
 
             return (
@@ -584,7 +677,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 }`}
               >
                 
-                {/* TOPIC-SPECIFIC STUDIO VISUAL CONTAINER (5 COLS) */}
+                {/* STUDIO VISUAL WIDGET (5 COLS) */}
                 <div
                   className={`lg:col-span-5 ${
                     isLeft ? 'lg:order-1' : 'lg:order-2'
@@ -601,7 +694,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                   >
                     {service.renderVisual(isDarkMode)}
 
-                    {/* Momentum Created Result Banner */}
+                    {/* Momentum Result Banner */}
                     <div
                       className={`relative z-10 p-5 m-4 rounded-2xl border text-xs font-semibold text-[#FF7A1A] backdrop-blur-md ${
                         isDarkMode
@@ -617,7 +710,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                   </motion.div>
                 </div>
 
-                {/* CONTENT & DELIVERABLES BREAKDOWN (7 COLS) */}
+                {/* CONTENT & DELIVERABLES (7 COLS) */}
                 <div
                   className={`lg:col-span-7 space-y-6 ${
                     isLeft ? 'lg:order-2' : 'lg:order-1'
@@ -635,11 +728,23 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                     </p>
                   </div>
 
+                  {/* dd.nyc Style Capability Sub-Tag Pill Bar */}
+                  <div className="flex items-center gap-2 flex-wrap pt-1">
+                    {service.subTags.map((tag, tIdx) => (
+                      <span
+                        key={tIdx}
+                        className="px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-[11px] font-mono text-zinc-300 font-bold"
+                      >
+                        [{tag}]
+                      </span>
+                    ))}
+                  </div>
+
                   <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-700'}`}>
                     {service.copy}
                   </p>
 
-                  {/* Perfect For Banner (If Applicable) */}
+                  {/* Perfect For Banner */}
                   {service.perfectFor && (
                     <div className={`p-4 rounded-2xl border text-xs ${
                       isDarkMode
@@ -651,7 +756,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                     </div>
                   )}
 
-                  {/* Deliverables List */}
+                  {/* Deliverables Checklist */}
                   <div className="space-y-3 pt-2">
                     <div className={`text-xs font-mono font-bold uppercase tracking-wider ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
                       WHAT WE DELIVER:
@@ -665,23 +770,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                       ))}
                     </div>
                   </div>
-
-                  {/* Every Website Includes (For Web Dev) */}
-                  {service.includes && (
-                    <div className={`pt-3 border-t space-y-2 ${isDarkMode ? 'border-zinc-800' : 'border-zinc-200'}`}>
-                      <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7A1A]">
-                        EVERY WEBSITE INCLUDES:
-                      </div>
-                      <div className={`grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>
-                        {service.includes.map((inc, iIdx) => (
-                          <div key={iIdx} className="flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A1A]" />
-                            <span>{inc}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
 
                   {/* Action Button */}
                   <div className="pt-2">
@@ -705,7 +793,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className={`mt-32 p-8 sm:p-14 rounded-3xl border relative overflow-hidden text-left ${
+          className={`p-8 sm:p-14 rounded-3xl border relative overflow-hidden text-left ${
             isDarkMode
               ? 'bg-[#0C0C0C] border-zinc-800 text-white'
               : 'bg-white border-zinc-200 text-zinc-900 shadow-2xl'
@@ -715,7 +803,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             
-            {/* Left: Deck Description & Download Action (7 Cols) */}
             <div className="lg:col-span-7 space-y-6">
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
                 <FileText className="w-3.5 h-3.5" />
@@ -727,10 +814,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
               </h2>
 
               <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-700'}`}>
-                Get our complete 2026 presentation deck detailing our core engineering methodologies, case studies, technology stack, service pricing structures, and project timelines in a single PDF.
+                Get our complete presentation deck detailing our core engineering methodologies, case studies, technology stack, service pricing structures, and project timelines in a single PDF.
               </p>
 
-              {/* Highlights List */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-mono font-bold">
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
@@ -750,12 +836,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 </div>
               </div>
 
-              {/* Action Buttons */}
               <div className="pt-4 flex items-center gap-4 flex-wrap">
                 <AlphaRoosButton
                   text="Download PDF Deck"
                   onClick={() => {
-                    alert('Roos StudioX 2026 Service Capabilities Deck requested! Our team will send the confidential PDF deck directly to your inbox.');
+                    alert('Roos StudioX Service Capabilities Deck requested! Our team will send the confidential PDF deck directly to your inbox.');
                   }}
                   isDarkMode={isDarkMode}
                 />
@@ -772,13 +857,12 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
               </div>
             </div>
 
-            {/* Right: Interactive 3D Deck Mockup Card (5 Cols) */}
             <div className="lg:col-span-5 flex justify-center">
               <div className="w-full max-w-sm rounded-2xl border border-zinc-800 bg-[#050505] p-6 shadow-2xl relative space-y-4 transform hover:scale-[1.02] transition-transform">
                 <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
                   <div className="flex items-center gap-2">
                     <span className="w-3 h-3 rounded-full bg-[#FF7A1A]" />
-                    <span className="text-xs font-mono font-bold text-white uppercase">ROOS_DECK_2026.PDF</span>
+                    <span className="text-xs font-mono font-bold text-white uppercase">ROOS_DECK.PDF</span>
                   </div>
                   <span className="text-[10px] font-mono text-zinc-500">24 PAGES</span>
                 </div>
@@ -788,7 +872,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                     <FileText className="w-8 h-8" />
                   </div>
                   <h3 className="font-display text-lg font-bold text-white">Roos StudioX Capabilities Briefing</h3>
-                  <p className="text-xs text-zinc-400">Official 2026 Agency Presentation & Methodology Overview</p>
+                  <p className="text-xs text-zinc-400">Official Agency Presentation & Methodology Overview</p>
                 </div>
 
                 <div className="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800 text-[11px] font-mono text-zinc-400 flex items-center justify-between">
@@ -801,89 +885,42 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           </div>
         </motion.div>
 
-        {/* WHY BUSINESSES CHOOSE ROOS STUDIOX */}
+        {/* DD.NYC STYLE 5-PHASE METHODICAL PROCESS ARCHITECTURE */}
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className={`mt-36 py-16 px-6 sm:px-12 rounded-3xl border text-left relative overflow-hidden ${
-            isDarkMode
-              ? 'bg-[#0C0C0C] border-zinc-800 text-white'
-              : 'bg-white border-zinc-200 text-zinc-900 shadow-xl'
-          }`}
-        >
-          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C]" />
-
-          <div className="text-center max-w-3xl mx-auto mb-14 space-y-3">
-            <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
-              THE ROOS ADVANTAGE
-            </span>
-            <h2 className="font-display text-4xl sm:text-6xl font-extrabold tracking-tight">
-              Why Businesses Choose Roos StudioX
-            </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
-            {whyUsPillars.map((pillar, pIdx) => (
-              <div
-                key={pIdx}
-                className={`p-6 rounded-2xl border space-y-2 ${
-                  isDarkMode
-                    ? 'bg-[#050505] border-zinc-800'
-                    : 'bg-zinc-50 border-zinc-200 shadow-sm'
-                }`}
-              >
-                <div className="text-[#FF7A1A] text-xs font-mono font-bold uppercase">
-                  0{pIdx + 1}
-                </div>
-                <h3 className={`font-display text-xl font-bold ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
-                  {pillar.title}
-                </h3>
-                <p className={`text-sm leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-600'}`}>
-                  {pillar.desc}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* THE ROOS GROWTH FRAMEWORK */}
-        <motion.div
-          initial={{ opacity: 0, y: 35 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="mt-28 text-left space-y-12"
+          className="text-left space-y-12"
         >
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
-              STEP-BY-STEP LEAP
+              OUR METHODOLOGY
             </span>
-            <h2 className={`font-display text-4xl sm:text-6xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
-              The Roos Growth Framework
+            <h2 className={`font-display text-4xl sm:text-6xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
+              5-Phase Studio Execution Process
             </h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {growthFramework.map((fStep, fIdx) => (
+            {ddProcessSteps.map((pStep, pIdx) => (
               <div
-                key={fIdx}
-                className={`p-5 rounded-2xl border flex flex-col justify-between space-y-3 ${
+                key={pIdx}
+                className={`p-6 rounded-2xl border flex flex-col justify-between space-y-4 text-left ${
                   isDarkMode
-                    ? 'bg-[#0C0C0C] border-zinc-800'
-                    : 'bg-white border-zinc-200 shadow-sm'
+                    ? 'bg-[#0C0C0C] border-zinc-800 text-white'
+                    : 'bg-white border-zinc-200 text-zinc-900 shadow-sm'
                 }`}
               >
-                <span className="text-2xl font-mono font-black text-[#FF7A1A]">
-                  {fStep.step}
-                </span>
+                <div className="text-2xl font-mono font-black text-[#FF7A1A]">
+                  {pStep.step}
+                </div>
                 <div>
-                  <div className="font-display text-lg font-bold text-[#FF7A1A] mb-1">
-                    {fStep.title}
-                  </div>
-                  <p className={`text-xs leading-relaxed ${isDarkMode ? 'text-[#7D7D7D]' : 'text-zinc-600'}`}>
-                    {fStep.desc}
+                  <h3 className="font-display text-lg font-bold text-[#FF7A1A] mb-1">
+                    {pStep.title}
+                  </h3>
+                  <p className="text-xs text-zinc-400 leading-relaxed">
+                    {pStep.desc}
                   </p>
                 </div>
               </div>
@@ -891,25 +928,65 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           </div>
         </motion.div>
 
-        {/* FINAL FULL SCREEN CTA - READY TO BUILD MOMENTUM? */}
+        {/* DD.NYC STYLE RECOGNITIONS & TRUST BADGES GRID */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-left space-y-10"
+        >
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+              STANDARDS & RECOGNITION
+            </span>
+            <h2 className={`font-display text-4xl sm:text-5xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
+              Studio Quality Standards
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {studioRecognitions.map((rec, rIdx) => (
+              <div
+                key={rIdx}
+                className="p-6 rounded-2xl bg-[#0C0C0C] border border-zinc-800 space-y-2 text-left"
+              >
+                <div className="flex items-center gap-2 text-[#FF7A1A]">
+                  <Award className="w-5 h-5" />
+                  <span className="text-xs font-mono font-bold uppercase">GOLD STANDARD</span>
+                </div>
+                <h3 className="font-display text-lg font-bold text-white">
+                  {rec.title}
+                </h3>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  {rec.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* FINAL FULL SCREEN CTA */}
         <motion.div
           initial={{ opacity: 0, scale: 0.96 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="mt-36 py-20 text-center space-y-8 max-w-4xl mx-auto relative"
+          className="p-8 sm:p-16 rounded-3xl border border-zinc-800 bg-[#08080A] text-center space-y-8 relative shadow-2xl overflow-hidden"
         >
-          <div className="space-y-4">
-            <h2 className={`font-display text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C]" />
+
+          <div className="space-y-4 max-w-3xl mx-auto">
+            <h2 className={`font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-none ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
               Ready To Build Momentum?
             </h2>
-            <div className={`text-xl sm:text-3xl font-semibold space-y-1 ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-600'}`}>
+            <div className={`text-lg sm:text-2xl font-semibold space-y-1 ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-600'}`}>
               <p>You Bring The Ambition.</p>
               <p className="text-[#FF7A1A] font-bold">We'll Build The Momentum.</p>
             </div>
           </div>
 
-          <div className="pt-4 flex flex-col items-center justify-center gap-4">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <AlphaRoosButton
               text="Get Your Free Growth Audit"
               onClick={onOpenInquiry}
@@ -918,8 +995,10 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 
             <button
               onClick={onNavigateHome}
-              className={`text-xs font-mono font-bold uppercase tracking-widest pt-2 cursor-pointer transition-colors ${
-                isDarkMode ? 'text-zinc-500 hover:text-zinc-300' : 'text-zinc-600 hover:text-zinc-900'
+              className={`px-6 py-3 rounded-full border text-xs font-mono font-bold transition-all cursor-pointer ${
+                isDarkMode
+                  ? 'bg-[#050505] border-zinc-800 text-zinc-300 hover:border-[#FF7A1A] hover:text-white'
+                  : 'bg-zinc-100 border-zinc-300 text-zinc-800 hover:border-[#FF7A1A] hover:text-zinc-900'
               }`}
             >
               ← Return to Main Homepage
