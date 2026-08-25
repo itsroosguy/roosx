@@ -29,27 +29,19 @@ const items = [
     delay: 0,
   },
   {
-    id: 'growth',
-    label: '+3X Growth',
-    icon: TrendingUp,
-    color: '#22C55E',
-    isGreen: true,
-    delay: 0.2,
-  },
-  {
     id: 'brand',
     label: 'Brand Positioning',
     icon: Target,
     color: '#F97316',
     hasOrbit: true,
-    delay: 0.4,
+    delay: 0.2,
   },
   {
     id: 'marketing',
     label: 'Digital Marketing',
     icon: Megaphone,
     color: '#F97316',
-    delay: 0.6,
+    delay: 0.4,
   },
   {
     id: 'workflow',
@@ -57,13 +49,21 @@ const items = [
     icon: Workflow,
     color: '#F97316',
     hasNodes: true,
-    delay: 0.8,
+    delay: 0.6,
   },
   {
     id: 'ai-arch',
     label: 'Scalable AI Systems',
     icon: Zap,
     color: '#F97316',
+    delay: 0.8,
+  },
+  {
+    id: 'growth',
+    label: '+3X Growth',
+    icon: TrendingUp,
+    color: '#22C55E',
+    isGreen: true,
     delay: 1.0,
   },
 ];
@@ -73,8 +73,8 @@ export const AntiGravityElements: React.FC<AntiGravityElementsProps> = ({
 }) => {
   return (
     <div className="w-full pt-2 pb-1">
-      {/* PERFECTLY BALANCED HORIZONTAL FLEX CONTAINER BETWEEN DESCRIPTION & BUTTON */}
-      <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 text-left">
+      {/* PERFECTLY BALANCED 3x2 GRID CONTAINER (3 COLUMNS x 2 ROWS) */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3 w-full max-w-[645px] text-left">
         {items.map((item) => {
           const IconComp = item.icon;
 
@@ -95,7 +95,7 @@ export const AntiGravityElements: React.FC<AntiGravityElementsProps> = ({
                   ease: 'easeInOut',
                   delay: item.delay,
                 }}
-                className={`group flex items-center gap-2 px-3 py-1.5 rounded-full border backdrop-blur-md text-xs font-semibold tracking-tight transition-all duration-300 cursor-default select-none shadow-sm ${
+                className={`group flex items-center justify-center sm:justify-start gap-2 px-3 py-2 rounded-full border backdrop-blur-md text-xs font-semibold tracking-tight transition-all duration-300 cursor-default select-none shadow-sm w-full ${
                   item.isGreen
                     ? 'bg-[#22C55E]/10 border-[#22C55E]/30 text-[#22C55E] hover:border-[#22C55E]'
                     : isDarkMode
