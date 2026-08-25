@@ -276,7 +276,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           className="text-center max-w-4xl mx-auto mb-20 sm:mb-28 space-y-6"
         >
           <h1
-            className={`font-display text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[1.05] ${
+            className={`font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.08] ${
               isDarkMode ? 'text-white' : 'text-[#111111]'
             }`}
           >
