@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Preloader } from './components/Preloader';
 import { AmbientGlow } from './components/AmbientGlow';
 import { Navbar } from './components/Navbar';
@@ -21,7 +21,28 @@ export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'services' | 'about'>('home');
+  const [currentView, setCurrentView] = useState<'home' | 'services' | 'about'>(() => {
+    const hash = window.location.hash;
+    if (hash === '#about') return 'about';
+    if (hash === '#services') return 'services';
+    return 'home';
+  });
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash === '#about') {
+        setCurrentView('about');
+      } else if (hash === '#services') {
+        setCurrentView('services');
+      } else {
+        setCurrentView('home');
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   return (
     <div
@@ -41,14 +62,17 @@ export function App() {
         isDarkMode={isDarkMode}
         onToggleTheme={() => setIsDarkMode(!isDarkMode)}
         onNavigateServices={() => {
+          window.location.hash = '#services';
           setCurrentView('services');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onNavigateAbout={() => {
+          window.location.hash = '#about';
           setCurrentView('about');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
         onNavigateHome={() => {
+          window.location.hash = '';
           setCurrentView('home');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
