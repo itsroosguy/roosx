@@ -191,8 +191,8 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
               </button>
             </form>
 
-            {/* BOTTOM SOCIAL PROOF AVATAR STACK (+ 50+ Ambitious Founders Joined) */}
-            <div className="pt-4 flex items-center justify-center gap-3 flex-wrap">
+            {/* CENTERED SOCIAL PROOF AVATAR STACK */}
+            <div className="pt-4 flex items-center justify-center">
               <div className="flex -space-x-2.5">
                 {[
                   'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80',
@@ -211,10 +211,6 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
                   +
                 </div>
               </div>
-
-              <span className={`text-xs font-mono font-semibold ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>
-                50+ Ambitious Founders & Leaders Transformed
-              </span>
             </div>
 
           </div>
