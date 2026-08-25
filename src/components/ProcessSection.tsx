@@ -124,7 +124,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
       {/* Ambient Radial Spotlight */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-radial from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12 text-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
         
         {/* HEADER BLOCK */}
         <motion.div
@@ -136,7 +136,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest backdrop-blur-md">
             <Layers className="w-3.5 h-3.5" />
-            <span>PERFECT EXPANDED ARC PROCESS STACK</span>
+            <span>5-STEP PROCESS DECK</span>
           </div>
 
           <h2
@@ -149,17 +149,9 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
               To The Goal Fast.
             </span>
           </h2>
-
-          <p
-            className={`text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto ${
-              isDarkMode ? 'text-[#B8B8B8]' : 'text-[#52525B]'
-            }`}
-          >
-            Hover or tap the 5-card deck to fan out and explore our studio execution methodology.
-          </p>
         </motion.div>
 
-        {/* 5-CARD TEAM STACK CONTAINER (INITIAL SHAPE PERFECT, EXPANDED FORMS PERFECT ARCHED CROWN ARC) */}
+        {/* 5-CARD TEAM STACK CONTAINER */}
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -217,7 +209,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                       e.stopPropagation();
                       onOpenInquiry?.();
                     }}
-                    className={`absolute top-3 right-3 flex items-[#center] justify-center gap-1.5 transition-all duration-300 shadow-md cursor-pointer ${
+                    className={`absolute top-3 right-3 flex items-center justify-center gap-1.5 transition-all duration-300 shadow-md cursor-pointer ${
                       isActive
                         ? 'px-3 py-1.5 rounded-full bg-[#FF7A1A] text-white text-xs font-mono font-bold shadow-[#FF7A1A]/40'
                         : 'w-8 h-8 rounded-full bg-[#27272A] text-white hover:bg-[#FF7A1A]'
@@ -245,8 +237,21 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           })}
         </div>
 
+        {/* DESCRIPTION PARAGRAPH POSITIONED BELOW THE ARC */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className={`text-base sm:text-lg font-medium max-w-2xl mx-auto pt-2 ${
+            isDarkMode ? 'text-[#B8B8B8]' : 'text-[#52525B]'
+          }`}
+        >
+          Hover or tap the 5-card deck to fan out and explore our studio execution methodology.
+        </motion.p>
+
         {/* BOTTOM ACTION CTA BUTTON */}
-        <div className="pt-4 text-center">
+        <div className="pt-2 text-center">
           <AlphaRoosButton
             text="Get Your Free Growth Audit"
             onClick={() => onOpenInquiry?.()}
