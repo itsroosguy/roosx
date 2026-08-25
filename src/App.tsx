@@ -13,7 +13,6 @@ import { PreFooterCTA } from './components/PreFooterCTA';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
-import { PhilosophyPage } from './components/PhilosophyPage';
 import { OurStoryPage } from './components/OurStoryPage';
 import { Project } from './types';
 
@@ -21,9 +20,8 @@ export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'philosophy' | 'our-story'>(() => {
+  const [currentView, setCurrentView] = useState<'home' | 'our-story'>(() => {
     const hash = window.location.hash;
-    if (hash === '#philosophy') return 'philosophy';
     if (hash === '#our-story' || hash === '#story') return 'our-story';
     return 'home';
   });
@@ -31,9 +29,7 @@ export function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#philosophy') {
-        setCurrentView('philosophy');
-      } else if (hash === '#our-story' || hash === '#story') {
+      if (hash === '#our-story' || hash === '#story') {
         setCurrentView('our-story');
       } else {
         setCurrentView('home');
@@ -47,7 +43,7 @@ export function App() {
   return (
     <div
       className={`min-h-screen transition-colors duration-500 relative bg-noise selection:bg-[#FF7A1A] selection:text-white ${
-        isDarkMode ? 'dark bg-[#0A0A0A] text-[#D4D4D8]' : 'bg-white text-[#111111]'
+        isDarkMode ? 'dark bg-[#0A0A0A] text-[#D4D4D8]' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
       {/* 3-Second Circular Gauge Telemetry Preloader */}
@@ -61,11 +57,6 @@ export function App() {
         onOpenInquiry={() => setIsInquiryOpen(true)}
         isDarkMode={isDarkMode}
         onToggleTheme={() => setIsDarkMode(!isDarkMode)}
-        onNavigatePhilosophy={() => {
-          window.location.hash = '#philosophy';
-          setCurrentView('philosophy');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
         onNavigateStory={() => {
           window.location.hash = '#our-story';
           setCurrentView('our-story');
@@ -89,16 +80,6 @@ export function App() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         />
-      ) : currentView === 'philosophy' ? (
-        <PhilosophyPage
-          onOpenInquiry={() => setIsInquiryOpen(true)}
-          isDarkMode={isDarkMode}
-          onNavigateHome={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        />
       ) : (
         <main>
           <Hero onOpenInquiry={() => setIsInquiryOpen(true)} isDarkMode={isDarkMode} />
@@ -110,7 +91,7 @@ export function App() {
           />
           <ProcessSection isDarkMode={isDarkMode} />
           
-          {/* Case Studies & Featured Works Section (Positioned Directly Above FAQ) */}
+          {/* Case Studies & Featured Works Section */}
           <Portfolio
             onSelectProject={(project) => setSelectedProject(project)}
             isDarkMode={isDarkMode}

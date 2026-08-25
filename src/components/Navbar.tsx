@@ -8,7 +8,6 @@ interface NavbarProps {
   onOpenInquiry: () => void;
   isDarkMode: boolean;
   onToggleTheme: () => void;
-  onNavigatePhilosophy?: () => void;
   onNavigateStory?: () => void;
   onNavigateHome?: () => void;
 }
@@ -17,7 +16,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenInquiry,
   isDarkMode,
   onToggleTheme,
-  onNavigatePhilosophy,
   onNavigateStory,
   onNavigateHome,
 }) => {
@@ -35,7 +33,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { name: 'Our Story', href: '#our-story', action: onNavigateStory, isBadge: true },
     { name: 'Services', href: '#services', action: onNavigateHome },
-    { name: 'Philosophy', href: '#philosophy', action: onNavigatePhilosophy },
     { name: 'Process', href: '#process', action: onNavigateHome },
     { name: 'Works', href: '#portfolio', action: onNavigateHome },
     { name: 'FAQ', href: '#faq', action: onNavigateHome },
