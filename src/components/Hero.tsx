@@ -97,20 +97,23 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
 
       <div className="max-w-[1750px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
         
-        {/* 1. TOP CENTER: 2-LINE HEADLINE */}
+        {/* 1. TOP CENTER: 2-LINE HEADLINE (SILVER TOP LINE & ORANGE BOTTOM LINE) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-center max-w-3xl mx-auto space-y-4 flex flex-col items-center mb-1 sm:mb-2"
+          className="text-center max-w-4xl mx-auto space-y-4 flex flex-col items-center mb-1 sm:mb-2"
         >
           <motion.h2
             variants={itemVariants}
-            className={`font-display text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tighter leading-[1.04] text-center transition-colors duration-500 ${
-              isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
-            }`}
+            className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] text-center"
           >
-            How We Step In & Get You To The Goal Fast.
+            <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent block pb-1">
+              You Bring Ambition.
+            </span>
+            <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
+              We’ll Build The Win.
+            </span>
           </motion.h2>
           <motion.p
             variants={itemVariants}
@@ -149,68 +152,45 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
                 isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
               }`}
             >
-              Roos StudioX helps businesses build stronger brands, create high-performing digital experiences and develop scalable systems for growth. We combine strategy, design and technology to attract the right audience, strengthen customer trust and drive measurable business results. Our focus is simple: turning digital presence into sustainable growth.
+              Roos StudioX is an elite design and engineering powerhouse. We craft bespoke digital products, brand identities, and high-conversion web experiences for ambitious founders and market leaders.
             </p>
 
-            {/* ELEGANT FLOATING ANIMATED MICRO-PILLS (PLACED BETWEEN DESCRIPTION & BUTTON) */}
-            <AntiGravityElements isDarkMode={isDarkMode} />
+            {/* FLOATING CAPABILITY PILLS */}
+            <div className="flex flex-wrap items-center gap-2 pt-1 pb-1 max-w-[640px]">
+              <AntiGravityElements />
+            </div>
 
-            {/* ACTION BUTTON & CIRCULAR ROTATING TEXT DOWN ARROW BADGE */}
-            <motion.div
-              variants={buttonVariants}
-              initial="hidden"
-              animate="visible"
-              className="pt-1 flex items-center gap-6 text-left flex-wrap"
-            >
-              <AlphaRoosButton onClick={onOpenInquiry} isDarkMode={isDarkMode} />
-
-              {/* INSIDE-HERO CIRCULAR ROTATING TEXT DOWN ARROW BADGE */}
-              <button
-                onClick={scrollToNextSection}
-                className="group relative flex items-center justify-center cursor-pointer focus:outline-none"
-                aria-label="Scroll to explore"
-              >
-                {/* SVG Rotating Circular Text */}
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
-                  className="w-20 h-20 sm:w-22 sm:h-22"
-                >
-                  <svg viewBox="0 0 100 100" className="w-full h-full">
-                    <path
-                      id="heroCirclePath"
-                      d="M 50, 50 m -38, 0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
-                      fill="none"
-                    />
-                    <text className="font-display font-bold uppercase text-[7.8px] tracking-[1.8px]">
-                      <textPath
-                        href="#heroCirclePath"
-                        fill={isDarkMode ? '#F97316' : '#EA580C'}
-                        startOffset="0%"
-                      >
-                        DISCOVER THE SYSTEM • ROOS STUDIOX • 
-                      </textPath>
-                    </text>
-                  </svg>
-                </motion.div>
-
-                {/* Centered ChevronDown Arrow Badge with Soft Bounce */}
-                <motion.div
-                  animate={{ y: [0, 4, 0] }}
-                  transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-                  className={`absolute p-2.5 rounded-full border transition-all shadow-sm flex items-center justify-center ${
-                    isDarkMode
-                      ? 'bg-[#18181B] border-[#27272A] text-[#F97316] group-hover:border-[#F97316] group-hover:shadow-[0_0_15px_rgba(249,115,22,0.3)]'
-                      : 'bg-white border-[#E4E4E7] text-[#F97316] group-hover:border-[#F97316] group-hover:shadow-[0_0_15px_rgba(249,115,22,0.2)]'
-                  }`}
-                >
-                  <ChevronDown className="w-4 h-4" />
-                </motion.div>
-              </button>
+            {/* ACTION BUTTON */}
+            <motion.div variants={buttonVariants} className="pt-2 sm:pt-3">
+              <AlphaRoosButton
+                text="Start Your Transformation"
+                onClick={onOpenInquiry}
+                isDarkMode={isDarkMode}
+              />
             </motion.div>
           </motion.div>
 
         </div>
+
+        {/* 3. SCROLL DOWN CHEVRON INDICATOR */}
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.2, duration: 0.8 }}
+          className="pt-6 sm:pt-8 pb-4 z-20 flex justify-center"
+        >
+          <button
+            onClick={scrollToNextSection}
+            aria-label="Scroll to services"
+            className={`p-2.5 rounded-full transition-all duration-300 group cursor-pointer border ${
+              isDarkMode
+                ? 'bg-zinc-900/60 border-zinc-800 text-zinc-400 hover:text-white hover:border-[#F97316] hover:bg-zinc-900'
+                : 'bg-zinc-100 border-zinc-200 text-zinc-600 hover:text-zinc-900 hover:border-[#F97316] hover:bg-zinc-200'
+            }`}
+          >
+            <ChevronDown className="w-5 h-5 animate-bounce group-hover:text-[#F97316]" />
+          </button>
+        </motion.div>
 
       </div>
     </section>

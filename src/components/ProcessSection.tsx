@@ -117,24 +117,28 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
         
-        {/* HEADER BLOCK (RESTORED PROPER TITLE WITH METALLIC SILVER TOP LINE & ELECTRIC ORANGE BOTTOM LINE) */}
+        {/* HEADER BLOCK (MATCHING IMAGE: ― OUR 5-PHASE ― EXECUTION METHODOLOGY) */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="space-y-4 max-w-5xl mx-auto px-2 text-center"
+          className="space-y-3 max-w-4xl mx-auto text-center"
         >
-          <h2
-            className={`font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1]`}
-          >
-            <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent block pb-1">
-              You Bring Ambition.
-            </span>
-            <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
-              We’ll Build The Win.
-            </span>
+          <div className="flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+            <span className="w-8 h-px bg-[#FF7A1A]/60" />
+            <span>OUR 5-PHASE</span>
+            <span className="w-8 h-px bg-[#FF7A1A]/60" />
+          </div>
+
+          <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08]">
+            <span className="text-white">Execution </span>
+            <span className="text-[#FF7A1A]">Methodology</span>
           </h2>
+
+          <p className="text-base sm:text-xl font-medium text-zinc-400">
+            Built For High-Velocity Growth
+          </p>
         </motion.div>
 
         {/* LOCKED HEIGHT UNIFIED ELECTRIC ORANGE ACCORDION DECK */}
@@ -237,8 +241,8 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 {/* Bottom Micro Indicator Dots */}
                 <div className="flex items-center gap-1.5 pt-1 z-10 relative shrink-0">
                   <div className={`w-2.5 h-2.5 rounded-full ${isActive ? 'bg-[#FF7A1A]' : 'bg-zinc-700'}`} />
-                  <div className={`w-2.5 h-2.5 rounded-full ${isActive ? 'bg-[#FF7A1A]/80' : 'bg-zinc-700/80'}`} />
-                  <div className={`w-2.5 h-2.5 rounded-full ${isActive ? 'bg-[#FF7A1A]/40' : 'bg-zinc-700/50'}`} />
+                  <div className={`w-2.5 h-2.5 rounded-full ${isActive ? 'bg-[#FF7A1A]/40' : 'bg-zinc-700/80'}`} />
+                  <div className={`w-2.5 h-2.5 rounded-full ${isActive ? 'bg-[#FF7A1A]/20' : 'bg-zinc-700/50'}`} />
                 </div>
               </motion.div>
             );
