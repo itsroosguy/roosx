@@ -10,6 +10,7 @@ import {
   TrendingUp,
   CheckCircle2,
   Bot,
+  FileText,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -484,6 +485,108 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             );
           })}
         </div>
+
+        {/* OFFICIAL STUDIO CAPABILITIES DECK SECTION */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className={`mt-32 p-8 sm:p-14 rounded-3xl border relative overflow-hidden text-left ${
+            isDarkMode
+              ? 'bg-[#0C0C0C] border-zinc-800 text-white'
+              : 'bg-white border-zinc-200 text-zinc-900 shadow-2xl'
+          }`}
+        >
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C]" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            {/* Left: Deck Description & Download Action (7 Cols) */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+                <FileText className="w-3.5 h-3.5" />
+                <span>OFFICIAL STUDIO DECK</span>
+              </div>
+
+              <h2 className="font-display text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                Download Our Official Studio Service & Capabilities Deck
+              </h2>
+
+              <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-700'}`}>
+                Get our complete 2026 presentation deck detailing our core engineering methodologies, case studies, technology stack, service pricing structures, and project timelines in a single PDF.
+              </p>
+
+              {/* Highlights List */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs font-mono font-bold">
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
+                  <span>Full 8-Service Execution Matrix</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
+                  <span>99+ Speed Guarantee Audits</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
+                  <span>24h Rapid Onboarding Protocol</span>
+                </div>
+                <div className="flex items-center gap-2.5">
+                  <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
+                  <span>Client Revenue Growth Studies</span>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-4 flex items-center gap-4 flex-wrap">
+                <AlphaRoosButton
+                  text="Download PDF Deck"
+                  onClick={() => {
+                    alert('Roos StudioX 2026 Service Capabilities Deck requested! Our team will send the confidential PDF deck directly to your inbox.');
+                  }}
+                  isDarkMode={isDarkMode}
+                />
+                <button
+                  onClick={onOpenInquiry}
+                  className={`px-6 py-3 rounded-full border text-xs font-mono font-bold transition-all cursor-pointer ${
+                    isDarkMode
+                      ? 'bg-[#050505] border-zinc-800 text-zinc-300 hover:border-[#FF7A1A] hover:text-white'
+                      : 'bg-zinc-100 border-zinc-300 text-zinc-800 hover:border-[#FF7A1A] hover:text-zinc-900'
+                  }`}
+                >
+                  Book Deck Walkthrough
+                </button>
+              </div>
+            </div>
+
+            {/* Right: Interactive 3D Deck Mockup Card (5 Cols) */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="w-full max-w-sm rounded-2xl border border-zinc-800 bg-[#050505] p-6 shadow-2xl relative space-y-4 transform hover:scale-[1.02] transition-transform">
+                <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="w-3 h-3 rounded-full bg-[#FF7A1A]" />
+                    <span className="text-xs font-mono font-bold text-white uppercase">ROOS_DECK_2026.PDF</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-zinc-500">24 PAGES</span>
+                </div>
+
+                <div className="py-6 text-center space-y-2">
+                  <div className="w-16 h-16 rounded-2xl bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-[#FF7A1A] mx-auto flex items-center justify-center">
+                    <FileText className="w-8 h-8" />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-white">Roos StudioX Capabilities Briefing</h3>
+                  <p className="text-xs text-zinc-400">Official 2026 Agency Presentation & Methodology Overview</p>
+                </div>
+
+                <div className="p-3 rounded-xl bg-zinc-900/60 border border-zinc-800 text-[11px] font-mono text-zinc-400 flex items-center justify-between">
+                  <span>FORMAT: PDF / PRESENTATION</span>
+                  <span className="text-[#FF7A1A] font-bold">READY TO READ</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </motion.div>
 
         {/* WHY BUSINESSES CHOOSE ROOS STUDIOX */}
         <motion.div
