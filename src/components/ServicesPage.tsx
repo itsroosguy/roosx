@@ -9,8 +9,6 @@ import {
   Megaphone,
   TrendingUp,
   CheckCircle2,
-  ArrowLeft,
-  Sparkles,
   Bot,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
@@ -268,7 +266,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 }) => {
   return (
     <div
-      className={`min-h-screen pt-24 pb-20 transition-colors duration-500 relative overflow-hidden ${
+      className={`min-h-screen pt-28 pb-20 transition-colors duration-500 relative overflow-hidden ${
         isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
@@ -286,33 +284,13 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* BACK TO HOME NAVIGATION */}
-        <div className="mb-10 text-left">
-          <button
-            onClick={onNavigateHome}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-mono font-bold transition-all cursor-pointer ${
-              isDarkMode
-                ? 'bg-[#0C0C0C] border-zinc-800 text-zinc-300 hover:border-[#FF7A1A] hover:text-white'
-                : 'bg-white border-zinc-200 text-zinc-700 hover:border-[#FF7A1A] hover:text-zinc-900 shadow-sm'
-            }`}
-          >
-            <ArrowLeft className="w-3.5 h-3.5 text-[#FF7A1A]" />
-            <span>RETURN TO HOME</span>
-          </button>
-        </div>
-
         {/* HERO SECTION - GROWTH STARTS WITH THE RIGHT MOMENTUM */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-4xl mx-auto mb-28 space-y-6"
+          className="text-center max-w-4xl mx-auto mb-20 sm:mb-28 space-y-6"
         >
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>ROOS STUDIOX • SERVICES</span>
-          </div>
-
           <h1
             className={`font-display text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[1.05] ${
               isDarkMode ? 'text-white' : 'text-[#111111]'
@@ -329,7 +307,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
               isDarkMode ? 'text-[#B8B8B8]' : 'text-[#52525B]'
             }`}
           >
-            <p className="font-semibold text-white">
+            <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
               Most businesses don't have a product problem.
             </p>
             <p>
@@ -338,14 +316,14 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
               <strong className="text-[#FF7A1A]">conversion problem</strong>, or a{' '}
               <strong className="text-[#FF7A1A]">growth problem</strong>.
             </p>
-            <p className="text-base sm:text-lg pt-2 text-[#7D7D7D]">
+            <p className={`text-base sm:text-lg pt-2 ${isDarkMode ? 'text-[#7D7D7D]' : 'text-zinc-600'}`}>
               At Roos StudioX, we combine strategy, branding, design, technology, and marketing to build digital ecosystems that attract the right audience, create trust, and generate measurable business growth.
             </p>
           </div>
         </motion.div>
 
         {/* 8 DETAILED SERVICE SECTIONS (REALISTIC STUDIO IMAGERY) */}
-        <div className="space-y-28">
+        <div className="space-y-24 sm:space-y-32">
           {detailedServices.map((service, idx) => {
             const ServiceIcon = service.icon;
             const isLeft = service.align === 'left';
@@ -382,18 +360,23 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                       <img
                         src={service.imageUrl}
                         alt={service.title}
-                        className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700 filter brightness-90 contrast-110"
+                        className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ${
+                          isDarkMode ? 'opacity-50 filter brightness-90 contrast-110' : 'opacity-85'
+                        }`}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/70 to-transparent" />
+                      <div
+                        className={`absolute inset-0 bg-gradient-to-t ${
+                          isDarkMode
+                            ? 'from-[#050505] via-[#050505]/70 to-transparent'
+                            : 'from-white via-white/80 to-transparent'
+                        }`}
+                      />
                     </div>
 
-                    {/* Top Corner Info Badge */}
+                    {/* Top Corner Number */}
                     <div className="relative z-10 p-6 flex items-center justify-between">
                       <span className="text-4xl font-mono font-black text-[#FF7A1A]">
                         {service.num}
-                      </span>
-                      <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#050505]/80 text-[#FF7A1A] border border-[#FF7A1A]/40 uppercase backdrop-blur-md">
-                        REALISTIC VISUAL
                       </span>
                     </div>
 
@@ -402,13 +385,19 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                       <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#FF7A1A] to-[#EA580C] text-white flex items-center justify-center shadow-xl shadow-[#FF7A1A]/40 border border-[#FF944D]/50 mb-3 transform group-hover:scale-110 transition-transform">
                         <ServiceIcon className="w-8 h-8" />
                       </div>
-                      <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300 drop-shadow-md">
+                      <div className={`text-xs font-mono font-bold uppercase tracking-wider ${isDarkMode ? 'text-zinc-200' : 'text-zinc-900'} drop-shadow-md`}>
                         {service.title}
                       </div>
                     </div>
 
                     {/* Momentum Created Result Banner */}
-                    <div className="relative z-10 p-5 m-4 rounded-2xl bg-[#050505]/90 border border-[#FF7A1A]/40 text-xs font-semibold text-[#FF7A1A] backdrop-blur-md">
+                    <div
+                      className={`relative z-10 p-5 m-4 rounded-2xl border text-xs font-semibold text-[#FF7A1A] backdrop-blur-md ${
+                        isDarkMode
+                          ? 'bg-[#050505]/90 border-[#FF7A1A]/40'
+                          : 'bg-white/90 border-[#FF7A1A]/40 shadow-sm'
+                      }`}
+                    >
                       <span className="font-bold uppercase font-mono block text-[10px] text-zinc-400 mb-0.5">
                         MOMENTUM CREATED:
                       </span>
@@ -427,18 +416,22 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                     <div className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest mb-1">
                       {service.num} • {service.title}
                     </div>
-                    <h2 className={`font-display text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
+                    <h2 className={`font-display text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
                       {service.headline}
                     </h2>
                   </div>
 
-                  <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-600'}`}>
+                  <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-700'}`}>
                     {service.copy}
                   </p>
 
                   {/* Perfect For Banner (If Applicable) */}
                   {service.perfectFor && (
-                    <div className="p-4 rounded-2xl bg-[#0C0C0C] border border-zinc-800 text-xs text-zinc-300">
+                    <div className={`p-4 rounded-2xl border text-xs ${
+                      isDarkMode
+                        ? 'bg-[#0C0C0C] border-zinc-800 text-zinc-300'
+                        : 'bg-zinc-100 border-zinc-200 text-zinc-800'
+                    }`}>
                       <strong className="text-[#FF7A1A] uppercase font-mono block mb-0.5">PERFECT FOR:</strong>
                       {service.perfectFor}
                     </div>
@@ -446,7 +439,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 
                   {/* Deliverables List */}
                   <div className="space-y-3 pt-2">
-                    <div className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">
+                    <div className={`text-xs font-mono font-bold uppercase tracking-wider ${isDarkMode ? 'text-zinc-400' : 'text-zinc-600'}`}>
                       WHAT WE DELIVER:
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -461,11 +454,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 
                   {/* Every Website Includes (For Web Dev) */}
                   {service.includes && (
-                    <div className="pt-3 border-t border-zinc-800 space-y-2">
+                    <div className={`pt-3 border-t space-y-2 ${isDarkMode ? 'border-zinc-800' : 'border-zinc-200'}`}>
                       <div className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7A1A]">
                         EVERY WEBSITE INCLUDES:
                       </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium text-zinc-300">
+                      <div className={`grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-medium ${isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}`}>
                         {service.includes.map((inc, iIdx) => (
                           <div key={iIdx} className="flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A1A]" />
@@ -498,7 +491,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mt-36 py-16 px-6 sm:px-12 rounded-3xl border border-zinc-800 bg-[#0C0C0C] text-left relative overflow-hidden"
+          className={`mt-36 py-16 px-6 sm:px-12 rounded-3xl border text-left relative overflow-hidden ${
+            isDarkMode
+              ? 'bg-[#0C0C0C] border-zinc-800 text-white'
+              : 'bg-white border-zinc-200 text-zinc-900 shadow-xl'
+          }`}
         >
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C]" />
 
@@ -513,14 +510,21 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {whyUsPillars.map((pillar, pIdx) => (
-              <div key={pIdx} className="p-6 rounded-2xl bg-[#050505] border border-zinc-800 space-y-2">
+              <div
+                key={pIdx}
+                className={`p-6 rounded-2xl border space-y-2 ${
+                  isDarkMode
+                    ? 'bg-[#050505] border-zinc-800'
+                    : 'bg-zinc-50 border-zinc-200 shadow-sm'
+                }`}
+              >
                 <div className="text-[#FF7A1A] text-xs font-mono font-bold uppercase">
                   0{pIdx + 1} • PILLAR
                 </div>
-                <h3 className="font-display text-xl font-bold text-white">
+                <h3 className={`font-display text-xl font-bold ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
                   {pillar.title}
                 </h3>
-                <p className="text-sm text-[#B8B8B8] leading-relaxed">
+                <p className={`text-sm leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-600'}`}>
                   {pillar.desc}
                 </p>
               </div>
@@ -540,7 +544,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
               STEP-BY-STEP LEAP
             </span>
-            <h2 className="font-display text-4xl sm:text-6xl font-extrabold tracking-tight">
+            <h2 className={`font-display text-4xl sm:text-6xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
               The Roos Growth Framework
             </h2>
           </div>
@@ -549,7 +553,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             {growthFramework.map((fStep, fIdx) => (
               <div
                 key={fIdx}
-                className="p-5 rounded-2xl bg-[#0C0C0C] border border-zinc-800 flex flex-col justify-between space-y-3"
+                className={`p-5 rounded-2xl border flex flex-col justify-between space-y-3 ${
+                  isDarkMode
+                    ? 'bg-[#0C0C0C] border-zinc-800'
+                    : 'bg-white border-zinc-200 shadow-sm'
+                }`}
               >
                 <span className="text-2xl font-mono font-black text-[#FF7A1A]">
                   {fStep.step}
@@ -558,7 +566,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                   <div className="font-display text-lg font-bold text-[#FF7A1A] mb-1">
                     {fStep.title}
                   </div>
-                  <p className="text-xs text-[#7D7D7D] leading-relaxed">
+                  <p className={`text-xs leading-relaxed ${isDarkMode ? 'text-[#7D7D7D]' : 'text-zinc-600'}`}>
                     {fStep.desc}
                   </p>
                 </div>
@@ -576,10 +584,10 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           className="mt-36 py-20 text-center space-y-8 max-w-4xl mx-auto relative"
         >
           <div className="space-y-4">
-            <h2 className="font-display text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none text-white">
+            <h2 className={`font-display text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-none ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
               Ready To Build Momentum?
             </h2>
-            <div className="text-xl sm:text-3xl font-semibold text-[#B8B8B8] space-y-1">
+            <div className={`text-xl sm:text-3xl font-semibold space-y-1 ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-600'}`}>
               <p>You Bring The Ambition.</p>
               <p className="text-[#FF7A1A] font-bold">We'll Build The Momentum.</p>
             </div>
@@ -594,7 +602,9 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 
             <button
               onClick={onNavigateHome}
-              className="text-xs font-mono font-bold text-zinc-500 hover:text-zinc-300 uppercase tracking-widest pt-2 cursor-pointer transition-colors"
+              className={`text-xs font-mono font-bold uppercase tracking-widest pt-2 cursor-pointer transition-colors ${
+                isDarkMode ? 'text-zinc-500 hover:text-zinc-300' : 'text-zinc-600 hover:text-zinc-900'
+              }`}
             >
               ← Return to Main Homepage
             </button>
