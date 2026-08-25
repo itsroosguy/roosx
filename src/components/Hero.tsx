@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 import { KangarooMascot } from './mascot/KangarooMascot';
+import { AntiGravityElements } from './AntiGravityElements';
 
 interface HeroProps {
   onOpenInquiry: () => void;
@@ -121,14 +122,18 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
         {/* 2. MIDDLE 2-COLUMN GRID (+15% WIDER SECTION CONTAINER) */}
         <div className="w-full max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center -mt-4 sm:-mt-8 md:-mt-10 relative z-20">
           
-          {/* MASCOT IN CENTER/LEFT (5 COLS) */}
+          {/* MASCOT IN CENTER/LEFT WITH FLOATING ANTI-GRAVITY ELEMENTS (5 COLS) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-5 flex justify-center lg:justify-end items-center relative z-20"
           >
-            <KangarooMascot />
+            <div className="relative">
+              {/* Apple-Level Minimalist Anti-Gravity Floating Objects */}
+              <AntiGravityElements isDarkMode={isDarkMode} />
+              <KangarooMascot />
+            </div>
           </motion.div>
 
           {/* VERTICALLY CENTER-ALIGNED RIGHT COLUMN TEXT & BUTTON (7 COLS) */}
