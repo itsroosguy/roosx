@@ -59,8 +59,17 @@ export const Footer: React.FC<FooterProps> = ({
           : 'bg-[#FAF9F6] text-[#111111] border-zinc-200'
       }`}
     >
-      {/* Brand Orange Radial Backlight Glow */}
-      <div className="absolute top-0 left-1/3 w-[1000px] h-[450px] bg-radial from-[#FF7A1A]/16 via-[#FF7A1A]/3 to-transparent blur-[160px] pointer-events-none" />
+      {/* Top Laser Accent Beam */}
+      <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#FF7A1A]/70 to-transparent" />
+
+      {/* Architectural Background Grid Mesh */}
+      <div className="absolute inset-0 bg-[size:4rem_4rem] bg-[linear-gradient(to_right,#27272A15_1px,transparent_1px),linear-gradient(to_bottom,#27272A15_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_40%,#000_70%,transparent_100%)] pointer-events-none opacity-40" />
+
+      {/* Primary Brand Orange Radial Backlight Glow */}
+      <div className="absolute top-0 left-1/3 w-[1000px] h-[450px] bg-radial from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none" />
+
+      {/* Secondary Ambient Glow Orb */}
+      <div className="absolute bottom-0 right-10 w-96 h-96 rounded-full bg-[#FF7A1A]/10 blur-[130px] pointer-events-none" />
 
       {/* GIANT KINETIC BACKGROUND TYPOGRAPHY WATERMARK */}
       <div className="absolute bottom-16 left-0 right-0 overflow-hidden pointer-events-none select-none opacity-5 flex justify-center">
