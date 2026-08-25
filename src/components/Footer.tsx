@@ -144,7 +144,7 @@ export const Footer: React.FC<FooterProps> = ({
                 {/* GST NUMBER CAPSULE */}
                 <div className="px-3.5 py-2 rounded-xl bg-[#121215] border border-zinc-800/90 text-zinc-300 font-medium flex items-center gap-2">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#FF7A1A]" />
-                  <span>GSTIN: 29ROOSX9629F1Z5</span>
+                  <span>GSTIN: 29BZKPP8182N1Z8</span>
                 </div>
               </div>
             </div>
@@ -242,7 +242,7 @@ export const Footer: React.FC<FooterProps> = ({
         {/* 3. BOTTOM COPYRIGHT & ELEVATOR TOP BUTTON */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans text-zinc-400 font-medium">
           <div>
-            © {new Date().getFullYear()} Roos StudioX. All rights reserved. • GSTIN: 29ROOSX9629F1Z5
+            © {new Date().getFullYear()} Roos StudioX. All rights reserved. • GSTIN: 29BZKPP8182N1Z8
           </div>
 
           <button
