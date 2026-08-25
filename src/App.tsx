@@ -14,15 +14,17 @@ import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
 import { OurStoryPage } from './components/OurStoryPage';
+import { ServicePage } from './components/ServicePage';
 import { Project } from './types';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'our-story'>(() => {
+  const [currentView, setCurrentView] = useState<'home' | 'our-story' | 'services'>(() => {
     const hash = window.location.hash;
     if (hash === '#our-story' || hash === '#story') return 'our-story';
+    if (hash === '#services') return 'services';
     return 'home';
   });
 
@@ -31,6 +33,8 @@ export function App() {
       const hash = window.location.hash;
       if (hash === '#our-story' || hash === '#story') {
         setCurrentView('our-story');
+      } else if (hash === '#services') {
+        setCurrentView('services');
       } else {
         setCurrentView('home');
       }
@@ -62,6 +66,11 @@ export function App() {
           setCurrentView('our-story');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onNavigateServices={() => {
+          window.location.hash = '#services';
+          setCurrentView('services');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         onNavigateHome={() => {
           window.location.hash = '';
           setCurrentView('home');
@@ -72,6 +81,16 @@ export function App() {
       {/* Main View Switching */}
       {currentView === 'our-story' ? (
         <OurStoryPage
+          onOpenInquiry={() => setIsInquiryOpen(true)}
+          isDarkMode={isDarkMode}
+          onNavigateHome={() => {
+            window.location.hash = '';
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      ) : currentView === 'services' ? (
+        <ServicePage
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}
           onNavigateHome={() => {

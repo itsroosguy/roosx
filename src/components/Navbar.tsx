@@ -9,6 +9,7 @@ interface NavbarProps {
   isDarkMode: boolean;
   onToggleTheme: () => void;
   onNavigateStory?: () => void;
+  onNavigateServices?: () => void;
   onNavigateHome?: () => void;
 }
 
@@ -17,6 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   isDarkMode,
   onToggleTheme,
   onNavigateStory,
+  onNavigateServices,
   onNavigateHome,
 }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -32,7 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navLinks = [
     { name: 'Our Story', href: '#our-story', action: onNavigateStory, isBadge: true },
-    { name: 'Services', href: '#services', action: onNavigateHome },
+    { name: 'Services', href: '#services', action: onNavigateServices },
     { name: 'Process', href: '#process', action: onNavigateHome },
     { name: 'Works', href: '#portfolio', action: onNavigateHome },
   ];
