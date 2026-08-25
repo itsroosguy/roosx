@@ -97,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
 
       <div className="max-w-[1750px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
         
-        {/* 1. TOP CENTER: REFINED 2-LINE HEADLINE (+3PX FONT SIZE & SLIGHTLY TIGHTER LETTER SPACING) */}
+        {/* 1. TOP CENTER: REFINED 2-LINE HEADLINE (NO PERIOD & SLIGHTLY LARGER FONT SIZE) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -106,10 +106,10 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
         >
           <motion.h2
             variants={itemVariants}
-            className="font-display text-[35px] sm:text-[51px] md:text-[63px] lg:text-[75px] font-bold tracking-[-0.035em] leading-[1.06] text-center"
+            className="font-display text-[38px] sm:text-[54px] md:text-[67px] lg:text-[79px] font-bold tracking-[-0.035em] leading-[1.06] text-center"
           >
             <span className="text-white block pb-0.5">
-              You bring ambition.
+              You bring ambition
             </span>
             <span className="block pt-0.5 whitespace-nowrap">
               <span className="bg-gradient-to-r from-zinc-100 via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
