@@ -16,6 +16,12 @@ interface StepCard {
   headline: string;
   description: string;
   deliverables: string[];
+  color: string;
+  glow: string;
+  borderClass: string;
+  ringClass: string;
+  bgBadgeClass: string;
+  gradientClass: string;
 }
 
 const process5StepCards: StepCard[] = [
@@ -25,13 +31,19 @@ const process5StepCards: StepCard[] = [
     title: 'Discover',
     tagline: 'Uncover opportunities.',
     icon: Search,
-    headline: '01. Research & Strategic Audit',
+    headline: 'Research & Strategic Audit',
     description: 'We analyze your target market, buyer friction points, and competitor blind spots to locate immediate growth levers.',
     deliverables: [
       '30-minute discovery & bottleneck audit',
       'Locate immediate conversion leaks',
       'Clear, prioritized action plan for launch',
     ],
+    color: '#EF4444',
+    glow: 'rgba(239, 68, 68, 0.35)',
+    borderClass: 'border-red-500/90',
+    ringClass: 'ring-2 ring-red-500/40',
+    bgBadgeClass: 'bg-red-500/20 text-red-400 border-red-500/50',
+    gradientClass: 'from-red-500 to-rose-600',
   },
   {
     id: 'define',
@@ -39,13 +51,19 @@ const process5StepCards: StepCard[] = [
     title: 'Define',
     tagline: 'Create the blueprint.',
     icon: Target,
-    headline: '02. Positioning & Copy Strategy',
+    headline: 'Positioning & Copy Strategy',
     description: 'We craft sharp positioning headlines and value props so potential buyers grasp your unique advantage in under 3 seconds.',
     deliverables: [
       'Conversion-focused headline & body copy',
       'Distinct brand voice & market positioning',
       'Frictionless customer navigation roadmap',
     ],
+    color: '#10B981',
+    glow: 'rgba(16, 185, 129, 0.35)',
+    borderClass: 'border-emerald-500/90',
+    ringClass: 'ring-2 ring-emerald-500/40',
+    bgBadgeClass: 'bg-emerald-500/20 text-emerald-400 border-emerald-500/50',
+    gradientClass: 'from-emerald-500 to-teal-600',
   },
   {
     id: 'design',
@@ -53,13 +71,19 @@ const process5StepCards: StepCard[] = [
     title: 'Design',
     tagline: 'Craft the experience.',
     icon: Pencil,
-    headline: '03. Meticulous UI/UX Systems',
+    headline: 'Meticulous UI/UX Systems',
     description: 'Bespoke design tokens, interactive prototypes, and pixel-perfect responsive layouts built for maximum conversion momentum.',
     deliverables: [
       'Custom modern UI/UX design (No templates)',
       'Interactive Figma prototype',
       'Design token system & responsive layout',
     ],
+    color: '#3B82F6',
+    glow: 'rgba(59, 130, 246, 0.35)',
+    borderClass: 'border-blue-500/90',
+    ringClass: 'ring-2 ring-blue-500/40',
+    bgBadgeClass: 'bg-blue-500/20 text-blue-400 border-blue-500/50',
+    gradientClass: 'from-blue-500 to-indigo-600',
   },
   {
     id: 'build',
@@ -67,13 +91,19 @@ const process5StepCards: StepCard[] = [
     title: 'Build',
     tagline: 'Engineer the system.',
     icon: Code,
-    headline: '04. High-Velocity Code Sprint',
+    headline: 'High-Velocity Code Sprint',
     description: 'Bespoke React codebase engineered in parallel with Lighthouse 100/100 performance baseline and zero template bloat.',
     deliverables: [
       'High-speed code with 99+ Google score',
       'CMS integration & automated lead routing',
       'Zero-latency edge CDN deployment',
     ],
+    color: '#FF7A1A',
+    glow: 'rgba(255, 122, 26, 0.35)',
+    borderClass: 'border-[#FF7A1A]',
+    ringClass: 'ring-2 ring-[#FF7A1A]/40',
+    bgBadgeClass: 'bg-[#FF7A1A]/20 text-[#FF7A1A] border-[#FF7A1A]/50',
+    gradientClass: 'from-[#FF7A1A] to-[#EA580C]',
   },
   {
     id: 'accelerate',
@@ -81,13 +111,19 @@ const process5StepCards: StepCard[] = [
     title: 'Accelerate',
     tagline: 'Scale the momentum.',
     icon: TrendingUp,
-    headline: '05. Rollout & Growth Tuning',
+    headline: 'Rollout & Growth Tuning',
     description: 'Continuous conversion rate telemetry monitoring, live A/B split testing, and revenue tuning for compounding momentum.',
     deliverables: [
       'Zero-downtime deployment & DNS handoff',
       'Active conversion tracking & lead analytics',
       'Ongoing speed & conversion optimization',
     ],
+    color: '#A855F7',
+    glow: 'rgba(168, 85, 247, 0.35)',
+    borderClass: 'border-purple-500/90',
+    ringClass: 'ring-2 ring-purple-500/40',
+    bgBadgeClass: 'bg-purple-500/20 text-purple-400 border-purple-500/50',
+    gradientClass: 'from-purple-500 to-violet-600',
   },
 ];
 
@@ -115,13 +151,16 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         }`}
       />
 
-      {/* Dynamic Animated Spotlight following Active Card */}
+      {/* Dynamic Colored Spotlight following Active Card */}
       <motion.div
         animate={{
           x: process5StepCards.findIndex((c) => c.id === activeCardId) * 80 - 160,
         }}
         transition={{ type: 'spring', stiffness: 120, damping: 20 }}
-        className="absolute top-1/3 left-1/2 w-[800px] h-[450px] bg-radial from-[#FF7A1A]/22 via-[#FF7A1A]/5 to-transparent blur-[140px] pointer-events-none"
+        style={{
+          background: `radial-gradient(circle, ${activeStep.glow} 0%, transparent 70%)`,
+        }}
+        className="absolute top-1/3 left-1/2 w-[800px] h-[450px] blur-[140px] pointer-events-none"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
@@ -153,7 +192,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         {/* 60% LEFT | 40% RIGHT SPLIT CONTAINER */}
         <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-8 max-w-7xl mx-auto">
           
-          {/* 60% LEFT COLUMN: LEFT-ALIGNED 3D STEPPED OVERLAPPING DECK WITH MAX ANIMATION */}
+          {/* 60% LEFT COLUMN: PROPERLY ALIGNED UNIQUE COLORFUL 5-CARD STACK */}
           <div className="w-full lg:w-[60%] relative min-h-[380px] sm:min-h-[410px] flex items-center justify-start py-2 select-none overflow-x-auto sm:overflow-visible">
             <div className="relative w-full h-[350px] flex items-center justify-start">
               {process5StepCards.map((card, idx) => {
@@ -170,37 +209,38 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     onMouseEnter={() => setHoveredCardId(card.id)}
                     onMouseLeave={() => setHoveredCardId(null)}
                     animate={{
-                      x: idx * (window.innerWidth > 640 ? 92 : 62),
+                      x: idx * (window.innerWidth > 640 ? 84 : 58),
                       y: isActive ? -14 : isHovered ? -6 : Math.abs(idx) * 2,
-                      scale: isActive ? 1.06 : isHovered ? 1.02 : 0.96,
+                      scale: isActive ? 1.05 : isHovered ? 1.02 : 0.96,
                       rotate: isActive ? 0 : (idx - 2) * 1.5,
                       zIndex: isActive ? 50 : isHovered ? 45 : 30 - Math.abs(offsetFromActive),
                     }}
                     transition={{ type: 'spring', stiffness: 220, damping: 20 }}
                     whileHover={{ y: -8 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`w-48 sm:w-56 h-[320px] sm:h-[340px] rounded-3xl p-5 border text-left cursor-pointer transition-colors duration-300 shadow-2xl backdrop-blur-xl flex flex-col justify-between absolute left-0 ${
+                    style={{
+                      boxShadow: isActive ? `0 20px 50px ${card.glow}` : 'none',
+                    }}
+                    className={`w-48 sm:w-56 h-[320px] sm:h-[340px] rounded-3xl p-5 border text-left cursor-pointer transition-all duration-300 backdrop-blur-xl flex flex-col justify-between absolute left-0 ${
                       isActive
-                        ? 'bg-[#141417] text-white border-[#FF7A1A] ring-2 ring-[#FF7A1A]/40 shadow-[0_20px_50px_rgba(255,122,26,0.4)]'
+                        ? `bg-[#141417] text-white ${card.borderClass} ${card.ringClass}`
                         : isHovered
                         ? 'bg-[#101014] text-white border-zinc-700 shadow-xl'
                         : 'bg-[#0A0A0C] text-zinc-400 border-zinc-800/80 hover:text-white'
                     }`}
                   >
-                    {/* Top Step Number + Active Pulse Badge */}
+                    {/* Top Step Number + Active Colored Badge */}
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
                         <div
-                          className={`text-xl sm:text-2xl font-mono font-extrabold transition-colors ${
-                            isActive ? 'text-[#FF7A1A]' : 'text-zinc-500'
-                          }`}
+                          style={{ color: isActive ? card.color : '#71717A' }}
+                          className="text-xl sm:text-2xl font-mono font-extrabold transition-colors"
                         >
                           {card.num}
                         </div>
                         <div
-                          className={`w-6 h-0.5 rounded-full transition-all ${
-                            isActive ? 'bg-[#FF7A1A] w-8' : 'bg-zinc-700'
-                          }`}
+                          style={{ backgroundColor: isActive ? card.color : '#3F3F46' }}
+                          className="h-0.5 rounded-full transition-all w-6"
                         />
                       </div>
 
@@ -208,24 +248,25 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                         <motion.div
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
-                          className="px-2 py-0.5 rounded-full bg-[#FF7A1A]/20 border border-[#FF7A1A]/50 text-[10px] font-mono font-bold text-[#FF7A1A] flex items-center gap-1"
+                          className={`px-2 py-0.5 rounded-full border text-[10px] font-mono font-bold flex items-center gap-1 ${card.bgBadgeClass}`}
                         >
-                          <Flame className="w-3 h-3 text-[#FF7A1A] animate-bounce" />
+                          <Flame className="w-3 h-3 animate-bounce" />
                           <span>ACTIVE</span>
                         </motion.div>
                       )}
                     </div>
 
-                    {/* Icon Center */}
+                    {/* Colored Icon Center */}
                     <div className="my-auto py-2 flex justify-start">
                       <motion.div
                         animate={isActive ? { rotate: [0, -8, 8, 0], scale: [1, 1.15, 1] } : {}}
                         transition={{ duration: 0.5 }}
-                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
-                          isActive
-                            ? 'bg-[#FF7A1A]/15 border border-[#FF7A1A]/50 text-[#FF7A1A] shadow-lg shadow-[#FF7A1A]/20'
-                            : 'bg-zinc-900 border border-zinc-800 text-zinc-400'
-                        }`}
+                        style={{
+                          backgroundColor: isActive ? `${card.color}18` : '#18181B',
+                          borderColor: isActive ? `${card.color}60` : '#27272A',
+                          color: isActive ? card.color : '#A1A1AA',
+                        }}
+                        className="w-12 h-12 rounded-2xl flex items-center justify-center border transition-all shadow-md"
                       >
                         <IconComp className="w-6 h-6" />
                       </motion.div>
@@ -248,14 +289,14 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     {/* Bottom Micro Indicator Dot Bar */}
                     <div className="pt-2 flex items-center gap-1.5">
                       <div
+                        style={{ backgroundColor: isActive ? card.color : '#3F3F46' }}
                         className={`h-0.5 rounded-full transition-all ${
-                          isActive ? 'w-4 bg-[#FF7A1A]' : 'w-2 bg-zinc-700'
+                          isActive ? 'w-4' : 'w-2'
                         }`}
                       />
                       <div
-                        className={`w-1 h-1 rounded-full ${
-                          isActive ? 'bg-[#FF7A1A]' : 'bg-zinc-700'
-                        }`}
+                        style={{ backgroundColor: isActive ? card.color : '#3F3F46' }}
+                        className="w-1 h-1 rounded-full"
                       />
                       <div className="w-1 h-1 rounded-full bg-zinc-700" />
                     </div>
@@ -265,7 +306,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
             </div>
           </div>
 
-          {/* 40% RIGHT COLUMN: NO CONTAINER BOX (CLEAN HIGH-ANIMATION DIRECT PRESENTATION) */}
+          {/* 40% RIGHT COLUMN: CLEAN HEADLINE & DELIVERABLES (NO REPEATED DUP TAGS) */}
           <div className="w-full lg:w-[40%] flex flex-col justify-center text-left">
             <AnimatePresence mode="wait">
               <motion.div
@@ -273,34 +314,27 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 initial={{ opacity: 0, x: 30, filter: 'blur(8px)' }}
                 animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
                 exit={{ opacity: 0, x: -30, filter: 'blur(8px)' }}
-                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 className="space-y-6 py-2"
               >
-                {/* Header Badge & Title */}
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <span className="text-4xl font-mono font-black text-[#FF7A1A]">
-                      {activeStep.num}
-                    </span>
-                    <div>
-                      <span className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-widest block">
-                        PHASE {activeStep.num} • {activeStep.title.toUpperCase()}
-                      </span>
-                      <h3 className="font-display text-2xl sm:text-3xl font-black text-white leading-tight">
-                        {activeStep.headline}
-                      </h3>
-                    </div>
-                  </div>
+                {/* Clean Stage Headline */}
+                <div className="space-y-2">
+                  <h3 className="font-display text-2xl sm:text-3xl font-black text-white leading-tight">
+                    {activeStep.headline}
+                  </h3>
 
                   <p className="text-sm sm:text-base text-zinc-300 leading-relaxed pt-1">
                     {activeStep.description}
                   </p>
                 </div>
 
-                {/* Staggered Deliverables Checklist (No Box, Clean List) */}
-                <div className="space-y-3 pt-2">
-                  <div className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-wider flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-[#FF7A1A] animate-pulse" />
+                {/* Staggered Deliverables Checklist with Active Color Accent */}
+                <div className="space-y-3 pt-1">
+                  <div
+                    style={{ color: activeStep.color }}
+                    className="text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2"
+                  >
+                    <Sparkles className="w-4 h-4 animate-pulse" />
                     <span>STAGE DELIVERABLES & OUTCOMES</span>
                   </div>
 
@@ -320,20 +354,26 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                           hidden: { opacity: 0, x: 20 },
                           visible: { opacity: 1, x: 0 },
                         }}
-                        className="p-3.5 rounded-2xl bg-[#0B0B0E]/80 border border-zinc-800/90 text-xs sm:text-sm font-semibold text-zinc-200 flex items-center gap-3 shadow-md hover:border-[#FF7A1A]/40 transition-colors"
+                        className="p-3.5 rounded-2xl bg-[#0B0B0E]/80 border border-zinc-800/90 text-xs sm:text-sm font-semibold text-zinc-200 flex items-center gap-3 shadow-md hover:border-zinc-700 transition-colors"
                       >
-                        <CheckCircle2 className="w-4.5 h-4.5 text-[#FF7A1A] shrink-0" />
+                        <CheckCircle2
+                          style={{ color: activeStep.color }}
+                          className="w-4.5 h-4.5 shrink-0"
+                        />
                         <span>{item}</span>
                       </motion.div>
                     ))}
                   </motion.div>
                 </div>
 
-                {/* Action CTA Button */}
+                {/* Action CTA Button with Active Gradient Color */}
                 <div className="pt-2">
                   <button
                     onClick={onOpenInquiry}
-                    className="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-[#FF7A1A] to-[#EA580C] text-white text-xs font-mono font-bold flex items-center justify-center gap-2.5 hover:shadow-[0_10px_30px_rgba(255,122,26,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-lg"
+                    style={{
+                      boxShadow: `0 10px 30px ${activeStep.glow}`,
+                    }}
+                    className={`w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r ${activeStep.gradientClass} text-white text-xs font-mono font-bold flex items-center justify-center gap-2.5 hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-lg`}
                   >
                     <span>Book Phase {activeStep.num} Audit</span>
                     <ArrowRight className="w-4 h-4" />
@@ -357,7 +397,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#121215]/90 border border-[#FF7A1A]/40 text-xs sm:text-sm font-mono font-bold text-zinc-200 backdrop-blur-xl shadow-xl shadow-[#FF7A1A]/10 group hover:border-[#FF7A1A] transition-all">
             <Sparkles className="w-4 h-4 text-[#FF7A1A] animate-pulse shrink-0" />
             <span className="tracking-wide">
-              Click any left-stacked card to reveal its animated deliverables on the right.
+              Click any left-stacked card to inspect its unique colorful deliverables on the right.
             </span>
           </div>
         </motion.div>
