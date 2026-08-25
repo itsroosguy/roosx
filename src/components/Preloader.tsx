@@ -5,13 +5,7 @@ interface PreloaderProps {
   onComplete?: () => void;
 }
 
-const statusMessages = [
-  { threshold: 0, text: 'INITIALIZING CORE' },
-  { threshold: 25, text: 'DRAWING BRAND MARKS' },
-  { threshold: 55, text: 'SYNCHRONIZING EXPERIENCES' },
-  { threshold: 85, text: 'FINALIZING STUDIO ENGINE' },
-  { threshold: 100, text: 'STUDIO READY' },
-];
+
 
 export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const [progress, setProgress] = useState<number>(0);
@@ -40,10 +34,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     return () => clearInterval(timer);
   }, [onComplete]);
 
-  // Active status text
-  const currentStatus =
-    [...statusMessages].reverse().find((s) => progress >= s.threshold)?.text ||
-    'INITIALIZING CORE';
+
 
   // SVG Circular Gauge calculations (radius = 90)
   const radius = 90;
@@ -158,15 +149,10 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
               </div>
             </div>
 
-            {/* Telemetry Counter & Status Bar */}
-            <div className="mt-6 flex flex-col items-center gap-2 text-center">
+            {/* Telemetry Counter */}
+            <div className="mt-6 flex flex-col items-center text-center">
               <div className="font-display text-4xl sm:text-5xl font-black tracking-tighter bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FDBA74] bg-clip-text text-transparent">
                 {progress}%
-              </div>
-
-              <div className="flex items-center gap-2 text-xs font-mono font-bold uppercase tracking-widest text-zinc-400">
-                <span className="w-2 h-2 rounded-full bg-[#F97316] animate-ping" />
-                <span className="text-[#F97316]">{currentStatus}</span>
               </div>
             </div>
           </div>
