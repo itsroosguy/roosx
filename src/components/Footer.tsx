@@ -107,11 +107,11 @@ export const Footer: React.FC<FooterProps> = ({
             <div className="space-y-2 pt-2">
               <div className="flex items-center gap-3 text-xs font-mono">
                 <button
-                  onClick={() => copyToClipboard('praveen@roosstudio.com', 'email')}
+                  onClick={() => copyToClipboard('praveen@roosstudiox.com', 'email')}
                   className="px-3.5 py-2 rounded-xl bg-[#121215] border border-zinc-800 text-zinc-200 hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer"
                 >
                   <Mail className="w-3.5 h-3.5 text-[#FF7A1A]" />
-                  <span>praveen@roosstudio.com</span>
+                  <span>praveen@roosstudiox.com</span>
                   {copiedText === 'email' ? (
                     <Check className="w-3.5 h-3.5 text-emerald-400" />
                   ) : (
@@ -120,11 +120,11 @@ export const Footer: React.FC<FooterProps> = ({
                 </button>
 
                 <button
-                  onClick={() => copyToClipboard('+910829026600', 'phone')}
+                  onClick={() => copyToClipboard('+919629026600', 'phone')}
                   className="px-3.5 py-2 rounded-xl bg-[#121215] border border-zinc-800 text-zinc-200 hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer"
                 >
                   <Phone className="w-3.5 h-3.5 text-[#FF7A1A]" />
-                  <span>+91 08290 26600</span>
+                  <span>+91 96290 26600</span>
                   {copiedText === 'phone' ? (
                     <Check className="w-3.5 h-3.5 text-emerald-400" />
                   ) : (
