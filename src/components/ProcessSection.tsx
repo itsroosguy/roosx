@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Target, Pencil, Code, TrendingUp, CheckCircle2, ArrowRight, Sparkles, Flame } from 'lucide-react';
+import { Search, Target, Pencil, Code, TrendingUp, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
 
 interface ProcessSectionProps {
   onOpenInquiry?: () => void;
@@ -192,7 +192,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     : 'opacity-80 hover:opacity-100 hover:border-zinc-700'
                 }`}
               >
-                {/* Top Number & Active Badge */}
+                {/* Top Number */}
                 <div className="flex items-center justify-between z-10 relative">
                   <div className="space-y-1">
                     <span
@@ -208,22 +208,6 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                       }`}
                     />
                   </div>
-
-                  {isActive && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      style={{
-                        backgroundColor: `${card.color}20`,
-                        borderColor: `${card.color}50`,
-                        color: card.color,
-                      }}
-                      className="px-3 py-1 rounded-full border text-[10px] font-mono font-bold flex items-center gap-1.5 shadow-md"
-                    >
-                      <Flame className="w-3.5 h-3.5 animate-bounce" />
-                      <span className="tracking-wider uppercase">ACTIVE STAGE</span>
-                    </motion.div>
-                  )}
                 </div>
 
                 {/* Center Content: Icon + Title + Description + Deliverables */}
