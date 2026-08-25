@@ -14,15 +14,17 @@ import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
 import { PhilosophyPage } from './components/PhilosophyPage';
+import { OurStoryPage } from './components/OurStoryPage';
 import { Project } from './types';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'philosophy'>(() => {
+  const [currentView, setCurrentView] = useState<'home' | 'philosophy' | 'our-story'>(() => {
     const hash = window.location.hash;
     if (hash === '#philosophy') return 'philosophy';
+    if (hash === '#our-story' || hash === '#story') return 'our-story';
     return 'home';
   });
 
@@ -31,6 +33,8 @@ export function App() {
       const hash = window.location.hash;
       if (hash === '#philosophy') {
         setCurrentView('philosophy');
+      } else if (hash === '#our-story' || hash === '#story') {
+        setCurrentView('our-story');
       } else {
         setCurrentView('home');
       }
@@ -62,6 +66,11 @@ export function App() {
           setCurrentView('philosophy');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onNavigateStory={() => {
+          window.location.hash = '#our-story';
+          setCurrentView('our-story');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         onNavigateHome={() => {
           window.location.hash = '';
           setCurrentView('home');
@@ -70,7 +79,17 @@ export function App() {
       />
 
       {/* Main View Switching */}
-      {currentView === 'philosophy' ? (
+      {currentView === 'our-story' ? (
+        <OurStoryPage
+          onOpenInquiry={() => setIsInquiryOpen(true)}
+          isDarkMode={isDarkMode}
+          onNavigateHome={() => {
+            window.location.hash = '';
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      ) : currentView === 'philosophy' ? (
         <PhilosophyPage
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}

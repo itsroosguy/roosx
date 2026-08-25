@@ -9,6 +9,7 @@ interface NavbarProps {
   isDarkMode: boolean;
   onToggleTheme: () => void;
   onNavigatePhilosophy?: () => void;
+  onNavigateStory?: () => void;
   onNavigateHome?: () => void;
 }
 
@@ -17,6 +18,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   isDarkMode,
   onToggleTheme,
   onNavigatePhilosophy,
+  onNavigateStory,
   onNavigateHome,
 }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -31,6 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
+    { name: 'Our Story', href: '#our-story', action: onNavigateStory, isBadge: true },
     { name: 'Services', href: '#services', action: onNavigateHome },
     { name: 'Philosophy', href: '#philosophy', action: onNavigatePhilosophy },
     { name: 'Process', href: '#process', action: onNavigateHome },
@@ -75,9 +78,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }
                 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                  isDarkMode
-                    ? 'text-[#D4D4D8] hover:text-white hover:bg-[#18181B]'
-                    : 'text-[#52525B] hover:text-[#111111] hover:bg-[#F4F4F5]'
+                  link.isBadge
+                    ? 'bg-[#FF6B00]/15 text-[#FF6B00] border border-[#FF6B00]/40 font-bold hover:bg-[#FF6B00]/25'
+                    : isDarkMode
+                      ? 'text-[#D4D4D8] hover:text-white hover:bg-[#18181B]'
+                      : 'text-[#52525B] hover:text-[#111111] hover:bg-[#F4F4F5]'
                 }`}
               >
                 {link.name}
@@ -156,9 +161,11 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }
                   }}
                   className={`block px-3 py-2 rounded-lg text-sm font-medium ${
-                    isDarkMode
-                      ? 'text-[#D4D4D8] hover:text-white hover:bg-[#18181B]'
-                      : 'text-[#52525B] hover:text-[#111111] hover:bg-[#F4F4F5]'
+                    link.isBadge
+                      ? 'bg-[#FF6B00]/20 text-[#FF6B00] font-bold'
+                      : isDarkMode
+                        ? 'text-[#D4D4D8] hover:text-white hover:bg-[#18181B]'
+                        : 'text-[#52525B] hover:text-[#111111] hover:bg-[#F4F4F5]'
                   }`}
                 >
                   {link.name}
