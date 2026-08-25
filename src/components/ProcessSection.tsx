@@ -19,8 +19,6 @@ interface StepCard {
   color: string;
   glowColor: string;
   borderColor: string;
-  bgCardGradient: string;
-  bgActiveCardGradient: string;
 }
 
 const process5StepCards: StepCard[] = [
@@ -37,11 +35,9 @@ const process5StepCards: StepCard[] = [
       'Conversion friction roadmap',
       'Prioritized growth action plan',
     ],
-    color: '#EF4444', // Red
-    glowColor: 'rgba(239, 68, 68, 0.4)',
-    borderColor: 'border-red-500/60',
-    bgCardGradient: 'bg-gradient-to-b from-[#2A0B0B] via-[#1A0606] to-[#0A0202]',
-    bgActiveCardGradient: 'bg-gradient-to-b from-[#421010] via-[#280909] to-[#120404]',
+    color: '#EF4444', // Red Accent
+    glowColor: 'rgba(239, 68, 68, 0.35)',
+    borderColor: 'border-red-500/70',
   },
   {
     id: 'define',
@@ -56,11 +52,9 @@ const process5StepCards: StepCard[] = [
       'Distinct brand voice guidelines',
       'Frictionless user flow roadmap',
     ],
-    color: '#22C55E', // Green
-    glowColor: 'rgba(34, 197, 94, 0.4)',
-    borderColor: 'border-emerald-500/60',
-    bgCardGradient: 'bg-gradient-to-b from-[#0A2914] via-[#06180C] to-[#020A05]',
-    bgActiveCardGradient: 'bg-gradient-to-b from-[#0F4220] via-[#0A2A14] to-[#041108]',
+    color: '#22C55E', // Green Accent
+    glowColor: 'rgba(34, 197, 94, 0.35)',
+    borderColor: 'border-emerald-500/70',
   },
   {
     id: 'design',
@@ -75,11 +69,9 @@ const process5StepCards: StepCard[] = [
       'Interactive Figma prototype',
       'Scalable design token system',
     ],
-    color: '#A855F7', // Purple
-    glowColor: 'rgba(168, 85, 247, 0.4)',
-    borderColor: 'border-purple-500/60',
-    bgCardGradient: 'bg-gradient-to-b from-[#240A34] via-[#160620] to-[#0A020E]',
-    bgActiveCardGradient: 'bg-gradient-to-b from-[#3B0F55] via-[#240934] to-[#110419]',
+    color: '#A855F7', // Purple Accent
+    glowColor: 'rgba(168, 85, 247, 0.35)',
+    borderColor: 'border-purple-500/70',
   },
   {
     id: 'build',
@@ -94,11 +86,9 @@ const process5StepCards: StepCard[] = [
       'Automated CRM webhook integration',
       'Zero-latency edge CDN deploy',
     ],
-    color: '#3B82F6', // Blue
-    glowColor: 'rgba(59, 130, 246, 0.4)',
-    borderColor: 'border-blue-500/60',
-    bgCardGradient: 'bg-gradient-to-b from-[#091B33] via-[#05101F] to-[#02070E]',
-    bgActiveCardGradient: 'bg-gradient-to-b from-[#0E2D54] via-[#081C35] to-[#040E1B]',
+    color: '#3B82F6', // Blue Accent
+    glowColor: 'rgba(59, 130, 246, 0.35)',
+    borderColor: 'border-blue-500/70',
   },
   {
     id: 'accelerate',
@@ -113,11 +103,9 @@ const process5StepCards: StepCard[] = [
       'Lead telemetry analytics suite',
       'Continuous conversion optimization',
     ],
-    color: '#F59E0B', // Amber
-    glowColor: 'rgba(245, 158, 11, 0.4)',
-    borderColor: 'border-amber-500/60',
-    bgCardGradient: 'bg-gradient-to-b from-[#311C09] via-[#1E1105] to-[#0D0702]',
-    bgActiveCardGradient: 'bg-gradient-to-b from-[#4A2B0D] via-[#2F1B08] to-[#150C03]',
+    color: '#F59E0B', // Amber Accent
+    glowColor: 'rgba(245, 158, 11, 0.35)',
+    borderColor: 'border-amber-500/70',
   },
 ];
 
@@ -144,12 +132,12 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         }`}
       />
 
-      {/* Dynamic Colored Spotlight behind Active Card */}
+      {/* Subtle Ambient Spotlight behind Active Card */}
       <div
         style={{
           background: `radial-gradient(circle, ${activeStep.glowColor} 0%, transparent 70%)`,
         }}
-        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] blur-[150px] pointer-events-none transition-all duration-700"
+        className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] blur-[160px] pointer-events-none transition-all duration-700 opacity-60"
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
@@ -178,7 +166,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* HIGH-CRAFT EXPANDING HORIZONTAL ACCORDION DECK */}
+        {/* SLEEK OBSIDIAN BLACK EXPANDING ACCORDION DECK */}
         <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 max-w-7xl mx-auto min-h-[460px] sm:min-h-[490px] select-none">
           {process5StepCards.map((card) => {
             const isActive = card.id === activeCardId;
@@ -194,17 +182,17 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 }}
                 transition={{ type: 'spring', stiffness: 200, damping: 22 }}
                 style={{
-                  boxShadow: isActive ? `0 20px 50px ${card.glowColor}` : 'none',
+                  boxShadow: isActive ? `0 20px 50px ${card.glowColor}` : '0 4px 20px rgba(0,0,0,0.6)',
                 }}
-                className={`rounded-3xl p-6 border cursor-pointer relative overflow-hidden backdrop-blur-2xl transition-all duration-500 flex flex-col justify-between text-left ${
-                  isActive ? card.bgActiveCardGradient : card.bgCardGradient
+                className={`rounded-3xl p-6 border cursor-pointer relative overflow-hidden backdrop-blur-2xl transition-colors duration-500 flex flex-col justify-between text-left ${
+                  isActive ? 'bg-[#121215] text-white' : 'bg-[#0A0A0C] text-zinc-400'
                 } ${card.borderColor} ${
                   isActive
-                    ? 'ring-2 ring-white/40 opacity-100'
-                    : 'opacity-75 hover:opacity-100 hover:border-zinc-700'
+                    ? 'ring-2 ring-white/30 opacity-100'
+                    : 'opacity-80 hover:opacity-100 hover:border-zinc-700'
                 }`}
               >
-                {/* Top Number & Active Flame Badge */}
+                {/* Top Number & Active Badge */}
                 <div className="flex items-center justify-between z-10 relative">
                   <div className="space-y-1">
                     <span
@@ -226,8 +214,8 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       style={{
-                        backgroundColor: `${card.color}25`,
-                        borderColor: `${card.color}60`,
+                        backgroundColor: `${card.color}20`,
+                        borderColor: `${card.color}50`,
                         color: card.color,
                       }}
                       className="px-3 py-1 rounded-full border text-[10px] font-mono font-bold flex items-center gap-1.5 shadow-md"
@@ -238,16 +226,16 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   )}
                 </div>
 
-                {/* Center Content: Icon + Title + Description + Deliverables (Expanded state vs Compact) */}
+                {/* Center Content: Icon + Title + Description + Deliverables */}
                 <div className="py-4 space-y-4 z-10 relative">
                   {/* Circular Icon Container */}
                   <div
                     style={{
                       borderColor: `${card.color}80`,
-                      backgroundColor: `${card.color}25`,
+                      backgroundColor: `${card.color}15`,
                       color: card.color,
                     }}
-                    className="w-14 h-14 rounded-full border-2 flex items-center justify-center shadow-lg transition-transform duration-300 group-hover:scale-110"
+                    className="w-14 h-14 rounded-full border-2 flex items-center justify-center shadow-lg transition-transform duration-300"
                   >
                     <IconComp className="w-7 h-7" />
                   </div>
@@ -270,9 +258,9 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.35 }}
-                        className="space-y-4 pt-3 border-t border-white/10"
+                        className="space-y-4 pt-3 border-t border-zinc-800"
                       >
-                        <p className="text-xs text-zinc-200 leading-relaxed">
+                        <p className="text-xs text-zinc-300 leading-relaxed">
                           {card.description}
                         </p>
 
