@@ -351,12 +351,8 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                       />
                     </div>
 
-                    {/* Top Corner Number Badge */}
-                    <div className="relative z-10 p-6 flex items-center justify-between">
-                      <span className="text-3xl sm:text-4xl font-mono font-black text-[#FF7A1A] px-3.5 py-1 rounded-2xl bg-[#050505]/70 border border-[#FF7A1A]/30 backdrop-blur-md shadow-lg">
-                        {service.num}
-                      </span>
-                    </div>
+                    {/* Spacer for bottom banner positioning */}
+                    <div className="relative z-10 p-4" />
 
                     {/* Momentum Created Result Banner */}
                     <div
