@@ -106,7 +106,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
         {/* ========================================================================= */}
-        {/* HEADER SECTION WITH TINY ELEGANT KANGAROO AVATAR */}
+        {/* HEADER SECTION WITH FLOATING SLIGHTLY BIGGER KANGAROO MASCOT */}
         {/* ========================================================================= */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -114,17 +114,11 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
           transition={{ duration: 0.8 }}
           className="text-center max-w-4xl mx-auto space-y-4 relative"
         >
-          {/* TINY ELEGANT KANGAROO AVATAR BADGE */}
+          {/* FLOATING KANGAROO MASCOT (NO BACKGROUND BOX) */}
           <div className="flex justify-center mb-2">
-            <div className="w-16 h-16 rounded-2xl bg-[#121215] border border-[#FF6B00]/40 p-2 flex items-center justify-center shadow-lg shadow-[#FF6B00]/20">
+            <div className="w-24 h-24 flex items-center justify-center filter drop-shadow-[0_10px_25px_rgba(255,107,0,0.3)]">
               <KangarooMascot />
             </div>
-          </div>
-
-          {/* EYEBROW BADGE */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121215] border border-[#FF6B00]/40 text-xs font-mono font-bold text-[#FF6B00] shadow-lg shadow-[#FF6B00]/10 tracking-widest uppercase">
-            <Sparkles className="w-3.5 h-3.5 text-[#FF6B00] animate-pulse" />
-            <span>THE 6 VALUES THAT SHAPE OUR WORK</span>
           </div>
 
           {/* MAIN TITLE */}
