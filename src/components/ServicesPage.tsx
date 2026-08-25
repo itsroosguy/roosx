@@ -14,6 +14,7 @@ import {
   BarChart3,
   Smartphone,
   Code,
+  Zap,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -515,38 +516,54 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* HERO SECTION - GROWTH STARTS WITH THE RIGHT MOMENTUM */}
+        {/* HERO SECTION - REVAMPED HIGH-ENGAGING MOMENTUM ENGINE */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center max-w-4xl mx-auto mb-20 sm:mb-28 space-y-6"
+          className="text-center max-w-4xl mx-auto mb-16 sm:mb-24 space-y-6"
         >
+          {/* Eyebrow Pill */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+            <Zap className="w-3.5 h-3.5" />
+            <span>EXECUTIVE CAPABILITIES BRIEFING</span>
+          </div>
+
+          {/* Guaranteed 2-Line Headline */}
           <h1
-            className={`font-display text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.08] ${
+            className={`font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.1] ${
               isDarkMode ? 'text-white' : 'text-[#111111]'
             }`}
           >
             <span className="block">Growth Starts With</span>
-            <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2">
-              The Right Momentum.
+            <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-1">
+              The Right Momentum
             </span>
           </h1>
 
-          <div
-            className={`text-lg sm:text-2xl font-medium leading-relaxed max-w-3xl mx-auto space-y-3 ${
+          {/* Shortened Punchy Subheadline */}
+          <p
+            className={`text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto ${
               isDarkMode ? 'text-[#B8B8B8]' : 'text-[#52525B]'
             }`}
           >
-            <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
-              Most businesses don't have a product problem.
-            </p>
-            <p className={`font-semibold ${isDarkMode ? 'text-zinc-200' : 'text-zinc-800'}`}>
-              They have a positioning problem, a visibility problem, a conversion problem, or a growth problem.
-            </p>
-            <p className={`text-base sm:text-lg pt-2 ${isDarkMode ? 'text-[#7D7D7D]' : 'text-zinc-600'}`}>
-              At Roos StudioX, we combine strategy, branding, design, technology, and marketing to build digital ecosystems that attract the right audience, create trust, and generate measurable business growth.
-            </p>
+            Most businesses don't have a product problem—they have a growth bottleneck. We combine strategy, engineering, and marketing to build ecosystems that scale.
+          </p>
+
+          {/* High-Engaging Interactive Bottleneck Eliminator Badges */}
+          <div className="pt-2 flex items-center justify-center gap-2.5 sm:gap-4 flex-wrap">
+            <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
+              <span>Positioning Friction</span>
+            </div>
+            <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
+              <span>Visibility Leaks</span>
+            </div>
+            <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
+              <span>Conversion Bottlenecks</span>
+            </div>
           </div>
         </motion.div>
 
