@@ -14,7 +14,8 @@ export const KangarooMascot: React.FC<KangarooMascotProps> = ({ className = '' }
   useEffect(() => {
     const HEAD_LERP = 0.06;
     const EYES_LERP = 0.12;
-    const MAX_EYE_RADIUS = 6.0;
+    const MAX_EYE_RADIUS_X = 3.2;
+    const MAX_EYE_RADIUS_Y = 2.4;
 
     let animFrameId: number;
     let pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
@@ -64,11 +65,12 @@ export const KangarooMascot: React.FC<KangarooMascotProps> = ({ className = '' }
       if (dist === 0) return { x: 0, y: 0 };
 
       const angle = Math.atan2(dy, dx);
-      const clampedDist = Math.min(dist * 0.05, MAX_EYE_RADIUS);
+      const clampedX = Math.cos(angle) * Math.min(dist * 0.025, MAX_EYE_RADIUS_X);
+      const clampedY = Math.sin(angle) * Math.min(dist * 0.025, MAX_EYE_RADIUS_Y);
 
       return {
-        x: Math.cos(angle) * clampedDist,
-        y: Math.sin(angle) * clampedDist,
+        x: clampedX,
+        y: clampedY,
       };
     };
 
