@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ArrowRight, Flame, Shield, Compass, Cpu, Zap, Activity } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { Shield, Sparkles, Flame, Scale, Users, Target, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { KangarooMascot } from './mascot/KangarooMascot';
 
@@ -14,18 +14,9 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   onOpenInquiry,
   onNavigateHome,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [activePillar, setActivePillar] = useState<number>(1);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Scroll Progress across the master documentary timeline
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ['start start', 'end end'],
-  });
-
-  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 20 });
-
-  // Mouse Tracking Effect
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
@@ -36,334 +27,282 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
 
   const triggerLeapConfetti = () => {
     confetti({
-      particleCount: 120,
-      spread: 90,
+      particleCount: 100,
+      spread: 80,
       origin: { y: 0.7 },
       colors: ['#FF6B00', '#FF8F3A', '#FFFFFF', '#EA580C'],
     });
   };
 
-  // Chapter 1: Eye Glow & Reveal (0 - 0.12)
-  const eyeOpacity = useTransform(smoothProgress, [0, 0.04, 0.12], [0.3, 1, 0.1]);
-  const chapter1TextOpacity = useTransform(smoothProgress, [0.03, 0.07, 0.12], [0, 1, 0]);
-  const chapter1TextY = useTransform(smoothProgress, [0.03, 0.07, 0.12], [40, 0, -40]);
-
-  // Chapter 2: Foundations & Cracking Ground (0.12 - 0.26)
-  const foundationsOpacity = useTransform(smoothProgress, [0.12, 0.17, 0.26], [0, 1, 0]);
-  const pillar1Glow = useTransform(smoothProgress, [0.15, 0.19], [0, 1]);
-  const pillar2Glow = useTransform(smoothProgress, [0.17, 0.21], [0, 1]);
-  const pillar3Glow = useTransform(smoothProgress, [0.19, 0.23], [0, 1]);
-  const pillar4Glow = useTransform(smoothProgress, [0.21, 0.25], [0, 1]);
-
-  // Chapter 3: Joey Journey Growth (0.26 - 0.40)
-  const joeyOpacity = useTransform(smoothProgress, [0.26, 0.30, 0.40], [0, 1, 0]);
-  const joeyScale = useTransform(smoothProgress, [0.27, 0.38], [0.4, 1.2]);
-
-  // Chapter 4: The 30FT Horizontal Leap (0.40 - 0.55)
-  const leapOpacity = useTransform(smoothProgress, [0.40, 0.44, 0.55], [0, 1, 0]);
-  const leapTranslateX = useTransform(smoothProgress, [0.42, 0.53], ['0%', '-70%']);
-  const kangarooJumpY = useTransform(smoothProgress, [0.44, 0.48, 0.52], [0, -180, 0]);
-
-  // Chapter 5: Balance System & Tail Path (0.55 - 0.68)
-  const balanceOpacity = useTransform(smoothProgress, [0.55, 0.59, 0.68], [0, 1, 0]);
-
-  // Chapter 6: The Mob Horizon (0.68 - 0.80)
-  const mobOpacity = useTransform(smoothProgress, [0.68, 0.72, 0.80], [0, 1, 0]);
-
-  // Chapter 7: Future Orbit Vision (0.80 - 0.90)
-  const futureOpacity = useTransform(smoothProgress, [0.80, 0.84, 0.90], [0, 1, 0]);
-  const orbitRotation = useTransform(smoothProgress, [0.80, 0.90], [0, 360]);
-
-  // Chapter 8: The Roos Manifesto (0.90 - 0.96)
-  const manifestoOpacity = useTransform(smoothProgress, [0.90, 0.92, 0.96], [0, 1, 0]);
-  const manifestoIndex = useTransform(smoothProgress, [0.90, 0.912, 0.924, 0.936, 0.95], [0, 1, 2, 3, 4]);
-
-  // Chapter 9: Final Leap CTA (0.96 - 1.0)
-  const finalCtaOpacity = useTransform(smoothProgress, [0.96, 0.98, 1.0], [0, 1, 1]);
+  const pillars = [
+    {
+      num: '01',
+      title: 'Strong Legs. Stronger Foundation.',
+      description: "A kangaroo's powerful legs make every leap possible. We build the strong basement for your business — strategy, branding, systems and structure that support long-term growth.",
+      tag: 'BASEMENT & STRUCTURE',
+      icon: Shield,
+      align: 'left',
+    },
+    {
+      num: '02',
+      title: 'Nurturing Every Joey (Startup).',
+      description: 'Every business begins as a small idea with big potential. We nurture that potential with care, guidance and expertise — shaping, building and polishing until you\'re ready to take on the world.',
+      tag: 'STARTUP NURTURING',
+      icon: Sparkles,
+      align: 'left',
+    },
+    {
+      num: '03',
+      title: 'Built to Leap 30 Feet.',
+      description: 'A kangaroo can leap up to 30 feet in one bound — that\'s 4x to 8x more progress in a single move. We create strategies and systems that deliver the kind of growth that multiplies your brand\'s impact.',
+      tag: 'MULTIPLIED GROWTH',
+      icon: Flame,
+      align: 'center',
+    },
+    {
+      num: '04',
+      title: 'Balance That Drives Growth.',
+      description: 'The tail keeps a kangaroo balanced and in control. We bring balance to your brand — aligning creativity, technology and marketing so every move is stable, smart and sustainable.',
+      tag: 'STABLE & SUSTAINABLE',
+      icon: Scale,
+      align: 'right',
+    },
+    {
+      num: '05',
+      title: 'Stronger Together.',
+      description: 'Kangaroos move in mobs, looking out for each other. We work as an extension of your team — collaborating, challenging and supporting you at every stage of your growth journey.',
+      tag: 'TEAM MOB COLLABORATION',
+      icon: Users,
+      align: 'right',
+    },
+    {
+      num: '06',
+      title: 'Always Looking Ahead.',
+      description: 'Kangaroos are always alert and aware of what\'s ahead. We stay ahead of trends, technology and market shifts — so your brand is always future-ready.',
+      tag: 'FUTURE READY',
+      icon: Target,
+      align: 'right',
+    },
+  ];
 
   return (
-    <div
-      ref={containerRef}
-      className="bg-[#050505] text-white relative min-h-[900vh] font-sans selection:bg-[#FF6B00] selection:text-white"
-    >
-      {/* 1. CURSOR-FOLLOWING DUST PARALLAX SPOTLIGHT */}
+    <div className="bg-[#050505] text-white min-h-screen relative overflow-hidden font-sans selection:bg-[#FF6B00] selection:text-white pt-28 pb-24">
+      
+      {/* 1. CURSOR-FOLLOWING AMBIENT GLOW SPOTLIGHT */}
       <div
         style={{
           left: `${mousePos.x}px`,
           top: `${mousePos.y}px`,
         }}
-        className="fixed w-[700px] h-[700px] rounded-full bg-radial from-[#FF6B00]/14 via-[#FF6B00]/3 to-transparent blur-[160px] pointer-events-none -translate-x-1/2 -translate-y-1/2 z-10 transition-opacity duration-500"
+        className="fixed w-[750px] h-[750px] rounded-full bg-radial from-[#FF6B00]/14 via-[#FF6B00]/3 to-transparent blur-[160px] pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0 transition-opacity duration-500"
       />
 
-      {/* 2. ATMOSPHERIC PARTICLES MESH */}
-      <div className="fixed inset-0 bg-[size:5rem_5rem] bg-[linear-gradient(to_right,#FF6B0008_1px,transparent_1px),linear-gradient(to_bottom,#FF6B0008_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_50%,#000_80%,transparent_100%)] pointer-events-none z-0" />
+      {/* 2. BACKGROUND ARCHITECTURAL MESH */}
+      <div className="fixed inset-0 bg-[size:4rem_4rem] bg-[linear-gradient(to_right,#FF6B0008_1px,transparent_1px),linear-gradient(to_bottom,#FF6B0008_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_40%,#000_80%,transparent_100%)] pointer-events-none z-0" />
 
-      {/* FIXED CAMERA VIEWPORT LAYER */}
-      <div className="fixed inset-0 w-full h-screen overflow-hidden flex items-center justify-center pointer-events-none z-20">
+      {/* 3. CINEMATIC SUNSET HORIZON BACKLIGHT ORB */}
+      <div className="absolute top-20 right-10 w-[700px] h-[400px] bg-gradient-to-l from-[#FF6B00]/25 via-[#FF8F3A]/10 to-transparent rounded-full blur-[140px] pointer-events-none -z-10" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
         {/* ========================================================================= */}
-        {/* CHAPTER 1: OPENING SCENE (GLOWING EYES & EMERGENCE) */}
+        {/* HEADER SECTION (1:1 MATCH TO REFERENCE IMAGE media_1787688564503.jpg) */}
         {/* ========================================================================= */}
         <motion.div
-          style={{ opacity: eyeOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-4xl mx-auto space-y-4"
         >
-          {/* Glowing Eye Tracking Orbs */}
-          <div className="relative w-72 h-36 flex items-center justify-between px-8 mb-8">
-            <motion.div
-              animate={{
-                x: (mousePos.x - window.innerWidth / 2) * 0.03,
-                y: (mousePos.y - window.innerHeight / 2) * 0.03,
-              }}
-              className="w-7 h-7 rounded-full bg-[#FF6B00] shadow-[0_0_40px_#FF6B00,0_0_80px_#FF8F3A] animate-pulse"
-            />
-            <motion.div
-              animate={{
-                x: (mousePos.x - window.innerWidth / 2) * 0.03,
-                y: (mousePos.y - window.innerHeight / 2) * 0.03,
-              }}
-              className="w-7 h-7 rounded-full bg-[#FF6B00] shadow-[0_0_40px_#FF6B00,0_0_80px_#FF8F3A] animate-pulse"
-            />
+          {/* EYEBROW BADGE */}
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121215] border border-[#FF6B00]/40 text-xs font-mono font-bold text-[#FF6B00] shadow-lg shadow-[#FF6B00]/10 tracking-widest uppercase">
+            <Sparkles className="w-3.5 h-3.5 text-[#FF6B00] animate-pulse" />
+            <span>THE 6 VALUES THAT SHAPE OUR WORK</span>
           </div>
 
-          <motion.div style={{ opacity: chapter1TextOpacity, y: chapter1TextY }} className="space-y-4 max-w-4xl">
-            <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] text-white">
-              <span className="block">BEFORE EVERY GREAT LEAP,</span>
-              <span className="bg-gradient-to-r from-[#FF6B00] via-[#FF8F3A] to-white bg-clip-text text-transparent">
-                THERE IS A STRONG FOUNDATION.
-              </span>
-            </h1>
-            <p className="text-sm font-mono text-zinc-500 tracking-widest uppercase">SCROLL TO BEGIN DOCUMENTARY JOURNEY</p>
-          </motion.div>
+          {/* MAIN TITLE */}
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] text-white">
+            The 6 Kangaroo <br className="hidden sm:block" />
+            <span className="bg-gradient-to-r from-white via-zinc-100 to-zinc-300 bg-clip-text text-transparent">
+              Philosophy Pillars
+            </span>
+          </h1>
+
+          {/* SUBTITLE */}
+          <p className="text-base sm:text-xl font-medium text-zinc-400">
+            Inspired by nature. Built for growth.
+          </p>
         </motion.div>
 
         {/* ========================================================================= */}
-        {/* CHAPTER 2: FOUNDATIONS SCENE (CRACKING GROUND & 4 PILLARS) */}
+        {/* CINEMATIC WINDING PATHWAY & 6 PILLAR NODES */}
         {/* ========================================================================= */}
-        <motion.div
-          style={{ opacity: foundationsOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center"
-        >
-          <div className="space-y-6 max-w-5xl">
-            <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-tight text-white">
-              <span className="block">A KANGAROO DOESN'T LEAP BECAUSE IT WANTS TO.</span>
-              <span className="text-[#FF6B00]">IT LEAPS BECAUSE ITS FOUNDATIONS ALLOW IT TO.</span>
-            </h2>
-
-            {/* 4 EMERGENCE PILLARS */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8">
-              {[
-                { name: 'STRATEGY', glow: pillar1Glow, icon: Compass },
-                { name: 'BRAND', glow: pillar2Glow, icon: Shield },
-                { name: 'TECHNOLOGY', glow: pillar3Glow, icon: Cpu },
-                { name: 'MARKETING', glow: pillar4Glow, icon: Zap },
-              ].map((pil, idx) => {
-                const IconComp = pil.icon;
-                return (
-                  <motion.div
-                    key={idx}
-                    style={{ opacity: pil.glow }}
-                    className="p-6 rounded-2xl bg-[#0A0A0C] border border-[#FF6B00]/40 text-center space-y-3 shadow-[0_0_30px_rgba(255,107,0,0.2)]"
-                  >
-                    <IconComp className="w-8 h-8 text-[#FF6B00] mx-auto" />
-                    <h4 className="font-mono text-sm font-black text-white">{pil.name}</h4>
-                    <div className="h-1 bg-[#FF6B00] rounded-full w-full" />
-                  </motion.div>
-                );
-              })}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* ========================================================================= */}
-        {/* CHAPTER 3: JOEY JOURNEY (EVOLUTION STAGES) */}
-        {/* ========================================================================= */}
-        <motion.div
-          style={{ opacity: joeyOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center"
-        >
-          <motion.div style={{ scale: joeyScale }} className="space-y-8 max-w-4xl">
-            <div className="w-32 h-32 mx-auto relative flex items-center justify-center">
-              <div className="absolute inset-0 bg-[#FF6B00]/30 rounded-full blur-2xl animate-pulse" />
+        <div className="relative py-12">
+          
+          {/* BACKGROUND CINEMATIC KANGAROO SILHOUETTE HIGHLIGHTS */}
+          <div className="hidden lg:block absolute top-0 left-0 w-80 h-80 opacity-85 pointer-events-none -z-10">
+            <div className="relative w-full h-full flex items-center justify-center">
+              <div className="absolute inset-0 bg-[#FF6B00]/20 rounded-full blur-3xl" />
               <KangarooMascot />
             </div>
+          </div>
 
-            <div className="space-y-4">
-              <h2 className="font-display text-3xl sm:text-5xl font-black text-white">
-                Every Great Business Begins With Potential.
-              </h2>
-              <p className="text-base sm:text-xl text-zinc-300 font-medium leading-relaxed max-w-2xl mx-auto">
-                Our role isn't to sell services. Our role is to help ideas grow into businesses people remember.
-              </p>
-            </div>
+          {/* S-CURVE GLOWING ROAD SVG PATH (DESKTOP) */}
+          <div className="hidden lg:block absolute inset-0 pointer-events-none -z-10">
+            <svg className="w-full h-full" viewBox="0 0 1200 800" fill="none">
+              <path
+                d="M 100,120 Q 300,200 500,160 T 900,220 T 1100,450 T 800,680 T 300,700"
+                stroke="#FF6B00"
+                strokeWidth="4"
+                strokeDasharray="8 8"
+                className="opacity-40 animate-pulse"
+              />
+              <path
+                d="M 100,120 Q 300,200 500,160 T 900,220 T 1100,450 T 800,680 T 300,700"
+                stroke="url(#glowGradient)"
+                strokeWidth="8"
+                strokeLinecap="round"
+                className="opacity-70 blur-[3px]"
+              />
+              <defs>
+                <linearGradient id="glowGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#FF6B00" />
+                  <stop offset="50%" stopColor="#FF8F3A" />
+                  <stop offset="100%" stopColor="#EA580C" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
 
-            {/* STAGE TIMELINE INDICATOR */}
-            <div className="flex justify-center gap-4 text-xs font-mono font-bold">
-              {['IDEA', 'BUILD', 'REFINE', 'LAUNCH'].map((stg, sIdx) => (
-                <div
-                  key={sIdx}
-                  className="px-4 py-2 rounded-full bg-[#121215] border border-[#FF6B00]/40 text-[#FF6B00] uppercase shadow-md"
+          {/* 6 PILLAR CARDS GRID (1:1 MATCH TO GRAPHIC LAYOUT) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch relative z-10">
+            {pillars.map((pil, idx) => {
+              const pNum = idx + 1;
+              const isActive = activePillar === pNum;
+              const IconComp = pil.icon;
+
+              return (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: idx * 0.1 }}
+                  onMouseEnter={() => setActivePillar(pNum)}
+                  onClick={() => setActivePillar(pNum)}
+                  className={`rounded-3xl p-6 sm:p-8 border text-left flex flex-col justify-between transition-all duration-500 cursor-pointer backdrop-blur-xl relative overflow-hidden ${
+                    isActive
+                      ? 'bg-[#0F0F14] border-[#FF6B00] shadow-[0_15px_45px_rgba(255,107,0,0.3)] ring-1 ring-[#FF6B00]/40'
+                      : 'bg-[#0A0A0C]/90 border-zinc-800/90 hover:border-zinc-700 opacity-90 hover:opacity-100'
+                  }`}
                 >
-                  STAGE {sIdx + 1}: {stg}
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        </motion.div>
+                  {/* Top Laser Accent Beam on Active */}
+                  {isActive && (
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF6B00] via-[#FF8F3A] to-[#EA580C]" />
+                  )}
 
-        {/* ========================================================================= */}
-        {/* CHAPTER 4: THE 30FT HORIZONTAL LEAP (CINEMATIC PAN) */}
-        {/* ========================================================================= */}
-        <motion.div
-          style={{ opacity: leapOpacity }}
-          className="absolute inset-0 flex items-center overflow-hidden"
-        >
-          <motion.div style={{ x: leapTranslateX }} className="flex items-center gap-24 whitespace-nowrap pl-24">
-            
-            {/* KANGAROO JUMPING ICON WITH DUST BURST */}
-            <motion.div style={{ y: kangarooJumpY }} className="relative shrink-0">
-              <div className="w-24 h-24 rounded-full bg-[#FF6B00] shadow-[0_0_60px_#FF6B00] flex items-center justify-center text-white">
-                <Flame className="w-12 h-12" />
-              </div>
+                  <div className="space-y-4 z-10 relative">
+                    {/* NODE NUMBER & CIRCULAR ICON BADGE */}
+                    <div className="flex items-center justify-between">
+                      <div
+                        className={`w-12 h-12 rounded-2xl border flex items-center justify-center transition-all ${
+                          isActive
+                            ? 'bg-[#FF6B00] text-white border-[#FF8F3A] shadow-lg shadow-[#FF6B00]/40'
+                            : 'bg-[#121215] text-[#FF6B00] border-zinc-800'
+                        }`}
+                      >
+                        <IconComp className="w-6 h-6" />
+                      </div>
+
+                      <span
+                        className={`font-mono text-2xl font-black ${
+                          isActive ? 'text-[#FF6B00]' : 'text-zinc-600'
+                        }`}
+                      >
+                        {pil.num}
+                      </span>
+                    </div>
+
+                    {/* TITLE */}
+                    <h3 className="font-display text-xl sm:text-2xl font-black text-white leading-tight">
+                      {pil.title}
+                    </h3>
+
+                    {/* DESCRIPTION */}
+                    <p className="text-xs sm:text-sm text-zinc-300 font-medium leading-relaxed">
+                      {pil.description}
+                    </p>
+                  </div>
+
+                  {/* CAPSULE TAG */}
+                  <div className="pt-6 z-10 relative">
+                    <span
+                      className={`inline-block px-3.5 py-1.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider border ${
+                        isActive
+                          ? 'bg-[#FF6B00]/20 text-[#FF6B00] border-[#FF6B00]/50'
+                          : 'bg-[#121215] text-zinc-400 border-zinc-800'
+                      }`}
+                    >
+                      {pil.tag}
+                    </span>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* NEXT LEAP WAYPOINT MILESTONE (BOTTOM RIGHT) */}
+          <div className="pt-12 flex justify-end">
+            <motion.div
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2.5, repeat: Infinity }}
+              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#FF6B00] text-white font-mono text-xs font-black uppercase tracking-widest shadow-[0_0_35px_rgba(255,107,0,0.5)] border border-[#FF8F3A]/60"
+            >
+              <div className="w-3 h-3 rounded-full bg-white animate-ping" />
+              <span>NEXT LEAP WAYPOINT</span>
             </motion.div>
-
-            {/* DISTANCE MARKERS */}
-            {['1 FT', '5 FT', '10 FT', '20 FT', '30 FT'].map((marker, mIdx) => (
-              <div key={mIdx} className="space-y-2 text-left shrink-0">
-                <span className="font-mono text-3xl sm:text-5xl font-black text-[#FF6B00] block">{marker}</span>
-                <div className="h-1 bg-zinc-800 w-36 rounded-full" />
-              </div>
-            ))}
-
-            <div className="space-y-2 shrink-0 pr-24">
-              <h2 className="font-display text-4xl sm:text-7xl font-black text-white">
-                MOST AGENCIES OPTIMIZE. <span className="text-[#FF6B00]">WE ENGINEER LEAPS.</span>
-              </h2>
-            </div>
-
-          </motion.div>
-        </motion.div>
-
-        {/* ========================================================================= */}
-        {/* CHAPTER 5: BALANCE SCENE & TAIL PATH NETWORK */}
-        {/* ========================================================================= */}
-        <motion.div
-          style={{ opacity: balanceOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center"
-        >
-          <div className="space-y-8 max-w-4xl">
-            <h2 className="font-display text-4xl sm:text-6xl font-black text-white">
-              GROWTH WITHOUT BALANCE IS CHAOS.
-            </h2>
-
-            {/* TAIL PATH NODES */}
-            <div className="flex flex-wrap justify-center gap-4 text-xs font-mono font-bold">
-              {['DESIGN', 'TECHNOLOGY', 'MARKETING', 'SALES', 'AUTOMATION'].map((nd, nIdx) => (
-                <div
-                  key={nIdx}
-                  className="p-4 rounded-2xl bg-[#0A0A0C] border border-[#FF6B00]/40 text-white flex items-center gap-2 shadow-lg"
-                >
-                  <Activity className="w-4 h-4 text-[#FF6B00]" />
-                  <span>{nd}</span>
-                </div>
-              ))}
-            </div>
           </div>
-        </motion.div>
+
+        </div>
 
         {/* ========================================================================= */}
-        {/* CHAPTER 6: THE MOB (PARTNERSHIP HORIZON) */}
+        {/* BOTTOM STATEMENT NARRATIVE (1:1 MATCH TO GRAPHIC FOOTER) */}
         {/* ========================================================================= */}
         <motion.div
-          style={{ opacity: mobOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="p-10 sm:p-14 rounded-[36px] bg-[#0A0A0C] border border-[#FF6B00]/40 text-center space-y-4 relative overflow-hidden backdrop-blur-2xl shadow-2xl"
         >
-          <div className="space-y-6 max-w-4xl">
-            <h2 className="font-display text-4xl sm:text-6xl font-black text-white">
-              THE BIGGEST LEAPS ARE NEVER TAKEN ALONE.
-            </h2>
-            <p className="text-xl sm:text-2xl text-[#FF6B00] font-mono font-bold">
-              WE DON'T WORK FOR CLIENTS. WE BUILD ALONGSIDE PARTNERS.
-            </p>
-          </div>
-        </motion.div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-[#FF6B00] to-transparent" />
 
-        {/* ========================================================================= */}
-        {/* CHAPTER 7: FUTURE VISION (ORBITING ELEMENTS) */}
-        {/* ========================================================================= */}
-        <motion.div
-          style={{ opacity: futureOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center"
-        >
-          <div className="space-y-8 max-w-4xl">
-            <h2 className="font-display text-4xl sm:text-6xl font-black text-white">
-              WE STAY ALERT. SO YOU STAY AHEAD.
-            </h2>
+          <p className="text-base sm:text-xl font-medium text-zinc-300">
+            At Roos StudioX, we don't just build brands.
+          </p>
 
-            {/* ORBITING ELEMENTS */}
-            <div className="relative w-64 h-64 mx-auto flex items-center justify-center">
-              <motion.div style={{ rotate: orbitRotation }} className="absolute inset-0 rounded-full border border-dashed border-[#FF6B00]/50" />
-              <KangarooMascot />
-            </div>
-          </div>
-        </motion.div>
+          <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-[#FF6B00] leading-snug max-w-4xl mx-auto">
+            We build the strength, momentum and confidence to help your business take its next great leap.
+          </h2>
 
-        {/* ========================================================================= */}
-        {/* CHAPTER 8: THE ROOS MANIFESTO */}
-        {/* ========================================================================= */}
-        <motion.div
-          style={{ opacity: manifestoOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center"
-        >
-          <div className="max-w-4xl space-y-4">
-            <h2 className="font-display text-4xl sm:text-7xl font-black text-[#FF6B00] tracking-tight">
-              {[
-                'WE BELIEVE IN FOUNDATIONS.',
-                'WE BELIEVE IN MOMENTUM.',
-                'WE BELIEVE IN CLARITY.',
-                'WE BELIEVE IN LONG-TERM GROWTH.',
-                'WE BELIEVE IN MEANINGFUL LEAPS.',
-              ][Math.min(4, Math.floor(manifestoIndex.get() || 0))]}
-            </h2>
-          </div>
-        </motion.div>
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={() => {
+                triggerLeapConfetti();
+                onOpenInquiry();
+              }}
+              className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF6B00] text-white font-mono font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#FF8833] transition-all shadow-[0_15px_40px_rgba(255,107,0,0.45)] cursor-pointer flex items-center justify-center gap-3 group"
+            >
+              <span>Book Your Free Growth Audit</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
 
-        {/* ========================================================================= */}
-        {/* CHAPTER 9: FINAL SCENE & 30FT LEAP CALL TO ACTION */}
-        {/* ========================================================================= */}
-        <motion.div
-          style={{ opacity: finalCtaOpacity }}
-          className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center pointer-events-auto"
-        >
-          <div className="space-y-8 max-w-3xl">
-            <div className="space-y-4">
-              <h2 className="font-display text-4xl sm:text-7xl font-black text-white">
-                READY FOR YOUR NEXT LEAP?
-              </h2>
-              <p className="text-lg sm:text-2xl text-zinc-300 font-medium">
-                LET'S BUILD SOMETHING THAT CAN TRAVEL 30 FEET.
-              </p>
-            </div>
-
-            <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                onClick={() => {
-                  triggerLeapConfetti();
-                  onOpenInquiry();
-                }}
-                className="px-10 py-5 rounded-full bg-[#FF6B00] text-white font-mono font-extrabold text-sm uppercase tracking-wider hover:bg-[#FF8833] transition-all shadow-[0_15px_40px_rgba(255,107,0,0.45)] cursor-pointer flex items-center justify-center gap-3"
-              >
-                <span>GET YOUR FREE GROWTH AUDIT</span>
-                <ArrowRight className="w-5 h-5" />
-              </button>
-
-              <button
-                onClick={onNavigateHome}
-                className="px-8 py-5 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-mono font-bold text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer"
-              >
-                Back to Overview
-              </button>
-            </div>
+            <button
+              onClick={onNavigateHome}
+              className="w-full sm:w-auto px-8 py-5 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer"
+            >
+              Back to Home
+            </button>
           </div>
         </motion.div>
 
