@@ -102,7 +102,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   isDarkMode = true,
 }) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
-  const [activeCardId, setActiveCardId] = useState<string>('build');
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
 
   return (
     <section
@@ -145,55 +145,61 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </h2>
         </motion.div>
 
-        {/* 5-CARD TEAM STACK CONTAINER */}
+        {/* 5-CARD TEAM STACK CONTAINER (RESPONDS TO CURSOR HOVER IMMEDIATELY) */}
         <div
           onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          className="relative h-[460px] sm:h-[500px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
+          onMouseLeave={() => {
+            setIsHovered(false);
+            setHoveredCardId(null);
+          }}
+          className="relative h-[480px] sm:h-[520px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
         >
           {process5StepCards.map((card, idx) => {
-            const isActive = card.id === activeCardId;
+            const isCardActive = hoveredCardId === card.id || (!hoveredCardId && card.id === 'build');
             const IconComp = card.avatarIcon;
 
             return (
               <motion.div
                 key={card.id}
-                onClick={() => setActiveCardId(card.id)}
+                onMouseEnter={() => setHoveredCardId(card.id)}
+                onClick={() => onOpenInquiry?.()}
                 animate={
                   isHovered
                     ? {
                         x: window.innerWidth > 1024 ? card.spreadX : (idx - 2) * 70,
-                        y: card.spreadY,
-                        rotate: card.spreadRotate,
-                        scale: isActive ? 1.05 : 0.95,
-                        zIndex: isActive ? 50 : 30 - Math.abs(idx - 2),
+                        y: isCardActive ? card.spreadY - 12 : card.spreadY,
+                        rotate: isCardActive ? 0 : card.spreadRotate,
+                        scale: isCardActive ? 1.08 : 0.94,
+                        opacity: isCardActive ? 1 : 0.75,
+                        zIndex: isCardActive ? 60 : 30 - Math.abs(idx - 2),
                       }
                     : {
                         x: card.collapsedX,
                         y: card.collapsedY,
                         rotate: card.collapsedRotate,
-                        scale: isActive ? 1.05 : 0.96,
-                        zIndex: isActive ? 50 : 30 - Math.abs(idx - 2),
+                        scale: isCardActive ? 1.05 : 0.96,
+                        opacity: 1,
+                        zIndex: isCardActive ? 60 : 30 - Math.abs(idx - 2),
                       }
                 }
-                transition={{ type: 'spring', stiffness: 220, damping: 20 }}
-                className={`absolute w-64 sm:w-72 h-[370px] sm:h-[390px] rounded-3xl p-5 border text-center cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl flex flex-col gap-3 ${
-                  isActive || (card.isFeatured && isHovered)
-                    ? 'bg-[#18181C] text-white border-[#FF7A1A]/80 ring-1 ring-[#FF7A1A]/40 shadow-[0_10px_40px_rgba(255,122,26,0.3)]'
+                transition={{ type: 'spring', stiffness: 240, damping: 20 }}
+                className={`absolute w-64 sm:w-72 h-[390px] sm:h-[420px] rounded-3xl p-5 border text-center cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl flex flex-col justify-between ${
+                  isCardActive
+                    ? 'bg-[#18181C] text-white border-[#FF7A1A] ring-2 ring-[#FF7A1A]/40 shadow-[0_12px_45px_rgba(255,122,26,0.35)]'
                     : isDarkMode
-                    ? 'bg-[#121215] text-zinc-200 border-zinc-800 hover:border-zinc-700'
+                    ? 'bg-[#121215] text-zinc-300 border-zinc-800 hover:border-zinc-700'
                     : 'bg-white text-zinc-900 border-zinc-200 shadow-xl'
                 }`}
               >
                 {/* Top Illustration Box with Top-Right Pill/Circle CTA */}
                 <div className="relative shrink-0">
                   <div className={`w-full h-36 rounded-2xl flex items-center justify-center relative transition-colors ${
-                    isActive
-                      ? 'bg-[#222228] border border-[#FF7A1A]/30'
+                    isCardActive
+                      ? 'bg-[#222228] border border-[#FF7A1A]/40'
                       : 'bg-[#18181C] border border-zinc-800'
                   }`}>
                     <IconComp className={`w-14 h-14 transition-transform duration-300 ${
-                      isActive ? 'text-[#FF7A1A] scale-110' : 'text-zinc-400'
+                      isCardActive ? 'text-[#FF7A1A] scale-110' : 'text-zinc-400'
                     }`} />
                   </div>
 
@@ -204,25 +210,27 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                       onOpenInquiry?.();
                     }}
                     className={`absolute top-3 right-3 flex items-center justify-center gap-1.5 transition-all duration-300 shadow-md cursor-pointer ${
-                      isActive
-                        ? 'px-3 py-1.5 rounded-full bg-[#FF7A1A] text-white text-xs font-mono font-bold shadow-[#FF7A1A]/40'
+                      isCardActive
+                        ? 'px-3.5 py-1.5 rounded-full bg-[#FF7A1A] text-white text-xs font-mono font-bold shadow-[#FF7A1A]/40 scale-105'
                         : 'w-8 h-8 rounded-full bg-[#27272A] text-[#FFFFFF] hover:bg-[#FF7A1A]'
                     }`}
                   >
-                    {isActive && <span>{card.ctaLabel}</span>}
+                    {isCardActive && <span>{card.ctaLabel}</span>}
                     <ArrowUpRight className="w-4 h-4 shrink-0" />
                   </button>
                 </div>
 
-                {/* Card Number, Title & Paragraph */}
-                <div className="space-y-1 text-center">
+                {/* Card Number, Title & Paragraph (Fully Visible On Cursor Hover) */}
+                <div className="space-y-1.5 pt-1 text-center flex flex-col items-center justify-center">
                   <div className="text-sm font-mono font-extrabold text-[#FF7A1A] tracking-wider">
                     {card.num}
                   </div>
-                  <h3 className="font-display text-lg sm:text-xl font-extrabold leading-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mx-auto">
+                  <h3 className="font-display text-lg sm:text-xl font-extrabold leading-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent px-1">
                     {card.name}
                   </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3 max-w-xs mx-auto pt-0.5">
+                  <p className={`text-xs text-zinc-300 leading-relaxed text-center px-1 pt-0.5 transition-opacity ${
+                    isCardActive ? 'opacity-100 font-medium' : 'opacity-80 line-clamp-3'
+                  }`}>
                     {card.description}
                   </p>
                 </div>
@@ -242,7 +250,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#121215]/90 border border-[#FF7A1A]/40 text-xs sm:text-sm font-mono font-bold text-zinc-200 backdrop-blur-xl shadow-xl shadow-[#FF7A1A]/10 group hover:border-[#FF7A1A] transition-all">
             <Sparkles className="w-4 h-4 text-[#FF7A1A] animate-pulse shrink-0" />
             <span className="tracking-wide text-center">
-              Hover or tap the 5-card deck to fan out and explore our studio execution methodology.
+              Hover your cursor over any card in the 5-step deck to bring it forward.
             </span>
           </div>
         </motion.div>
