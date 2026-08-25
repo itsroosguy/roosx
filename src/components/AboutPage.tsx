@@ -11,7 +11,7 @@ import {
   Layers,
   TrendingUp,
   BarChart3,
-  Code,
+  Award,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -21,57 +21,50 @@ interface AboutPageProps {
   onNavigateHome: () => void;
 }
 
-const frameworkStages = [
+const agencyStats = [
+  { metric: '50+', label: 'Years Combined Expertise', sub: 'Senior Strategists & Engineers' },
+  { metric: '99+', label: 'Google Speed Guarantee', sub: 'Lighthouse Performance Baseline' },
+  { metric: '4.8X', label: 'Average ROAS Multiplier', sub: 'Data-Driven Acquisition Funnels' },
+  { metric: '100%', label: 'Bespoke Engineering', sub: 'Zero Slow Template Bloat' },
+];
+
+const ddProcessSteps = [
   {
     step: '01',
-    title: 'Discover',
-    tagline: 'Deep Market & Audience Telemetry',
-    desc: 'We audit your target market, buyer friction points, competitor blind spots, and revenue growth opportunities.',
+    title: 'Research & Strategic Audit',
+    tagline: 'Deep Market & Competitor Telemetry',
+    desc: 'Research is the cornerstone of our work. Analyzing competitors, target audience friction points, and relevant design trends is the first step to creating an unbeatable positioning strategy.',
     deliverable: 'Audience Friction & Market Opportunity Audit Report',
-    icon: SearchIcon,
   },
   {
     step: '02',
-    title: 'Position',
-    tagline: 'Unbeatable Market Advantage',
-    desc: 'We craft sharp positioning, high-impact headlines, and value propositions that make your brand stand out instantly.',
+    title: 'Discovery & Concepting',
+    tagline: 'Multi-Concept Visual Direction',
+    desc: 'Discovery is a collaborative process during which we take our strategic findings and devise multiple bespoke UI/UX concepts for every project. Our creative directors refine top-selected directions into a presentation where clients participate directly.',
     deliverable: 'Strategic Positioning Deck & Copywriting Architecture',
-    icon: Compass,
   },
   {
     step: '03',
-    title: 'Build',
-    tagline: '99+ Speed Engineering & Glassmorphic UI',
-    desc: 'We engineer custom React web applications and design systems with zero template bloat and instant load times.',
-    deliverable: 'Custom React Codebase & High-Performance CMS Integration',
-    icon: Code,
+    title: 'Meticulous UI/UX & Prototyping',
+    tagline: 'Pixel-Perfect Responsive Systems',
+    desc: 'The design stage is a meticulous process applying selected visual concepts across all expanded digital touchpoints—brand assets, web pages, and product dashboards. We deliver interactive prototypes for final signoff before engineering begins.',
+    deliverable: 'Custom React Codebase & Interactive Figma Prototype',
   },
   {
     step: '04',
-    title: 'Launch',
-    tagline: '24h Rapid Onboarding Protocol',
-    desc: 'We deploy infrastructure to edge CDNs, set up automated CRM webhooks, and launch high-velocity growth initiatives.',
+    title: 'Developer Handoff & QA',
+    tagline: 'Zero-Discrepancy Code Handoff',
+    desc: 'Design handoff is key to project success. We outline design tokens and responsive breakpoints to our core web engineers, building custom React applications with automated CRM webhooks and edge CDN infrastructure.',
     deliverable: 'Live Production Site & Automated Lead Telemetry Pipeline',
-    icon: Zap,
   },
   {
     step: '05',
-    title: 'Optimize',
-    tagline: 'Continuous Conversion & Revenue Tuning',
-    desc: 'We run live A/B tests, monitor conversion rate telemetry, and continuously tune the growth engine for maximum ROI.',
+    title: 'Rollout & Launch Checklists',
+    tagline: 'Continuous Growth & Performance Tuning',
+    desc: 'Rollout is the most exciting stage, but not our finish line. We follow a strict launch checklist, monitor live telemetry, run A/B tests, and continuously tune the growth engine for maximum ROI.',
     deliverable: 'Monthly CRO Optimization & Growth Trajectory Dashboard',
-    icon: TrendingUp,
   },
 ];
-
-function SearchIcon(props: any) {
-  return (
-    <svg {...props} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <circle cx="11" cy="11" r="8" strokeWidth="2" />
-      <path d="M21 21l-4.35-4.35" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}
 
 const differencePillars = [
   {
@@ -108,6 +101,13 @@ const differencePillars = [
   },
 ];
 
+const studioRecognitions = [
+  { title: 'Google Lighthouse 100/100', desc: 'Certified top tier web performance & accessibility excellence.' },
+  { title: 'Custom React Architecture', desc: 'Bespoke codebase engineering built without slow template plugins.' },
+  { title: 'Clutch Gold Standard Quality', desc: 'Consistently rated 5-stars for client satisfaction and project execution.' },
+  { title: '24h Rapid Onboarding Protocol', desc: 'Direct access to senior strategists and engineering leads from day one.' },
+];
+
 export const AboutPage: React.FC<AboutPageProps> = ({
   onOpenInquiry,
   isDarkMode,
@@ -137,7 +137,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-24 sm:space-y-32">
         
-        {/* SECTION 1: HERO SECTION (KINETIC STUDIO COMMAND CENTER) */}
+        {/* SECTION 1: HERO SECTION (DD.NYC STYLE AGENCY STATEMENT) */}
         <div className="pt-12 sm:pt-20 flex flex-col justify-center items-center text-center space-y-8 relative">
           
           <motion.div
@@ -149,7 +149,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             {/* Live Telemetry Eyebrow Pill */}
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest backdrop-blur-md">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>THE ROOS STUDIOX PHILOSOPHY</span>
+              <span>ROOS STUDIOX • AGENCY MANIFESTO</span>
             </div>
 
             {/* Guaranteed 2-Line Bold Title */}
@@ -208,6 +208,36 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           </motion.div>
 
         </div>
+
+        {/* AGENCY KEY STATISTICS COUNTER BAR (DD.NYC PATTERN) */}
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+        >
+          {agencyStats.map((stat, sIdx) => (
+            <div
+              key={sIdx}
+              className={`p-6 rounded-2xl border text-left space-y-2 relative overflow-hidden ${
+                isDarkMode
+                  ? 'bg-[#0C0C0C] border-zinc-800 text-white'
+                  : 'bg-white border-zinc-200 text-zinc-900 shadow-md'
+              }`}
+            >
+              <div className="text-3xl sm:text-4xl font-mono font-black text-[#FF7A1A]">
+                {stat.metric}
+              </div>
+              <div className="font-display text-base font-bold">
+                {stat.label}
+              </div>
+              <div className="text-xs font-mono text-zinc-500">
+                {stat.sub}
+              </div>
+            </div>
+          ))}
+        </motion.div>
 
         {/* SECTION 2: UNBRIDLED CREATIVITY & PASSIONATE MARKETING MANIFESTO */}
         <motion.div
@@ -476,7 +506,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           </div>
         </motion.div>
 
-        {/* SECTION 5: THE ROOS GROWTH FRAMEWORK - INTERACTIVE TIMELINE */}
+        {/* SECTION 5: DD.NYC STYLE 5-PHASE METHODICAL PROCESS ARCHITECTURE */}
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -486,10 +516,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({
         >
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
-              PROVEN EXECUTION SYSTEM
+              OUR METHODOLOGY
             </span>
             <h2 className={`font-display text-4xl sm:text-6xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
-              The Roos Growth Framework
+              5-Phase Studio Execution Process
             </h2>
             <p className="text-base text-zinc-400">
               Click any stage below to inspect the guaranteed studio deliverables at each phase of your leap.
@@ -498,38 +528,37 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
           {/* Timeline Buttons */}
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-            {frameworkStages.map((fStage, fIdx) => {
-              const IconComp = fStage.icon;
-              return (
-                <button
-                  key={fIdx}
-                  onClick={() => setActiveFrameworkIdx(fIdx)}
-                  className={`p-6 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between space-y-4 ${
-                    activeFrameworkIdx === fIdx
-                      ? 'bg-[#0C0C0C] border-[#FF7A1A] shadow-xl shadow-[#FF7A1A]/20 scale-105'
-                      : isDarkMode
-                      ? 'bg-[#050505] border-zinc-800 hover:border-zinc-700'
-                      : 'bg-white border-zinc-200 shadow-sm hover:border-zinc-300'
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="text-2xl font-mono font-black text-[#FF7A1A]">
-                      {fStage.step}
-                    </span>
-                    <IconComp className="w-4 h-4 text-[#FF7A1A]" />
-                  </div>
+            {ddProcessSteps.map((fStage, fIdx) => (
+              <button
+                key={fIdx}
+                onClick={() => setActiveFrameworkIdx(fIdx)}
+                className={`p-6 rounded-2xl border text-left transition-all cursor-pointer flex flex-col justify-between space-y-4 ${
+                  activeFrameworkIdx === fIdx
+                    ? 'bg-[#0C0C0C] border-[#FF7A1A] shadow-xl shadow-[#FF7A1A]/20 scale-105'
+                    : isDarkMode
+                    ? 'bg-[#050505] border-zinc-800 hover:border-zinc-700'
+                    : 'bg-white border-zinc-200 shadow-sm hover:border-zinc-300'
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <span className="text-2xl font-mono font-black text-[#FF7A1A]">
+                    {fStage.step}
+                  </span>
+                  {activeFrameworkIdx === fIdx && (
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF7A1A] animate-ping" />
+                  )}
+                </div>
 
-                  <div>
-                    <h3 className={`font-display text-lg font-bold ${isDarkMode ? 'text-white' : 'text-zinc-900'} mb-1`}>
-                      {fStage.title}
-                    </h3>
-                    <p className={`text-xs leading-relaxed ${isDarkMode ? 'text-[#7D7D7D]' : 'text-zinc-600'}`}>
-                      {fStage.tagline}
-                    </p>
-                  </div>
-                </button>
-              );
-            })}
+                <div>
+                  <h3 className={`font-display text-lg font-bold ${isDarkMode ? 'text-white' : 'text-zinc-900'} mb-1`}>
+                    {fStage.title}
+                  </h3>
+                  <p className={`text-xs leading-relaxed ${isDarkMode ? 'text-[#7D7D7D]' : 'text-zinc-600'}`}>
+                    {fStage.tagline}
+                  </p>
+                </div>
+              </button>
+            ))}
           </div>
 
           {/* Active Stage Detailed Deliverables Card */}
@@ -542,18 +571,18 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           >
             <div className="flex items-center justify-between flex-wrap gap-2 border-b border-zinc-800 pb-3">
               <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase">
-                STAGE {frameworkStages[activeFrameworkIdx].step} • {frameworkStages[activeFrameworkIdx].title} DEEP DIVE
+                STAGE {ddProcessSteps[activeFrameworkIdx].step} • {ddProcessSteps[activeFrameworkIdx].title} DEEP DIVE
               </span>
               <span className="text-xs font-mono text-emerald-400 font-bold">✓ GUARANTEED STAGE DELIVERABLE</span>
             </div>
 
             <p className="text-base text-zinc-300 leading-relaxed">
-              {frameworkStages[activeFrameworkIdx].desc}
+              {ddProcessSteps[activeFrameworkIdx].desc}
             </p>
 
             <div className="p-4 rounded-xl bg-[#050505] border border-zinc-800 text-xs font-mono flex items-center justify-between">
               <span className="text-zinc-400">OUTPUT DELIVERABLE:</span>
-              <span className="text-[#FF7A1A] font-bold">{frameworkStages[activeFrameworkIdx].deliverable}</span>
+              <span className="text-[#FF7A1A] font-bold">{ddProcessSteps[activeFrameworkIdx].deliverable}</span>
             </div>
           </motion.div>
         </motion.div>
@@ -616,6 +645,44 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           </div>
         </motion.div>
 
+        {/* DD.NYC STYLE RECOGNITIONS & TRUST BADGES GRID */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-left space-y-10"
+        >
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+              STANDARDS & RECOGNITION
+            </span>
+            <h2 className={`font-display text-4xl sm:text-5xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
+              Studio Quality Standards
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {studioRecognitions.map((rec, rIdx) => (
+              <div
+                key={rIdx}
+                className="p-6 rounded-2xl bg-[#0C0C0C] border border-zinc-800 space-y-2 text-left"
+              >
+                <div className="flex items-center gap-2 text-[#FF7A1A]">
+                  <Award className="w-5 h-5" />
+                  <span className="text-xs font-mono font-bold uppercase">GOLD STANDARD</span>
+                </div>
+                <h3 className="font-display text-lg font-bold text-white">
+                  {rec.title}
+                </h3>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  {rec.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* SECTION 7: OUR VISION - REVAMPED HIGH-FORMATION POSTER CARD */}
         <motion.div
           initial={{ opacity: 0, scale: 0.97 }}
@@ -624,10 +691,8 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           transition={{ duration: 0.8 }}
           className="p-8 sm:p-16 rounded-3xl border border-[#FF7A1A]/40 bg-[#0C0C0C] text-center relative overflow-hidden shadow-2xl space-y-8"
         >
-          {/* Top Gradient Laser Bar */}
           <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C]" />
 
-          {/* Vision Header Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
             <Target className="w-4 h-4" />
             <span>OUR VISION & DESTINATION</span>
@@ -641,7 +706,6 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             Not by offering more services. But by creating better outcomes. Helping brands move faster. Scale smarter. And grow with confidence.
           </p>
 
-          {/* 3 Outcome Metrics Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto pt-4 font-mono text-xs font-bold">
             <div className="p-4 rounded-2xl bg-[#050505] border border-zinc-800 text-center space-y-1">
               <div className="text-[#FF7A1A] text-base font-black">MOVE FASTER</div>
@@ -658,7 +722,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
           </div>
         </motion.div>
 
-        {/* SECTION 8: FINAL FULL-SCREEN CTA - REVAMPED HIGH-ENGAGEMENT ACTION BOX */}
+        {/* SECTION 8: FINAL FULL-SCREEN CTA */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
