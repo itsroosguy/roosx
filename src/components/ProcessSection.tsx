@@ -1,109 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import {
-  Zap,
-  Target,
-  Check,
-  Sparkles,
-  PhoneCall,
-  Code2,
-  TrendingUp,
-} from 'lucide-react';
+import { Zap, Sparkles } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
 interface ProcessSectionProps {
   onOpenInquiry?: () => void;
   isDarkMode?: boolean;
 }
-
-interface ProcessStep {
-  id: string;
-  num: string;
-  timeframe: string;
-  title: string;
-  headline: string;
-  description: string;
-  annotation: string;
-  badgeText: string;
-  icon: React.ElementType;
-  keyPoints: string[];
-  align: 'left' | 'right';
-}
-
-const fastTrackSteps: ProcessStep[] = [
-  {
-    id: 'step-1',
-    num: '01',
-    timeframe: 'DAY 01',
-    title: 'Rapid Audit & Entry',
-    headline: 'We Step In Within 24 Hours',
-    description:
-      'Within 24 hours of connecting, we dive deep into your website, messaging, and funnel to locate exact points of lost revenue.',
-    annotation: '30-min call • Zero fluff • Immediate clarity',
-    badgeText: 'Instant Traction',
-    icon: PhoneCall,
-    keyPoints: [
-      '30-minute discovery & bottleneck audit',
-      'Locate immediate conversion leaks',
-      'Clear, prioritized action plan for launch',
-    ],
-    align: 'left',
-  },
-  {
-    id: 'step-2',
-    num: '02',
-    timeframe: 'DAYS 02–05',
-    title: 'Strategy & Copy',
-    headline: 'Define What Makes You Unbeatable',
-    description:
-      'We craft sharp, high-converting messaging and positioning so visitors get your value in under 3 seconds and trust your business.',
-    annotation: 'All decisions explained, no black boxes x',
-    badgeText: 'Positioned To Win',
-    icon: Target,
-    keyPoints: [
-      'Conversion-focused headline & body copy',
-      'Distinct brand voice & market positioning',
-      'Frictionless customer navigation path',
-    ],
-    align: 'right',
-  },
-  {
-    id: 'step-3',
-    num: '03',
-    timeframe: 'DAYS 06–15',
-    title: 'High-Velocity Build',
-    headline: 'Production Without The Friction',
-    description:
-      'We design and build custom, ultra-fast interfaces in parallel. Up to 2 rounds of collaborative edits ensure perfection.',
-    annotation: 'Up to 2 rounds of rapid collaborative edits',
-    badgeText: '99+ Speed Score',
-    icon: Code2,
-    keyPoints: [
-      'Custom modern UI/UX (No templates)',
-      'High-speed code with 99+ Google performance',
-      'CMS integration & automated lead routing',
-    ],
-    align: 'left',
-  },
-  {
-    id: 'step-4',
-    num: '04',
-    timeframe: 'DAY 16+',
-    title: 'Launch & Scale',
-    headline: 'Go Live & Multiply Revenue',
-    description:
-      'We launch your new digital experience with active lead tracking, analytics telemetry, and continuous conversion tuning.',
-    annotation: 'Turn visitors into long-term revenue',
-    badgeText: 'Continuous Momentum',
-    icon: TrendingUp,
-    keyPoints: [
-      'Zero-downtime deployment & DNS handoff',
-      'Active conversion tracking & lead analytics',
-      'Ongoing speed & conversion optimization',
-    ],
-    align: 'right',
-  },
-];
 
 export const ProcessSection: React.FC<ProcessSectionProps> = ({
   onOpenInquiry,
@@ -163,92 +66,181 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* PINTEREST-INSPIRED PERFECT 4-COLUMN HORIZONTAL ROW PIPELINE (ZERO BOXES) */}
-        <div className="relative max-w-7xl mx-auto py-4 text-left">
+        {/* PINTEREST EDITORIAL ORGANIC DYNAMIC CANVAS ARTWORK */}
+        <div className="relative max-w-6xl mx-auto py-6 text-left">
           
-          {/* HORIZONTAL CONTINUOUS CONNECTING LASER LINE (VISIBLE ON DESKTOP) */}
-          <div className="absolute top-10 left-12 right-12 h-0.5 bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C] opacity-70 pointer-events-none hidden lg:block" />
+          {/* FLOWING DYNAMIC SVG WINDING VECTOR LINE */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none hidden md:block">
+            <svg
+              className="w-full h-full max-w-4xl overflow-visible"
+              viewBox="0 0 1000 600"
+              fill="none"
+            >
+              <path
+                d="M 150,120 C 450,40 550,280 850,160 C 950,220 850,480 500,450 C 250,420 150,520 850,500"
+                stroke="#F97316"
+                strokeWidth="2.5"
+                strokeDasharray="6 6"
+                className="opacity-60"
+              />
+            </svg>
+          </div>
 
-          {/* 4 HORIZONTAL COLUMNS PIPELINE */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 relative">
-            {fastTrackSteps.map((step, idx) => {
-              return (
-                <motion.div
-                  key={step.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex flex-col items-start space-y-4 relative"
-                >
-                  {/* STEP NUMBER & NODE BADGE (SITTING DIRECTLY ON HORIZONTAL LINE) */}
-                  <div className="flex items-center gap-3 w-full">
-                    <div className="relative shrink-0">
-                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl sm:text-3xl font-black shadow-xl shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 relative z-10">
-                        {step.num}
-                      </div>
-                      <span className="absolute -inset-2 rounded-full border border-[#F97316]/30 animate-ping opacity-25" />
-                    </div>
-
-                    <div className="flex flex-col">
-                      <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/30 uppercase tracking-wider w-max mb-1">
-                        {step.timeframe}
-                      </span>
-                      <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
-                        {step.badgeText}
-                      </span>
-                    </div>
+          {/* 4 ORGANICALLY STAGGERED EDITORIAL NODES */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16 relative">
+            
+            {/* NODE 01: TOP LEFT (ORGANIC POSITIONING) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-col items-start space-y-4 md:pr-6"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
+                  01
+                </div>
+                <div>
+                  <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/30 uppercase tracking-wider block w-max mb-1">
+                    DAY 01 • RAPID ENTRY
+                  </span>
+                  <div className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+                    Instant Traction
                   </div>
+                </div>
+              </div>
 
-                  {/* STEP CONTENT & NARRATIVE (HORIZONTAL ROW FLOW) */}
-                  <div className="space-y-3 pt-1 w-full">
-                    <div>
-                      <h3
-                        className={`font-display text-xl sm:text-2xl font-extrabold tracking-tight leading-tight ${
-                          isDarkMode ? 'text-white' : 'text-[#111111]'
-                        }`}
-                      >
-                        {step.headline}
-                      </h3>
-                      <div className="text-xs font-bold text-[#F97316] mt-1 tracking-tight">
-                        {step.title}
-                      </div>
-                    </div>
+              <div>
+                <h3 className={`font-display text-2xl sm:text-3xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
+                  We Step In Within 24 Hours
+                </h3>
+                <p className={`text-sm leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
+                  No 3-month onboarding delay. Within 24 hours of connecting, we dive straight into your site & messaging to locate exact lost revenue points.
+                </p>
+              </div>
 
-                    <p
-                      className={`text-xs sm:text-sm leading-relaxed font-normal ${
-                        isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
-                      }`}
-                    >
-                      {step.description}
-                    </p>
+              {/* Floating Organic Callout Note */}
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] rotate-[-2deg] shadow-sm">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>"30-min call • Zero fluff • Immediate clarity"</span>
+              </div>
+            </motion.div>
 
-                    {/* Open Bullet Milestones (No Card Enclosures) */}
-                    <div className="space-y-2 pt-1">
-                      {step.keyPoints.map((point, pIdx) => (
-                        <div key={pIdx} className="flex items-start gap-2 text-xs font-semibold">
-                          <div className="w-4 h-4 rounded-full bg-[#F97316]/15 text-[#F97316] flex items-center justify-center shrink-0 border border-[#F97316]/30 mt-0.5">
-                            <Check className="w-2.5 h-2.5" />
-                          </div>
-                          <span className={isDarkMode ? 'text-zinc-200' : 'text-zinc-800'}>{point}</span>
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Floating Handwritten Callout Annotation */}
-                    <motion.div
-                      animate={{ y: [-2, 2, -2] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                      className="pt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-[11px] font-semibold text-[#F97316] shadow-sm"
-                    >
-                      <Sparkles className="w-3 h-3 shrink-0" />
-                      <span>"{step.annotation}"</span>
-                    </motion.div>
+            {/* NODE 02: TOP RIGHT (STAGGERED DOWN) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="flex flex-col items-start space-y-4 md:pl-6 md:mt-12 lg:mt-16"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
+                  02
+                </div>
+                <div>
+                  <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/30 uppercase tracking-wider block w-max mb-1">
+                    DAYS 02–05 • POSITIONING
+                  </span>
+                  <div className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+                    Positioned To Win
                   </div>
+                </div>
+              </div>
 
-                </motion.div>
-              );
-            })}
+              <div>
+                <h3 className={`font-display text-2xl sm:text-3xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
+                  Define What Makes You Unbeatable
+                </h3>
+                <p className={`text-sm leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
+                  We craft sharp conversion messaging so potential buyers get your unique value in under 3 seconds and trust your brand immediately.
+                </p>
+              </div>
+
+              {/* Floating Organic Callout Note */}
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] rotate-[2deg] shadow-sm">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>"All decisions explained, no black boxes x"</span>
+              </div>
+            </motion.div>
+
+            {/* NODE 03: BOTTOM LEFT */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-col items-start space-y-4 md:pr-6 md:mt-6"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
+                  03
+                </div>
+                <div>
+                  <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/30 uppercase tracking-wider block w-max mb-1">
+                    DAYS 06–15 • BUILD SPRINT
+                  </span>
+                  <div className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+                    99+ Speed Performance
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className={`font-display text-2xl sm:text-3xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
+                  Production Without The Friction
+                </h3>
+                <p className={`text-sm leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
+                  Custom, ultra-fast interfaces built in parallel. Up to 2 rounds of rapid collaborative edits ensure absolute perfection.
+                </p>
+              </div>
+
+              {/* Floating Organic Callout Note */}
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] rotate-[-1deg] shadow-sm">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>"Up to 2 rounds of rapid collaborative edits"</span>
+              </div>
+            </motion.div>
+
+            {/* NODE 04: BOTTOM RIGHT (STAGGERED DOWN) */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.45 }}
+              className="flex flex-col items-start space-y-4 md:pl-6 md:mt-16 lg:mt-20"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl font-black shadow-lg shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 shrink-0">
+                  04
+                </div>
+                <div>
+                  <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 uppercase tracking-wider block w-max mb-1">
+                    DAY 16+ • LAUNCH & SCALE
+                  </span>
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#22C55E]">
+                    +3X Growth Multiplier
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 className={`font-display text-2xl sm:text-3xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
+                  Go Live & Multiply Revenue
+                </h3>
+                <p className={`text-sm leading-relaxed mt-2 ${isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'}`}>
+                  Zero-downtime deployment with active conversion telemetry, analytics tracking, and continuous revenue tuning.
+                </p>
+              </div>
+
+              {/* Floating Organic Callout Note */}
+              <div className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/40 text-xs font-semibold text-emerald-400 rotate-[1.5deg] shadow-sm">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>"Turn visitors into long-term revenue"</span>
+              </div>
+            </motion.div>
+
           </div>
         </div>
 
