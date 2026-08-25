@@ -49,26 +49,12 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
 
           {/* User Requested Impact Narrative */}
           <h2
-            className={`font-display text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-snug max-w-4xl mx-auto mb-6 ${
+            className={`font-display text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-snug max-w-4xl mx-auto mb-8 ${
               isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
             }`}
           >
-            <span className="block">Your product, service or idea</span>
-            <span className="block mt-1">
-              may be exceptional but is it{' '}
-              <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FDBA74] bg-clip-text text-transparent inline-block">
-                reaching the right audience?
-              </span>
-            </span>
+            Starting a new project or want to collaborate with us?
           </h2>
-
-          <p
-            className={`text-base sm:text-xl font-medium leading-relaxed max-w-3xl mx-auto mb-10 ${
-              isDarkMode ? 'text-[#CBD5E1]' : 'text-[#52525B]'
-            }`}
-          >
-            We help brands cut through the noise, solve the right problems and create the impact they deserve.
-          </p>
 
           {/* Book A Demo Action Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5">
