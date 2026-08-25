@@ -9,6 +9,7 @@ import {
   Activity,
   ArrowRight,
   ArrowLeft,
+  Layers,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -28,6 +29,11 @@ interface StepConfig {
   annotation: string;
   accentColor: string;
   deliverables: string[];
+  jitterRotate: number;
+  jitterY: number;
+  spreadX: number;
+  spreadY: number;
+  spreadRotate: number;
 }
 
 const simulatorSteps: StepConfig[] = [
@@ -47,6 +53,11 @@ const simulatorSteps: StepConfig[] = [
       'Locate immediate conversion leaks',
       'Clear, prioritized action plan for launch',
     ],
+    jitterRotate: -4,
+    jitterY: -8,
+    spreadX: -260,
+    spreadY: 10,
+    spreadRotate: -8,
   },
   {
     id: 'positioning',
@@ -57,13 +68,18 @@ const simulatorSteps: StepConfig[] = [
     headline: 'Define What Makes You Unbeatable',
     description:
       'We craft sharp conversion messaging so potential buyers get your unique value in under 3 seconds and trust your brand immediately.',
-    annotation: 'All decisions explained, no black boxes x',
+    annotation: 'All decisions explained, no black boxes',
     accentColor: '#FB923C',
     deliverables: [
       'Conversion-focused headline & body copy',
       'Distinct brand voice & market positioning',
       'Frictionless customer navigation roadmap',
     ],
+    jitterRotate: 2,
+    jitterY: -4,
+    spreadX: -80,
+    spreadY: -5,
+    spreadRotate: -2,
   },
   {
     id: 'build',
@@ -81,6 +97,11 @@ const simulatorSteps: StepConfig[] = [
       'High-speed code with 99+ Google score',
       'CMS integration & automated lead routing',
     ],
+    jitterRotate: -2,
+    jitterY: 4,
+    spreadX: 100,
+    spreadY: 5,
+    spreadRotate: 3,
   },
   {
     id: 'scale',
@@ -98,6 +119,11 @@ const simulatorSteps: StepConfig[] = [
       'Active conversion tracking & lead analytics',
       'Ongoing speed & conversion optimization',
     ],
+    jitterRotate: 4,
+    jitterY: 8,
+    spreadX: 270,
+    spreadY: -10,
+    spreadRotate: 8,
   },
 ];
 
@@ -106,6 +132,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   isDarkMode = false,
 }) => {
   const [activeStepIdx, setActiveStepIdx] = useState<number>(0);
+  const [isStackedFannedOut, setIsStackedFannedOut] = useState<boolean>(false);
   
   // Interactive Widget States
   const [scannedLeaksFixed, setScannedLeaksFixed] = useState<boolean>(false);
@@ -118,7 +145,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   return (
     <section
       id="process"
-      className={`relative py-12 sm:py-16 transition-colors duration-500 overflow-hidden ${
+      className={`relative py-16 sm:py-24 transition-colors duration-500 overflow-hidden ${
         isDarkMode ? 'bg-[#0A0A0A] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
@@ -134,7 +161,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
       {/* Ambient Orange Glow Spotlight */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-radial from-[#F97316]/15 via-[#FB923C]/5 to-transparent blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
         
         {/* HEADER BLOCK */}
         <motion.div
@@ -142,8 +169,13 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-4xl mx-auto mb-8 sm:mb-10 space-y-3"
+          className="text-center max-w-4xl mx-auto space-y-3"
         >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/30 text-xs font-mono font-bold text-[#F97316] uppercase tracking-widest backdrop-blur-md">
+            <Layers className="w-3.5 h-3.5" />
+            <span>INTERACTIVE TEAM-STACK PROCESS DECK</span>
+          </div>
+
           <h2
             className={`font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-[1.08] ${
               isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
@@ -160,47 +192,90 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
               isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
             }`}
           >
-            From brand positioning and custom web development to growth marketing and automation—explore how we turn your vision into market momentum.
+            Hover or tap the fanned-out deck below to inspect each stage of our high-velocity execution framework.
           </p>
         </motion.div>
 
-        {/* KINETIC PHASE SELECTOR BAR */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto mb-6">
+        {/* TEAM-STACK FAN-OUT PROCESS CARDS DECK (UNLUMEN TEAM-STACK ANIMATION) */}
+        <div
+          onMouseEnter={() => setIsStackedFannedOut(true)}
+          onMouseLeave={() => setIsStackedFannedOut(false)}
+          className="relative min-h-[160px] sm:min-h-[200px] max-w-5xl mx-auto flex items-center justify-center py-6 cursor-pointer"
+        >
           {simulatorSteps.map((step, idx) => {
             const isSelected = idx === activeStepIdx;
+
             return (
-              <button
+              <motion.button
                 key={step.id}
-                onClick={() => setActiveStepIdx(idx)}
-                className={`flex flex-col items-center p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 cursor-pointer text-center relative ${
+                onClick={() => {
+                  setActiveStepIdx(idx);
+                  setIsStackedFannedOut(true);
+                }}
+                animate={
+                  isStackedFannedOut
+                    ? {
+                        x: window.innerWidth > 768 ? step.spreadX : (idx - 1.5) * 80,
+                        y: step.spreadY,
+                        rotate: step.spreadRotate,
+                        scale: isSelected ? 1.06 : 0.96,
+                        zIndex: isSelected ? 40 : 20 - idx,
+                      }
+                    : {
+                        x: (idx - 1.5) * 18,
+                        y: step.jitterY,
+                        rotate: step.jitterRotate,
+                        scale: isSelected ? 1.04 : 0.96,
+                        zIndex: isSelected ? 40 : 20 - idx,
+                      }
+                }
+                transition={{ type: 'spring', stiffness: 260, damping: 22 }}
+                className={`absolute p-4 sm:p-5 rounded-2xl border text-left transition-all duration-300 w-56 sm:w-64 shadow-xl backdrop-blur-xl ${
                   isSelected
-                    ? 'bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white border-[#FDBA74] shadow-xl shadow-[#F97316]/30 scale-105'
+                    ? 'bg-gradient-to-br from-[#18181B] to-[#09090B] border-[#F97316] text-white shadow-[#F97316]/30 ring-2 ring-[#F97316]/40'
                     : isDarkMode
-                    ? 'bg-[#141417] text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-white'
-                    : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:text-zinc-900 shadow-sm'
+                    ? 'bg-[#141417]/90 text-zinc-300 border-zinc-800 hover:border-zinc-700'
+                    : 'bg-white/95 text-zinc-800 border-zinc-200 shadow-md'
                 }`}
               >
-                <div className="flex items-center gap-2 mb-1">
+                <div className="flex items-center justify-between mb-2">
                   <span
-                    className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md ${
-                      isSelected ? 'bg-white/20 text-white' : 'bg-[#F97316]/10 text-[#F97316]'
+                    className={`text-xs font-mono font-bold px-2 py-0.5 rounded-md ${
+                      isSelected ? 'bg-[#F97316] text-white' : 'bg-[#F97316]/10 text-[#F97316]'
                     }`}
                   >
                     {step.num}
                   </span>
-                  <span className="text-[11px] font-mono font-bold uppercase tracking-tight">
+                  <span className="text-[10px] font-mono font-bold uppercase text-zinc-400">
                     {step.phaseTime.split('•')[0]}
                   </span>
                 </div>
-                <div className="font-display text-xs sm:text-sm font-extrabold tracking-tight">
+
+                <div className="font-display text-sm sm:text-base font-extrabold tracking-tight mb-1 text-white">
                   {step.title}
                 </div>
-              </button>
+
+                <div className="text-[11px] font-mono text-zinc-400 line-clamp-1 mb-3">
+                  {step.headline}
+                </div>
+
+                {/* Animated Spring CTA Pill */}
+                <div className="pt-1 flex items-center justify-between border-t border-zinc-800/80">
+                  <span className="text-[10px] font-mono font-bold text-[#F97316] uppercase">
+                    {isSelected ? 'ACTIVE PHASE' : 'INSPECT PHASE →'}
+                  </span>
+                  <ArrowRight
+                    className={`w-3.5 h-3.5 text-[#F97316] transition-transform ${
+                      isSelected ? 'translate-x-1' : ''
+                    }`}
+                  />
+                </div>
+              </motion.button>
             );
           })}
         </div>
 
-        {/* MAIN INTERACTIVE SIMULATOR CANVAS DECK */}
+        {/* MAIN ACTIVE STEP CANVAS DECK */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeStep.id}
@@ -301,174 +376,157 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   >
                     <ArrowRight className="w-4 h-4" />
                   </button>
+
+                  <span className="text-xs font-mono text-zinc-400">
+                    Step {activeStepIdx + 1} of {simulatorSteps.length}
+                  </span>
                 </div>
               </div>
 
-              {/* RIGHT COLUMN: LIVE TACTILE SIMULATOR WIDGET (6 COLS) */}
+              {/* RIGHT COLUMN: INTERACTIVE ENGINE CANVAS (6 COLS) */}
               <div className="lg:col-span-6">
-                <div
-                  className={`rounded-2xl border p-6 sm:p-7 relative text-left shadow-xl transition-all duration-500 ${
-                    isDarkMode
-                      ? 'bg-[#0E0E11] border-zinc-800 text-white'
-                      : 'bg-zinc-50 border-zinc-200 text-zinc-900'
-                  }`}
-                >
+                <div className="rounded-2xl border border-zinc-800 bg-[#09090B] p-5 sm:p-6 shadow-2xl relative space-y-4">
                   
-                  {/* WIDGET 01: RAPID BOTTLENECK SCANNER */}
-                  {activeStepIdx === 0 && (
+                  {/* STEP 01 WIDGET: 24H BOTTLENECK TELEMETRY AUDIT */}
+                  {activeStep.id === 'entry' && (
                     <div className="space-y-4">
-                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                      <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
                         <div className="flex items-center gap-2">
                           <Search className="w-4 h-4 text-[#F97316]" />
-                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">
-                            24h Bottleneck Telemetry Audit
-                          </span>
+                          <span className="text-xs font-mono font-bold text-white uppercase">24H BOTTLENECK TELEMETRY AUDIT</span>
                         </div>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F97316]/10 text-[#F97316] font-bold">
-                          LIVE ENGINE
-                        </span>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F97316]/20 text-[#F97316] font-bold">LIVE ENGINE</span>
                       </div>
 
-                      <div className="space-y-3">
-                        <div className="flex items-center justify-between text-xs p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
-                          <span className="text-zinc-300">Homepage Load Speed</span>
+                      <div className="space-y-2.5 font-mono text-xs">
+                        <div className="p-3 rounded-xl bg-zinc-900/90 border border-zinc-800 flex justify-between items-center">
+                          <span className="text-zinc-400">Homepage Load Speed</span>
                           <span className={scannedLeaksFixed ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
-                            {scannedLeaksFixed ? '0.4s (Fixed)' : '3.8s (Slow Leak)'}
+                            {scannedLeaksFixed ? '0.48s (Instant baseline)' : '3.8s (Slow Leak)'}
                           </span>
                         </div>
-
-                        <div className="flex items-center justify-between text-xs p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
-                          <span className="text-zinc-300">Headline Value Pitch</span>
+                        <div className="p-3 rounded-xl bg-zinc-900/90 border border-zinc-800 flex justify-between items-center">
+                          <span className="text-zinc-400">Headline Value Pitch</span>
                           <span className={scannedLeaksFixed ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
-                            {scannedLeaksFixed ? '100% Clear' : 'Vague / Confusing'}
+                            {scannedLeaksFixed ? '100% Unbeatable Clarity' : 'Vague / Confusing'}
                           </span>
                         </div>
-
-                        <div className="flex items-center justify-between text-xs p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
-                          <span className="text-zinc-300">Lead Capture Rate</span>
+                        <div className="p-3 rounded-xl bg-zinc-900/90 border border-zinc-800 flex justify-between items-center">
+                          <span className="text-zinc-400">Lead Capture Rate</span>
                           <span className={scannedLeaksFixed ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
-                            {scannedLeaksFixed ? '3.8X Conversion' : '1.2% (Dropping)'}
+                            {scannedLeaksFixed ? '7.9% (+340% Lift)' : '1.2% (Dropping)'}
                           </span>
                         </div>
                       </div>
 
                       <button
                         onClick={() => setScannedLeaksFixed(!scannedLeaksFixed)}
-                        className="w-full py-3 rounded-xl bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#F97316]/30 hover:scale-[1.02] transition-transform cursor-pointer"
+                        className="w-full py-3 rounded-xl bg-[#F97316] text-white font-mono text-xs font-bold uppercase tracking-wider hover:bg-[#EA580C] transition-all cursor-pointer shadow-lg shadow-[#F97316]/30"
                       >
-                        {scannedLeaksFixed ? 'Reset Audit Simulation' : 'Fix Bottlenecks Now'}
+                        {scannedLeaksFixed ? '✓ BOTTLENECKS ELIMINATED' : 'FIX BOTTLENECKS NOW'}
                       </button>
                     </div>
                   )}
 
-                  {/* WIDGET 02: POSITIONING CLARITY TUNER */}
-                  {activeStepIdx === 1 && (
+                  {/* STEP 02 WIDGET: VALUE PROPOSITION CLARITY METER */}
+                  {activeStep.id === 'positioning' && (
                     <div className="space-y-4">
-                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                      <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
                         <div className="flex items-center gap-2">
                           <Sliders className="w-4 h-4 text-[#FB923C]" />
-                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">
-                            Brand Positioning Tuner
-                          </span>
+                          <span className="text-xs font-mono font-bold text-white uppercase">MESSAGING CLARITY TELEMETRY</span>
                         </div>
-                        <span className="text-xs font-mono text-[#FB923C] font-bold">
-                          {clarityValue}% CLARITY
-                        </span>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#FB923C]/20 text-[#FB923C] font-bold">3 SEC RULE</span>
                       </div>
 
-                      <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-2">
-                        <div className="text-[11px] font-mono text-zinc-400 uppercase">Live Headline Pitch Output:</div>
-                        <div className="text-sm font-bold text-white font-display">
-                          {clarityValue > 80
-                            ? '"We Build High-Speed Growth Sites That Convert Visitors Into Pipeline."'
-                            : '"We offer comprehensive multi-disciplinary creative solutions for brands."'}
+                      <div className="space-y-3">
+                        <div className="flex justify-between text-xs font-mono">
+                          <span className="text-zinc-400">Buyer Attention Clarity:</span>
+                          <span className="text-[#FB923C] font-bold">{clarityValue}%</span>
                         </div>
-                      </div>
 
-                      <div className="space-y-1">
-                        <div className="flex justify-between text-[11px] text-zinc-400 font-mono">
-                          <span>Generic Noise</span>
-                          <span>Unbeatable Position</span>
-                        </div>
                         <input
                           type="range"
                           min="30"
                           max="100"
                           value={clarityValue}
-                          onChange={(e) => setClarityValue(Number(e.target.value))}
+                          onChange={(e) => setClarityValue(parseInt(e.target.value))}
                           className="w-full accent-[#FB923C] cursor-pointer"
                         />
+
+                        <div className="p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300">
+                          {clarityValue > 80 ? (
+                            <span className="text-emerald-400 font-bold">✓ High Conversion Pitch: Prospects instantly grasp your market advantage in 3 seconds.</span>
+                          ) : (
+                            <span className="text-amber-400">× Generic Noise: Potential buyers leave because your positioning sounds like everyone else.</span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   )}
 
-                  {/* WIDGET 03: HIGH-SPEED ACCELERATION GAUGE */}
-                  {activeStepIdx === 2 && (
-                    <div className="space-y-4 text-center">
-                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                  {/* STEP 03 WIDGET: LIGHTHOUSE 99+ SPEED BOOST */}
+                  {activeStep.id === 'build' && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
                         <div className="flex items-center gap-2">
                           <Gauge className="w-4 h-4 text-[#38BDF8]" />
-                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">
-                            Google Performance Telemetry
-                          </span>
+                          <span className="text-xs font-mono font-bold text-white uppercase">LIGHTHOUSE SPEED ENGINE</span>
                         </div>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#38BDF8]/10 text-[#38BDF8] font-bold">
-                          {boostedSpeed ? '99/100 SPEED' : '45/100 SLOW'}
-                        </span>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#38BDF8]/20 text-[#38BDF8] font-bold">REACT CODE</span>
                       </div>
 
-                      <div className="py-4 flex flex-col items-center justify-center">
-                        <div className="text-5xl font-black font-mono tracking-tight text-[#38BDF8]">
-                          {boostedSpeed ? '99 / 100' : '45 / 100'}
+                      <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-2 text-xs font-mono">
+                        <div className="flex justify-between">
+                          <span className="text-zinc-400">Performance Score</span>
+                          <span className={boostedSpeed ? 'text-emerald-400 font-bold' : 'text-zinc-300'}>
+                            {boostedSpeed ? '100 / 100' : '62 / 100'}
+                          </span>
                         </div>
-                        <div className="text-xs font-bold text-zinc-400 mt-1 uppercase tracking-wider">
-                          {boostedSpeed ? 'Ultra-Fast Lighthouse Score' : 'Unoptimized Template Speed'}
+                        <div className="flex justify-between">
+                          <span className="text-zinc-400">First Contentful Paint</span>
+                          <span className={boostedSpeed ? 'text-emerald-400 font-bold' : 'text-zinc-300'}>
+                            {boostedSpeed ? '0.3s' : '2.1s'}
+                          </span>
                         </div>
                       </div>
 
                       <button
                         onClick={() => setBoostedSpeed(!boostedSpeed)}
-                        className="w-full py-3 rounded-xl bg-gradient-to-r from-[#38BDF8] to-[#0284C7] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#38BDF8]/30 hover:scale-[1.02] transition-transform cursor-pointer"
+                        className="w-full py-3 rounded-xl bg-[#38BDF8] text-zinc-950 font-mono text-xs font-bold uppercase tracking-wider hover:bg-sky-400 transition-all cursor-pointer shadow-lg shadow-[#38BDF8]/30"
                       >
-                        {boostedSpeed ? 'Reset Speed Score' : 'Engage 99+ Speed Acceleration'}
+                        {boostedSpeed ? '✓ LIGHTHOUSE 100/100 ACTIVE' : 'OPTIMIZE SPEED ENGINE'}
                       </button>
                     </div>
                   )}
 
-                  {/* WIDGET 04: REVENUE MULTIPLIER TRAJECTORY */}
-                  {activeStepIdx === 3 && (
+                  {/* STEP 04 WIDGET: REVENUE SCALE TELEMETRY */}
+                  {activeStep.id === 'scale' && (
                     <div className="space-y-4">
-                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                      <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
                         <div className="flex items-center gap-2">
                           <Activity className="w-4 h-4 text-[#10B981]" />
-                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">
-                            Revenue Pipeline Multiplier
-                          </span>
+                          <span className="text-xs font-mono font-bold text-white uppercase">REVENUE SCALE TELEMETRY</span>
                         </div>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-bold">
-                          {multiplierMode ? '+3.4X MULTIPLIER' : '1.0X BASELINE'}
-                        </span>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#10B981]/20 text-[#10B981] font-bold">4.8X ROAS</span>
                       </div>
 
-                      <div className="h-28 flex items-end justify-around p-3 rounded-xl bg-zinc-900/80 border border-zinc-800">
-                        <div className="w-10 bg-zinc-700 rounded-t-md h-1/3 text-[10px] text-center font-mono text-zinc-300">M1</div>
-                        <div className="w-10 bg-zinc-600 rounded-t-md h-1/2 text-[10px] text-center font-mono text-zinc-300">M2</div>
-                        <div
-                          className="w-10 rounded-t-md transition-all duration-500 text-[10px] text-center font-mono font-bold text-white flex items-center justify-center"
-                          style={{
-                            height: multiplierMode ? '90%' : '40%',
-                            backgroundColor: multiplierMode ? '#10B981' : '#52525B',
-                          }}
-                        >
-                          {multiplierMode ? '3.4X' : '1.2X'}
+                      <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-2 text-xs font-mono text-zinc-300">
+                        <div className="flex justify-between">
+                          <span>Monthly Inbound Pipeline:</span>
+                          <span className="text-[#10B981] font-bold">{multiplierMode ? '$142,500' : '$28,000'}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Conversion Rate:</span>
+                          <span className="text-[#10B981] font-bold">{multiplierMode ? '7.9%' : '1.8%'}</span>
                         </div>
                       </div>
 
                       <button
                         onClick={() => setMultiplierMode(!multiplierMode)}
-                        className="w-full py-3 rounded-xl bg-gradient-to-r from-[#10B981] to-[#059669] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-emerald-500/30 hover:scale-[1.02] transition-transform cursor-pointer"
+                        className="w-full py-3 rounded-xl bg-[#10B981] text-zinc-950 font-mono text-xs font-bold uppercase tracking-wider hover:bg-emerald-400 transition-all cursor-pointer shadow-lg shadow-[#10B981]/30"
                       >
-                        {multiplierMode ? 'Show Baseline Growth' : 'Engage Roos Growth Multiplier'}
+                        {multiplierMode ? '✓ 4.8X MULTIPLIER ACTIVE' : 'ENABLE REVENUE MULTIPLIER'}
                       </button>
                     </div>
                   )}
@@ -480,22 +538,14 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </motion.div>
         </AnimatePresence>
 
-        {/* BOTTOM CTA BUTTON */}
-        {onOpenInquiry && (
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mt-8 sm:mt-10 flex flex-col items-center justify-center text-center space-y-4"
-          >
-            <AlphaRoosButton
-              text="Get Your Free Audit"
-              onClick={onOpenInquiry}
-              isDarkMode={isDarkMode}
-            />
-          </motion.div>
-        )}
+        {/* BOTTOM ACTION CTA */}
+        <div className="pt-4 text-center">
+          <AlphaRoosButton
+            text="Get Your Free Growth Audit"
+            onClick={() => onOpenInquiry?.()}
+            isDarkMode={isDarkMode}
+          />
+        </div>
 
       </div>
     </section>

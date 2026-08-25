@@ -102,21 +102,24 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-center max-w-6xl mx-auto space-y-6 flex flex-col items-center mb-1 sm:mb-2 relative z-10"
+          className="text-center max-w-3xl mx-auto space-y-4 flex flex-col items-center mb-1 sm:mb-2"
         >
-          <motion.h1
+          <motion.h2
             variants={itemVariants}
-            className={`font-display text-4xl sm:text-7xl md:text-[86px] font-semibold tracking-tighter leading-[1.04] text-center transition-colors duration-500 ${
+            className={`font-display text-3xl sm:text-5xl md:text-6xl font-semibold tracking-tighter leading-[1.04] text-center transition-colors duration-500 ${
               isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
             }`}
           >
-            <span className="block sm:whitespace-nowrap leading-[1.04]">
-              You bring ambition.
-            </span>
-            <span className="block sm:whitespace-nowrap leading-[1.04] mt-1">
-              We’ll build the <span className="text-gradient-brand">momentum</span>
-            </span>
-          </motion.h1>
+            How We Step In & Get You To The Goal Fast.
+          </motion.h2>
+          <motion.p
+            variants={itemVariants}
+            className={`font-sans text-lg sm:text-xl md:text-2xl text-center max-w-2xl transition-colors duration-500 ${
+              isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
+            }`}
+          >
+            From brand positioning and custom web development to growth marketing and automation—explore how we turn your vision into market momentum.
+          </motion.p>
         </motion.div>
 
         {/* 2. MIDDLE 2-COLUMN GRID (+15% WIDER SECTION CONTAINER) */}
