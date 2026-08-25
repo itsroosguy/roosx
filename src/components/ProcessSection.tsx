@@ -163,91 +163,43 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* PINTEREST-INSPIRED CONTINUOUS WINDING SNAKE LINE ROADMAP (ZERO BOXES) */}
-        <div className="relative py-4">
+        {/* PINTEREST-INSPIRED SINGLE VERTICAL COLUMN EDITORIAL TIMELINE (ZERO BOXES) */}
+        <div className="relative max-w-4xl mx-auto py-4 text-left">
           
-          {/* CONTINUOUS WINDING SVG SNAKE LINE (VISIBLE ON DESKTOP & TABLET) */}
-          <div className="absolute inset-0 flex justify-center pointer-events-none hidden md:block">
-            <svg
-              className="h-full w-full max-w-3xl overflow-visible"
-              viewBox="0 0 800 1200"
-              fill="none"
-            >
-              <defs>
-                <linearGradient id="snakePathGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="#F97316" />
-                  <stop offset="50%" stopColor="#FB923C" />
-                  <stop offset="100%" stopColor="#EA580C" />
-                </linearGradient>
-              </defs>
-              <path
-                d="M 200,80 C 600,80 600,380 200,380 C -200,380 -200,680 200,680 C 600,680 600,980 200,980"
-                stroke="url(#snakePathGrad)"
-                strokeWidth="3"
-                strokeDasharray="8 8"
-                className="opacity-70"
-              />
-            </svg>
-          </div>
+          {/* CONTINUOUS VERTICAL CONNECTING LASER LINE */}
+          <div className="absolute top-10 bottom-10 left-8 sm:left-10 w-0.5 bg-gradient-to-b from-[#F97316] via-[#FB923C] to-[#EA580C] opacity-70 pointer-events-none" />
 
-          {/* 4 EDITORIAL OPEN ROADMAP STEPS */}
-          <div className="space-y-20 sm:space-y-32 relative">
+          {/* 4 EDITORIAL VERTICAL COLUMN STEPS */}
+          <div className="space-y-14 sm:space-y-20 relative">
             {fastTrackSteps.map((step, idx) => {
-              const isLeft = step.align === 'left';
-
               return (
                 <motion.div
                   key={step.id}
-                  initial={{ opacity: 0, y: 35 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: -25 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className={`grid grid-cols-1 md:grid-cols-12 gap-8 items-center text-left relative ${
-                    isLeft ? '' : 'md:flex-row-reverse'
-                  }`}
+                  transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex items-start gap-6 sm:gap-10 relative"
                 >
-                  
-                  {/* STEP NUMBER & NODE BADGE (CENTER/LEFT) */}
-                  <div
-                    className={`md:col-span-5 flex flex-col ${
-                      isLeft ? 'md:items-end md:text-right' : 'md:items-start md:text-left'
-                    }`}
-                  >
-                    <div className="flex items-center gap-4 mb-2">
-                      <div className="relative">
-                        {/* Glowing Circular Number Circle (No Box Card) */}
-                        <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl sm:text-3xl font-black shadow-xl shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 relative z-10">
-                          {step.num}
-                        </div>
-                        <span className="absolute -inset-2 rounded-full border border-[#F97316]/30 animate-ping opacity-25" />
-                      </div>
-
-                      <div>
-                        <span className="text-xs font-mono font-bold px-2.5 py-1 rounded-full bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/30 uppercase tracking-wider block w-max mb-1">
-                          {step.timeframe}
-                        </span>
-                        <div className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-                          {step.badgeText}
-                        </div>
-                      </div>
+                  {/* STEP NUMBER & NODE BADGE (SITTING DIRECTLY ON VERTICAL LINE) */}
+                  <div className="relative shrink-0 pt-1">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl sm:text-3xl font-black shadow-xl shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 relative z-10">
+                      {step.num}
                     </div>
-
-                    {/* Floating Handwritten Callout Annotation (Pinterest Style) */}
-                    <motion.div
-                      animate={{ y: [-2, 2, -2] }}
-                      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                      className="mt-3 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] rotate-[-2deg] shadow-sm"
-                    >
-                      <Sparkles className="w-3.5 h-3.5 shrink-0" />
-                      <span>"{step.annotation}"</span>
-                    </motion.div>
+                    <span className="absolute -inset-2 rounded-full border border-[#F97316]/30 animate-ping opacity-25" />
                   </div>
 
-                  {/* CENTER SPACER (2 COLS) */}
-                  <div className="hidden md:block md:col-span-2" />
+                  {/* STEP CONTENT & NARRATIVE (SINGLE COLUMN FLOW) */}
+                  <div className="space-y-4 pt-1 flex-1">
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/30 uppercase tracking-wider">
+                        {step.timeframe}
+                      </span>
+                      <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+                        {step.badgeText}
+                      </span>
+                    </div>
 
-                  {/* STEP CONTENT & NARRATIVE (5 COLS - OPEN EDITORIAL TEXT, NO BOX CARDS) */}
-                  <div className="md:col-span-5 space-y-4">
                     <div>
                       <h3
                         className={`font-display text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight ${
@@ -262,7 +214,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     </div>
 
                     <p
-                      className={`text-sm sm:text-base leading-relaxed font-normal ${
+                      className={`text-sm sm:text-base leading-relaxed font-normal max-w-2xl ${
                         isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
                       }`}
                     >
@@ -270,7 +222,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     </p>
 
                     {/* Open Bullet Milestones (No Card Enclosures) */}
-                    <div className="space-y-2 pt-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 max-w-2xl">
                       {step.keyPoints.map((point, pIdx) => (
                         <div key={pIdx} className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold">
                           <div className="w-5 h-5 rounded-full bg-[#F97316]/15 text-[#F97316] flex items-center justify-center shrink-0 border border-[#F97316]/30">
@@ -280,13 +232,22 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                         </div>
                       ))}
                     </div>
+
+                    {/* Floating Handwritten Callout Annotation */}
+                    <motion.div
+                      animate={{ y: [-2, 2, -2] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                      className="pt-1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] shadow-sm"
+                    >
+                      <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                      <span>"{step.annotation}"</span>
+                    </motion.div>
                   </div>
 
                 </motion.div>
               );
             })}
           </div>
-
         </div>
 
         {/* BOTTOM CTA AUDIT TRIGGER (NO PPT BOX) */}
