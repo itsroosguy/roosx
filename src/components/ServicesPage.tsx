@@ -519,7 +519,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 }`}
               >
                 <div className="text-[#FF7A1A] text-xs font-mono font-bold uppercase">
-                  0{pIdx + 1} • PILLAR
+                  0{pIdx + 1}
                 </div>
                 <h3 className={`font-display text-xl font-bold ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
                   {pillar.title}
