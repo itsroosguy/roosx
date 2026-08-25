@@ -3,11 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
   Zap,
   Sparkles,
-  Car,
-  Award,
-  Wrench,
-  Rocket,
   CheckCircle2,
+  Gauge,
+  Sliders,
+  Search,
+  Activity,
   ArrowRight,
   ArrowLeft,
 } from 'lucide-react';
@@ -18,67 +18,58 @@ interface ProcessSectionProps {
   isDarkMode?: boolean;
 }
 
-interface StepDetail {
+interface StepConfig {
   id: string;
   num: string;
-  timeframe: string;
+  phaseTime: string;
   badgeTag: string;
   title: string;
   headline: string;
   description: string;
   annotation: string;
   accentColor: string;
-  glowShadow: string;
-  trackIcon: React.ElementType;
-  trackLabel: string;
   deliverables: string[];
 }
 
-const roadmapSteps: StepDetail[] = [
+const simulatorSteps: StepConfig[] = [
   {
-    id: 'step-01',
+    id: 'entry',
     num: '01',
-    timeframe: 'DAY 01 • RAPID ENTRY',
+    phaseTime: 'DAY 01 • RAPID ENTRY',
     badgeTag: 'INSTANT TRACTION',
     title: 'Rapid Audit & Entry',
     headline: 'We Step In Within 24 Hours',
     description:
-      'No 3-month onboarding delay. Within 24 hours of connecting, we dive straight into your website, messaging, and funnel to locate exact points of lost revenue.',
+      'No 3-month onboarding delay. Within 24 hours of connecting, we dive straight into your site, messaging, and funnel to locate exact lost revenue points.',
     annotation: '30-min call • Zero fluff • Immediate clarity',
     accentColor: '#F97316',
-    glowShadow: 'rgba(249, 115, 22, 0.6)',
-    trackIcon: Car,
-    trackLabel: 'entry',
     deliverables: [
       '30-minute discovery & bottleneck audit',
       'Locate immediate conversion leaks',
-      'Prioritized action plan for launch',
+      'Clear, prioritized action plan for launch',
     ],
   },
   {
-    id: 'step-02',
+    id: 'positioning',
     num: '02',
-    timeframe: 'DAYS 02–05 • POSITIONING',
+    phaseTime: 'DAYS 02–05 • POSITIONING',
     badgeTag: 'POSITIONED TO WIN',
     title: 'Strategy & Copy',
     headline: 'Define What Makes You Unbeatable',
     description:
-      'We craft sharp, high-converting conversion copy so potential buyers get your unique value in under 3 seconds and trust your brand immediately.',
+      'We craft sharp conversion messaging so potential buyers get your unique value in under 3 seconds and trust your brand immediately.',
     annotation: 'All decisions explained, no black boxes x',
     accentColor: '#FB923C',
-    glowShadow: 'rgba(251, 146, 60, 0.6)',
-    trackIcon: Award,
-    trackLabel: 'unbeatable',
     deliverables: [
-      'Conversion headline & high-impact copy',
+      'Conversion-focused headline & body copy',
       'Distinct brand voice & market positioning',
       'Frictionless customer navigation roadmap',
     ],
   },
   {
-    id: 'step-03',
+    id: 'build',
     num: '03',
-    timeframe: 'DAYS 06–15 • BUILD SPRINT',
+    phaseTime: 'DAYS 06–15 • BUILD SPRINT',
     badgeTag: '99+ SPEED PERFORMANCE',
     title: 'High-Velocity Build',
     headline: 'Production Without The Friction',
@@ -86,9 +77,6 @@ const roadmapSteps: StepDetail[] = [
       'Custom, ultra-fast interfaces built in parallel. Up to 2 rounds of rapid collaborative edits ensure absolute perfection before deployment.',
     annotation: 'Up to 2 rounds of rapid collaborative edits',
     accentColor: '#38BDF8',
-    glowShadow: 'rgba(56, 189, 248, 0.6)',
-    trackIcon: Wrench,
-    trackLabel: 'friction',
     deliverables: [
       'Custom modern UI/UX (No templates)',
       'High-speed code with 99+ Google score',
@@ -96,19 +84,16 @@ const roadmapSteps: StepDetail[] = [
     ],
   },
   {
-    id: 'step-04',
+    id: 'scale',
     num: '04',
-    timeframe: 'DAY 16+ • LAUNCH & SCALE',
+    phaseTime: 'DAY 16+ • LAUNCH & SCALE',
     badgeTag: '+3X GROWTH MULTIPLIER',
     title: 'Launch & Scale',
     headline: 'Go Live & Multiply Revenue',
     description:
-      'Zero-downtime deployment with active conversion telemetry, lead analytics tracking, and continuous revenue tuning for long-term momentum.',
+      'Zero-downtime deployment with active conversion telemetry, analytics tracking, and continuous revenue tuning for long-term momentum.',
     annotation: 'Turn visitors into long-term revenue',
     accentColor: '#10B981',
-    glowShadow: 'rgba(16, 185, 129, 0.6)',
-    trackIcon: Rocket,
-    trackLabel: 'launch',
     deliverables: [
       'Zero-downtime deployment & DNS handoff',
       'Active conversion tracking & lead analytics',
@@ -122,17 +107,23 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   isDarkMode = false,
 }) => {
   const [activeStepIdx, setActiveStepIdx] = useState<number>(0);
+  
+  // Interactive Widget States
+  const [scannedLeaksFixed, setScannedLeaksFixed] = useState<boolean>(false);
+  const [clarityValue, setClarityValue] = useState<number>(85);
+  const [boostedSpeed, setBoostedSpeed] = useState<boolean>(false);
+  const [multiplierMode, setMultiplierMode] = useState<boolean>(true);
 
-  const activeStep = roadmapSteps[activeStepIdx];
+  const activeStep = simulatorSteps[activeStepIdx];
 
   return (
     <section
       id="process"
-      className={`relative py-20 sm:py-28 transition-colors duration-500 overflow-hidden ${
+      className={`relative py-24 sm:py-32 transition-colors duration-500 overflow-hidden ${
         isDarkMode ? 'bg-[#0A0A0A] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
-      {/* Subtle Background Grid Mesh */}
+      {/* Background Architectural Grid */}
       <div
         className={`absolute inset-0 bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_70%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none ${
           isDarkMode
@@ -141,26 +132,33 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         }`}
       />
 
-      {/* Ambient Radial Spotlight */}
+      {/* Ambient Orange Glow Spotlight */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-radial from-[#F97316]/15 via-[#FB923C]/5 to-transparent blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* HEADER BLOCK WITH GIANT ROADMAP TITLE */}
+        {/* HEADER BLOCK */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 space-y-3"
+          className="text-center max-w-4xl mx-auto mb-16 sm:mb-20 space-y-4"
         >
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/30 text-xs font-mono font-bold text-[#F97316] uppercase tracking-widest">
             <Zap className="w-3.5 h-3.5" />
-            <span>High-Velocity Execution Engine</span>
+            <span>Interactive Velocity Simulator</span>
           </div>
 
-          <h2 className="font-display text-5xl sm:text-7xl font-black tracking-tight leading-none bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#10B981] bg-clip-text text-transparent opacity-95">
-            Roadmap
+          <h2
+            className={`font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-[1.08] ${
+              isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
+            }`}
+          >
+            <span className="block">How We Step In & Get You</span>
+            <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
+              To The Goal — Fast.
+            </span>
           </h2>
 
           <p
@@ -168,120 +166,47 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
               isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
             }`}
           >
-            Click any milestone on the glowing highway to inspect how we step in and reach your goal fast.
+            Test our interactive execution engine below to experience how we eliminate friction and accelerate your launch.
           </p>
         </motion.div>
 
-        {/* TOP GLOWING ROADMAP HIGHWAY TRACK (MATCHING USER SKETCH / PINTEREST IMAGE) */}
-        <div className="relative py-8 mb-12 max-w-6xl mx-auto">
-          
-          {/* HIGHWAY SVG GLOWING CURVED PATH (DESKTOP & TABLET) */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none hidden md:block">
-            <svg
-              className="w-full h-36 overflow-visible"
-              viewBox="0 0 1000 140"
-              fill="none"
-            >
-              <defs>
-                <linearGradient id="highwayGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#F97316" />
-                  <stop offset="33%" stopColor="#FB923C" />
-                  <stop offset="66%" stopColor="#38BDF8" />
-                  <stop offset="100%" stopColor="#10B981" />
-                </linearGradient>
-                <filter id="glowFilter" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="6" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-              </defs>
-
-              {/* Outer Neon Glow Beam */}
-              <path
-                d="M 60,70 C 250,10 450,130 650,20 C 800,10 900,100 940,70"
-                stroke="url(#highwayGrad)"
-                strokeWidth="10"
-                strokeLinecap="round"
-                className="opacity-30 blur-md"
-              />
-              {/* Inner Glowing Track Line */}
-              <path
-                d="M 60,70 C 250,10 450,130 650,20 C 800,10 900,100 940,70"
-                stroke="url(#highwayGrad)"
-                strokeWidth="5"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-
-          {/* 4 INTERACTIVE WAYPOINT NODES ON THE HIGHWAY */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 relative z-10">
-            {roadmapSteps.map((step, idx) => {
-              const TrackIcon = step.trackIcon;
-              const isSelected = idx === activeStepIdx;
-
-              return (
-                <button
-                  key={step.id}
-                  onClick={() => setActiveStepIdx(idx)}
-                  className={`group relative flex flex-col items-center p-4 sm:p-5 rounded-2xl border transition-all duration-300 cursor-pointer text-center ${
-                    isSelected
-                      ? 'bg-[#18181B] border-[#FDBA74] text-white shadow-2xl scale-105'
-                      : isDarkMode
-                      ? 'bg-[#141417]/80 text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-white'
-                      : 'bg-white/90 text-zinc-600 border-zinc-200 hover:border-zinc-400 hover:text-zinc-900 shadow-sm'
-                  }`}
-                  style={{
-                    boxShadow: isSelected ? `0 0 25px ${step.glowShadow}` : undefined,
-                  }}
-                >
-                  {/* Floating Micro-Label Pill */}
+        {/* KINETIC PHASE SELECTOR BAR */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-5xl mx-auto mb-10">
+          {simulatorSteps.map((step, idx) => {
+            const isSelected = idx === activeStepIdx;
+            return (
+              <button
+                key={step.id}
+                onClick={() => setActiveStepIdx(idx)}
+                className={`flex flex-col items-center p-3.5 sm:p-4 rounded-2xl border transition-all duration-300 cursor-pointer text-center relative ${
+                  isSelected
+                    ? 'bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white border-[#FDBA74] shadow-xl shadow-[#F97316]/30 scale-105'
+                    : isDarkMode
+                    ? 'bg-[#141417] text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-white'
+                    : 'bg-white text-zinc-600 border-zinc-200 hover:border-zinc-300 hover:text-zinc-900 shadow-sm'
+                }`}
+              >
+                <div className="flex items-center gap-2 mb-1">
                   <span
-                    className="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full mb-2 border transition-colors"
-                    style={{
-                      backgroundColor: `${step.accentColor}15`,
-                      color: step.accentColor,
-                      borderColor: `${step.accentColor}40`,
-                    }}
+                    className={`text-[10px] font-mono font-bold px-2 py-0.5 rounded-md ${
+                      isSelected ? 'bg-white/20 text-white' : 'bg-[#F97316]/10 text-[#F97316]'
+                    }`}
                   >
-                    {step.trackLabel}
+                    {step.num}
                   </span>
-
-                  {/* Node Circle Button */}
-                  <div className="relative mb-2">
-                    <div
-                      className="w-14 h-14 sm:w-16 sm:h-16 rounded-full text-white flex items-center justify-center font-display text-xl sm:text-2xl font-black transition-transform group-hover:scale-110 shadow-lg"
-                      style={{
-                        backgroundColor: step.accentColor,
-                        boxShadow: `0 0 15px ${step.glowShadow}`,
-                      }}
-                    >
-                      {step.num}
-                    </div>
-
-                    {/* Active Ping Animation */}
-                    {isSelected && (
-                      <span
-                        className="absolute -inset-2 rounded-full border animate-ping opacity-40 pointer-events-none"
-                        style={{ borderColor: step.accentColor }}
-                      />
-                    )}
-                  </div>
-
-                  {/* Step Title & Icon */}
-                  <div className="flex items-center gap-1.5 text-xs font-bold font-display tracking-tight">
-                    <TrackIcon className="w-3.5 h-3.5 shrink-0" style={{ color: step.accentColor }} />
-                    <span>{step.title}</span>
-                  </div>
-                  <span className="text-[10px] font-mono font-semibold text-zinc-500 mt-0.5">
-                    {step.timeframe.split('•')[0]}
+                  <span className="text-[11px] font-mono font-bold uppercase tracking-tight">
+                    {step.phaseTime.split('•')[0]}
                   </span>
-                </button>
-              );
-            })}
-          </div>
+                </div>
+                <div className="font-display text-xs sm:text-sm font-extrabold tracking-tight">
+                  {step.title}
+                </div>
+              </button>
+            );
+          })}
         </div>
 
-        {/* BOTTOM ACTIVE CONTENT EXPANSION DRAWER (CLICK TO REVEAL DETAILS) */}
+        {/* MAIN INTERACTIVE SIMULATOR CANVAS DECK */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeStep.id}
@@ -289,35 +214,29 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -20, scale: 0.98 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className={`max-w-4xl mx-auto rounded-3xl border p-6 sm:p-10 shadow-2xl relative overflow-hidden text-left transition-colors duration-500 ${
+            className={`max-w-5xl mx-auto rounded-3xl border p-6 sm:p-10 shadow-2xl relative overflow-hidden text-left transition-colors duration-500 ${
               isDarkMode
-                ? 'bg-[#141417]/95 border-zinc-800 text-white shadow-black/70'
+                ? 'bg-[#141417]/95 border-zinc-800 text-white shadow-black/80'
                 : 'bg-white border-zinc-200 text-zinc-900 shadow-xl'
             }`}
           >
-            {/* Top Accent Color Line */}
+            {/* Top Accent Line */}
             <div
               className="absolute top-0 left-0 right-0 h-1.5"
               style={{ backgroundColor: activeStep.accentColor }}
             />
 
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
-              {/* LEFT CONTENT NARRATIVE (7 COLS) */}
-              <div className="lg:col-span-7 space-y-5">
+              {/* LEFT COLUMN: HUMAN NARRATIVE & DELIVERABLES (6 COLS) */}
+              <div className="lg:col-span-6 space-y-5">
                 <div className="flex items-center gap-3">
-                  <span
-                    className="text-xs font-mono font-bold px-3 py-1 rounded-full border uppercase tracking-wider"
-                    style={{
-                      backgroundColor: `${activeStep.accentColor}15`,
-                      color: activeStep.accentColor,
-                      borderColor: `${activeStep.accentColor}40`,
-                    }}
-                  >
-                    {activeStep.timeframe}
+                  <span className="text-3xl font-mono font-black text-[#F97316]">
+                    {activeStep.num}
                   </span>
-                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
-                    {activeStep.badgeTag}
+                  <div className="h-4 w-px bg-zinc-700" />
+                  <span className="text-xs font-mono font-bold uppercase tracking-widest text-zinc-400">
+                    {activeStep.phaseTime}
                   </span>
                 </div>
 
@@ -325,7 +244,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   <h3 className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">
                     {activeStep.headline}
                   </h3>
-                  <div className="text-sm font-bold mt-1" style={{ color: activeStep.accentColor }}>
+                  <div className="text-sm font-bold text-[#F97316] mt-1">
                     {activeStep.title}
                   </div>
                 </div>
@@ -338,25 +257,31 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   {activeStep.description}
                 </p>
 
-                {/* Floating Handwritten Callout Annotation */}
-                <div
-                  className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-xs font-semibold shadow-sm"
-                  style={{
-                    backgroundColor: `${activeStep.accentColor}15`,
-                    color: activeStep.accentColor,
-                    borderColor: `${activeStep.accentColor}40`,
-                  }}
-                >
+                {/* Floating Handwritten Callout Note */}
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] shadow-sm">
                   <Sparkles className="w-3.5 h-3.5 shrink-0" />
                   <span>"{activeStep.annotation}"</span>
                 </div>
 
-                {/* Step Switcher Buttons */}
+                {/* Key Milestone Bullet Points */}
+                <div className="space-y-2.5 pt-2 border-t border-zinc-800/80">
+                  <div className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+                    Key Deliverables:
+                  </div>
+                  {activeStep.deliverables.map((item, dIdx) => (
+                    <div key={dIdx} className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold">
+                      <CheckCircle2 className="w-4 h-4 text-[#F97316] shrink-0" />
+                      <span className={isDarkMode ? 'text-zinc-200' : 'text-zinc-800'}>{item}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Switcher Buttons */}
                 <div className="pt-2 flex items-center gap-3">
                   <button
                     onClick={() =>
                       setActiveStepIdx(
-                        (prev) => (prev - 1 + roadmapSteps.length) % roadmapSteps.length
+                        (prev) => (prev - 1 + simulatorSteps.length) % simulatorSteps.length
                       )
                     }
                     className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
@@ -371,7 +296,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
                   <button
                     onClick={() =>
-                      setActiveStepIdx((prev) => (prev + 1) % roadmapSteps.length)
+                      setActiveStepIdx((prev) => (prev + 1) % simulatorSteps.length)
                     }
                     className={`p-2.5 rounded-xl border transition-all cursor-pointer ${
                       isDarkMode
@@ -382,38 +307,178 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   >
                     <ArrowRight className="w-4 h-4" />
                   </button>
-
-                  <span className="text-xs font-mono text-zinc-400 ml-2">
-                    Step {activeStepIdx + 1} of {roadmapSteps.length}
-                  </span>
                 </div>
               </div>
 
-              {/* RIGHT DELIVERABLES CARD (5 COLS) */}
-              <div className="lg:col-span-5">
+              {/* RIGHT COLUMN: LIVE TACTILE SIMULATOR WIDGET (6 COLS) */}
+              <div className="lg:col-span-6">
                 <div
-                  className={`rounded-2xl border p-6 text-left space-y-4 shadow-lg ${
-                    isDarkMode ? 'bg-[#0E0E11] border-zinc-800' : 'bg-zinc-50 border-zinc-200'
+                  className={`rounded-2xl border p-6 sm:p-7 relative text-left shadow-xl transition-all duration-500 ${
+                    isDarkMode
+                      ? 'bg-[#0E0E11] border-zinc-800 text-white'
+                      : 'bg-zinc-50 border-zinc-200 text-zinc-900'
                   }`}
                 >
-                  <div className="text-xs font-bold uppercase tracking-wider text-zinc-400 pb-2 border-b border-zinc-800/60 flex items-center justify-between">
-                    <span>Key Deliverables:</span>
-                    <span className="font-mono text-emerald-400">NO DELAYS</span>
-                  </div>
-
-                  <div className="space-y-3">
-                    {activeStep.deliverables.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5 text-xs font-semibold">
-                        <CheckCircle2
-                          className="w-4 h-4 shrink-0 mt-0.5"
-                          style={{ color: activeStep.accentColor }}
-                        />
-                        <span className={isDarkMode ? 'text-zinc-200' : 'text-zinc-800'}>
-                          {item}
+                  
+                  {/* WIDGET 01: RAPID BOTTLENECK SCANNER */}
+                  {activeStepIdx === 0 && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                        <div className="flex items-center gap-2">
+                          <Search className="w-4 h-4 text-[#F97316]" />
+                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">
+                            24h Bottleneck Telemetry Audit
+                          </span>
+                        </div>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F97316]/10 text-[#F97316] font-bold">
+                          LIVE ENGINE
                         </span>
                       </div>
-                    ))}
-                  </div>
+
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between text-xs p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                          <span className="text-zinc-300">Homepage Load Speed</span>
+                          <span className={scannedLeaksFixed ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
+                            {scannedLeaksFixed ? '0.4s (Fixed)' : '3.8s (Slow Leak)'}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center justify-between text-xs p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                          <span className="text-zinc-300">Headline Value Pitch</span>
+                          <span className={scannedLeaksFixed ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
+                            {scannedLeaksFixed ? '100% Clear' : 'Vague / Confusing'}
+                          </span>
+                        </div>
+
+                        <div className="flex items-center justify-between text-xs p-3 rounded-xl bg-zinc-900/60 border border-zinc-800">
+                          <span className="text-zinc-300">Lead Capture Rate</span>
+                          <span className={scannedLeaksFixed ? 'text-emerald-400 font-bold' : 'text-amber-400 font-bold'}>
+                            {scannedLeaksFixed ? '3.8X Conversion' : '1.2% (Dropping)'}
+                          </span>
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => setScannedLeaksFixed(!scannedLeaksFixed)}
+                        className="w-full py-3 rounded-xl bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#F97316]/30 hover:scale-[1.02] transition-transform cursor-pointer"
+                      >
+                        {scannedLeaksFixed ? 'Reset Audit Simulation' : 'Fix Bottlenecks Now'}
+                      </button>
+                    </div>
+                  )}
+
+                  {/* WIDGET 02: POSITIONING CLARITY TUNER */}
+                  {activeStepIdx === 1 && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                        <div className="flex items-center gap-2">
+                          <Sliders className="w-4 h-4 text-[#FB923C]" />
+                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">
+                            Brand Positioning Tuner
+                          </span>
+                        </div>
+                        <span className="text-xs font-mono text-[#FB923C] font-bold">
+                          {clarityValue}% CLARITY
+                        </span>
+                      </div>
+
+                      <div className="p-4 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-2">
+                        <div className="text-[11px] font-mono text-zinc-400 uppercase">Live Headline Pitch Output:</div>
+                        <div className="text-sm font-bold text-white font-display">
+                          {clarityValue > 80
+                            ? '"We Build High-Speed Growth Sites That Convert Visitors Into Pipeline."'
+                            : '"We offer comprehensive multi-disciplinary creative solutions for brands."'}
+                        </div>
+                      </div>
+
+                      <div className="space-y-1">
+                        <div className="flex justify-between text-[11px] text-zinc-400 font-mono">
+                          <span>Generic Noise</span>
+                          <span>Unbeatable Position</span>
+                        </div>
+                        <input
+                          type="range"
+                          min="30"
+                          max="100"
+                          value={clarityValue}
+                          onChange={(e) => setClarityValue(Number(e.target.value))}
+                          className="w-full accent-[#FB923C] cursor-pointer"
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* WIDGET 03: HIGH-SPEED ACCELERATION GAUGE */}
+                  {activeStepIdx === 2 && (
+                    <div className="space-y-4 text-center">
+                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                        <div className="flex items-center gap-2">
+                          <Gauge className="w-4 h-4 text-[#38BDF8]" />
+                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">
+                            Google Performance Telemetry
+                          </span>
+                        </div>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#38BDF8]/10 text-[#38BDF8] font-bold">
+                          {boostedSpeed ? '99/100 SPEED' : '45/100 SLOW'}
+                        </span>
+                      </div>
+
+                      <div className="py-4 flex flex-col items-center justify-center">
+                        <div className="text-5xl font-black font-mono tracking-tight text-[#38BDF8]">
+                          {boostedSpeed ? '99 / 100' : '45 / 100'}
+                        </div>
+                        <div className="text-xs font-bold text-zinc-400 mt-1 uppercase tracking-wider">
+                          {boostedSpeed ? 'Ultra-Fast Lighthouse Score' : 'Unoptimized Template Speed'}
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => setBoostedSpeed(!boostedSpeed)}
+                        className="w-full py-3 rounded-xl bg-gradient-to-r from-[#38BDF8] to-[#0284C7] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#38BDF8]/30 hover:scale-[1.02] transition-transform cursor-pointer"
+                      >
+                        {boostedSpeed ? 'Reset Speed Score' : 'Engage 99+ Speed Acceleration'}
+                      </button>
+                    </div>
+                  )}
+
+                  {/* WIDGET 04: REVENUE MULTIPLIER TRAJECTORY */}
+                  {activeStepIdx === 3 && (
+                    <div className="space-y-4">
+                      <div className="flex items-center justify-between pb-3 border-b border-zinc-800">
+                        <div className="flex items-center gap-2">
+                          <Activity className="w-4 h-4 text-[#10B981]" />
+                          <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-300">
+                            Revenue Pipeline Multiplier
+                          </span>
+                        </div>
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 font-bold">
+                          {multiplierMode ? '+3.4X MULTIPLIER' : '1.0X BASELINE'}
+                        </span>
+                      </div>
+
+                      <div className="h-28 flex items-end justify-around p-3 rounded-xl bg-zinc-900/80 border border-zinc-800">
+                        <div className="w-10 bg-zinc-700 rounded-t-md h-1/3 text-[10px] text-center font-mono text-zinc-300">M1</div>
+                        <div className="w-10 bg-zinc-600 rounded-t-md h-1/2 text-[10px] text-center font-mono text-zinc-300">M2</div>
+                        <div
+                          className="w-10 rounded-t-md transition-all duration-500 text-[10px] text-center font-mono font-bold text-white flex items-center justify-center"
+                          style={{
+                            height: multiplierMode ? '90%' : '40%',
+                            backgroundColor: multiplierMode ? '#10B981' : '#52525B',
+                          }}
+                        >
+                          {multiplierMode ? '3.4X' : '1.2X'}
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => setMultiplierMode(!multiplierMode)}
+                        className="w-full py-3 rounded-xl bg-gradient-to-r from-[#10B981] to-[#059669] text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-emerald-500/30 hover:scale-[1.02] transition-transform cursor-pointer"
+                      >
+                        {multiplierMode ? 'Show Baseline Growth' : 'Engage Roos Growth Multiplier'}
+                      </button>
+                    </div>
+                  )}
+
                 </div>
               </div>
 
