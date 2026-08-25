@@ -8,6 +8,7 @@ import { CreativeServicesExperience } from './components/CreativeServicesExperie
 import { ProcessSection } from './components/ProcessSection';
 import { Portfolio } from './components/Portfolio';
 import { FAQSection } from './components/FAQSection';
+import { PreFooterCTA } from './components/PreFooterCTA';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
@@ -52,6 +53,12 @@ export function App() {
         />
 
         <FAQSection
+          onOpenInquiry={() => setIsInquiryOpen(true)}
+          isDarkMode={isDarkMode}
+        />
+
+        {/* High-Impact Pre-Footer Demo Booking Banner */}
+        <PreFooterCTA
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}
         />
