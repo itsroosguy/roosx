@@ -145,7 +145,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </h2>
         </motion.div>
 
-        {/* 5-CARD TEAM STACK CONTAINER (ULTRA-SMOOTH FLUID SPRING PHYSICS & SILKY TRANSITIONS) */}
+        {/* 5-CARD TEAM STACK CONTAINER (ZERO CARD FLIP ON HOVER) */}
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => {
@@ -167,10 +167,10 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   isHovered
                     ? {
                         x: window.innerWidth > 1024 ? card.spreadX : (idx - 2) * 70,
-                        y: isCardActive ? card.spreadY - 10 : card.spreadY,
-                        rotate: isCardActive ? 0 : card.spreadRotate,
-                        scale: isCardActive ? 1.05 : 0.95,
-                        opacity: isCardActive ? 1 : 0.78,
+                        y: isCardActive ? card.spreadY - 8 : card.spreadY,
+                        rotate: card.spreadRotate,
+                        scale: isCardActive ? 1.04 : 0.96,
+                        opacity: isCardActive ? 1 : 0.8,
                         zIndex: isCardActive ? 60 : 30 - Math.abs(idx - 2),
                       }
                     : {
