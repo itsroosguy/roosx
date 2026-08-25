@@ -57,7 +57,7 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
               isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
             }`}
           >
-            Your product, service, or idea may be exceptional but is it{' '}
+            Your product, service or idea may be exceptional but is it{' '}
             <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FDBA74] bg-clip-text text-transparent inline-block">
               reaching the right audience?
             </span>
@@ -68,7 +68,7 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
               isDarkMode ? 'text-[#CBD5E1]' : 'text-[#52525B]'
             }`}
           >
-            We help brands cut through the noise, solve the right problems, and create the impact they deserve.
+            We help brands cut through the noise, solve the right problems and create the impact they deserve.
           </p>
 
           {/* Book A Demo Action Buttons */}
