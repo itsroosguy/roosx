@@ -20,12 +20,15 @@ export const Logo: React.FC<LogoProps> = ({
       : undefined;
 
   return (
-    <div className={`relative inline-flex items-center ${className}`}>
+    <div className={`relative inline-flex items-center group ${className}`}>
+      {/* Brand Radial Ambient Glow Overlay */}
+      <div className="absolute inset-0 bg-radial from-[#FF7A1A]/30 via-[#FF7A1A]/5 to-transparent blur-md pointer-events-none group-hover:scale-125 transition-transform duration-500 opacity-60" />
+
       {/* Brand Icon Mark (Visible on initial load, swaps out on scroll) */}
       <img
-        src="/mark.png"
+        src="./mark.png"
         alt="Roos StudioX Mark"
-        className={`h-11 sm:h-13 w-auto object-contain transition-all duration-500 transform dark:brightness-0 dark:invert ${
+        className={`h-11 sm:h-13 w-auto object-contain transition-all duration-500 transform dark:brightness-0 dark:invert relative z-10 ${
           isScrolled
             ? 'opacity-0 -translate-y-4 pointer-events-none absolute'
             : 'opacity-100 translate-y-0 relative'
@@ -35,9 +38,9 @@ export const Logo: React.FC<LogoProps> = ({
 
       {/* Brand Wordmark logo.png (Hidden on initial load, swaps in on scroll) */}
       <img
-        src="/logo.png"
+        src="./logo.png"
         alt="ROOS STUDIOX"
-        className={`h-4 sm:h-5 w-auto object-contain transition-all duration-500 transform dark:brightness-0 dark:invert ${
+        className={`h-4 sm:h-5 w-auto object-contain transition-all duration-500 transform dark:brightness-0 dark:invert relative z-10 ${
           isScrolled
             ? 'opacity-100 translate-y-0 relative'
             : 'opacity-0 translate-y-4 pointer-events-none absolute'

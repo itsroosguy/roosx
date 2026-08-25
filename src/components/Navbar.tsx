@@ -56,10 +56,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               : 'bg-transparent px-4 py-2'
           }`}
         >
-          {/* Logo (Swaps mark.png to logo.png on scroll) */}
+          {/* Logo with Frosted Glass Pill Capsule Overlay */}
           <button
             onClick={() => onNavigateHome?.()}
-            className="flex items-center cursor-pointer bg-transparent border-none p-0"
+            className={`flex items-center cursor-pointer px-3 py-1.5 rounded-full border transition-all duration-300 ${
+              isDarkMode
+                ? 'bg-[#18181B]/90 border-[#27272A] hover:border-[#FF7A1A]/60 shadow-md shadow-black/50 backdrop-blur-md'
+                : 'glass-card border-[#E4E4E7] hover:border-[#FF7A1A]/60 shadow-sm'
+            }`}
           >
             <Logo isScrolled={scrolled} isDarkMode={isDarkMode} />
           </button>
