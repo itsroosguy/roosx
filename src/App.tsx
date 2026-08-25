@@ -13,9 +13,6 @@ import { PreFooterCTA } from './components/PreFooterCTA';
 import { Footer } from './components/Footer';
 import { ProjectModal } from './components/ProjectModal';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
-import { ServicesPage } from './components/ServicesPage';
-import { ServicesV2Page } from './components/ServicesV2Page';
-import { AboutPage } from './components/AboutPage';
 import { PhilosophyPage } from './components/PhilosophyPage';
 import { Project } from './types';
 
@@ -23,11 +20,8 @@ export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'services' | 'services2' | 'about' | 'philosophy'>(() => {
+  const [currentView, setCurrentView] = useState<'home' | 'philosophy'>(() => {
     const hash = window.location.hash;
-    if (hash === '#about') return 'about';
-    if (hash === '#services') return 'services';
-    if (hash === '#services2' || hash === '#service2') return 'services2';
     if (hash === '#philosophy') return 'philosophy';
     return 'home';
   });
@@ -35,13 +29,7 @@ export function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#about') {
-        setCurrentView('about');
-      } else if (hash === '#services') {
-        setCurrentView('services');
-      } else if (hash === '#services2' || hash === '#service2') {
-        setCurrentView('services2');
-      } else if (hash === '#philosophy') {
+      if (hash === '#philosophy') {
         setCurrentView('philosophy');
       } else {
         setCurrentView('home');
@@ -69,16 +57,6 @@ export function App() {
         onOpenInquiry={() => setIsInquiryOpen(true)}
         isDarkMode={isDarkMode}
         onToggleTheme={() => setIsDarkMode(!isDarkMode)}
-        onNavigateServices={() => {
-          window.location.hash = '#services2';
-          setCurrentView('services2');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
-        onNavigateAbout={() => {
-          window.location.hash = '#about';
-          setCurrentView('about');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
         onNavigatePhilosophy={() => {
           window.location.hash = '#philosophy';
           setCurrentView('philosophy');
@@ -92,37 +70,7 @@ export function App() {
       />
 
       {/* Main View Switching */}
-      {currentView === 'services2' ? (
-        <ServicesV2Page
-          onOpenInquiry={() => setIsInquiryOpen(true)}
-          isDarkMode={isDarkMode}
-          onNavigateHome={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        />
-      ) : currentView === 'services' ? (
-        <ServicesPage
-          onOpenInquiry={() => setIsInquiryOpen(true)}
-          isDarkMode={isDarkMode}
-          onNavigateHome={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        />
-      ) : currentView === 'about' ? (
-        <AboutPage
-          onOpenInquiry={() => setIsInquiryOpen(true)}
-          isDarkMode={isDarkMode}
-          onNavigateHome={() => {
-            window.location.hash = '';
-            setCurrentView('home');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-          }}
-        />
-      ) : currentView === 'philosophy' ? (
+      {currentView === 'philosophy' ? (
         <PhilosophyPage
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}
@@ -163,7 +111,7 @@ export function App() {
       )}
 
       {/* Global Studio Footer */}
-      <Footer onOpenInquiry={() => setIsInquiryOpen(true)} isDarkMode={isDarkMode} />
+      <Footer isDarkMode={isDarkMode} />
 
       {/* Interactive Modals */}
       <ProjectModal

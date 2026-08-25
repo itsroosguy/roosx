@@ -157,12 +157,6 @@ export const Footer: React.FC<FooterProps> = ({
             </h4>
             <ul className="space-y-3 text-sm font-medium text-zinc-300">
               <li>
-                <a href="#services2" className="hover:text-[#FF7A1A] transition-colors flex items-center gap-2">
-                  <span>Service Architecture V2</span>
-                  <span className="px-1.5 py-0.5 rounded text-[10px] font-sans bg-[#FF7A1A]/20 text-[#FF7A1A] font-bold">NEW</span>
-                </a>
-              </li>
-              <li>
                 <a href="#services" className="hover:text-[#FF7A1A] transition-colors">
                   Bento Services
                 </a>

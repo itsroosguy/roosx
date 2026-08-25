@@ -8,8 +8,6 @@ interface NavbarProps {
   onOpenInquiry: () => void;
   isDarkMode: boolean;
   onToggleTheme: () => void;
-  onNavigateServices?: () => void;
-  onNavigateAbout?: () => void;
   onNavigatePhilosophy?: () => void;
   onNavigateHome?: () => void;
 }
@@ -18,8 +16,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onOpenInquiry,
   isDarkMode,
   onToggleTheme,
-  onNavigateServices,
-  onNavigateAbout,
   onNavigatePhilosophy,
   onNavigateHome,
 }) => {
@@ -35,9 +31,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   }, []);
 
   const navLinks = [
-    { name: 'Service 2', href: '#services2', action: onNavigateServices, isBadge: true },
-    { name: 'Services', href: '#services', action: onNavigateServices },
-    { name: 'About', href: '#about', action: onNavigateAbout },
+    { name: 'Services', href: '#services', action: onNavigateHome },
     { name: 'Philosophy', href: '#philosophy', action: onNavigatePhilosophy },
     { name: 'Process', href: '#process', action: onNavigateHome },
     { name: 'Works', href: '#portfolio', action: onNavigateHome },
@@ -81,11 +75,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                   }
                 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
-                  link.isBadge
-                    ? 'bg-[#FF7A1A]/15 text-[#FF7A1A] border border-[#FF7A1A]/40 font-bold hover:bg-[#FF7A1A]/25'
-                    : isDarkMode
-                      ? 'text-[#D4D4D8] hover:text-white hover:bg-[#18181B]'
-                      : 'text-[#52525B] hover:text-[#111111] hover:bg-[#F4F4F5]'
+                  isDarkMode
+                    ? 'text-[#D4D4D8] hover:text-white hover:bg-[#18181B]'
+                    : 'text-[#52525B] hover:text-[#111111] hover:bg-[#F4F4F5]'
                 }`}
               >
                 {link.name}
@@ -164,11 +156,9 @@ export const Navbar: React.FC<NavbarProps> = ({
                     }
                   }}
                   className={`block px-3 py-2 rounded-lg text-sm font-medium ${
-                    link.isBadge
-                      ? 'bg-[#FF7A1A]/20 text-[#FF7A1A] font-bold'
-                      : isDarkMode
-                        ? 'text-[#D4D4D8] hover:text-white hover:bg-[#18181B]'
-                        : 'text-[#52525B] hover:text-[#111111] hover:bg-[#F4F4F5]'
+                    isDarkMode
+                      ? 'text-[#D4D4D8] hover:text-white hover:bg-[#18181B]'
+                      : 'text-[#52525B] hover:text-[#111111] hover:bg-[#F4F4F5]'
                   }`}
                 >
                   {link.name}
