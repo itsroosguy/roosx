@@ -4,6 +4,7 @@ import {
   Sparkles,
   CheckCircle2,
   AlertTriangle,
+  Flame,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -111,7 +112,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* HERO SECTION - KINETIC BRAND STATEMENT */}
+        {/* SECTION 1: HERO SECTION - REVAMPED HIGH-ENGAGING ABOUT HERO */}
         <div className="py-16 sm:py-24 flex flex-col justify-center items-center text-center space-y-8 relative">
           
           <motion.div
@@ -120,13 +121,13 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             transition={{ duration: 0.6 }}
             className="space-y-6 max-w-4xl mx-auto"
           >
-            {/* Live Telemetry Eyebrow Pill */}
+            {/* Eyebrow Badge */}
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>THE ROOS STUDIOX PHILOSOPHY</span>
+              <span>OUR MISSION & CREATIVE PHILOSOPHY</span>
             </div>
 
-            {/* Guaranteed 2-Line Bold Title */}
+            {/* Guaranteed 2-Line Headline */}
             <h1
               className={`font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.12] ${
                 isDarkMode ? 'text-white' : 'text-[#111111]'
@@ -144,10 +145,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({
                 isDarkMode ? 'text-[#B8B8B8]' : 'text-[#52525B]'
               }`}
             >
-              We turn ambitious ideas, products, and services into scalable market momentum by building integrated growth ecosystems.
+              We turn ambitious ideas, products, and services into scalable market momentum by building integrated growth systems.
             </p>
 
-            {/* Micro Telemetry Pills */}
+            {/* Interactive Value Badges */}
             <div className="pt-2 flex items-center justify-center gap-2.5 sm:gap-4 flex-wrap">
               <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
@@ -155,7 +156,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
               </div>
               <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
-                <span>Frictionless UX</span>
+                <span>Unbridled Creativity</span>
               </div>
               <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
@@ -164,24 +165,93 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             </div>
           </motion.div>
 
-          {/* Interactive Floating Mascot Orbit Engine */}
+          {/* Clean Floating Mascot Mark */}
           <motion.div
             animate={{ y: [-6, 6, -6] }}
             transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
-            className="pt-6 relative"
+            className="pt-4"
           >
-            <div className="w-40 h-40 sm:w-48 sm:h-48 rounded-full border-2 border-[#FF7A1A]/40 bg-[#FF7A1A]/5 flex items-center justify-center relative shadow-[0_0_50px_rgba(255,122,26,0.3)] backdrop-blur-md group">
-              <span className="absolute -inset-3 rounded-full border border-[#FF7A1A]/20 animate-ping opacity-25" />
-              
+            <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full border-2 border-[#FF7A1A]/30 bg-[#FF7A1A]/5 flex items-center justify-center relative shadow-[0_0_40px_rgba(255,122,26,0.25)] backdrop-blur-md">
               <img
                 src="./mark.png"
                 alt="Roos Kangaroo Mark"
-                className="w-24 sm:w-28 h-auto object-contain filter drop-shadow-[0_10px_25px_rgba(255,122,26,0.6)] group-hover:scale-110 transition-transform duration-500"
+                className="w-20 sm:w-24 h-auto object-contain filter drop-shadow-[0_8px_20px_rgba(255,122,26,0.6)]"
               />
             </div>
           </motion.div>
 
         </div>
+
+        {/* SECTION: UNBRIDLED CREATIVITY & PASSIONATE MARKETING MANIFESTO */}
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className={`py-16 px-6 sm:px-12 rounded-3xl border text-left relative overflow-hidden my-16 ${
+            isDarkMode
+              ? 'bg-[#08080B] border-zinc-800 text-white'
+              : 'bg-white border-zinc-200 text-zinc-900 shadow-xl'
+          }`}
+        >
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C]" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            
+            {/* Left: Passionate Narrative */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+                <Flame className="w-3.5 h-3.5" />
+                <span>WHO WE ARE • PASSIONATE CREATIVITY</span>
+              </div>
+
+              <h2 className="font-display text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                Passionate Marketers & Engineers Exploring Uncharted Territory
+              </h2>
+
+              <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-700'}`}>
+                We are not a traditional, slow-moving corporate agency. We are a collective of passionate marketers, visual artists, and web engineers who reject boring templates and safe clichés.
+              </p>
+
+              <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-700'}`}>
+                We believe marketing should ignite curiosity, design should feel breathtakingly intuitive, and technology should operate at lightning speed. We explore with unbridled creativity to craft brand identities that command market attention.
+              </p>
+
+              {/* 3 Core Values */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs font-mono font-bold">
+                <div className="p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-1">
+                  <div className="text-[#FF7A1A]">01 • BOLD CREATIVITY</div>
+                  <div className="text-zinc-300">Unfiltered Ideas & Design</div>
+                </div>
+                <div className="p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-1">
+                  <div className="text-[#FF7A1A]">02 • HIGH VELOCITY</div>
+                  <div className="text-zinc-300">99+ Speed Guarantee</div>
+                </div>
+                <div className="p-3.5 rounded-xl bg-zinc-900/90 border border-zinc-800 space-y-1">
+                  <div className="text-[#FF7A1A]">03 • ZERO CLICHÉS</div>
+                  <div className="text-zinc-300">No Cookie-Cutter Templates</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right: Studio Culture Card */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="w-full max-w-sm rounded-2xl border border-[#FF7A1A]/40 bg-[#050505] p-6 shadow-2xl space-y-4 text-center">
+                <div className="w-16 h-16 rounded-2xl bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-[#FF7A1A] mx-auto flex items-center justify-center">
+                  <Sparkles className="w-8 h-8" />
+                </div>
+                <h3 className="font-display text-xl font-bold text-white">The Roos Studio Culture</h3>
+                <p className="text-xs text-zinc-400 leading-relaxed">
+                  Driven by relentless ambition, endless curiosity, and an obsession with crafting digital experiences that make people stop and take notice.
+                </p>
+                <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono text-[#FF7A1A] font-bold">
+                  100% TAILOR-MADE CREATIVITY
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </motion.div>
 
         {/* SECTION 2: WHY WE EXIST - INTERACTIVE ENGINE SWITCHER */}
         <motion.div
@@ -472,7 +542,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({
             <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
               OUR UNFAIR ADVANTAGE
             </span>
-            <h2 className={`font-display text-4xl sm:text-6xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
+            <h2 className={`font-display text-4xl sm:text-6xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
               What Makes Us Different
             </h2>
           </div>
