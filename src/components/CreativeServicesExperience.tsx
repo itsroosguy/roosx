@@ -397,11 +397,8 @@ export const CreativeServicesExperience: React.FC<CreativeServicesExperienceProp
                       <IconComp className="w-6 h-6" />
                     </motion.div>
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#F97316]">
-                        Capability {activeService.num}
-                      </span>
                       <h4
-                        className={`font-display text-xl font-bold ${
+                        className={`font-display text-xl sm:text-2xl font-bold ${
                           isDarkMode ? 'text-white' : 'text-[#111111]'
                         }`}
                       >

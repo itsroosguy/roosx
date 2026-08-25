@@ -352,12 +352,6 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
               {/* RIGHT COLUMN: CAPABILITY TILES MATRIX (6 COLS) */}
               <div className="lg:col-span-6 space-y-4">
-                <div className="flex items-center justify-between border-b pb-3 border-[#27272A]">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#F97316]">
-                    Key Deliverables ({currentStage.subNodes.length})
-                  </span>
-                </div>
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {currentStage.subNodes.map((sub, sIdx) => {
                     const SubIcon = sub.icon;
