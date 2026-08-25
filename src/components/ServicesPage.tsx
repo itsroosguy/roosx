@@ -3,6 +3,17 @@ import { motion } from 'framer-motion';
 import {
   CheckCircle2,
   FileText,
+  Compass,
+  Palette,
+  Globe,
+  Layout,
+  Search,
+  Megaphone,
+  Bot,
+  TrendingUp,
+  BarChart3,
+  Smartphone,
+  Code,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -18,12 +29,12 @@ interface DetailedService {
   title: string;
   headline: string;
   copy: string;
-  imageUrl: string;
   deliverables: string[];
   includes?: string[];
   outcome: string;
   perfectFor?: string;
   align: 'left' | 'right';
+  renderVisual: (isDark: boolean) => React.ReactNode;
 }
 
 const detailedServices: DetailedService[] = [
@@ -33,7 +44,6 @@ const detailedServices: DetailedService[] = [
     title: 'Brand Strategy & Positioning',
     headline: 'Build a Brand People Remember',
     copy: 'A great logo isn\'t a brand. A strong brand is a clear promise, a unique market position, and a memorable identity that customers instantly recognize and trust. We help businesses uncover what makes them different and transform that advantage into a powerful brand strategy that stands out in crowded markets.',
-    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Brand Discovery Workshops',
       'Market Research',
@@ -51,6 +61,49 @@ const detailedServices: DetailedService[] = [
     outcome:
       'Stand out in crowded markets, attract premium customers, and clearly communicate your value.',
     align: 'left',
+    renderVisual: (isDark) => (
+      <div className={`p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-between space-y-6 ${isDark ? 'bg-[#050505] text-white' : 'bg-zinc-50 text-zinc-900'}`}>
+        <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
+          <div className="flex items-center gap-2">
+            <Compass className="w-5 h-5 text-[#FF7A1A]" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">BRAND POSITIONING MATRIX</span>
+          </div>
+          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/30">UNBEATABLE CLARITY</span>
+        </div>
+
+        <div className="space-y-4">
+          <div className="space-y-1.5">
+            <div className="flex justify-between text-xs font-mono">
+              <span className="text-zinc-400">Generic Market Noise</span>
+              <span className="text-zinc-500 font-bold">12% Impact</span>
+            </div>
+            <div className="w-full h-2 rounded-full bg-zinc-800 overflow-hidden">
+              <div className="h-full bg-zinc-600 w-[12%]" />
+            </div>
+          </div>
+
+          <div className="space-y-1.5">
+            <div className="flex justify-between text-xs font-mono">
+              <span className="text-white font-bold">Roos Strategic Positioning</span>
+              <span className="text-[#FF7A1A] font-bold">100% Market Differentiation</span>
+            </div>
+            <div className="w-full h-2.5 rounded-full bg-zinc-800 overflow-hidden">
+              <motion.div
+                initial={{ width: 0 }}
+                animate={{ width: '100%' }}
+                transition={{ duration: 1.5 }}
+                className="h-full bg-gradient-to-r from-[#FF7A1A] to-[#EA580C]"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono flex items-center justify-between">
+          <span className="text-zinc-400">Target Audience Trust Index:</span>
+          <span className="text-[#FF7A1A] font-bold">98.4 / 100</span>
+        </div>
+      </div>
+    ),
   },
   {
     id: 'visual-identity',
@@ -58,7 +111,6 @@ const detailedServices: DetailedService[] = [
     title: 'Logo & Visual Identity Design',
     headline: 'Create A Brand That Looks As Good As It Performs',
     copy: 'Your visual identity shapes first impressions long before customers read a single word. We design memorable brand systems that communicate professionalism, credibility, and confidence across every customer touchpoint.',
-    imageUrl: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Logo Design',
       'Visual Identity Systems',
@@ -73,6 +125,40 @@ const detailedServices: DetailedService[] = [
     outcome:
       'A professional visual identity that builds trust, increases recognition, and creates consistency across your business.',
     align: 'right',
+    renderVisual: (isDark) => (
+      <div className={`p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-between space-y-6 ${isDark ? 'bg-[#050505] text-white' : 'bg-zinc-50 text-zinc-900'}`}>
+        <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
+          <div className="flex items-center gap-2">
+            <Palette className="w-5 h-5 text-[#FF7A1A]" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">STUDIO DESIGN SYSTEM</span>
+          </div>
+          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/30">BRAND ASSET KIT</span>
+        </div>
+
+        <div className="grid grid-cols-3 gap-3">
+          <div className="p-3 rounded-xl bg-[#050505] border border-zinc-800 text-center space-y-1.5">
+            <div className="w-6 h-6 rounded-full bg-[#050505] border border-zinc-700 mx-auto" />
+            <div className="text-[10px] font-mono text-zinc-400">#050505</div>
+            <div className="text-[9px] font-mono text-zinc-500 uppercase">DARK CORE</div>
+          </div>
+          <div className="p-3 rounded-xl bg-[#0C0C0C] border border-zinc-800 text-center space-y-1.5">
+            <div className="w-6 h-6 rounded-full bg-[#0C0C0C] border border-zinc-700 mx-auto" />
+            <div className="text-[10px] font-mono text-zinc-400">#0C0C0C</div>
+            <div className="text-[9px] font-mono text-zinc-500 uppercase">SURFACE</div>
+          </div>
+          <div className="p-3 rounded-xl bg-[#FF7A1A]/20 border border-[#FF7A1A] text-center space-y-1.5">
+            <div className="w-6 h-6 rounded-full bg-[#FF7A1A] shadow-md shadow-[#FF7A1A]/50 mx-auto" />
+            <div className="text-[10px] font-mono text-[#FF7A1A] font-bold">#FF7A1A</div>
+            <div className="text-[9px] font-mono text-[#FF7A1A] uppercase font-bold">ACCENT</div>
+          </div>
+        </div>
+
+        <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono flex items-center justify-between">
+          <span className="text-zinc-400">TYPOGRAPHY:</span>
+          <span className="text-white font-bold">GOOGLE SANS / SF PRO</span>
+        </div>
+      </div>
+    ),
   },
   {
     id: 'website-development',
@@ -80,7 +166,6 @@ const detailedServices: DetailedService[] = [
     title: 'Website Design & Development',
     headline: 'Your Website Should Be Your Best Salesperson',
     copy: 'A website should do more than look beautiful. It should educate visitors, build trust, answer objections, and guide prospects toward taking action. We design and develop high-performance websites that combine exceptional user experience with conversion-focused strategy.',
-    imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Business Websites',
       'Corporate Websites',
@@ -104,6 +189,32 @@ const detailedServices: DetailedService[] = [
     outcome:
       'A digital experience that attracts, engages, and converts visitors into qualified leads.',
     align: 'left',
+    renderVisual: (isDark) => (
+      <div className={`p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-between space-y-6 ${isDark ? 'bg-[#050505] text-white' : 'bg-zinc-50 text-zinc-900'}`}>
+        <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
+          <div className="flex items-center gap-2">
+            <Globe className="w-5 h-5 text-[#FF7A1A]" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">HIGH-SPEED BROWSER ENGINE</span>
+          </div>
+          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">99+ SPEED GUARANTEE</span>
+        </div>
+
+        <div className="p-4 rounded-xl bg-[#09090B] border border-zinc-800 font-mono text-xs space-y-2">
+          <div className="flex items-center gap-2 text-zinc-500 border-b border-zinc-800 pb-2 text-[11px]">
+            <Code className="w-3.5 h-3.5 text-[#FF7A1A]" />
+            <span>App.tsx • High-Performance React Engine</span>
+          </div>
+          <div className="text-emerald-400 font-bold">✓ Lighthouse Performance: 100/100</div>
+          <div className="text-zinc-400">✓ LCP (Largest Contentful Paint): 0.48s</div>
+          <div className="text-zinc-400">✓ Zero Bloat Plugins • Edge CDN Active</div>
+        </div>
+
+        <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono flex items-center justify-between">
+          <span className="text-zinc-400 font-bold">PAGE LOAD SPEED:</span>
+          <span className="text-[#FF7A1A] font-bold">0.48 SECONDS</span>
+        </div>
+      </div>
+    ),
   },
   {
     id: 'ui-ux-design',
@@ -111,7 +222,6 @@ const detailedServices: DetailedService[] = [
     title: 'UI/UX Design',
     headline: 'Design Experiences People Actually Enjoy Using',
     copy: 'Great user experiences feel effortless. We create intuitive interfaces that help users find what they need quickly while increasing engagement, satisfaction, and conversions.',
-    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'UX Strategy',
       'User Research',
@@ -127,6 +237,39 @@ const detailedServices: DetailedService[] = [
     outcome:
       'Digital products that are easier to use, more enjoyable to interact with, and designed for long-term growth.',
     align: 'right',
+    renderVisual: (isDark) => (
+      <div className={`p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-between space-y-6 ${isDark ? 'bg-[#050505] text-white' : 'bg-zinc-50 text-zinc-900'}`}>
+        <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
+          <div className="flex items-center gap-2">
+            <Layout className="w-5 h-5 text-[#FF7A1A]" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">APP INTERFACE & DASHBOARD UX</span>
+          </div>
+          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/30">USER CENTRIC UX</span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-2">
+            <div className="text-[11px] font-mono font-bold text-white flex items-center gap-1.5">
+              <Smartphone className="w-3.5 h-3.5 text-[#FF7A1A]" />
+              <span>Mobile App UX</span>
+            </div>
+            <p className="text-[10px] text-zinc-400 leading-relaxed">Frictionless 1-tap navigation flows with instant visual feedback.</p>
+          </div>
+          <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 space-y-2">
+            <div className="text-[11px] font-mono font-bold text-white flex items-center gap-1.5">
+              <BarChart3 className="w-3.5 h-3.5 text-[#FF7A1A]" />
+              <span>SaaS Dashboards</span>
+            </div>
+            <p className="text-[10px] text-zinc-400 leading-relaxed">Clean data visual hierarchies for effortless user decision making.</p>
+          </div>
+        </div>
+
+        <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono flex items-center justify-between">
+          <span className="text-zinc-400">TASK COMPLETION RATE:</span>
+          <span className="text-[#FF7A1A] font-bold">99.2% EFFORTLESS</span>
+        </div>
+      </div>
+    ),
   },
   {
     id: 'seo-optimization',
@@ -134,7 +277,6 @@ const detailedServices: DetailedService[] = [
     title: 'Search Engine Optimization (SEO)',
     headline: 'Get Found By The Right Customers',
     copy: 'If customers can\'t find you, they can\'t buy from you. Our SEO strategies improve visibility, increase qualified traffic, and position your business in front of people actively searching for your products and services.',
-    imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Technical SEO',
       'On-Page SEO',
@@ -149,6 +291,33 @@ const detailedServices: DetailedService[] = [
     outcome:
       'More visibility, more organic traffic, and more opportunities to generate revenue.',
     align: 'left',
+    renderVisual: (isDark) => (
+      <div className={`p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-between space-y-6 ${isDark ? 'bg-[#050505] text-white' : 'bg-zinc-50 text-zinc-900'}`}>
+        <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
+          <div className="flex items-center gap-2">
+            <Search className="w-5 h-5 text-[#FF7A1A]" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">ORGANIC SEARCH TELEMETRY</span>
+          </div>
+          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/30">#1 GOOGLE RANKINGS</span>
+        </div>
+
+        <div className="space-y-3">
+          <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-between text-xs font-mono">
+            <span className="text-zinc-300 font-bold">High-Intent Keywords Ranked #1:</span>
+            <span className="text-[#FF7A1A] font-bold">48 Keywords</span>
+          </div>
+          <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 flex items-center justify-between text-xs font-mono">
+            <span className="text-zinc-300 font-bold">Monthly Organic Traffic Growth:</span>
+            <span className="text-emerald-400 font-bold">+420% Growth</span>
+          </div>
+        </div>
+
+        <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono flex items-center justify-between">
+          <span className="text-zinc-400">QUALIFIED INBOUND LEADS:</span>
+          <span className="text-[#FF7A1A] font-bold">PREDICTABLE DAILY VOLUME</span>
+        </div>
+      </div>
+    ),
   },
   {
     id: 'digital-marketing',
@@ -156,7 +325,6 @@ const detailedServices: DetailedService[] = [
     title: 'Digital Marketing',
     headline: 'Turn Attention Into Revenue',
     copy: 'Marketing isn\'t about generating clicks. It\'s about attracting the right audience and turning interest into measurable business growth. We develop data-driven campaigns that connect strategy, creativity, and performance.',
-    imageUrl: 'https://images.unsplash.com/photo-1533750349088-cd871a92f312?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Growth Marketing Strategy',
       'Paid Advertising',
@@ -171,6 +339,37 @@ const detailedServices: DetailedService[] = [
     outcome:
       'More qualified leads, stronger customer acquisition, and predictable growth.',
     align: 'right',
+    renderVisual: (isDark) => (
+      <div className={`p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-between space-y-6 ${isDark ? 'bg-[#050505] text-white' : 'bg-zinc-50 text-zinc-900'}`}>
+        <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
+          <div className="flex items-center gap-2">
+            <Megaphone className="w-5 h-5 text-[#FF7A1A]" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">ACQUISITION FUNNEL TELEMETRY</span>
+          </div>
+          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/30">4.8X ROAS MULTIPLIER</span>
+        </div>
+
+        <div className="space-y-2 text-xs font-mono">
+          <div className="p-2.5 rounded-lg bg-zinc-900/90 border border-zinc-800 flex justify-between">
+            <span className="text-zinc-400">1. Impressions & Ad Reach</span>
+            <span className="text-zinc-300 font-bold">120,000</span>
+          </div>
+          <div className="p-2.5 rounded-lg bg-zinc-900/90 border border-zinc-800 flex justify-between">
+            <span className="text-zinc-400">2. Qualified Click Throughs</span>
+            <span className="text-zinc-300 font-bold">8,400</span>
+          </div>
+          <div className="p-2.5 rounded-lg bg-zinc-900/90 border border-[#FF7A1A]/40 flex justify-between">
+            <span className="text-white font-bold">3. Closed Customers & Revenue</span>
+            <span className="text-[#FF7A1A] font-bold">$142,500</span>
+          </div>
+        </div>
+
+        <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono flex items-center justify-between">
+          <span className="text-zinc-400">CAMPAIGN RETURN ON AD SPEND:</span>
+          <span className="text-[#FF7A1A] font-bold">4.8X RETURN</span>
+        </div>
+      </div>
+    ),
   },
   {
     id: 'automation-ai',
@@ -178,7 +377,6 @@ const detailedServices: DetailedService[] = [
     title: 'Marketing Automation & AI Systems',
     headline: 'Scale Smarter, Not Harder',
     copy: 'Businesses lose time and revenue because of repetitive processes and disconnected systems. We implement automation and AI-driven workflows that improve efficiency, nurture leads, and support scalable growth.',
-    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Lead Automation',
       'CRM Integration',
@@ -192,6 +390,29 @@ const detailedServices: DetailedService[] = [
     outcome:
       'Less manual work, faster execution, and more time focused on growth.',
     align: 'left',
+    renderVisual: (isDark) => (
+      <div className={`p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-between space-y-6 ${isDark ? 'bg-[#050505] text-white' : 'bg-zinc-50 text-zinc-900'}`}>
+        <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
+          <div className="flex items-center gap-2">
+            <Bot className="w-5 h-5 text-[#FF7A1A]" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">AUTOMATED WORKFLOW PIPELINE</span>
+          </div>
+          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">24/7 AI AUTOPILOT</span>
+        </div>
+
+        <div className="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono space-y-2">
+          <div className="text-emerald-400 font-bold">✓ Form Submission Received</div>
+          <div className="text-zinc-300">→ AI Lead Scoring: Qualified High Intent</div>
+          <div className="text-zinc-300">→ HubSpot CRM Webhook Sync: Instant</div>
+          <div className="text-zinc-300">→ Auto-Email Sent: Customized Pitch</div>
+        </div>
+
+        <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono flex items-center justify-between">
+          <span className="text-zinc-400">MANUAL WORK ELIMINATED:</span>
+          <span className="text-[#FF7A1A] font-bold">100% AUTOMATED</span>
+        </div>
+      </div>
+    ),
   },
   {
     id: 'conversion-optimization',
@@ -199,7 +420,6 @@ const detailedServices: DetailedService[] = [
     title: 'Conversion Optimization',
     headline: 'Turn More Visitors Into Customers',
     copy: 'Getting traffic is only half the equation. The real opportunity comes from converting more of your existing visitors into paying customers. We identify friction points and optimize your digital experience to improve performance at every stage of the customer journey.',
-    imageUrl: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1000&q=80',
     deliverables: [
       'Conversion Audits',
       'Landing Page Optimization',
@@ -213,6 +433,33 @@ const detailedServices: DetailedService[] = [
     outcome:
       'Higher conversion rates, improved ROI, and more revenue from existing traffic.',
     align: 'right',
+    renderVisual: (isDark) => (
+      <div className={`p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-between space-y-6 ${isDark ? 'bg-[#050505] text-white' : 'bg-zinc-50 text-zinc-900'}`}>
+        <div className="flex items-center justify-between border-b border-zinc-800 pb-4">
+          <div className="flex items-center gap-2">
+            <TrendingUp className="w-5 h-5 text-[#FF7A1A]" />
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-zinc-400">A/B TEST SPLIT TELEMETRY</span>
+          </div>
+          <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/30">+340% CONVERSION LEAP</span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <div className="p-3 rounded-xl bg-zinc-900/80 border border-zinc-800 text-center space-y-1">
+            <div className="text-[10px] font-mono text-zinc-500 uppercase">VARIANT A (OLD)</div>
+            <div className="text-lg font-mono font-bold text-zinc-400">1.8% Rate</div>
+          </div>
+          <div className="p-3 rounded-xl bg-zinc-900/80 border border-[#FF7A1A]/50 text-center space-y-1">
+            <div className="text-[10px] font-mono text-[#FF7A1A] font-bold uppercase">VARIANT B (ROOS OPTIMIZED)</div>
+            <div className="text-lg font-mono font-bold text-[#FF7A1A]">7.9% Rate</div>
+          </div>
+        </div>
+
+        <div className="p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800 text-xs font-mono flex items-center justify-between">
+          <span className="text-zinc-400">REVENUE FROM EXISTING TRAFFIC:</span>
+          <span className="text-[#FF7A1A] font-bold">+3.4X MULTIPLIER</span>
+        </div>
+      </div>
+    ),
   },
 ];
 
@@ -303,7 +550,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
           </div>
         </motion.div>
 
-        {/* 8 DETAILED SERVICE SECTIONS (REALISTIC STUDIO IMAGERY) */}
+        {/* 8 DETAILED SERVICE SECTIONS (TOPIC-SPECIFIC STUDIO VISUALS) */}
         <div className="space-y-24 sm:space-y-32">
           {detailedServices.map((service, idx) => {
             const isLeft = service.align === 'left';
@@ -320,46 +567,29 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
                 }`}
               >
                 
-                {/* REALISTIC 3D/STUDIO VISUAL CANVAS (5 COLS) */}
+                {/* TOPIC-SPECIFIC STUDIO VISUAL CONTAINER (5 COLS) */}
                 <div
                   className={`lg:col-span-5 ${
                     isLeft ? 'lg:order-1' : 'lg:order-2'
                   }`}
                 >
                   <motion.div
-                    animate={{ y: [-6, 6, -6], rotate: isLeft ? [-1, 1, -1] : [1, -1, 1] }}
-                    transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-                    className={`rounded-3xl border shadow-2xl relative overflow-hidden flex flex-col justify-between h-full min-h-[380px] transition-all group ${
+                    animate={{ y: [-4, 4, -4] }}
+                    transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+                    className={`rounded-3xl border shadow-2xl relative overflow-hidden flex flex-col justify-between h-full min-h-[360px] transition-all group ${
                       isDarkMode
                         ? 'bg-[#0C0C0C] border-zinc-800 text-white shadow-black/80'
                         : 'bg-white border-zinc-200 text-zinc-900 shadow-xl'
                     }`}
                   >
-                    {/* Realistic High-Resolution Studio Image Background */}
-                    <div className="absolute inset-0 z-0 overflow-hidden rounded-3xl">
-                      <img
-                        src={service.imageUrl}
-                        alt={service.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 filter brightness-100 contrast-105"
-                      />
-                      <div
-                        className={`absolute inset-0 bg-gradient-to-t ${
-                          isDarkMode
-                            ? 'from-[#050505]/90 via-[#050505]/30 to-transparent'
-                            : 'from-white/90 via-white/30 to-transparent'
-                        }`}
-                      />
-                    </div>
-
-                    {/* Spacer for bottom banner positioning */}
-                    <div className="relative z-10 p-4" />
+                    {service.renderVisual(isDarkMode)}
 
                     {/* Momentum Created Result Banner */}
                     <div
                       className={`relative z-10 p-5 m-4 rounded-2xl border text-xs font-semibold text-[#FF7A1A] backdrop-blur-md ${
                         isDarkMode
-                          ? 'bg-[#050505]/85 border-[#FF7A1A]/40 shadow-2xl'
-                          : 'bg-white/85 border-[#FF7A1A]/40 shadow-lg'
+                          ? 'bg-[#050505]/90 border-[#FF7A1A]/40 shadow-2xl'
+                          : 'bg-white/90 border-[#FF7A1A]/40 shadow-lg'
                       }`}
                     >
                       <span className="font-bold uppercase font-mono block text-[10px] text-zinc-400 mb-0.5">
@@ -613,7 +843,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({
             <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
               STEP-BY-STEP LEAP
             </span>
-            <h2 className={`font-display text-4xl sm:text-6xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-zinc-900'}`}>
+            <h2 className={`font-display text-4xl sm:text-6xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
               The Roos Growth Framework
             </h2>
           </div>
