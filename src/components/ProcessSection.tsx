@@ -47,8 +47,6 @@ interface ProcessColumnData {
   title: string;
   tagline: string;
   description: string;
-  impactMetric: string;
-  impactLabel: string;
   icon: React.ElementType;
   subNodes: SubNode[];
 }
@@ -61,8 +59,6 @@ const processColumnsData: ProcessColumnData[] = [
     tagline: 'We Uncover What Others Miss',
     description:
       'Before writing code or designing pixels, we perform deep-dive architectural discovery. We analyze your market ecosystem, target customer friction points, and competitor positioning to map high-leverage growth opportunities.',
-    impactMetric: '+180%',
-    impactLabel: 'Market Opportunity Clarity',
     icon: Compass,
     subNodes: [
       { title: 'Business Audit', desc: 'Full infrastructure & revenue bottleneck analysis', icon: FileText },
@@ -78,8 +74,6 @@ const processColumnsData: ProcessColumnData[] = [
     tagline: 'Strategy Before Execution',
     description:
       'Execution without strategy is wasted momentum. We define razor-sharp brand positioning, value proposition frameworks, and strategic product roadmaps to ensure every asset drives measurable revenue outcomes.',
-    impactMetric: '100%',
-    impactLabel: 'Strategic Messaging Alignment',
     icon: Target,
     subNodes: [
       { title: 'Brand Positioning', desc: 'Unfair market advantage formulation', icon: Flag },
@@ -95,8 +89,6 @@ const processColumnsData: ProcessColumnData[] = [
     tagline: 'Create Experiences People Remember',
     description:
       'We craft world-class visual identity systems, spatial UI/UX interfaces, and interactive webGL motion design that command authority, inspire buyer trust, and elevate brand perception.',
-    impactMetric: '3.4x',
-    impactLabel: 'Brand Perception Elevation',
     icon: Palette,
     subNodes: [
       { title: 'Brand Systems', desc: 'Scalable design systems & guidelines', icon: Layers },
@@ -109,16 +101,14 @@ const processColumnsData: ProcessColumnData[] = [
     num: '04',
     id: 'build',
     title: 'Build',
-    tagline: 'Built For Sub-100ms Performance',
+    tagline: 'Built For High-Performance Scale',
     description:
-      'We engineer ultra-fast web platforms, headless CMS integrations, and custom AI automation workflows designed to scale effortlessly under high enterprise traffic volumes.',
-    impactMetric: '<100ms',
-    impactLabel: 'Sub-100ms Render Performance',
+      'We engineer ultra-fast web platforms, headless CMS integrations, and modern digital systems designed to scale effortlessly under high enterprise traffic volumes.',
     icon: Code2,
     subNodes: [
       { title: 'Modern Web Stack', desc: 'React, Vite, Next & TypeScript build', icon: Code },
       { title: 'Headless CMS', desc: 'Decoupled lightning-fast content engines', icon: Database },
-      { title: 'AI Automation', desc: 'Autonomous LLM agent & lead workflows', icon: Bot },
+      { title: 'AI Automation', desc: 'Smart workflow & lead automation pipelines', icon: Bot },
       { title: 'System Integrations', desc: 'Custom API & CRM webhook pipelines', icon: Zap },
     ],
   },
@@ -128,13 +118,11 @@ const processColumnsData: ProcessColumnData[] = [
     title: 'Scale',
     tagline: 'Growth Never Stops At Launch',
     description:
-      'Post-launch is where momentum compounds. We deploy automated lead acquisition pipelines, SEO/GEO search engines, and real-time analytics to drive sustainable revenue growth.',
-    impactMetric: '24/7',
-    impactLabel: 'Automated Growth Engine',
+      'Post-launch is where momentum compounds. We deploy automated lead acquisition pipelines, SEO search engines, and real-time analytics to drive sustainable revenue growth.',
     icon: TrendingUp,
     subNodes: [
-      { title: 'SEO & GEO Engine', desc: 'AI-search & generative engine optimization', icon: Search },
-      { title: 'Analytics Radar', desc: 'Real-time user telemetry & funnel tracking', icon: BarChart2 },
+      { title: 'SEO & Search Engine', desc: 'Search & discovery optimization', icon: Search },
+      { title: 'Analytics Telemetry', desc: 'Real-time telemetry & funnel tracking', icon: BarChart2 },
       { title: 'Conversion Tuning', desc: 'Continuous A/B testing & UX refinement', icon: Filter },
       { title: 'Growth Systems', desc: 'Predictable recurring lead pipelines', icon: Rocket },
     ],
@@ -259,18 +247,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   </div>
 
                   {/* Step Title Label */}
-                  <div className="mt-2 text-center">
-                    <span
-                      className={`text-[10px] font-mono font-extrabold uppercase tracking-wider block ${
-                        isActive
-                          ? 'text-[#F97316]'
-                          : isDarkMode
-                          ? 'text-zinc-500'
-                          : 'text-zinc-400'
-                      }`}
-                    >
-                      Stage {step.num}
-                    </span>
+                  <div className="mt-2.5 text-center">
                     <span
                       className={`text-xs sm:text-sm font-bold tracking-tight block transition-colors ${
                         isActive
@@ -312,13 +289,6 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
               
               {/* LEFT COLUMN: STRATEGY & NARRATIVE (6 COLS) */}
               <div className="lg:col-span-6 space-y-6 text-left">
-                {/* Stage Badge & Index */}
-                <div className="flex items-center gap-3">
-                  <span className="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-widest bg-[#F97316]/15 text-[#F97316] border border-[#F97316]/30">
-                    Stage {currentStage.num} of 05 • Architecture
-                  </span>
-                </div>
-
                 {/* Main Stage Headline & Tagline */}
                 <div>
                   <h3
@@ -341,31 +311,6 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 >
                   {currentStage.description}
                 </p>
-
-                {/* Impact Metric Radar Badge */}
-                <div
-                  className={`p-4 rounded-2xl border flex items-center gap-4 shadow-sm ${
-                    isDarkMode
-                      ? 'bg-[#18181B] border-[#27272A]'
-                      : 'bg-[#FAFAFA] border-[#E4E4E7]'
-                  }`}
-                >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white font-black font-display text-base flex items-center justify-center shrink-0 shadow-md shadow-[#F97316]/30">
-                    {currentStage.impactMetric}
-                  </div>
-                  <div>
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#F97316] block">
-                      Target System Impact
-                    </span>
-                    <span
-                      className={`text-xs sm:text-sm font-semibold block ${
-                        isDarkMode ? 'text-white' : 'text-[#111111]'
-                      }`}
-                    >
-                      {currentStage.impactLabel}
-                    </span>
-                  </div>
-                </div>
 
                 {/* Stage Controls */}
                 <div className="pt-2 flex items-center gap-3 flex-wrap">
