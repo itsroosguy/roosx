@@ -145,11 +145,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </h2>
         </motion.div>
 
-        {/* 5-CARD TEAM STACK CONTAINER */}
+        {/* 5-CARD TEAM STACK CONTAINER (FULLY VISIBLE TEXT, CENTER ALIGNED, EXPANDED HEIGHT) */}
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="relative h-[440px] sm:h-[470px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
+          className="relative h-[490px] sm:h-[530px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
         >
           {process5StepCards.map((card, idx) => {
             const isActive = card.id === activeCardId;
@@ -177,7 +177,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                       }
                 }
                 transition={{ type: 'spring', stiffness: 220, damping: 20 }}
-                className={`absolute w-64 sm:w-72 h-[370px] sm:h-[390px] rounded-3xl p-5 border text-center cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl flex flex-col gap-3 ${
+                className={`absolute w-64 sm:w-72 h-[410px] sm:h-[440px] rounded-3xl p-5 border text-center cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl flex flex-col gap-2.5 justify-start ${
                   isActive || (card.isFeatured && isHovered)
                     ? 'bg-[#18181C] text-white border-[#FF7A1A]/80 ring-1 ring-[#FF7A1A]/40 shadow-[0_10px_40px_rgba(255,122,26,0.3)]'
                     : isDarkMode
@@ -187,7 +187,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
               >
                 {/* Top Illustration Box with Top-Right Pill/Circle CTA */}
                 <div className="relative shrink-0">
-                  <div className={`w-full h-36 rounded-2xl flex items-center justify-center relative transition-colors ${
+                  <div className={`w-full h-34 rounded-2xl flex items-center justify-center relative transition-colors ${
                     isActive
                       ? 'bg-[#222228] border border-[#FF7A1A]/30'
                       : 'bg-[#18181C] border border-zinc-800'
@@ -214,15 +214,15 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   </button>
                 </div>
 
-                {/* Card Number, Title & Paragraph */}
-                <div className="space-y-1 text-center">
-                  <div className="text-sm font-mono font-extrabold text-[#FF7A1A] tracking-wider">
+                {/* Card Number, Title & Paragraph (Fully Visible, 100% Center Aligned) */}
+                <div className="space-y-1.5 pt-1 text-center flex flex-col items-center justify-center">
+                  <div className="text-sm font-mono font-extrabold text-[#FF7A1A] tracking-wider text-center">
                     {card.num}
                   </div>
-                  <h3 className="font-display text-lg sm:text-xl font-extrabold leading-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mx-auto">
+                  <h3 className="font-display text-lg sm:text-xl font-extrabold leading-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent text-center px-1">
                     {card.name}
                   </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3 max-w-xs mx-auto pt-0.5">
+                  <p className="text-xs text-zinc-400 leading-relaxed text-center px-1 pt-0.5">
                     {card.description}
                   </p>
                 </div>
@@ -231,7 +231,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           })}
         </div>
 
-        {/* HIGH-CRAFT ELEVATED INSTRUCTION CAPSULE (POSITIONED BELOW DECK ARC) */}
+        {/* HIGH-CRAFT ELEVATED INSTRUCTION CAPSULE */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -241,7 +241,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         >
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#121215]/90 border border-[#FF7A1A]/40 text-xs sm:text-sm font-mono font-bold text-zinc-200 backdrop-blur-xl shadow-xl shadow-[#FF7A1A]/10 group hover:border-[#FF7A1A] transition-all">
             <Sparkles className="w-4 h-4 text-[#FF7A1A] animate-pulse shrink-0" />
-            <span className="tracking-wide">
+            <span className="tracking-wide text-center">
               Hover or tap the 5-card deck to fan out and explore our studio execution methodology.
             </span>
           </div>
