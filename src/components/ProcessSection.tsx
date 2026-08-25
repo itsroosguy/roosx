@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Target, Pencil, Code, TrendingUp, CheckCircle2, Sparkles } from 'lucide-react';
+import { Search, Target, Pencil, Code, TrendingUp, CheckCircle2 } from 'lucide-react';
 
 interface ProcessSectionProps {
   onOpenInquiry?: () => void;
@@ -117,7 +117,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
         
-        {/* HEADER BLOCK: THE MOMENTUM ENGINE (2-LINE SUBHEAD FORMATTING) */}
+        {/* HEADER BLOCK: THE MOMENTUM ENGINE */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -245,22 +245,6 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
             );
           })}
         </div>
-
-        {/* INSTRUCTION FOOTER CAPSULE */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="pt-2 flex justify-center text-center"
-        >
-          <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#121215]/90 border border-[#FF7A1A]/40 text-xs sm:text-sm font-mono font-bold text-zinc-200 backdrop-blur-xl shadow-xl shadow-[#FF7A1A]/10 group hover:border-[#FF7A1A] transition-all">
-            <Sparkles className="w-4 h-4 text-[#FF7A1A] animate-pulse shrink-0" />
-            <span className="tracking-wide">
-              Hover or click any phase card to inspect its execution deliverables.
-            </span>
-          </div>
-        </motion.div>
 
       </div>
     </section>
