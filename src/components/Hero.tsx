@@ -97,16 +97,16 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
 
       <div className="max-w-[1750px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
         
-        {/* 1. TOP CENTER: REFINED 2-LINE HEADLINE WITH BALANCED FONT SIZE */}
+        {/* 1. TOP CENTER: REFINED 2-LINE HEADLINE (+3PX FONT SIZE & SLIGHTLY TIGHTER LETTER SPACING) */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="text-center max-w-4xl mx-auto flex flex-col items-center mb-1 sm:mb-2 px-2"
+          className="text-center max-w-5xl mx-auto flex flex-col items-center mb-1 sm:mb-2 px-2"
         >
           <motion.h2
             variants={itemVariants}
-            className="font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-[1.08] text-center"
+            className="font-display text-[35px] sm:text-[51px] md:text-[63px] lg:text-[75px] font-bold tracking-[-0.035em] leading-[1.06] text-center"
           >
             <span className="text-white block pb-0.5">
               You bring ambition.
