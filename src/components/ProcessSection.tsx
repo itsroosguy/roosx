@@ -32,12 +32,12 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'We analyze your target market, buyer friction points, and competitor blind spots to locate immediate growth levers.',
     avatarIcon: Search,
     ctaLabel: 'Audit Market',
-    collapsedX: -90,
-    collapsedY: 8,
-    collapsedRotate: -14,
+    collapsedX: -135,
+    collapsedY: 22,
+    collapsedRotate: -15,
     spreadX: -340,
-    spreadY: 10,
-    spreadRotate: -12,
+    spreadY: 0,
+    spreadRotate: -10,
   },
   {
     id: 'positioning',
@@ -46,11 +46,11 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'We craft sharp positioning headlines and value props so potential buyers grasp your unique advantage in under 3 seconds.',
     avatarIcon: Compass,
     ctaLabel: 'Position Brand',
-    collapsedX: -45,
-    collapsedY: 2,
-    collapsedRotate: -7,
+    collapsedX: -68,
+    collapsedY: 6,
+    collapsedRotate: -7.5,
     spreadX: -170,
-    spreadY: -4,
+    spreadY: 0,
     spreadRotate: -5,
   },
   {
@@ -62,10 +62,10 @@ const process5StepCards: TeamMemberCard[] = [
     isFeatured: true,
     ctaLabel: 'Build Code',
     collapsedX: 0,
-    collapsedY: -8,
+    collapsedY: 0,
     collapsedRotate: 0,
     spreadX: 0,
-    spreadY: -10,
+    spreadY: 0,
     spreadRotate: 0,
   },
   {
@@ -75,11 +75,11 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'We deploy infrastructure to edge CDNs, configure automated CRM webhooks, and complete strict pre-launch checklists.',
     avatarIcon: Zap,
     ctaLabel: 'Deploy QA',
-    collapsedX: 45,
-    collapsedY: 2,
-    collapsedRotate: 7,
+    collapsedX: 68,
+    collapsedY: 6,
+    collapsedRotate: 7.5,
     spreadX: 170,
-    spreadY: -4,
+    spreadY: 0,
     spreadRotate: 5,
   },
   {
@@ -89,12 +89,12 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'Continuous conversion rate telemetry monitoring, live A/B split testing, and revenue tuning for compounding momentum.',
     avatarIcon: TrendingUp,
     ctaLabel: 'Scale Revenue',
-    collapsedX: 90,
-    collapsedY: 8,
-    collapsedRotate: 14,
+    collapsedX: 135,
+    collapsedY: 22,
+    collapsedRotate: 15,
     spreadX: 340,
-    spreadY: 10,
-    spreadRotate: 12,
+    spreadY: 0,
+    spreadRotate: 10,
   },
 ];
 
@@ -136,7 +136,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest backdrop-blur-md">
             <Layers className="w-3.5 h-3.5" />
-            <span>INTERACTIVE TEAM-STACK PROCESS DECK</span>
+            <span>SMOOTH DECK ARC PROCESS STACK</span>
           </div>
 
           <h2
@@ -159,7 +159,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* 5-CARD TEAM STACK CONTAINER (EXACT MATCH TO UNLUMEN TEAM-STACK REFERENCE) */}
+        {/* 5-CARD TEAM STACK CONTAINER (SMOOTH PERFECT DECK ARC) */}
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
@@ -211,7 +211,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     }`} />
                   </div>
 
-                  {/* Top-Right Expanding CTA Button (Circle when collapsed, Pill when active/hovered) */}
+                  {/* Top-Right Expanding CTA Button */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
