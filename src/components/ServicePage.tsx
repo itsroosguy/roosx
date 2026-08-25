@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Compass, Shield, Laptop, Code2, Search, TrendingUp, Cpu, Layers, CheckCircle2, ChevronRight, Sparkles, BarChart, Zap, ShieldCheck } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface ServicePageProps {
@@ -13,198 +13,139 @@ export const ServicePage: React.FC<ServicePageProps> = ({
   onOpenInquiry,
   onNavigateHome,
 }) => {
-  const [transformationState, setTransformationState] = useState<'before' | 'after'>('after');
-  const [activeEvolution, setActiveEvolution] = useState<number>(0);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [activeFaq, setActiveFaq] = useState<number | null>(0);
 
   const triggerLeapConfetti = () => {
     confetti({
-      particleCount: 120,
-      spread: 90,
+      particleCount: 100,
+      spread: 80,
       origin: { y: 0.7 },
-      colors: ['#FF6B00', '#FF8F3A', '#FFFFFF', '#EA580C'],
+      colors: ['#FF7A1A', '#FF8833', '#FFFFFF', '#EA580C'],
     });
   };
 
-  // ALL 8 CORE SERVICES EXPLICITLY REPRESENTED & TRANSFORMATION-MAPPED
-  const allServices = [
+  const services = [
     {
-      num: '01',
+      id: 'brand-strategy',
+      category: 'strategy',
+      icon: Compass,
       title: 'Brand Strategy & Positioning',
-      subtitle: 'Extracting Your Category Dominance',
-      desc: 'Defining your unfair advantage, value proposition, and messaging framework so clients choose you first.',
-      tag: 'STRATEGY',
-      outcomes: ['Unshakeable Brand Authority', 'Higher Value Pricing Power', 'Unified Strategic Messaging'],
+      subtitle: 'Extract your unfair advantage & category dominance.',
+      description: 'We audit your market landscape, define your core brand narrative, and position your offer so clients choose you first without price resistance.',
+      deliverables: ['Market Positioning Matrix', 'Customer Persona Mapping', 'Value Proposition & Copy Framework', 'Competitive Gap Analysis'],
+      impact: '4.8x Higher Value Perception',
     },
     {
-      num: '02',
+      id: 'visual-identity',
+      category: 'design',
+      icon: Shield,
       title: 'Visual Identity & Design Systems',
-      subtitle: 'Designing Enterprise Trust',
-      desc: 'Digital-first logos, typography scales, color tokens, and design guidelines built to project market leadership.',
-      tag: 'BRANDING',
-      outcomes: ['Instant Market Trust', 'Cohesive Design Tokens', 'Faster Design Execution'],
+      subtitle: 'Brands are remembered by design excellence.',
+      description: 'Digital-first logo marks, typography hierarchies, custom color tokens, and scalable UI component libraries engineered for enterprise trust.',
+      deliverables: ['Logo & Mark Architecture', 'Color & Typography Tokens', 'Figma Component Library', 'Brand Guidelines Deck'],
+      impact: 'Instant Category Authority',
     },
     {
-      num: '03',
+      id: 'web-design',
+      category: 'design',
+      icon: Laptop,
       title: 'Website Design & UI/UX',
-      subtitle: 'Conversion-Engineered User Journeys',
-      desc: 'Creating high-fidelity UI/UX, micro-interactions, and visual storytelling that convert visitors into booked pipeline.',
-      tag: 'WEB DESIGN',
-      outcomes: ['Sub-100ms UX Interactions', 'Increased Conversion Rates', 'Editorial Studio Polish'],
+      subtitle: 'Conversion-engineered user experiences.',
+      description: 'Immersive, high-converting web layouts designed to guide visitors seamlessly from curiosity to high-intent booking calls.',
+      deliverables: ['High-Fidelity Wireframes', 'Interactive Prototypes', 'Responsive Mobile Design', 'Conversion Funnel Flow'],
+      impact: '+180% Lead Form Conversions',
     },
     {
-      num: '04',
-      title: 'Web Development & Next.js Architecture',
-      subtitle: 'Sub-100ms Code Execution',
-      desc: 'Building lightning-fast, SEO-optimized web applications with 100/100 Lighthouse performance benchmarks.',
-      tag: 'WEB DEV',
-      outcomes: ['100/100 Lighthouse Benchmark', 'Sub-Second Page Loads', 'Zero Technical Debt'],
+      id: 'web-dev',
+      category: 'engineering',
+      icon: Code2,
+      title: 'Web Development & Next.js Engine',
+      subtitle: 'Sub-100ms execution with 100/100 Lighthouse benchmark.',
+      description: 'Custom React & Next.js engineering with WebGL micro-interactions, clean headless CMS integrations, and zero technical debt.',
+      deliverables: ['Custom Next.js App Architecture', 'Headless CMS Integration', 'WebGL & Framer Micro-Interactions', '100/100 Lighthouse Score'],
+      impact: 'Sub-100ms Load Times',
     },
     {
-      num: '05',
+      id: 'seo',
+      category: 'growth',
+      icon: Search,
       title: 'SEO & Organic Search Dominance',
-      subtitle: 'Capturing High-Intent Buyer Traffic',
-      desc: 'Technical SEO audits, programmatic content architecture, and keyword authority strategies for organic dominance.',
-      tag: 'SEO',
-      outcomes: ['Page #1 Google Rankings', 'High-Intent Pipeline Traffic', 'Compounding Organic ROI'],
+      subtitle: 'Capture high-intent buyer traffic on Google.',
+      description: 'Data-driven technical SEO, programmatic content systems, and authority link-building strategies engineered to dominate Page #1 rankings.',
+      deliverables: ['Technical SEO Audit & Fixes', 'Programmatic Content Specs', 'Keyword Intent Mapping', 'Organic Telemetry Dashboard'],
+      impact: '#1 Google Keyword Rankings',
     },
     {
-      num: '06',
-      title: 'Digital Marketing & Performance Growth',
-      subtitle: 'Systematic Revenue Acquisition',
-      desc: 'Multi-channel acquisition campaigns, high-converting landers, and targeted funnels built for payback efficiency.',
-      tag: 'DIGITAL MARKETING',
-      outcomes: ['Lower Acquisition Costs (CAC)', 'Higher Intent Lead Volume', 'Transparent ROI Telemetry'],
+      id: 'digital-marketing',
+      category: 'growth',
+      icon: TrendingUp,
+      title: 'Digital Marketing & Growth Funnels',
+      subtitle: 'Predictable, scalable customer acquisition.',
+      description: 'Targeted multi-channel ad campaigns, high-converting landers, and automated email nurturing sequences built for payback efficiency.',
+      deliverables: ['Paid Social & Search Ads', 'High-Converting Landing Pages', 'Email & SMS Nurturing Sequences', 'Full-Funnel Attribution Setup'],
+      impact: '3.4x Average Return on Ad Spend',
     },
     {
-      num: '07',
-      title: 'AI & Operations Automation',
-      subtitle: 'Scale Without Operational Overhead',
-      desc: 'Architecting custom AI agents, automated lead routing, and CRM pipeline workflows that eliminate repetitive friction.',
-      tag: 'AUTOMATION',
-      outcomes: ['85% Manual Tasks Saved', 'Instant Lead Response Acceleration', 'Exponential Output'],
+      id: 'automation',
+      category: 'engineering',
+      icon: Cpu,
+      title: 'AI & Workflow Automation',
+      subtitle: 'Scale operations without adding team overhead.',
+      description: 'Custom AI neural agents, CRM lead routing, and automated back-office workflows that eliminate manual friction and speed up deal velocity.',
+      deliverables: ['Custom AI Lead Qualifiers', 'HubSpot / Salesforce Routing', 'Automated Contract & Invoice Flows', '24/7 Operations Bot'],
+      impact: '85% Manual Friction Eliminated',
     },
     {
-      num: '08',
-      title: 'Digital Product Experience',
-      subtitle: 'SaaS Platforms & Interactive Web Apps',
-      desc: 'End-to-end product design and frontend development for SaaS tools, portals, and interactive digital products.',
-      tag: 'DIGITAL PRODUCT',
-      outcomes: ['Intuitive User Onboarding', 'Reduced Customer Churn', 'Scalable React Architecture'],
+      id: 'digital-product',
+      category: 'engineering',
+      icon: Layers,
+      title: 'Digital Product & SaaS Engineering',
+      subtitle: 'Full-stack software design & engineering.',
+      description: 'End-to-end UX architecture and production development for web applications, SaaS dashboards, and client portals built for scale.',
+      deliverables: ['Product Requirement Docs (PRD)', 'SaaS Dashboard UI/UX', 'Full-Stack API & Database Setup', 'Scalable Cloud Deployment'],
+      impact: 'Production-Ready in 6 Weeks',
     },
   ];
 
-  const evolutions = [
-    {
-      from: 'UNKNOWN',
-      to: 'CATEGORY AUTHORITY',
-      capability: 'Brand Strategy & Narrative Architecture',
-      beforeText: 'Blending into the noise with generic messaging, low pricing power, and zero market differentiation.',
-      afterText: 'Dominating your category with unshakeable narrative clarity, premium positioning, and instant enterprise trust.',
-      metric: '4.8x Higher Value Perception',
-    },
-    {
-      from: 'INVISIBLE',
-      to: 'CONVERSION MAGNET',
-      capability: 'Website Design & Next.js Engine',
-      beforeText: 'Slow, static website with high bounce rates, vague positioning, and broken conversion pathways.',
-      afterText: 'Lightning-fast Sub-100ms digital product with interactive WebGL story reveals that turn visitors into booked pipeline.',
-      metric: '+380% Qualified Lead Volume',
-    },
-    {
-      from: 'MANUAL',
-      to: 'AUTOMATED SCALE',
-      capability: 'AI Workflows & Operations Automation',
-      beforeText: 'Repetitive operational bottlenecks, lost lead follow-ups, and manual team friction capping scale.',
-      afterText: 'Autonomous neural workflows, instant CRM lead routing, and 24/7 automated business operations.',
-      metric: '85% Operational Overhead Saved',
-    },
+  const filteredServices = selectedCategory === 'all'
+    ? services
+    : services.filter(s => s.category === selectedCategory);
+
+  const faqs = [
+    { q: 'How does Roos StudioX differ from traditional digital agencies?', a: 'Traditional agencies sell isolated deliverables (a logo, a site, an ad). We engineer complete growth engines where strategy, high-speed code, performance marketing, and AI automation work together to drive measurable revenue.' },
+    { q: 'What is the typical timeline for a core project?', a: 'Brand identity & core web builds typically take 4 to 6 weeks from kick-off to live production deployment. Full-stack growth engines operate on continuous 90-day momentum sprints.' },
+    { q: 'Can we hire Roos StudioX for a specific single service?', a: 'Yes. Whether you need a standalone website redesign, a design system, or an AI automation workflow, we deliver targeted high-impact modules that integrate into your existing stack.' },
+    { q: 'What is required from our team during the process?', a: 'We minimize internal friction. We only require strategic alignment during kick-off diagnostics, bi-weekly progress reviews, and final launch sign-offs.' },
   ];
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen relative overflow-hidden font-sans selection:bg-[#FF6B00] selection:text-white pt-28 pb-24">
+    <div className="bg-[#050505] text-[#D4D4D8] min-h-screen relative overflow-hidden font-sans pt-28 pb-24 selection:bg-[#FF7A1A] selection:text-white">
       
-      {/* 1. CURSOR SPOTLIGHT */}
-      <div
-        style={{
-          left: `${mousePos.x}px`,
-          top: `${mousePos.y}px`,
-        }}
-        className="fixed w-[800px] h-[800px] rounded-full bg-radial from-[#FF6B00]/16 via-[#FF6B00]/3 to-transparent blur-[170px] pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0 transition-opacity duration-500"
-      />
+      {/* BACKGROUND ATMOSPHERIC LIGHTING */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none -z-10" />
 
-      {/* 2. BACKGROUND MESH */}
-      <div className="fixed inset-0 bg-[size:5rem_5rem] bg-[linear-gradient(to_right,#FF6B0008_1px,transparent_1px),linear-gradient(to_bottom,#FF6B0008_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_40%,#000_80%,transparent_100%)] pointer-events-none z-0" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-36">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 relative z-10">
         
         {/* ========================================================================= */}
-        {/* ERA 01: THE TRANSFORMATION HERO */}
+        {/* HERO SECTION */}
         {/* ========================================================================= */}
-        <section className="text-center max-w-5xl mx-auto space-y-8 pt-6">
-          
-          {/* LIVE TRANSFORMATION STATE CONTROLLER */}
-          <div className="flex justify-center">
-            <div className="inline-flex items-center gap-2 p-1.5 rounded-full bg-[#121215] border border-zinc-800 backdrop-blur-xl">
-              <button
-                onClick={() => setTransformationState('before')}
-                className={`px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
-                  transformationState === 'before'
-                    ? 'bg-rose-500/20 text-rose-400 border border-rose-500/40'
-                    : 'text-zinc-500 hover:text-zinc-300'
-                }`}
-              >
-                STATUS: BEFORE ROOS
-              </button>
-              <button
-                onClick={() => setTransformationState('after')}
-                className={`px-4 py-1.5 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
-                  transformationState === 'after'
-                    ? 'bg-[#FF6B00]/20 text-[#FF6B00] border border-[#FF6B00]/50 shadow-md shadow-[#FF6B00]/20'
-                    : 'text-zinc-500 hover:text-zinc-300'
-                }`}
-              >
-                STATUS: AFTER TRANSFORMATION ⚡
-              </button>
-            </div>
+        <section className="text-center max-w-4xl mx-auto space-y-6 pt-4">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121215] border border-zinc-800 text-xs font-sans font-semibold text-[#FF7A1A] shadow-md">
+            <Sparkles className="w-3.5 h-3.5 text-[#FF7A1A]" />
+            <span>FULL-SERVICE DIGITAL STUDIO ARCHITECTURE</span>
           </div>
 
-          {/* MASSIVE EDITORIAL TYPOGRAPHY */}
-          <motion.div
-            key={transformationState}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="space-y-6"
-          >
-            {transformationState === 'before' ? (
-              <h1 className="font-display text-4xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[1.05] text-zinc-500">
-                Fragmented. Slow. <br />
-                <span className="text-rose-400">Invisible to the Market.</span>
-              </h1>
-            ) : (
-              <h1 className="font-display text-4xl sm:text-7xl md:text-8xl font-black tracking-tight leading-[1.05] text-white">
-                From Invisible <br />
-                <span className="bg-gradient-to-r from-white via-zinc-100 to-[#FF6B00] bg-clip-text text-transparent">
-                  To Unforgettable.
-                </span>
-              </h1>
-            )}
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.08]">
+            Full-Service Digital Excellence. <br />
+            <span className="bg-gradient-to-r from-white via-zinc-200 to-[#FF7A1A] bg-clip-text text-transparent">
+              Engineered For Scale.
+            </span>
+          </h1>
 
-            <p className="text-base sm:text-2xl font-medium text-zinc-300 max-w-3xl mx-auto leading-relaxed">
-              {transformationState === 'before'
-                ? 'Relying on fragmented vendors, outdated websites, and manual workflows that choke business momentum.'
-                : 'We partner with ambitious brands to engineer authority, high-converting digital products, SEO dominance, digital marketing, and automated growth engines.'}
-            </p>
-          </motion.div>
+          <p className="text-base sm:text-xl font-medium text-zinc-300 max-w-2xl mx-auto leading-relaxed">
+            We partner with ambitious founders and marketing leaders to build enterprise brand systems, high-converting web engines, and automated revenue funnels.
+          </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
@@ -212,196 +153,214 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 triggerLeapConfetti();
                 onOpenInquiry();
               }}
-              className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF6B00] text-white font-mono font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#FF8833] transition-all shadow-[0_15px_40px_rgba(255,107,0,0.45)] cursor-pointer flex items-center justify-center gap-3 group"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#FF7A1A] hover:bg-[#FF8833] text-white font-sans font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-[#FF7A1A]/30 cursor-pointer flex items-center justify-center gap-2 group"
             >
-              <span>TRIGGER YOUR TRANSFORMATION</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              <span>Book A Free Strategy Call</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <button
+              onClick={onNavigateHome}
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer"
+            >
+              Back To Overview
             </button>
           </div>
-        </section>
 
-        {/* ========================================================================= */}
-        {/* ERA 02: THE 3 BUSINESS EVOLUTIONS */}
-        {/* ========================================================================= */}
-        <section className="space-y-16">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#FF6B00]">THE THREE EVOLUTIONARY LEAPS</span>
-            <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black text-white">How Your Business Evolves</h2>
-          </div>
-
-          {/* EVOLUTION SELECTOR TAB BAR */}
-          <div className="flex flex-wrap justify-center gap-3">
-            {evolutions.map((ev, idx) => (
-              <button
-                key={idx}
-                onClick={() => setActiveEvolution(idx)}
-                className={`px-6 py-3 rounded-full text-xs font-mono font-bold transition-all cursor-pointer ${
-                  activeEvolution === idx
-                    ? 'bg-[#FF6B00] text-white shadow-lg shadow-[#FF6B00]/30 scale-105'
-                    : 'bg-[#121215] text-zinc-400 border border-zinc-800 hover:text-white'
-                }`}
-              >
-                0{idx + 1}. {ev.from} → {ev.to}
-              </button>
-            ))}
-          </div>
-
-          {/* EVOLUTION DISPLAY */}
-          <div className="relative pt-6">
-            {(() => {
-              const activeEv = evolutions[activeEvolution];
-              return (
-                <motion.div
-                  key={activeEvolution}
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="space-y-12"
-                >
-                  <div className="text-center space-y-2">
-                    <span className="text-xs font-mono font-bold text-[#FF6B00] uppercase tracking-widest">{activeEv.capability}</span>
-                    <h3 className="font-display text-3xl sm:text-5xl font-black text-white">
-                      {activeEv.from} <span className="text-[#FF6B00]">→</span> {activeEv.to}
-                    </h3>
-                  </div>
-
-                  {/* UNBOXED COMPARISON COLUMNS */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
-                    
-                    {/* BEFORE STATE */}
-                    <div className="space-y-4 p-8 rounded-3xl bg-[#0A0A0C]/60 border border-rose-500/20 text-left relative overflow-hidden">
-                      <div className="flex items-center justify-between">
-                        <span className="px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 font-mono text-xs font-bold border border-rose-500/30">
-                          OLD WAY (BEFORE)
-                        </span>
-                        <span className="font-mono text-xs text-rose-500 font-bold">FRAGMENTED</span>
-                      </div>
-                      <p className="text-base sm:text-lg text-zinc-300 font-medium leading-relaxed">
-                        {activeEv.beforeText}
-                      </p>
-                    </div>
-
-                    {/* AFTER STATE */}
-                    <div className="space-y-4 p-8 rounded-3xl bg-[#0F0F14] border border-[#FF6B00]/40 text-left relative overflow-hidden shadow-[0_10px_40px_rgba(255,107,0,0.2)]">
-                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF6B00] to-[#FF8F3A]" />
-                      <div className="flex items-center justify-between">
-                        <span className="px-3 py-1 rounded-full bg-[#FF6B00]/20 text-[#FF6B00] font-mono text-xs font-bold border border-[#FF6B00]/40">
-                          ROOS WAY (AFTER) ⚡
-                        </span>
-                        <span className="font-mono text-xs text-[#FF6B00] font-bold">{activeEv.metric}</span>
-                      </div>
-                      <p className="text-base sm:text-lg text-white font-medium leading-relaxed">
-                        {activeEv.afterText}
-                      </p>
-                    </div>
-
-                  </div>
-                </motion.div>
-              );
-            })()}
+          {/* QUICK TELEMETRY HIGHLIGHT BAR */}
+          <div className="pt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs font-sans font-semibold text-zinc-400 border-t border-zinc-800/80 max-w-3xl mx-auto">
+            <div className="flex items-center gap-2">
+              <Zap className="w-4 h-4 text-[#FF7A1A]" />
+              <span>100/100 LIGHTHOUSE BENCHMARK</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <BarChart className="w-4 h-4 text-[#FF7A1A]" />
+              <span>SUB-100MS LOAD PERFORMANCE</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="w-4 h-4 text-[#FF7A1A]" />
+              <span>END-TO-END GROWTH ENGINE</span>
+            </div>
           </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* ERA 03: ALL 8 CORE SERVICES (UNBOXED CONTINUOUS MOMENTUM STREAM) */}
+        {/* SERVICES CATEGORY FILTER TABS */}
         {/* ========================================================================= */}
-        <section className="space-y-16 pt-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#FF6B00]">COMPLETE CAPABILITY SUITE</span>
-            <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black text-white">Our 8 Core Growth Services</h2>
-            <p className="text-zinc-400 text-sm sm:text-base font-medium">Every capability connects directly to the next, building compounding brand momentum.</p>
-          </div>
+        <section className="space-y-12">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-b border-zinc-800 pb-6">
+            <div>
+              <h2 className="font-display text-2xl sm:text-4xl font-black text-white">Our Service Capabilities</h2>
+              <p className="text-xs sm:text-sm text-zinc-400 font-medium">Select a category to filter specific capability modules.</p>
+            </div>
 
-          {/* CONTINUOUS LASER STREAM LINE */}
-          <div className="relative space-y-24">
-            <div className="absolute left-6 md:left-1/2 top-0 bottom-0 -translate-x-1/2 w-1 bg-gradient-to-b from-[#FF6B00]/20 via-[#FF6B00] to-[#FF6B00]/20 pointer-events-none z-0" />
-
-            {allServices.map((srv, idx) => {
-              const isEven = idx % 2 === 0;
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.6, delay: idx * 0.08 }}
-                  className={`flex flex-col md:flex-row items-center gap-8 ${
-                    isEven ? 'md:flex-row' : 'md:flex-row-reverse'
+            <div className="flex flex-wrap items-center gap-2">
+              {[
+                { id: 'all', label: 'All Services' },
+                { id: 'strategy', label: 'Strategy' },
+                { id: 'design', label: 'Design' },
+                { id: 'engineering', label: 'Engineering' },
+                { id: 'growth', label: 'Growth' },
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setSelectedCategory(tab.id)}
+                  className={`px-4 py-2 rounded-xl text-xs font-sans font-semibold transition-all cursor-pointer ${
+                    selectedCategory === tab.id
+                      ? 'bg-[#FF7A1A] text-white shadow-md'
+                      : 'bg-[#121215] border border-zinc-800 text-zinc-400 hover:text-white'
                   }`}
                 >
-                  {/* TEXT COLUMN */}
-                  <div className={`w-full md:w-1/2 space-y-4 pl-12 md:pl-0 ${isEven ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
-                    <div className={`flex items-center gap-3 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
-                      <span className="font-mono text-3xl font-black text-[#FF6B00]">{srv.num}</span>
-                      <span className="px-3 py-1 rounded-full bg-[#FF6B00]/15 text-[#FF6B00] font-mono text-[10px] font-bold border border-[#FF6B00]/30 uppercase">
-                        {srv.tag}
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 8 CORE SERVICES HIGH-CRAFT GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <AnimatePresence mode="wait">
+              {filteredServices.map((srv) => {
+                const IconComponent = srv.icon;
+                return (
+                  <motion.div
+                    key={srv.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="p-8 sm:p-10 rounded-3xl bg-[#0A0A0C] border border-zinc-800/90 hover:border-[#FF7A1A]/60 transition-all duration-300 space-y-6 relative overflow-hidden group shadow-xl"
+                  >
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                    <div className="flex items-center justify-between">
+                      <div className="w-12 h-12 rounded-2xl bg-[#121215] border border-zinc-800 text-[#FF7A1A] flex items-center justify-center group-hover:bg-[#FF7A1A] group-hover:text-white transition-all shadow-md">
+                        <IconComponent className="w-6 h-6" />
+                      </div>
+
+                      <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 font-mono text-xs font-bold border border-emerald-500/20">
+                        {srv.impact}
                       </span>
                     </div>
-                    <h3 className="font-display text-2xl sm:text-4xl font-black text-white leading-tight">
-                      {srv.title}
-                    </h3>
-                    <p className="text-sm font-mono font-bold text-[#FF8F3A]">{srv.subtitle}</p>
-                    <p className="text-sm sm:text-base text-zinc-300 font-medium leading-relaxed max-w-lg">
-                      {srv.desc}
-                    </p>
 
-                    {/* OUTCOMES BADGES */}
-                    <div className={`flex flex-wrap gap-2 pt-2 ${isEven ? 'md:justify-end' : 'md:justify-start'}`}>
-                      {srv.outcomes.map((out, oIdx) => (
-                        <div key={oIdx} className="px-3 py-1 rounded-lg bg-[#121215] border border-zinc-800 text-[11px] font-mono text-zinc-300 flex items-center gap-1.5">
-                          <CheckCircle2 className="w-3 h-3 text-[#FF6B00]" />
-                          <span>{out}</span>
-                        </div>
-                      ))}
+                    <div className="space-y-2">
+                      <h3 className="font-display text-2xl font-black text-white group-hover:text-[#FF7A1A] transition-colors">
+                        {srv.title}
+                      </h3>
+                      <p className="text-xs font-mono font-bold text-[#FF7A1A]">{srv.subtitle}</p>
+                      <p className="text-xs sm:text-sm text-zinc-300 font-medium leading-relaxed pt-1">
+                        {srv.description}
+                      </p>
                     </div>
-                  </div>
 
-                  {/* CENTRAL GLOWING NODE */}
-                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 w-12 h-12 rounded-full bg-[#FF6B00] text-white flex items-center justify-center font-mono font-black text-sm shadow-[0_0_35px_#FF6B00] shrink-0 z-10">
-                    {srv.num}
-                  </div>
-
-                  {/* BALANCING SPACE */}
-                  <div className="hidden md:block w-1/2" />
-                </motion.div>
-              );
-            })}
+                    {/* DELIVERABLES LIST */}
+                    <div className="space-y-2 pt-2 border-t border-zinc-800/80">
+                      <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-zinc-400">WHAT WE DELIVER</span>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        {srv.deliverables.map((item, dIdx) => (
+                          <div key={dIdx} className="flex items-center gap-2 text-xs font-medium text-zinc-300">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7A1A] shrink-0" />
+                            <span>{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
           </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* ERA 04: THE FINAL EVOLUTION CTA */}
+        {/* ENGAGEMENT PROCESS (4 STEP ROADMAP) */}
         {/* ========================================================================= */}
-        <section className="py-16 text-center space-y-8 relative overflow-hidden">
-          <div className="w-3/4 h-0.5 bg-gradient-to-r from-transparent via-[#FF6B00] to-transparent mx-auto mb-6 opacity-60" />
-
-          <div className="space-y-4 max-w-4xl mx-auto">
-            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#FF6B00]">READY FOR YOUR NEXT LEAP?</span>
-            <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-black text-white leading-tight">
-              Let's Build Something That Can Travel 30 Feet.
-            </h2>
-            <p className="text-base sm:text-xl font-medium text-zinc-300 max-w-2xl mx-auto">
-              No pressure sales pitch. A strategic diagnostic conversation focused on your growth opportunities.
-            </p>
+        <section className="space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF7A1A]">PROVEN ENGAGEMENT BLUEPRINT</span>
+            <h2 className="font-display text-3xl sm:text-5xl font-black text-white">How We Execute</h2>
+            <p className="text-xs sm:text-sm text-zinc-400 font-medium">A structured 4-phase methodology designed for speed, alignment, and maximum ROI.</p>
           </div>
 
-          <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { num: '01', title: 'Audit & Strategy', desc: 'Market diagnostics, competitor teardown, and strategic growth positioning blueprint.' },
+              { num: '02', title: 'Architecture & Design', desc: 'Figma component systems, high-converting UI wireframes, and copywriting.' },
+              { num: '03', title: 'Build & Engineering', desc: 'Next.js frontend development, CMS wiring, AI automations, and speed optimization.' },
+              { num: '04', title: 'Launch & Scale', desc: 'Flawless production deployment, live telemetry setup, and continuous CRO.' },
+            ].map((st, idx) => (
+              <div key={idx} className="p-6 rounded-2xl bg-[#0A0A0C] border border-zinc-800 space-y-3 text-left">
+                <span className="font-mono text-3xl font-black text-[#FF7A1A]">{st.num}</span>
+                <h4 className="font-display text-lg font-black text-white">{st.title}</h4>
+                <p className="text-xs text-zinc-400 font-medium leading-relaxed">{st.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* FAQ SECTION */}
+        {/* ========================================================================= */}
+        <section className="space-y-10 max-w-4xl mx-auto">
+          <div className="text-center space-y-3">
+            <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF7A1A]">TRANSPARENCY & CLARITY</span>
+            <h2 className="font-display text-3xl sm:text-5xl font-black text-white">Frequently Asked Questions</h2>
+          </div>
+
+          <div className="space-y-4">
+            {faqs.map((faq, fIdx) => (
+              <div
+                key={fIdx}
+                className="rounded-2xl bg-[#0A0A0C] border border-zinc-800 overflow-hidden"
+              >
+                <button
+                  onClick={() => setActiveFaq(activeFaq === fIdx ? null : fIdx)}
+                  className="w-full p-6 text-left font-display text-base sm:text-lg font-black text-white flex items-center justify-between gap-4 cursor-pointer"
+                >
+                  <span>{faq.q}</span>
+                  <ChevronRight className={`w-5 h-5 text-[#FF7A1A] transition-transform ${activeFaq === fIdx ? 'rotate-90' : ''}`} />
+                </button>
+                {activeFaq === fIdx && (
+                  <div className="px-6 pb-6 text-xs sm:text-sm text-zinc-300 font-medium leading-relaxed border-t border-zinc-800/40 pt-4">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* FINAL CONVERSION CALL TO ACTION */}
+        {/* ========================================================================= */}
+        <section className="p-10 sm:p-16 rounded-[36px] bg-[#0A0A0C] border border-[#FF7A1A]/40 text-center space-y-6 relative overflow-hidden backdrop-blur-2xl shadow-2xl">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent" />
+
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight">
+            Ready To Upgrade Your Digital Presence?
+          </h2>
+
+          <p className="text-base sm:text-xl font-medium text-zinc-300 max-w-2xl mx-auto">
+            Let's discuss your project goals, bottlenecks, and custom roadmap.
+          </p>
+
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => {
                 triggerLeapConfetti();
                 onOpenInquiry();
               }}
-              className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF6B00] text-white font-mono font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#FF8833] transition-all shadow-[0_15px_40px_rgba(255,107,0,0.45)] cursor-pointer flex items-center justify-center gap-3 group"
+              className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF7A1A] hover:bg-[#FF8833] text-white font-sans font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-[#FF7A1A]/30 cursor-pointer flex items-center justify-center gap-3 group"
             >
-              <span>Get Your Free Growth Audit</span>
+              <span>Book Your Strategy Call</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
               onClick={onNavigateHome}
-              className="w-full sm:w-auto px-8 py-5 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer"
+              className="w-full sm:w-auto px-8 py-5 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer"
             >
-              Back to Overview
+              Back To Home
             </button>
           </div>
         </section>
