@@ -101,7 +101,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   return (
     <section
       id="process"
-      className={`relative pt-12 sm:pt-16 pb-20 sm:pb-28 transition-colors duration-500 overflow-hidden ${
+      className={`relative pt-12 sm:pt-16 pb-20 sm:pb-24 transition-colors duration-500 overflow-hidden ${
         isDarkMode ? 'bg-[#050505] text-white' : 'bg-[#FAF9F6] text-[#111111]'
       }`}
     >
@@ -117,24 +117,22 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
       {/* Ambient Orange Glow Spotlight */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-radial from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12 text-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
         
-        {/* HEADER BLOCK (MATCHING IMAGE: ― OUR 5-PHASE ― EXECUTION METHODOLOGY) */}
+        {/* HEADER BLOCK (CENTERED TOP TITLE) */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="space-y-3 max-w-4xl mx-auto"
+          className="space-y-3 max-w-4xl mx-auto text-center"
         >
-          {/* Eyebrow with Orange Accent Lines */}
           <div className="flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
             <span className="w-8 h-px bg-[#FF7A1A]/60" />
             <span>OUR 5-PHASE</span>
             <span className="w-8 h-px bg-[#FF7A1A]/60" />
           </div>
 
-          {/* Main Title: Execution (White) Methodology (Orange) */}
           <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08]">
             <span className="text-white">Execution </span>
             <span className="text-[#FF7A1A]">Methodology</span>
@@ -145,168 +143,177 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* 5-CARD 3D OVERLAPPING STEPPED STACK (MATCHING REFERENCE IMAGE 1:1) */}
-        <div className="relative min-h-[460px] sm:min-h-[500px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none">
-          <div className="flex items-center justify-center w-full relative">
-            {process5StepCards.map((card, idx) => {
-              const isActive = card.id === activeCardId;
-              const IconComp = card.icon;
-              const activeIdx = process5StepCards.findIndex((c) => c.id === activeCardId);
-              const offsetFromActive = idx - activeIdx;
+        {/* 2-COLUMN SIDE-BY-SIDE LAYOUT: LEFT STACKED CARDS | RIGHT EXPANDED CONTENT */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-7xl mx-auto">
+          
+          {/* LEFT COLUMN: LEFT-ALIGNED COMPACT 3D OVERLAPPING CARDS */}
+          <div className="lg:col-span-5 relative min-h-[380px] sm:min-h-[400px] flex items-center justify-start py-2 select-none overflow-x-auto sm:overflow-visible">
+            <div className="relative w-full h-[350px] flex items-center justify-start">
+              {process5StepCards.map((card, idx) => {
+                const isActive = card.id === activeCardId;
+                const IconComp = card.icon;
+                const activeIdx = process5StepCards.findIndex((c) => c.id === activeCardId);
+                const offsetFromActive = idx - activeIdx;
 
-              return (
-                <motion.div
-                  key={card.id}
-                  onClick={() => setActiveCardId(card.id)}
-                  animate={{
-                    x: (idx - 2) * (window.innerWidth > 768 ? 160 : 65),
-                    y: isActive ? -12 : Math.abs(idx - 2) * 4,
-                    scale: isActive ? 1.05 : 0.96,
-                    zIndex: isActive ? 50 : 30 - Math.abs(offsetFromActive),
-                  }}
-                  transition={{ type: 'spring', stiffness: 220, damping: 22 }}
-                  className={`w-56 sm:w-64 h-[420px] sm:h-[450px] rounded-3xl p-6 border text-left cursor-pointer transition-all duration-500 shadow-2xl backdrop-blur-xl flex flex-col justify-between absolute ${
-                    isActive
-                      ? 'bg-[#121215] text-white border-[#FF7A1A] ring-2 ring-[#FF7A1A]/40 shadow-[0_15px_50px_rgba(255,122,26,0.35)]'
-                      : 'bg-[#0A0A0C] text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-white'
-                  }`}
-                >
-                  {/* Top Step Number */}
-                  <div className="space-y-1">
-                    <div
-                      className={`text-xl sm:text-2xl font-mono font-extrabold transition-colors ${
-                        isActive ? 'text-[#FF7A1A]' : 'text-zinc-500'
-                      }`}
-                    >
-                      {card.num}
+                return (
+                  <motion.div
+                    key={card.id}
+                    onClick={() => setActiveCardId(card.id)}
+                    animate={{
+                      x: idx * (window.innerWidth > 640 ? 68 : 52),
+                      y: isActive ? -8 : Math.abs(idx) * 2,
+                      scale: isActive ? 1.04 : 0.96,
+                      zIndex: isActive ? 50 : 30 - Math.abs(offsetFromActive),
+                    }}
+                    transition={{ type: 'spring', stiffness: 220, damping: 22 }}
+                    className={`w-44 sm:w-48 h-[310px] sm:h-[330px] rounded-2xl p-4 border text-left cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl flex flex-col justify-between absolute left-0 ${
+                      isActive
+                        ? 'bg-[#121215] text-white border-[#FF7A1A] ring-2 ring-[#FF7A1A]/40 shadow-[0_15px_40px_rgba(255,122,26,0.35)]'
+                        : 'bg-[#0A0A0C] text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-white'
+                    }`}
+                  >
+                    {/* Top Step Number */}
+                    <div className="space-y-1">
+                      <div
+                        className={`text-lg sm:text-xl font-mono font-extrabold transition-colors ${
+                          isActive ? 'text-[#FF7A1A]' : 'text-zinc-500'
+                        }`}
+                      >
+                        {card.num}
+                      </div>
+                      <div
+                        className={`w-5 h-0.5 rounded-full transition-colors ${
+                          isActive ? 'bg-[#FF7A1A]' : 'bg-zinc-700'
+                        }`}
+                      />
                     </div>
-                    <div
-                      className={`w-6 h-0.5 rounded-full transition-colors ${
-                        isActive ? 'bg-[#FF7A1A]' : 'bg-zinc-700'
-                      }`}
-                    />
-                  </div>
 
-                  {/* Icon Center */}
-                  <div className="my-auto py-4 flex justify-start">
-                    <div
-                      className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${
-                        isActive
-                          ? 'bg-[#FF7A1A]/10 border border-[#FF7A1A]/40 text-[#FF7A1A] scale-110 shadow-lg shadow-[#FF7A1A]/20'
-                          : 'bg-zinc-900 border border-zinc-800 text-zinc-400'
-                      }`}
-                    >
-                      <IconComp className="w-7 h-7" />
+                    {/* Icon Center */}
+                    <div className="my-auto py-2 flex justify-start">
+                      <div
+                        className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${
+                          isActive
+                            ? 'bg-[#FF7A1A]/10 border border-[#FF7A1A]/40 text-[#FF7A1A] scale-110 shadow-md shadow-[#FF7A1A]/20'
+                            : 'bg-zinc-900 border border-zinc-800 text-zinc-400'
+                        }`}
+                      >
+                        <IconComp className="w-5 h-5" />
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Title & Short Tagline */}
-                  <div className="space-y-1 pt-2 border-t border-zinc-800/80">
-                    <h3
-                      className={`font-display text-xl sm:text-2xl font-extrabold transition-colors ${
-                        isActive ? 'text-white' : 'text-zinc-300'
-                      }`}
-                    >
-                      {card.title}
-                    </h3>
-                    <p className="text-xs text-zinc-400 leading-relaxed font-medium">
-                      {card.tagline}
-                    </p>
-                  </div>
+                    {/* Title & Tagline */}
+                    <div className="space-y-0.5 pt-1.5 border-t border-zinc-800/80">
+                      <h3
+                        className={`font-display text-base sm:text-lg font-extrabold transition-colors ${
+                          isActive ? 'text-white' : 'text-zinc-300'
+                        }`}
+                      >
+                        {card.title}
+                      </h3>
+                      <p className="text-[11px] text-zinc-400 leading-tight font-medium line-clamp-2">
+                        {card.tagline}
+                      </p>
+                    </div>
 
-                  {/* Bottom Micro Indicator Dot Bar (Matching Image: — . . .) */}
-                  <div className="pt-4 flex items-center gap-1.5">
-                    <div
-                      className={`h-0.5 rounded-full transition-all ${
-                        isActive ? 'w-4 bg-[#FF7A1A]' : 'w-2 bg-zinc-700'
-                      }`}
-                    />
-                    <div
-                      className={`w-1 h-1 rounded-full ${
-                        isActive ? 'bg-[#FF7A1A]' : 'bg-zinc-700'
-                      }`}
-                    />
-                    <div className="w-1 h-1 rounded-full bg-zinc-700" />
-                    <div className="w-1 h-1 rounded-full bg-zinc-700" />
-                  </div>
-                </motion.div>
-              );
-            })}
+                    {/* Bottom Micro Indicator Dot Bar */}
+                    <div className="pt-2 flex items-center gap-1">
+                      <div
+                        className={`h-0.5 rounded-full transition-all ${
+                          isActive ? 'w-3 bg-[#FF7A1A]' : 'w-1.5 bg-zinc-700'
+                        }`}
+                      />
+                      <div
+                        className={`w-1 h-1 rounded-full ${
+                          isActive ? 'bg-[#FF7A1A]' : 'bg-zinc-700'
+                        }`}
+                      />
+                      <div className="w-1 h-1 rounded-full bg-zinc-700" />
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
+
+          {/* RIGHT COLUMN: ACTIVE CARD EXPANDED CONTENT DISPLAY */}
+          <div className="lg:col-span-7 flex flex-col justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeStep.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.35 }}
+                className="w-full p-6 sm:p-8 rounded-3xl bg-[#0C0C0C] border border-[#FF7A1A]/40 text-left space-y-6 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between"
+              >
+                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C]" />
+
+                {/* Header Info */}
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between flex-wrap gap-3 border-b border-zinc-800 pb-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-3xl font-mono font-black text-[#FF7A1A]">
+                        {activeStep.num}
+                      </span>
+                      <div>
+                        <span className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider">
+                          PHASE {activeStep.num} • {activeStep.title.toUpperCase()}
+                        </span>
+                        <h4 className="font-display text-2xl font-bold text-white">
+                          {activeStep.headline}
+                        </h4>
+                      </div>
+                    </div>
+
+                    <button
+                      onClick={onOpenInquiry}
+                      className="px-4 py-2 rounded-full bg-[#FF7A1A] text-white text-xs font-mono font-bold flex items-center gap-2 hover:bg-[#EA580C] transition-all shadow-lg shadow-[#FF7A1A]/30 cursor-pointer"
+                    >
+                      <span>Book Phase Audit</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
+                  </div>
+
+                  <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+                    {activeStep.description}
+                  </p>
+                </div>
+
+                {/* Deliverables */}
+                <div className="space-y-3 pt-2">
+                  <span className="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider">
+                    STAGE DELIVERABLES & OUTCOMES:
+                  </span>
+                  <div className="space-y-2.5">
+                    {activeStep.deliverables.map((item, dIdx) => (
+                      <div
+                        key={dIdx}
+                        className="p-3.5 rounded-2xl bg-[#050505] border border-zinc-800 text-xs sm:text-sm font-semibold text-zinc-200 flex items-center gap-3"
+                      >
+                        <CheckCircle2 className="w-4 h-4 text-[#FF7A1A] shrink-0" />
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
 
-        {/* CLICK-EXPANDED DETAILED DELIVERABLES CANVAS (DISPLAYED ON CARD CLICK) */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeStep.id}
-            initial={{ opacity: 0, y: 20, scale: 0.98 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.98 }}
-            transition={{ duration: 0.4 }}
-            className="max-w-4xl mx-auto p-6 sm:p-8 rounded-3xl bg-[#0C0C0C] border border-[#FF7A1A]/40 text-left space-y-6 shadow-2xl relative overflow-hidden"
-          >
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C]" />
-
-            <div className="flex items-center justify-between flex-wrap gap-4 border-b border-zinc-800 pb-4">
-              <div className="flex items-center gap-3">
-                <span className="text-3xl font-mono font-black text-[#FF7A1A]">
-                  {activeStep.num}
-                </span>
-                <div>
-                  <span className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider">
-                    PHASE {activeStep.num} • {activeStep.title.toUpperCase()}
-                  </span>
-                  <h4 className="font-display text-2xl font-bold text-white">
-                    {activeStep.headline}
-                  </h4>
-                </div>
-              </div>
-
-              <button
-                onClick={onOpenInquiry}
-                className="px-5 py-2.5 rounded-full bg-[#FF7A1A] text-white text-xs font-mono font-bold flex items-center gap-2 hover:bg-[#EA580C] transition-all shadow-lg shadow-[#FF7A1A]/30 cursor-pointer"
-              >
-                <span>Book Phase Audit</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-
-            <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
-              {activeStep.description}
-            </p>
-
-            {/* Guaranteed Phase Deliverables */}
-            <div className="space-y-3 pt-2">
-              <span className="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider">
-                GUARANTEED STAGE DELIVERABLES:
-              </span>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                {activeStep.deliverables.map((item, dIdx) => (
-                  <div
-                    key={dIdx}
-                    className="p-3.5 rounded-2xl bg-[#050505] border border-zinc-800 text-xs font-semibold text-zinc-200 flex items-center gap-2.5"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-[#FF7A1A] shrink-0" />
-                    <span>{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* HIGH-CRAFT INSTRUCTION FOOTER CAPSULE */}
+        {/* INSTRUCTION FOOTER CAPSULE */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="pt-2 flex justify-center"
+          className="pt-2 flex justify-center text-center"
         >
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#121215]/90 border border-[#FF7A1A]/40 text-xs sm:text-sm font-mono font-bold text-zinc-200 backdrop-blur-xl shadow-xl shadow-[#FF7A1A]/10 group hover:border-[#FF7A1A] transition-all">
             <Sparkles className="w-4 h-4 text-[#FF7A1A] animate-pulse shrink-0" />
-            <span className="tracking-wide text-center">
-              Click any card above to inspect its deep-dive execution deliverables.
+            <span className="tracking-wide">
+              Click any left-stacked card to reveal its detailed execution deliverables on the right.
             </span>
           </div>
         </motion.div>
