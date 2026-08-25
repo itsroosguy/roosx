@@ -56,75 +56,75 @@ const processColumnsData: ProcessColumnData[] = [
     num: '01',
     id: 'discover',
     title: 'Discover',
-    tagline: 'We Uncover What Others Miss',
+    tagline: 'Uncover What Makes You Stand Out',
     description:
-      'Before writing code or designing pixels, we perform deep-dive architectural discovery. We analyze your market ecosystem, target customer friction points, and competitor positioning to map high-leverage growth opportunities.',
+      'We analyze your business, target audience, and competitors to identify clear opportunities that help your brand stand out and attract the right customers.',
     icon: Compass,
     subNodes: [
-      { title: 'Business Audit', desc: 'Full infrastructure & revenue bottleneck analysis', icon: FileText },
-      { title: 'Market Intelligence', desc: 'Competitor gap & positioning teardowns', icon: PieChart },
-      { title: 'Audience Research', desc: 'ICP buyer friction & intent mapping', icon: Users },
-      { title: 'Opportunity Mapping', desc: 'High-ROI strategic execution blueprints', icon: MapPin },
+      { title: 'Business Audit', desc: 'Evaluate your brand, website, and growth blockers', icon: FileText },
+      { title: 'Market Research', desc: 'Understand competitor strategies and positioning', icon: PieChart },
+      { title: 'Audience Insights', desc: 'Identify who your best customers are and what they need', icon: Users },
+      { title: 'Growth Roadmap', desc: 'Clear plan of action tailored to your goals', icon: MapPin },
     ],
   },
   {
     num: '02',
     id: 'define',
     title: 'Define',
-    tagline: 'Strategy Before Execution',
+    tagline: 'Clarity Before Execution',
     description:
-      'Execution without strategy is wasted momentum. We define razor-sharp brand positioning, value proposition frameworks, and strategic product roadmaps to ensure every asset drives measurable revenue outcomes.',
+      'We refine your brand positioning and messaging so potential customers understand your value immediately and trust your business.',
     icon: Target,
     subNodes: [
-      { title: 'Brand Positioning', desc: 'Unfair market advantage formulation', icon: Flag },
-      { title: 'Messaging Framework', desc: 'High-converting value proposition copy', icon: MessageSquare },
-      { title: 'Customer Journey', desc: 'Frictionless conversion funnel design', icon: Users },
-      { title: 'Strategic Roadmap', desc: 'Milestone-driven execution timeline', icon: Map },
+      { title: 'Brand Positioning', desc: 'Define what makes your business unique', icon: Flag },
+      { title: 'Messaging Strategy', desc: 'Clear, persuasive copy that resonates', icon: MessageSquare },
+      { title: 'Customer Journey', desc: 'Simple, direct path from visitor to customer', icon: Users },
+      { title: 'Action Plan', desc: 'Prioritized steps for maximum impact', icon: Map },
     ],
   },
   {
     num: '03',
     id: 'design',
     title: 'Design',
-    tagline: 'Create Experiences People Remember',
+    tagline: 'Build Trust & Visual Authority',
     description:
-      'We craft world-class visual identity systems, spatial UI/UX interfaces, and interactive webGL motion design that command authority, inspire buyer trust, and elevate brand perception.',
+      'We design memorable visual identities, websites, and user experiences that build trust, look professional, and drive real business results.',
     icon: Palette,
     subNodes: [
-      { title: 'Brand Systems', desc: 'Scalable design systems & guidelines', icon: Layers },
-      { title: 'Website Architecture', desc: 'High-converting digital flagship layouts', icon: Layout },
-      { title: 'UI / UX Design', desc: 'Intuitive spatial digital interfaces', icon: Smartphone },
-      { title: 'Motion & WebGL', desc: 'Immersive micro-interactions & shaders', icon: Video },
+      { title: 'Brand Identity', desc: 'Logos, color palettes, typography, and visual assets', icon: Layers },
+      { title: 'Website Design', desc: 'Modern, responsive designs tailored for conversion', icon: Layout },
+      { title: 'UI / UX Design', desc: 'Intuitive interfaces your visitors love using', icon: Smartphone },
+      { title: 'Motion & Visuals', desc: 'Engaging visuals that make your brand stand out', icon: Video },
     ],
   },
   {
     num: '04',
     id: 'build',
     title: 'Build',
-    tagline: 'Built For High-Performance Scale',
+    tagline: 'Fast, Reliable & Built To Scale',
     description:
-      'We engineer ultra-fast web platforms, headless CMS integrations, and modern digital systems designed to scale effortlessly under high enterprise traffic volumes.',
+      'We build custom, high-speed websites and digital systems engineered to perform effortlessly across all devices.',
     icon: Code2,
     subNodes: [
-      { title: 'Modern Web Stack', desc: 'React, Vite, Next & TypeScript build', icon: Code },
-      { title: 'Headless CMS', desc: 'Decoupled lightning-fast content engines', icon: Database },
-      { title: 'AI Automation', desc: 'Smart workflow & lead automation pipelines', icon: Bot },
-      { title: 'System Integrations', desc: 'Custom API & CRM webhook pipelines', icon: Zap },
+      { title: 'Web Development', desc: 'Clean, high-speed frontend and backend code', icon: Code },
+      { title: 'Content Management', desc: 'Easy-to-update CMS platforms for your team', icon: Database },
+      { title: 'Workflow Automation', desc: 'Smart tools that save time and manual effort', icon: Bot },
+      { title: 'Integrations', desc: 'Connect your website with your CRM and tools', icon: Zap },
     ],
   },
   {
     num: '05',
     id: 'scale',
     title: 'Scale',
-    tagline: 'Growth Never Stops At Launch',
+    tagline: 'Turn Visitors Into Long-Term Growth',
     description:
-      'Post-launch is where momentum compounds. We deploy automated lead acquisition pipelines, SEO search engines, and real-time analytics to drive sustainable revenue growth.',
+      'We optimize your digital presence, search visibility, and conversion flow to keep attracting new customers and growing your revenue.',
     icon: TrendingUp,
     subNodes: [
-      { title: 'SEO & Search Engine', desc: 'Search & discovery optimization', icon: Search },
-      { title: 'Analytics Telemetry', desc: 'Real-time telemetry & funnel tracking', icon: BarChart2 },
-      { title: 'Conversion Tuning', desc: 'Continuous A/B testing & UX refinement', icon: Filter },
-      { title: 'Growth Systems', desc: 'Predictable recurring lead pipelines', icon: Rocket },
+      { title: 'SEO & Visibility', desc: 'Help the right customers find you on Google', icon: Search },
+      { title: 'Performance Analytics', desc: 'Track key metrics and user engagement', icon: BarChart2 },
+      { title: 'Conversion Tuning', desc: 'Optimize pages to increase leads and sales', icon: Filter },
+      { title: 'Growth Optimization', desc: 'Ongoing improvements to sustain momentum', icon: Rocket },
     ],
   },
 ];
@@ -175,22 +175,22 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           className="text-center max-w-4xl mx-auto mb-12 sm:mb-16 space-y-3"
         >
           <h2
-            className={`font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-[0.96] ${
+            className={`font-display text-4xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-[1.12] sm:leading-[1.1] pb-2 sm:pb-3 ${
               isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
             }`}
           >
-            <span className="block leading-[0.96]">Growth Isn't an Event</span>
-            <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FDBA74] bg-clip-text text-transparent block leading-[0.96] mt-1">
+            <span className="block">Growth Isn't Luck</span>
+            <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FDBA74] bg-clip-text text-transparent inline-block pb-2 pt-1">
               It's a Strategic Blueprint
             </span>
           </h2>
 
           <p
-            className={`mt-4 text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto transition-colors duration-500 ${
+            className={`mt-2 text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto transition-colors duration-500 ${
               isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
             }`}
           >
-            Our 5-stage growth architecture turns complex brand challenges into predictable momentum.
+            We combine strategy, design, and technology to build brands that attract the right audience and drive sustainable revenue.
           </p>
         </motion.div>
 
@@ -222,7 +222,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   key={step.id}
                   onClick={() => setActiveStep(idx)}
                   className="group flex flex-col items-center cursor-pointer focus:outline-none"
-                  aria-label={`Jump to stage ${step.num}: ${step.title}`}
+                  aria-label={`Jump to stage: ${step.title}`}
                 >
                   {/* Step Icon Badge */}
                   <div
@@ -354,9 +354,8 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
               <div className="lg:col-span-6 space-y-4">
                 <div className="flex items-center justify-between border-b pb-3 border-[#27272A]">
                   <span className="text-xs font-bold uppercase tracking-wider text-[#F97316]">
-                    Execution Deliverables ({currentStage.subNodes.length})
+                    Key Deliverables ({currentStage.subNodes.length})
                   </span>
-                  <span className="text-xs font-mono opacity-60">Stage {currentStage.num}</span>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -382,7 +381,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                           </div>
                           <span
                             className={`font-display text-sm font-bold tracking-tight ${
-                              isDarkMode ? 'text-white' : 'text-[#111111]'
+                              isDarkMode ? 'text-[#FAFAFA]' : 'text-[#111111]'
                             }`}
                           >
                             {sub.title}
@@ -390,7 +389,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                         </div>
                         <p
                           className={`text-xs leading-relaxed font-medium ${
-                            isDarkMode ? 'text-[#A1A1AA]' : 'text-[#71717A]'
+                            isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
                           }`}
                         >
                           {sub.desc}
