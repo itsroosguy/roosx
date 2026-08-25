@@ -117,7 +117,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
         
-        {/* HEADER BLOCK (MATCHING IMAGE: ― OUR 5-PHASE ― EXECUTION METHODOLOGY) */}
+        {/* HEADER BLOCK: THE MOMENTUM ENGINE (NO BADGE, SILVER WHITE & ORANGE TITLE + NEW DESCRIPTION) */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -125,23 +125,19 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           transition={{ duration: 0.6 }}
           className="space-y-3 max-w-4xl mx-auto text-center"
         >
-          <div className="flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
-            <span className="w-8 h-px bg-[#FF7A1A]/60" />
-            <span>OUR 5-PHASE</span>
-            <span className="w-8 h-px bg-[#FF7A1A]/60" />
-          </div>
-
           <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08]">
-            <span className="text-white">Execution </span>
-            <span className="text-[#FF7A1A]">Methodology</span>
+            <span className="bg-gradient-to-r from-white via-zinc-100 to-zinc-300 bg-clip-text text-transparent">
+              The Momentum{' '}
+            </span>
+            <span className="text-[#FF7A1A]">Engine</span>
           </h2>
 
-          <p className="text-base sm:text-xl font-medium text-zinc-400">
-            Built For High-Velocity Growth
+          <p className="text-base sm:text-lg md:text-xl font-medium text-zinc-400 max-w-3xl mx-auto">
+            Five strategic phases designed to discover opportunities, build authority, and accelerate sustainable growth.
           </p>
         </motion.div>
 
-        {/* LOCKED HEIGHT UNIFIED ELECTRIC ORANGE ACCORDION DECK (REBALANCED FLEX RATIO) */}
+        {/* LOCKED HEIGHT UNIFIED ELECTRIC ORANGE ACCORDION DECK */}
         <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 max-w-7xl mx-auto h-[430px] sm:h-[460px] select-none">
           {process5StepCards.map((card) => {
             const isActive = card.id === activeCardId;
@@ -213,7 +209,6 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                         transition={{ duration: 0.25 }}
                         className="space-y-3 pt-3 border-t border-zinc-800 shrink-0"
                       >
-                        {/* LARGER DESCRIPTION TEXT */}
                         <p className="text-xs sm:text-sm text-zinc-200 leading-relaxed font-normal">
                           {card.description}
                         </p>
