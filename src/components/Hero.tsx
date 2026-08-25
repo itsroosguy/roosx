@@ -139,7 +139,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
             className="lg:col-span-6 flex flex-col items-start justify-center text-left space-y-5 lg:pl-2 py-4"
           >
             <p
-              className={`text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-[480px] text-left transition-colors duration-500 ${
+              className={`text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-[530px] text-left transition-colors duration-500 ${
                 isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
               }`}
             >
