@@ -34,7 +34,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       subtitle: 'Extract your unfair advantage & category dominance.',
       description: 'We audit your market landscape, define your core brand narrative, and position your offer so clients choose you first without price resistance.',
       deliverables: ['Market Positioning Matrix', 'Customer Persona Mapping', 'Value Proposition & Copy Framework', 'Competitive Gap Analysis'],
-      impact: '4.8x Higher Value Perception',
     },
     {
       id: 'visual-identity',
@@ -44,7 +43,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       subtitle: 'Brands are remembered by design excellence.',
       description: 'Digital-first logo marks, typography hierarchies, custom color tokens, and scalable UI component libraries engineered for enterprise trust.',
       deliverables: ['Logo & Mark Architecture', 'Color & Typography Tokens', 'Figma Component Library', 'Brand Guidelines Deck'],
-      impact: 'Instant Category Authority',
     },
     {
       id: 'web-design',
@@ -54,7 +52,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       subtitle: 'Conversion-engineered user experiences.',
       description: 'Immersive, high-converting web layouts designed to guide visitors seamlessly from curiosity to high-intent booking calls.',
       deliverables: ['High-Fidelity Wireframes', 'Interactive Prototypes', 'Responsive Mobile Design', 'Conversion Funnel Flow'],
-      impact: '+180% Lead Form Conversions',
     },
     {
       id: 'web-dev',
@@ -64,7 +61,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       subtitle: 'Sub-100ms execution with 100/100 Lighthouse benchmark.',
       description: 'Custom React & Next.js engineering with WebGL micro-interactions, clean headless CMS integrations, and zero technical debt.',
       deliverables: ['Custom Next.js App Architecture', 'Headless CMS Integration', 'WebGL & Framer Micro-Interactions', '100/100 Lighthouse Score'],
-      impact: 'Sub-100ms Load Times',
     },
     {
       id: 'seo',
@@ -74,7 +70,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       subtitle: 'Capture high-intent buyer traffic on Google.',
       description: 'Data-driven technical SEO, programmatic content systems, and authority link-building strategies engineered to dominate Page #1 rankings.',
       deliverables: ['Technical SEO Audit & Fixes', 'Programmatic Content Specs', 'Keyword Intent Mapping', 'Organic Telemetry Dashboard'],
-      impact: '#1 Google Keyword Rankings',
     },
     {
       id: 'digital-marketing',
@@ -84,7 +79,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       subtitle: 'Predictable, scalable customer acquisition.',
       description: 'Targeted multi-channel ad campaigns, high-converting landers, and automated email nurturing sequences built for payback efficiency.',
       deliverables: ['Paid Social & Search Ads', 'High-Converting Landing Pages', 'Email & SMS Nurturing Sequences', 'Full-Funnel Attribution Setup'],
-      impact: '3.4x Average Return on Ad Spend',
     },
     {
       id: 'automation',
@@ -94,7 +88,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       subtitle: 'Scale operations without adding team overhead.',
       description: 'Custom AI neural agents, CRM lead routing, and automated back-office workflows that eliminate manual friction and speed up deal velocity.',
       deliverables: ['Custom AI Lead Qualifiers', 'HubSpot / Salesforce Routing', 'Automated Contract & Invoice Flows', '24/7 Operations Bot'],
-      impact: '85% Manual Friction Eliminated',
     },
     {
       id: 'digital-product',
@@ -104,7 +97,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       subtitle: 'Full-stack software design & engineering.',
       description: 'End-to-end UX architecture and production development for web applications, SaaS dashboards, and client portals built for scale.',
       deliverables: ['Product Requirement Docs (PRD)', 'SaaS Dashboard UI/UX', 'Full-Stack API & Database Setup', 'Scalable Cloud Deployment'],
-      impact: 'Production-Ready in 6 Weeks',
     },
   ];
 
@@ -128,32 +120,57 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 relative z-10">
         
         {/* ========================================================================= */}
-        {/* HERO SECTION */}
+        {/* HERO SECTION WITH STAGGERED MOTION REVEALS */}
         {/* ========================================================================= */}
-        <section className="text-center max-w-4xl mx-auto space-y-6 pt-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121215] border border-zinc-800 text-xs font-sans font-semibold text-[#FF7A1A] shadow-md">
-            <Sparkles className="w-3.5 h-3.5 text-[#FF7A1A]" />
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center max-w-4xl mx-auto space-y-6 pt-4"
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121215] border border-zinc-800 text-xs font-sans font-semibold text-[#FF7A1A] shadow-md"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#FF7A1A] animate-pulse" />
             <span>FULL-SERVICE DIGITAL STUDIO ARCHITECTURE</span>
-          </div>
+          </motion.div>
 
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.08]">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.08]"
+          >
             Full-Service Digital Excellence. <br />
             <span className="bg-gradient-to-r from-white via-zinc-200 to-[#FF7A1A] bg-clip-text text-transparent">
               Engineered For Scale.
             </span>
-          </h1>
+          </motion.h1>
 
-          <p className="text-base sm:text-xl font-medium text-zinc-300 max-w-2xl mx-auto leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="text-base sm:text-xl font-medium text-zinc-300 max-w-2xl mx-auto leading-relaxed"
+          >
             We partner with ambitious founders and marketing leaders to build enterprise brand systems, high-converting web engines, and automated revenue funnels.
-          </p>
+          </motion.p>
 
-          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
             <button
               onClick={() => {
                 triggerLeapConfetti();
                 onOpenInquiry();
               }}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#FF7A1A] hover:bg-[#FF8833] text-white font-sans font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-[#FF7A1A]/30 cursor-pointer flex items-center justify-center gap-2 group"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#FF7A1A] hover:bg-[#FF8833] text-white font-sans font-bold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-[#FF7A1A]/30 cursor-pointer flex items-center justify-center gap-2 group hover:scale-105 active:scale-95"
             >
               <span>Book A Free Strategy Call</span>
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -161,14 +178,19 @@ export const ServicePage: React.FC<ServicePageProps> = ({
 
             <button
               onClick={onNavigateHome}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer"
+              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer hover:scale-105 active:scale-95"
             >
               Back To Overview
             </button>
-          </div>
+          </motion.div>
 
           {/* QUICK TELEMETRY HIGHLIGHT BAR */}
-          <div className="pt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs font-sans font-semibold text-zinc-400 border-t border-zinc-800/80 max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="pt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs font-sans font-semibold text-zinc-400 border-t border-zinc-800/80 max-w-3xl mx-auto"
+          >
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-[#FF7A1A]" />
               <span>100/100 LIGHTHOUSE BENCHMARK</span>
@@ -181,11 +203,11 @@ export const ServicePage: React.FC<ServicePageProps> = ({
               <ShieldCheck className="w-4 h-4 text-[#FF7A1A]" />
               <span>END-TO-END GROWTH ENGINE</span>
             </div>
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* ========================================================================= */}
-        {/* SERVICES CATEGORY FILTER TABS */}
+        {/* SERVICES CATEGORY FILTER TABS WITH INTERACTIVE SPRING ANIMATION */}
         {/* ========================================================================= */}
         <section className="space-y-12">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-b border-zinc-800 pb-6">
@@ -205,10 +227,10 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 <button
                   key={tab.id}
                   onClick={() => setSelectedCategory(tab.id)}
-                  className={`px-4 py-2 rounded-xl text-xs font-sans font-semibold transition-all cursor-pointer ${
+                  className={`px-4 py-2 rounded-xl text-xs font-sans font-semibold transition-all cursor-pointer relative ${
                     selectedCategory === tab.id
-                      ? 'bg-[#FF7A1A] text-white shadow-md'
-                      : 'bg-[#121215] border border-zinc-800 text-zinc-400 hover:text-white'
+                      ? 'bg-[#FF7A1A] text-white shadow-lg shadow-[#FF7A1A]/30 scale-105'
+                      : 'bg-[#121215] border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700'
                   }`}
                 >
                   {tab.label}
@@ -217,30 +239,28 @@ export const ServicePage: React.FC<ServicePageProps> = ({
             </div>
           </div>
 
-          {/* 8 CORE SERVICES HIGH-CRAFT GRID */}
+          {/* 8 CORE SERVICES HIGH-CRAFT ANIMATED GRID (WITHOUT GREEN BADGES) */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <AnimatePresence mode="wait">
-              {filteredServices.map((srv) => {
+            <AnimatePresence mode="popLayout">
+              {filteredServices.map((srv, idx) => {
                 const IconComponent = srv.icon;
                 return (
                   <motion.div
                     key={srv.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.4 }}
-                    className="p-8 sm:p-10 rounded-3xl bg-[#0A0A0C] border border-zinc-800/90 hover:border-[#FF7A1A]/60 transition-all duration-300 space-y-6 relative overflow-hidden group shadow-xl"
+                    layout
+                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.9, y: -20 }}
+                    transition={{ duration: 0.4, delay: idx * 0.05 }}
+                    whileHover={{ y: -6 }}
+                    className="p-8 sm:p-10 rounded-3xl bg-[#0A0A0C] border border-zinc-800/90 hover:border-[#FF7A1A]/70 transition-all duration-300 space-y-6 relative overflow-hidden group shadow-xl"
                   >
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-[#121215] border border-zinc-800 text-[#FF7A1A] flex items-center justify-center group-hover:bg-[#FF7A1A] group-hover:text-white transition-all shadow-md">
+                      <div className="w-12 h-12 rounded-2xl bg-[#121215] border border-zinc-800 text-[#FF7A1A] flex items-center justify-center group-hover:bg-[#FF7A1A] group-hover:text-white transition-all shadow-md group-hover:scale-110">
                         <IconComponent className="w-6 h-6" />
                       </div>
-
-                      <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 font-mono text-xs font-bold border border-emerald-500/20">
-                        {srv.impact}
-                      </span>
                     </div>
 
                     <div className="space-y-2">
@@ -273,7 +293,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* ENGAGEMENT PROCESS (4 STEP ROADMAP) */}
+        {/* ENGAGEMENT PROCESS (4 STEP ROADMAP WITH STAGGERED SCROLL ANIMATIONS) */}
         {/* ========================================================================= */}
         <section className="space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -289,11 +309,19 @@ export const ServicePage: React.FC<ServicePageProps> = ({
               { num: '03', title: 'Build & Engineering', desc: 'Next.js frontend development, CMS wiring, AI automations, and speed optimization.' },
               { num: '04', title: 'Launch & Scale', desc: 'Flawless production deployment, live telemetry setup, and continuous CRO.' },
             ].map((st, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-[#0A0A0C] border border-zinc-800 space-y-3 text-left">
-                <span className="font-mono text-3xl font-black text-[#FF7A1A]">{st.num}</span>
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                whileHover={{ y: -5 }}
+                className="p-6 rounded-2xl bg-[#0A0A0C] border border-zinc-800 hover:border-[#FF7A1A]/50 transition-all space-y-3 text-left group"
+              >
+                <span className="font-mono text-3xl font-black text-[#FF7A1A] group-hover:scale-110 inline-block transition-transform">{st.num}</span>
                 <h4 className="font-display text-lg font-black text-white">{st.title}</h4>
                 <p className="text-xs text-zinc-400 font-medium leading-relaxed">{st.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -333,7 +361,13 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         {/* ========================================================================= */}
         {/* FINAL CONVERSION CALL TO ACTION */}
         {/* ========================================================================= */}
-        <section className="p-10 sm:p-16 rounded-[36px] bg-[#0A0A0C] border border-[#FF7A1A]/40 text-center space-y-6 relative overflow-hidden backdrop-blur-2xl shadow-2xl">
+        <motion.section
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="p-10 sm:p-16 rounded-[36px] bg-[#0A0A0C] border border-[#FF7A1A]/40 text-center space-y-6 relative overflow-hidden backdrop-blur-2xl shadow-2xl"
+        >
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent" />
 
           <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight">
@@ -350,7 +384,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 triggerLeapConfetti();
                 onOpenInquiry();
               }}
-              className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF7A1A] hover:bg-[#FF8833] text-white font-sans font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-[#FF7A1A]/30 cursor-pointer flex items-center justify-center gap-3 group"
+              className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF7A1A] hover:bg-[#FF8833] text-white font-sans font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-[#FF7A1A]/30 cursor-pointer flex items-center justify-center gap-3 group hover:scale-105 active:scale-95"
             >
               <span>Book Your Strategy Call</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -358,12 +392,12 @@ export const ServicePage: React.FC<ServicePageProps> = ({
 
             <button
               onClick={onNavigateHome}
-              className="w-full sm:w-auto px-8 py-5 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer"
+              className="w-full sm:w-auto px-8 py-5 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer hover:scale-105 active:scale-95"
             >
               Back To Home
             </button>
           </div>
-        </section>
+        </motion.section>
 
       </div>
     </div>
