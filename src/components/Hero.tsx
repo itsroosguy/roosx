@@ -118,25 +118,25 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
           </motion.h1>
         </motion.div>
 
-        {/* 2. MIDDLE 2-COLUMN GRID */}
-        <div className="w-full max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-2 sm:gap-4 items-center -mt-4 sm:-mt-8 md:-mt-10 relative z-20">
+        {/* 2. MIDDLE 2-COLUMN GRID (+15% WIDER SECTION CONTAINER) */}
+        <div className="w-full max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center -mt-4 sm:-mt-8 md:-mt-10 relative z-20">
           
-          {/* MASCOT IN CENTER/LEFT (6 COLS, RIGHT ALIGNED TO TIGHTEN SPACING) */}
+          {/* MASCOT IN CENTER/LEFT (5 COLS) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.1, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-6 flex justify-center lg:justify-end items-center relative z-20"
+            className="lg:col-span-5 flex justify-center lg:justify-end items-center relative z-20"
           >
             <KangarooMascot />
           </motion.div>
 
-          {/* VERTICALLY CENTER-ALIGNED RIGHT COLUMN TEXT & BUTTON (6 COLS) */}
+          {/* VERTICALLY CENTER-ALIGNED RIGHT COLUMN TEXT & BUTTON (7 COLS) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.9, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-6 flex flex-col items-start justify-center text-left space-y-5 lg:pl-2 py-4"
+            className="lg:col-span-7 flex flex-col items-start justify-center text-left space-y-6 lg:pl-4 py-4"
           >
             <p
               className={`text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-[715px] text-left transition-colors duration-500 ${
