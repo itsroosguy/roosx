@@ -29,7 +29,7 @@ const process5StepCards: StepCard[] = [
     title: 'Discover',
     tagline: 'Uncover opportunities.',
     icon: Search,
-    headline: 'Research & Strategic Audit',
+    headline: '01. Research & Strategic Audit',
     description: 'We analyze your target market, buyer friction points, and competitor blind spots to locate immediate growth levers.',
     deliverables: [
       '30-minute discovery & bottleneck audit',
@@ -48,7 +48,7 @@ const process5StepCards: StepCard[] = [
     title: 'Define',
     tagline: 'Create the blueprint.',
     icon: Target,
-    headline: 'Positioning & Copy Strategy',
+    headline: '02. Positioning & Copy Strategy',
     description: 'We craft sharp positioning headlines and value props so potential buyers grasp your unique advantage in under 3 seconds.',
     deliverables: [
       'Conversion-focused headline & body copy',
@@ -67,7 +67,7 @@ const process5StepCards: StepCard[] = [
     title: 'Design',
     tagline: 'Craft the experience.',
     icon: Pencil,
-    headline: 'Meticulous UI/UX Systems',
+    headline: '03. Meticulous UI/UX Systems',
     description: 'Bespoke design tokens, interactive prototypes, and pixel-perfect responsive layouts built for maximum conversion momentum.',
     deliverables: [
       'Custom modern UI/UX design (No templates)',
@@ -86,7 +86,7 @@ const process5StepCards: StepCard[] = [
     title: 'Build',
     tagline: 'Engineer the system.',
     icon: Code,
-    headline: 'High-Velocity Code Sprint',
+    headline: '04. High-Velocity Code Sprint',
     description: 'Bespoke React codebase engineered in parallel with Lighthouse 100/100 performance baseline and zero template bloat.',
     deliverables: [
       'High-speed code with 99+ Google score',
@@ -105,7 +105,7 @@ const process5StepCards: StepCard[] = [
     title: 'Accelerate',
     tagline: 'Scale the momentum.',
     icon: TrendingUp,
-    headline: 'Rollout & Growth Tuning',
+    headline: '05. Rollout & Growth Tuning',
     description: 'Continuous conversion rate telemetry monitoring, live A/B split testing, and revenue tuning for compounding momentum.',
     deliverables: [
       'Zero-downtime deployment & DNS handoff',
@@ -253,30 +253,14 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
             </div>
           </div>
 
-          {/* RIGHT SIDE (45%): ACTIVE STAGE TEXT & DELIVERABLES PANEL */}
+          {/* RIGHT SIDE (45%): CLEAN STAGE TEXT & DELIVERABLES PANEL (NO DUPLICATE NUMBERS OR EYEBROWS) */}
           <div className="w-full lg:w-[45%] flex flex-col justify-center text-left space-y-6 py-2">
             
-            {/* Header Stage Info */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3">
-                <span
-                  style={{ color: activeStep.color }}
-                  className="text-4xl font-mono font-black"
-                >
-                  {activeStep.num}
-                </span>
-                <div>
-                  <span
-                    style={{ color: activeStep.color }}
-                    className="text-xs font-mono font-bold uppercase tracking-wider block"
-                  >
-                    PHASE {activeStep.num} • {activeStep.title.toUpperCase()}
-                  </span>
-                  <h3 className="font-display text-2xl sm:text-3xl font-black text-white leading-tight">
-                    {activeStep.headline}
-                  </h3>
-                </div>
-              </div>
+            {/* Clean Stage Headline */}
+            <div className="space-y-2">
+              <h3 className="font-display text-2xl sm:text-3xl font-black text-white leading-tight">
+                {activeStep.headline}
+              </h3>
 
               <p className="text-sm sm:text-base text-zinc-300 leading-relaxed pt-1">
                 {activeStep.description}
@@ -318,7 +302,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 }}
                 className="w-full sm:w-auto px-6 py-3 rounded-full text-white text-xs font-mono font-bold flex items-center justify-center gap-2.5 hover:opacity-90 transition-opacity cursor-pointer shadow-lg"
               >
-                <span>Book Phase {activeStep.num} Audit</span>
+                <span>Book Phase Audit</span>
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>
