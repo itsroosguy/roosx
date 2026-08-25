@@ -18,7 +18,8 @@ interface StepCard {
   color: string;
   borderColor: string;
   glowColor: string;
-  bgGlass: string;
+  bgCardGradient: string;
+  bgActiveCardGradient: string;
 }
 
 const process5StepCards: StepCard[] = [
@@ -35,10 +36,11 @@ const process5StepCards: StepCard[] = [
       'Locate immediate conversion leaks',
       'Clear, prioritized action plan for launch',
     ],
-    color: '#EF4444', // Red
-    borderColor: 'border-red-500/80',
-    glowColor: 'rgba(239, 68, 68, 0.3)',
-    bgGlass: 'bg-red-950/20',
+    color: '#FF3B30', // Vibrant Crimson Red
+    borderColor: 'border-red-500',
+    glowColor: 'rgba(255, 59, 48, 0.45)',
+    bgCardGradient: 'bg-gradient-to-b from-[#320A0A] via-[#1E0606] to-[#0F0303]',
+    bgActiveCardGradient: 'bg-gradient-to-b from-[#4A0D0D] via-[#2D0808] to-[#140404]',
   },
   {
     id: 'define',
@@ -53,10 +55,11 @@ const process5StepCards: StepCard[] = [
       'Distinct brand voice & market positioning',
       'Frictionless customer navigation roadmap',
     ],
-    color: '#22C55E', // Green
-    borderColor: 'border-green-500/80',
-    glowColor: 'rgba(34, 197, 94, 0.3)',
-    bgGlass: 'bg-green-950/20',
+    color: '#22C55E', // Emerald Green
+    borderColor: 'border-emerald-500',
+    glowColor: 'rgba(34, 197, 94, 0.45)',
+    bgCardGradient: 'bg-gradient-to-b from-[#0A3016] via-[#061C0D] to-[#030E06]',
+    bgActiveCardGradient: 'bg-gradient-to-b from-[#0E441F] via-[#092B14] to-[#041309]',
   },
   {
     id: 'design',
@@ -71,10 +74,11 @@ const process5StepCards: StepCard[] = [
       'Interactive Figma prototype',
       'Design token system & responsive layout',
     ],
-    color: '#A855F7', // Purple
-    borderColor: 'border-purple-500/80',
-    glowColor: 'rgba(168, 85, 247, 0.3)',
-    bgGlass: 'bg-purple-950/20',
+    color: '#A855F7', // Violet Purple
+    borderColor: 'border-purple-500',
+    glowColor: 'rgba(168, 85, 247, 0.45)',
+    bgCardGradient: 'bg-gradient-to-b from-[#2A0A3A] via-[#190623] to-[#0C0312]',
+    bgActiveCardGradient: 'bg-gradient-to-b from-[#3B0E52] via-[#240833] to-[#12041A]',
   },
   {
     id: 'build',
@@ -89,10 +93,11 @@ const process5StepCards: StepCard[] = [
       'CMS integration & automated lead routing',
       'Zero-latency edge CDN deployment',
     ],
-    color: '#3B82F6', // Blue
-    borderColor: 'border-blue-500/80',
-    glowColor: 'rgba(59, 130, 246, 0.3)',
-    bgGlass: 'bg-blue-950/20',
+    color: '#007AFF', // Royal Blue
+    borderColor: 'border-blue-500',
+    glowColor: 'rgba(0, 122, 255, 0.45)',
+    bgCardGradient: 'bg-gradient-to-b from-[#0A1F38] via-[#061222] to-[#030911]',
+    bgActiveCardGradient: 'bg-gradient-to-b from-[#0E2E54] via-[#081B33] to-[#040D1A]',
   },
   {
     id: 'accelerate',
@@ -107,10 +112,11 @@ const process5StepCards: StepCard[] = [
       'Active conversion tracking & lead analytics',
       'Ongoing speed & conversion optimization',
     ],
-    color: '#F59E0B', // Amber/Orange
-    borderColor: 'border-amber-500/80',
-    glowColor: 'rgba(245, 158, 11, 0.3)',
-    bgGlass: 'bg-amber-950/20',
+    color: '#FF9500', // Amber Orange
+    borderColor: 'border-amber-500',
+    glowColor: 'rgba(255, 149, 0, 0.45)',
+    bgCardGradient: 'bg-gradient-to-b from-[#38200A] via-[#221306] to-[#110903]',
+    bgActiveCardGradient: 'bg-gradient-to-b from-[#522F0E] via-[#331D09] to-[#1A0F04]',
   },
 ];
 
@@ -141,15 +147,15 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         
         {/* HEADER BLOCK (MATCHING IMAGE: ― OUR 5-PHASE ― EXECUTION METHODOLOGY) */}
         <div className="space-y-3 max-w-4xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#EF4444] uppercase tracking-widest">
-            <span className="w-8 h-px bg-[#EF4444]/60" />
+          <div className="flex items-center justify-center gap-3 text-xs font-mono font-bold text-[#FF3B30] uppercase tracking-widest">
+            <span className="w-8 h-px bg-[#FF3B30]/60" />
             <span>OUR 5-PHASE</span>
-            <span className="w-8 h-px bg-[#EF4444]/60" />
+            <span className="w-8 h-px bg-[#FF3B30]/60" />
           </div>
 
           <h2 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08]">
             <span className="text-white">Execution </span>
-            <span className="text-[#EF4444]">Methodology</span>
+            <span className="text-[#FF3B30]">Methodology</span>
           </h2>
 
           <p className="text-base sm:text-xl font-medium text-zinc-400">
@@ -157,10 +163,10 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </div>
 
-        {/* SIDE-BY-SIDE LAYOUT: LEFT ALIGNED COLORFUL CARDS (55%) | RIGHT TEXT DELIVERABLES (45%) */}
+        {/* SIDE-BY-SIDE LAYOUT: FULL-COLOR CARDS LEFT (55%) | RIGHT TEXT DELIVERABLES (45%) */}
         <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-8 max-w-7xl mx-auto">
           
-          {/* LEFT SIDE (55%): 5 STEPPED OVERLAPPING COLORFUL CARDS (Red, Green, Purple, Blue, Orange) */}
+          {/* LEFT SIDE (55%): 5 FULL-COLOR RICH GRADIENT CARDS (Red, Green, Purple, Blue, Orange) */}
           <div className="w-full lg:w-[55%] relative min-h-[380px] sm:min-h-[410px] flex items-center justify-start py-2 select-none overflow-x-auto sm:overflow-visible">
             <div className="relative w-full h-[350px] flex items-center justify-start">
               {process5StepCards.map((card, idx) => {
@@ -175,28 +181,30 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     onClick={() => setActiveCardId(card.id)}
                     style={{
                       transform: `translateX(${idx * (window.innerWidth > 640 ? 82 : 56)}px) translateY(${
-                        isActive ? -12 : idx * 2
+                        isActive ? -14 : idx * 2
                       }px) scale(${isActive ? 1.04 : 0.96})`,
                       zIndex: isActive ? 50 : 30 - Math.abs(offsetFromActive),
-                      boxShadow: isActive ? `0 20px 45px ${card.glowColor}` : `0 4px 20px ${card.glowColor}`,
+                      boxShadow: isActive
+                        ? `0 20px 50px ${card.glowColor}, inset 0 1px 1px rgba(255,255,255,0.2)`
+                        : `0 8px 30px ${card.glowColor}`,
                     }}
-                    className={`w-48 sm:w-56 h-[330px] sm:h-[350px] rounded-3xl p-5 border text-left cursor-pointer transition-all duration-300 backdrop-blur-xl flex flex-col justify-between absolute left-0 ${
-                      card.bgGlass
+                    className={`w-48 sm:w-56 h-[330px] sm:h-[350px] rounded-3xl p-5 border text-left cursor-pointer transition-all duration-300 backdrop-blur-2xl flex flex-col justify-between absolute left-0 ${
+                      isActive ? card.bgActiveCardGradient : card.bgCardGradient
                     } ${card.borderColor} ${
-                      isActive ? 'ring-2 ring-white/30' : 'hover:opacity-100 opacity-90'
+                      isActive ? 'ring-2 ring-white/40 opacity-100' : 'hover:opacity-100 opacity-95'
                     }`}
                   >
                     {/* Top Step Number with Underline Accent */}
                     <div className="space-y-1">
                       <div
                         style={{ color: card.color }}
-                        className="text-xl sm:text-2xl font-mono font-extrabold"
+                        className="text-2xl sm:text-3xl font-mono font-black tracking-tight"
                       >
                         {card.num}
                       </div>
                       <div
                         style={{ backgroundColor: card.color }}
-                        className="w-6 h-0.5 rounded-full"
+                        className="w-7 h-0.5 rounded-full"
                       />
                     </div>
 
@@ -204,11 +212,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     <div className="my-auto py-2 flex justify-start">
                       <div
                         style={{
-                          borderColor: `${card.color}60`,
-                          backgroundColor: `${card.color}15`,
+                          borderColor: `${card.color}80`,
+                          backgroundColor: `${card.color}25`,
                           color: card.color,
                         }}
-                        className="w-14 h-14 rounded-full border flex items-center justify-center shadow-lg"
+                        className="w-14 h-14 rounded-full border-2 flex items-center justify-center shadow-inner"
                       >
                         <IconComp className="w-7 h-7" />
                       </div>
@@ -216,10 +224,10 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
                     {/* Title & Tagline */}
                     <div className="space-y-1 pt-1">
-                      <h3 className="font-display text-lg sm:text-xl font-bold text-white leading-tight">
+                      <h3 className="font-display text-lg sm:text-xl font-extrabold text-white leading-tight">
                         {card.title}
                       </h3>
-                      <p className="text-xs text-zinc-300 leading-relaxed font-medium line-clamp-2">
+                      <p className="text-xs text-zinc-200 leading-relaxed font-medium line-clamp-2">
                         {card.tagline}
                       </p>
                     </div>
@@ -228,15 +236,15 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     <div className="pt-2 flex items-center gap-1.5 justify-start">
                       <div
                         style={{ backgroundColor: card.color }}
-                        className="w-2 h-2 rounded-full"
+                        className="w-2.5 h-2.5 rounded-full"
                       />
                       <div
-                        style={{ backgroundColor: `${card.color}80` }}
-                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: `${card.color}90` }}
+                        className="w-2.5 h-2.5 rounded-full"
                       />
                       <div
-                        style={{ backgroundColor: `${card.color}40` }}
-                        className="w-2 h-2 rounded-full"
+                        style={{ backgroundColor: `${card.color}50` }}
+                        className="w-2.5 h-2.5 rounded-full"
                       />
                     </div>
                   </div>
