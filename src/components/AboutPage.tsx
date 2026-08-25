@@ -66,67 +66,72 @@ export const AboutPage: React.FC<AboutPageProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* SECTION 1: HERO SECTION (FULL SCREEN CINEMATIC STORY) */}
-        <div className="min-h-[85vh] flex flex-col justify-center items-center text-center py-16 space-y-8 relative">
+        {/* SECTION 1: HERO SECTION (REVAMPED HIGH-ENGAGING ABOUT HERO) */}
+        <div className="py-16 sm:py-24 flex flex-col justify-center items-center text-center space-y-8 relative">
           
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="space-y-6 max-w-5xl mx-auto"
+            transition={{ duration: 0.6 }}
+            className="space-y-6 max-w-4xl mx-auto"
           >
+            {/* Eyebrow Badge */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+              <span>OUR MISSION & PHILOSOPHY</span>
+            </div>
+
+            {/* Guaranteed 2-Line Headline */}
             <h1
-              className={`font-display text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter leading-[1.05] ${
+              className={`font-display text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.12] ${
                 isDarkMode ? 'text-white' : 'text-[#111111]'
               }`}
             >
-              <span className="block">We Believe Every Business</span>
-              <span className="block">Has The Potential To</span>
-              <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2">
-                Leap Further.
+              <span className="block">We Believe Every Business Has The Potential</span>
+              <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-1">
+                To Leap Further.
               </span>
             </h1>
 
-            {/* Narrative Intro Story Copy */}
-            <div
-              className={`text-lg sm:text-2xl font-medium leading-relaxed max-w-3xl mx-auto space-y-3 ${
-                isDarkMode ? 'text-[#B8B8B8]' : 'text-zinc-600'
+            {/* Shortened Punchy Subheadline */}
+            <p
+              className={`text-base sm:text-xl font-medium leading-relaxed max-w-2xl mx-auto ${
+                isDarkMode ? 'text-[#B8B8B8]' : 'text-[#52525B]'
               }`}
             >
-              <p>Some businesses have incredible products.</p>
-              <p>Some have exceptional services.</p>
-              <p>Others have game-changing ideas.</p>
-              <p className={`pt-2 ${isDarkMode ? 'text-white' : 'text-zinc-900'} font-semibold`}>
-                Yet many struggle to grow because their brand lacks clarity, their website fails to convert, or their marketing doesn't create momentum.
-              </p>
-              <p className="text-base sm:text-lg text-[#FF7A1A] font-bold pt-1">
-                That's where we come in.
-              </p>
+              We turn ambitious ideas, products, and services into scalable market momentum by building integrated growth systems.
+            </p>
+
+            {/* Interactive Value Badges */}
+            <div className="pt-2 flex items-center justify-center gap-2.5 sm:gap-4 flex-wrap">
+              <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
+                <span>Strategic Positioning</span>
+              </div>
+              <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
+                <span>Frictionless UX</span>
+              </div>
+              <div className="px-4 py-2 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 font-bold flex items-center gap-2 shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-[#FF7A1A]" />
+                <span>Predictable Growth</span>
+              </div>
             </div>
           </motion.div>
 
-          {/* Floating Anti-Gravity Kangaroo Mascot / 3D Orbit Ring */}
+          {/* Clean Floating Mascot Mark */}
           <motion.div
-            animate={{ y: [-8, 8, -8], rotate: [-1, 1, -1] }}
-            transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-            className="relative py-6"
+            animate={{ y: [-6, 6, -6] }}
+            transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+            className="pt-4"
           >
-            {/* Glowing Orbit Ring */}
-            <div className="w-48 h-48 sm:w-60 sm:h-60 rounded-full border-2 border-[#FF7A1A]/30 bg-[#FF7A1A]/5 flex items-center justify-center relative shadow-[0_0_40px_rgba(255,122,26,0.25)] backdrop-blur-md">
-              <span className="absolute -inset-4 rounded-full border border-[#FF7A1A]/20 animate-ping opacity-25" />
-              
-              {/* Central Mascot Mark */}
+            <div className="w-36 h-36 sm:w-44 sm:h-44 rounded-full border-2 border-[#FF7A1A]/30 bg-[#FF7A1A]/5 flex items-center justify-center relative shadow-[0_0_40px_rgba(255,122,26,0.25)] backdrop-blur-md">
               <img
                 src="./mark.png"
                 alt="Roos Kangaroo Mark"
-                className="w-24 sm:w-32 h-auto object-contain filter drop-shadow-[0_10px_25px_rgba(255,122,26,0.6)]"
+                className="w-20 sm:w-24 h-auto object-contain filter drop-shadow-[0_8px_20px_rgba(255,122,26,0.6)]"
               />
             </div>
           </motion.div>
-
-          <p className={`text-sm sm:text-base max-w-xl mx-auto ${isDarkMode ? 'text-[#7D7D7D]' : 'text-zinc-500'}`}>
-            Roos StudioX was built to help ambitious businesses turn potential into progress and ideas into measurable growth.
-          </p>
 
         </div>
 
