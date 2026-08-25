@@ -120,7 +120,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-8 text-center">
         
-        {/* HEADER BLOCK (REDUCED TOP PADDING & REMOVED FULL STOP) */}
+        {/* HEADER BLOCK */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -172,7 +172,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                       }
                 }
                 transition={{ type: 'spring', stiffness: 220, damping: 20 }}
-                className={`absolute w-64 sm:w-72 h-[380px] sm:h-[410px] rounded-3xl p-5 border text-left cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl flex flex-col justify-between ${
+                className={`absolute w-64 sm:w-72 h-[380px] sm:h-[410px] rounded-3xl p-5 border text-center cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl flex flex-col justify-between ${
                   isActive || (card.isFeatured && isHovered)
                     ? 'bg-[#18181C] text-white border-[#FF7A1A]/80 ring-1 ring-[#FF7A1A]/40 shadow-[0_10px_40px_rgba(255,122,26,0.3)]'
                     : isDarkMode
@@ -209,12 +209,12 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   </button>
                 </div>
 
-                {/* Card Title */}
-                <div className="space-y-2 pt-2">
-                  <h3 className="font-display text-lg sm:text-xl font-extrabold leading-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+                {/* Card Title & Paragraph (Center Aligned) */}
+                <div className="space-y-2 pt-2 text-center">
+                  <h3 className="font-display text-lg sm:text-xl font-extrabold leading-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent mx-auto">
                     {card.name}
                   </h3>
-                  <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3">
+                  <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3 max-w-xs mx-auto">
                     {card.description}
                   </p>
                 </div>
