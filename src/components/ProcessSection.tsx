@@ -32,12 +32,12 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'We analyze your target market, buyer friction points, and competitor blind spots to locate immediate growth levers.',
     avatarIcon: Search,
     ctaLabel: 'Audit Market',
-    collapsedX: -135,
-    collapsedY: 22,
-    collapsedRotate: -15,
+    collapsedX: -130,
+    collapsedY: 42,
+    collapsedRotate: -16,
     spreadX: -340,
-    spreadY: 0,
-    spreadRotate: -10,
+    spreadY: 30,
+    spreadRotate: -12,
   },
   {
     id: 'positioning',
@@ -46,12 +46,12 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'We craft sharp positioning headlines and value props so potential buyers grasp your unique advantage in under 3 seconds.',
     avatarIcon: Compass,
     ctaLabel: 'Position Brand',
-    collapsedX: -68,
-    collapsedY: 6,
-    collapsedRotate: -7.5,
+    collapsedX: -65,
+    collapsedY: 15,
+    collapsedRotate: -8,
     spreadX: -170,
-    spreadY: 0,
-    spreadRotate: -5,
+    spreadY: 10,
+    spreadRotate: -6,
   },
   {
     id: 'build',
@@ -62,10 +62,10 @@ const process5StepCards: TeamMemberCard[] = [
     isFeatured: true,
     ctaLabel: 'Build Code',
     collapsedX: 0,
-    collapsedY: 0,
+    collapsedY: -8,
     collapsedRotate: 0,
     spreadX: 0,
-    spreadY: 0,
+    spreadY: -10,
     spreadRotate: 0,
   },
   {
@@ -75,12 +75,12 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'We deploy infrastructure to edge CDNs, configure automated CRM webhooks, and complete strict pre-launch checklists.',
     avatarIcon: Zap,
     ctaLabel: 'Deploy QA',
-    collapsedX: 68,
-    collapsedY: 6,
-    collapsedRotate: 7.5,
+    collapsedX: 65,
+    collapsedY: 15,
+    collapsedRotate: 8,
     spreadX: 170,
-    spreadY: 0,
-    spreadRotate: 5,
+    spreadY: 10,
+    spreadRotate: 6,
   },
   {
     id: 'scale',
@@ -89,12 +89,12 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'Continuous conversion rate telemetry monitoring, live A/B split testing, and revenue tuning for compounding momentum.',
     avatarIcon: TrendingUp,
     ctaLabel: 'Scale Revenue',
-    collapsedX: 135,
-    collapsedY: 22,
-    collapsedRotate: 15,
+    collapsedX: 130,
+    collapsedY: 42,
+    collapsedRotate: 16,
     spreadX: 340,
-    spreadY: 0,
-    spreadRotate: 10,
+    spreadY: 30,
+    spreadRotate: 12,
   },
 ];
 
@@ -136,7 +136,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest backdrop-blur-md">
             <Layers className="w-3.5 h-3.5" />
-            <span>SMOOTH DECK ARC PROCESS STACK</span>
+            <span>ARCHED DECK CROWN PROCESS STACK</span>
           </div>
 
           <h2
@@ -159,11 +159,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* 5-CARD TEAM STACK CONTAINER (SMOOTH PERFECT DECK ARC) */}
+        {/* 5-CARD TEAM STACK CONTAINER (ARCHED DECK CROWN: CENTER TOP, 2/4 MID, 1/5 LOWEST) */}
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="relative h-[430px] sm:h-[470px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
+          className="relative h-[440px] sm:h-[480px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
         >
           {process5StepCards.map((card, idx) => {
             const isActive = card.id === activeCardId;
