@@ -32,12 +32,12 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'We analyze your target market, buyer friction points, and competitor blind spots to locate immediate growth levers.',
     avatarIcon: Search,
     ctaLabel: 'Audit Market',
-    collapsedX: -130,
-    collapsedY: 42,
-    collapsedRotate: -16,
-    spreadX: -340,
-    spreadY: 30,
-    spreadRotate: -12,
+    collapsedX: -140,
+    collapsedY: 95,
+    collapsedRotate: -20,
+    spreadX: -350,
+    spreadY: 45,
+    spreadRotate: -14,
   },
   {
     id: 'positioning',
@@ -46,12 +46,12 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'We craft sharp positioning headlines and value props so potential buyers grasp your unique advantage in under 3 seconds.',
     avatarIcon: Compass,
     ctaLabel: 'Position Brand',
-    collapsedX: -65,
-    collapsedY: 15,
-    collapsedRotate: -8,
-    spreadX: -170,
-    spreadY: 10,
-    spreadRotate: -6,
+    collapsedX: -70,
+    collapsedY: 20,
+    collapsedRotate: -10,
+    spreadX: -175,
+    spreadY: 12,
+    spreadRotate: -7,
   },
   {
     id: 'build',
@@ -62,10 +62,10 @@ const process5StepCards: TeamMemberCard[] = [
     isFeatured: true,
     ctaLabel: 'Build Code',
     collapsedX: 0,
-    collapsedY: -8,
+    collapsedY: -35,
     collapsedRotate: 0,
     spreadX: 0,
-    spreadY: -10,
+    spreadY: -20,
     spreadRotate: 0,
   },
   {
@@ -75,12 +75,12 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'We deploy infrastructure to edge CDNs, configure automated CRM webhooks, and complete strict pre-launch checklists.',
     avatarIcon: Zap,
     ctaLabel: 'Deploy QA',
-    collapsedX: 65,
-    collapsedY: 15,
-    collapsedRotate: 8,
-    spreadX: 170,
-    spreadY: 10,
-    spreadRotate: 6,
+    collapsedX: 70,
+    collapsedY: 20,
+    collapsedRotate: 10,
+    spreadX: 175,
+    spreadY: 12,
+    spreadRotate: 7,
   },
   {
     id: 'scale',
@@ -89,12 +89,12 @@ const process5StepCards: TeamMemberCard[] = [
     description: 'Continuous conversion rate telemetry monitoring, live A/B split testing, and revenue tuning for compounding momentum.',
     avatarIcon: TrendingUp,
     ctaLabel: 'Scale Revenue',
-    collapsedX: 130,
-    collapsedY: 42,
-    collapsedRotate: 16,
-    spreadX: 340,
-    spreadY: 30,
-    spreadRotate: 12,
+    collapsedX: 140,
+    collapsedY: 95,
+    collapsedRotate: 20,
+    spreadX: 350,
+    spreadY: 45,
+    spreadRotate: 14,
   },
 ];
 
@@ -136,7 +136,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         >
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest backdrop-blur-md">
             <Layers className="w-3.5 h-3.5" />
-            <span>ARCHED DECK CROWN PROCESS STACK</span>
+            <span>DRAMATIC DECK ARC PROCESS STACK</span>
           </div>
 
           <h2
@@ -159,11 +159,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* 5-CARD TEAM STACK CONTAINER (ARCHED DECK CROWN: CENTER TOP, 2/4 MID, 1/5 LOWEST) */}
+        {/* 5-CARD TEAM STACK CONTAINER (DRAMATIC ARC: CARD 3 TOP (-35px), CARDS 2/4 MID (20px), CARDS 1/5 LOWEST (95px)) */}
         <div
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
-          className="relative h-[440px] sm:h-[480px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
+          className="relative h-[480px] sm:h-[520px] max-w-6xl mx-auto flex items-center justify-center py-6 select-none"
         >
           {process5StepCards.map((card, idx) => {
             const isActive = card.id === activeCardId;
@@ -233,7 +233,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   <div className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider">
                     {card.role}
                   </div>
-                  <h3 className="font-display text-lg sm:text-xl font-bold leading-tight text-white">
+                  <h3 className="font-display text-lg sm:text-xl font-bold leading-tight text-[#FFFFFF]">
                     {card.name}
                   </h3>
                   <p className="text-xs text-zinc-400 leading-relaxed line-clamp-3">
