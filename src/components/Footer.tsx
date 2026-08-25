@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Logo } from './Logo';
-import { ArrowUp, Send, Mail, Phone } from 'lucide-react';
+import { ArrowUp, Send, Mail, Phone, Globe, Clock, Check, Copy, Sparkles, Github, Linkedin, Twitter, Dribbble } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
 interface FooterProps {
@@ -14,6 +14,27 @@ export const Footer: React.FC<FooterProps> = ({
 }) => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
+  const [copiedText, setCopiedText] = useState<string | null>(null);
+  const [currentTime, setCurrentTime] = useState<string>('');
+
+  // Live IST Clock update
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      const options: Intl.DateTimeFormatOptions = {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+      };
+      setCurrentTime(new Intl.DateTimeFormat('en-US', options).format(now));
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -26,171 +47,220 @@ export const Footer: React.FC<FooterProps> = ({
     }
   };
 
+  const copyToClipboard = (text: string, label: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedText(label);
+    setTimeout(() => setCopiedText(null), 2000);
+  };
+
   return (
     <footer
-      className={`relative z-10 w-full pt-16 pb-12 border-t transition-colors duration-500 overflow-hidden ${
+      className={`relative z-10 w-full pt-20 pb-12 border-t transition-colors duration-500 overflow-hidden ${
         isDarkMode
-          ? 'bg-[#0A0A0A] text-[#D4D4D8] border-[#27272A]'
-          : 'bg-white text-[#111111] border-[#E4E4E7]'
+          ? 'bg-[#050505] text-[#D4D4D8] border-zinc-900'
+          : 'bg-[#FAF9F6] text-[#111111] border-zinc-200'
       }`}
     >
-      {/* Brand Orange Radial Spotlight Backlight Glow */}
-      <div className="absolute top-0 left-1/4 w-[850px] h-[380px] bg-radial from-[#F97316]/15 via-[#F97316]/5 to-transparent blur-[140px] pointer-events-none" />
+      {/* Brand Orange Radial Backlight Glow */}
+      <div className="absolute top-0 left-1/3 w-[1000px] h-[450px] bg-radial from-[#FF7A1A]/16 via-[#FF7A1A]/3 to-transparent blur-[160px] pointer-events-none" />
 
-      {/* FULL BLEED EDGE-TO-EDGE BALANCED CONTAINER */}
-      <div className="w-full px-6 sm:px-12 lg:px-16 relative z-10 font-sans">
-        <div className="max-w-[1750px] mx-auto">
-          
-          {/* LEFT-ALIGNED WELL-BALANCED FOOTER GRID */}
-          <div
-            className={`grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-14 pb-14 border-b text-left items-start ${
-              isDarkMode ? 'border-[#27272A]' : 'border-[#E4E4E7]'
-            }`}
-          >
-            
-            {/* BRAND & STUDIO INFO (5 COLS) */}
-            <div className="md:col-span-5 flex flex-col items-start text-left space-y-4">
-              <a href="#" className="inline-flex items-center justify-start">
-                <Logo isScrolled={true} isDarkMode={isDarkMode} />
-              </a>
+      {/* GIANT KINETIC BACKGROUND TYPOGRAPHY WATERMARK */}
+      <div className="absolute bottom-16 left-0 right-0 overflow-hidden pointer-events-none select-none opacity-5 flex justify-center">
+        <span className="font-display text-[120px] sm:text-[180px] md:text-[240px] font-black tracking-tighter text-white whitespace-nowrap leading-none">
+          ROOS STUDIOX
+        </span>
+      </div>
 
-              <p className="text-sm leading-relaxed max-w-md text-left font-medium">
-                Roos StudioX helps businesses build stronger brands, create high-performing digital experiences and develop scalable systems for growth. We combine strategy, design and technology to attract the right audience, strengthen customer trust and drive measurable business results.
-                <span className="block mt-1.5 font-semibold">Our focus is simple: turning digital presence into sustainable growth.</span>
-              </p>
-
-              {/* Clickable Direct Contact Links */}
-              <div className="pt-1 flex flex-wrap items-center gap-4 text-xs font-semibold text-[#F97316]">
-                <a
-                  href="mailto:praveen@roosstudio.com"
-                  className="hover:underline flex items-center gap-1.5 transition-colors"
-                >
-                  <Mail className="w-3.5 h-3.5" />
-                  <span>praveen@roosstudio.com</span>
-                </a>
-                <span className="opacity-40">•</span>
-                <a
-                  href="tel:+910829026600"
-                  className="hover:underline flex items-center gap-1.5 transition-colors"
-                >
-                  <Phone className="w-3.5 h-3.5" />
-                  <span>+91 08290 26600</span>
-                </a>
-              </div>
-
-              {/* Direct Project Inquiry Action */}
-              {onOpenInquiry && (
-                <div className="pt-2">
-                  <AlphaRoosButton
-                    text="Get Your Free Audit"
-                    onClick={onOpenInquiry}
-                    isDarkMode={isDarkMode}
-                    compact
-                  />
-                </div>
-              )}
-            </div>
-
-            {/* QUICK LINKS (3 COLS) */}
-            <div className="md:col-span-3 flex flex-col items-start text-left space-y-3">
-              <h4
-                className={`text-xs font-bold uppercase tracking-wider mb-2 ${
-                  isDarkMode ? 'text-white' : 'text-[#111111]'
-                }`}
-              >
-                Navigation
-              </h4>
-              <ul className="space-y-2.5 text-sm font-medium flex flex-col items-start">
-                <li>
-                  <a href="#portfolio" className="hover:text-[#F97316] transition-colors">
-                    Featured Case Studies
-                  </a>
-                </li>
-                <li>
-                  <a href="#services" className="hover:text-[#F97316] transition-colors">
-                    Bento Services
-                  </a>
-                </li>
-                <li>
-                  <a href="#process" className="hover:text-[#F97316] transition-colors">
-                    Execution Blueprint
-                  </a>
-                </li>
-                <li>
-                  <a href="#faq" className="hover:text-[#F97316] transition-colors">
-                    Frequently Asked Questions
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            {/* NEWSLETTER DISPATCH (4 COLS) */}
-            <div className="md:col-span-4 flex flex-col items-start text-left space-y-4">
-              <h4
-                className={`text-xs font-bold uppercase tracking-wider mb-1 ${
-                  isDarkMode ? 'text-white' : 'text-[#111111]'
-                }`}
-              >
-                Subscribe to Design Intelligence
-              </h4>
-              <p className="text-xs font-medium max-w-xs text-left">
-                Bi-weekly analysis of WebGL shaders, React micro-interactions, and spatial UX.
-              </p>
-
-              {!subscribed ? (
-                <form onSubmit={handleNewsletter} className="flex gap-2 w-full max-w-sm">
-                  <input
-                    type="email"
-                    required
-                    value={newsletterEmail}
-                    onChange={(e) => setNewsletterEmail(e.target.value)}
-                    placeholder="Enter your work email"
-                    className={`w-full px-4 py-2.5 rounded-xl text-xs font-medium focus:outline-none focus:border-[#F97316] shadow-sm transition-all ${
-                      isDarkMode
-                        ? 'bg-[#18181B] border border-[#27272A] text-white placeholder-zinc-500 focus:shadow-[0_0_15px_rgba(249,115,22,0.25)]'
-                        : 'bg-white border border-[#E4E4E7] text-[#111111] placeholder-zinc-400 focus:shadow-[0_0_15px_rgba(249,115,22,0.2)]'
-                    }`}
-                  />
-                  <button
-                    type="submit"
-                    className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C] hover:opacity-95 text-white text-xs font-bold transition-all flex items-center justify-center gap-1 shrink-0 cursor-pointer shadow-lg shadow-[#F97316]/30 border border-[#FDBA74]/40"
-                  >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>Join</span>
-                  </button>
-                </form>
-              ) : (
-                <div className="p-3 rounded-xl bg-[#22C55E]/15 border border-[#22C55E]/30 text-[#22C55E] text-xs font-semibold">
-                  ✓ Subscribed! You will receive our next release dispatch.
-                </div>
-              )}
-            </div>
-
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 font-sans space-y-16">
+        
+        {/* 1. TOP LIVE TELEMETRY BAR */}
+        <div className="p-4 sm:p-5 rounded-2xl bg-[#0A0A0C]/90 border border-zinc-800/90 backdrop-blur-xl flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+          <div className="flex items-center gap-3">
+            <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
+            <span className="text-zinc-300 font-bold">STUDIO STATUS: ACCEPTING Q3/Q4 PROJECTS</span>
           </div>
 
-          {/* LEFT-ALIGNED BALANCED FOOTER BOTTOM BAR */}
-          <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-left">
-            <div>
-              © {new Date().getFullYear()} Roos StudioX Inc. All rights reserved. • Creative Intelligence Engine
+          <div className="flex items-center gap-6 text-zinc-400">
+            <div className="flex items-center gap-1.5">
+              <Globe className="w-3.5 h-3.5 text-[#FF7A1A]" />
+              <span>BLR, IND</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-[#FF7A1A]" />
+              <span>{currentTime || '12:00 AM IST'}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 2. MAIN FOOTER CONTENT GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 text-left items-start pb-12 border-b border-zinc-800/80">
+          
+          {/* BRAND COLUMN (5 COLS) */}
+          <div className="md:col-span-5 space-y-6">
+            <a href="#" className="inline-block">
+              <Logo isScrolled={true} isDarkMode={isDarkMode} />
+            </a>
+
+            <p className="text-sm sm:text-base leading-relaxed text-zinc-300 font-medium max-w-md">
+              Roos StudioX helps ambitious businesses build authority, craft high-converting digital products, and engineer scalable growth engines.
+            </p>
+
+            {/* DIRECT CONTACT CAPSULES WITH COPY ACTIONS */}
+            <div className="space-y-2 pt-2">
+              <div className="flex items-center gap-3 text-xs font-mono">
+                <button
+                  onClick={() => copyToClipboard('praveen@roosstudio.com', 'email')}
+                  className="px-3.5 py-2 rounded-xl bg-[#121215] border border-zinc-800 text-zinc-200 hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[#FF7A1A]" />
+                  <span>praveen@roosstudio.com</span>
+                  {copiedText === 'email' ? (
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  ) : (
+                    <Copy className="w-3 h-3 text-zinc-500" />
+                  )}
+                </button>
+
+                <button
+                  onClick={() => copyToClipboard('+910829026600', 'phone')}
+                  className="px-3.5 py-2 rounded-xl bg-[#121215] border border-zinc-800 text-zinc-200 hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer"
+                >
+                  <Phone className="w-3.5 h-3.5 text-[#FF7A1A]" />
+                  <span>+91 08290 26600</span>
+                  {copiedText === 'phone' ? (
+                    <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  ) : (
+                    <Copy className="w-3 h-3 text-zinc-500" />
+                  )}
+                </button>
+              </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              <button
-                onClick={scrollToTop}
-                className={`p-2.5 rounded-xl border hover:text-[#F97316] hover:border-[#F97316] transition-all flex items-center justify-center gap-1.5 shadow-sm cursor-pointer ${
-                  isDarkMode
-                    ? 'bg-[#18181B] border-[#27272A] text-[#D4D4D8] hover:shadow-[0_0_15px_rgba(249,115,22,0.3)]'
-                    : 'bg-white border-[#E4E4E7] text-[#52525B] hover:shadow-[0_0_15px_rgba(249,115,22,0.2)]'
-                }`}
-                aria-label="Back to top"
-              >
-                <ArrowUp className="w-4 h-4" />
-                <span className="text-[11px] font-bold">TOP</span>
-              </button>
+            {/* CTA BUTTON */}
+            {onOpenInquiry && (
+              <div className="pt-2">
+                <AlphaRoosButton
+                  text="Get Your Free Audit"
+                  onClick={onOpenInquiry}
+                  isDarkMode={isDarkMode}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* NAVIGATION LINKS (3 COLS) */}
+          <div className="md:col-span-3 space-y-4">
+            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7A1A]">
+              SYSTEM MAP
+            </h4>
+            <ul className="space-y-3 text-sm font-medium text-zinc-300">
+              <li>
+                <a href="#services2" className="hover:text-[#FF7A1A] transition-colors flex items-center gap-2">
+                  <span>Service Architecture V2</span>
+                  <span className="px-1.5 py-0.5 rounded text-[10px] font-mono bg-[#FF7A1A]/20 text-[#FF7A1A] font-bold">NEW</span>
+                </a>
+              </li>
+              <li>
+                <a href="#services" className="hover:text-[#FF7A1A] transition-colors">
+                  Bento Services
+                </a>
+              </li>
+              <li>
+                <a href="#process" className="hover:text-[#FF7A1A] transition-colors">
+                  The Momentum Engine
+                </a>
+              </li>
+              <li>
+                <a href="#portfolio" className="hover:text-[#FF7A1A] transition-colors">
+                  Featured Case Studies
+                </a>
+              </li>
+              <li>
+                <a href="#faq" className="hover:text-[#FF7A1A] transition-colors">
+                  Frequently Asked Questions
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* NEWSLETTER INTEL DISPATCH (4 COLS) */}
+          <div className="md:col-span-4 space-y-4">
+            <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-[#FF7A1A] flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-[#FF7A1A]" />
+              <span>DESIGN INTELLIGENCE DISPATCH</span>
+            </h4>
+            <p className="text-xs text-zinc-400 font-medium leading-relaxed">
+              Join 2,400+ tech leaders receiving bi-weekly breakdowns on conversion optimization, WebGL micro-interactions, and brand positioning.
+            </p>
+
+            {!subscribed ? (
+              <form onSubmit={handleNewsletter} className="flex gap-2 w-full">
+                <input
+                  type="email"
+                  required
+                  value={newsletterEmail}
+                  onChange={(e) => setNewsletterEmail(e.target.value)}
+                  placeholder="Enter your work email..."
+                  className="w-full px-4 py-3 rounded-xl text-xs font-medium bg-[#121215] border border-zinc-800 text-white placeholder-zinc-500 focus:outline-none focus:border-[#FF7A1A] transition-all"
+                />
+                <button
+                  type="submit"
+                  className="px-5 py-3 rounded-xl bg-[#FF7A1A] hover:bg-[#FF8833] text-white text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 shrink-0 cursor-pointer shadow-lg shadow-[#FF7A1A]/30"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  <span>Join</span>
+                </button>
+              </form>
+            ) : (
+              <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold flex items-center gap-2">
+                <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>Subscribed to Design Intelligence!</span>
+              </div>
+            )}
+
+            {/* SOCIAL MEDIA NETWORK LINKS */}
+            <div className="pt-2 flex items-center gap-3">
+              {[
+                { icon: Twitter, href: 'https://twitter.com', label: 'Twitter' },
+                { icon: Linkedin, href: 'https://linkedin.com', label: 'LinkedIn' },
+                { icon: Github, href: 'https://github.com/itsroosguy/roosx', label: 'GitHub' },
+                { icon: Dribbble, href: 'https://dribbble.com', label: 'Dribbble' },
+              ].map((s, idx) => {
+                const IconComp = s.icon;
+                return (
+                  <a
+                    key={idx}
+                    href={s.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={s.label}
+                    className="w-9 h-9 rounded-xl bg-[#121215] border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-white hover:border-[#FF7A1A] hover:bg-[#FF7A1A]/10 transition-all shadow-sm"
+                  >
+                    <IconComp className="w-4 h-4" />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
         </div>
+
+        {/* 3. BOTTOM COPYRIGHT & ELEVATOR TOP BUTTON */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-zinc-400">
+          <div>
+            © {new Date().getFullYear()} Roos StudioX Inc. All rights reserved. • High-Velocity Growth Engine
+          </div>
+
+          <button
+            onClick={scrollToTop}
+            className="px-4 py-2.5 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 hover:text-white hover:border-[#FF7A1A] transition-all flex items-center gap-2 cursor-pointer shadow-md group"
+            aria-label="Back to top"
+          >
+            <ArrowUp className="w-4 h-4 text-[#FF7A1A] group-hover:-translate-y-0.5 transition-transform" />
+            <span className="text-xs font-bold">BACK TO TOP</span>
+          </button>
+        </div>
+
       </div>
     </footer>
   );
