@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { ArrowRight, Compass, Shield, Laptop, Code2, Search, TrendingUp, Cpu, Layers, CheckCircle2, ChevronRight, Sparkles, BarChart, Zap, ShieldCheck } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -13,8 +13,25 @@ export const ServicePage: React.FC<ServicePageProps> = ({
   onOpenInquiry,
   onNavigateHome,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
+
+  // SCROLL-DRIVEN MOTION PHYSICS
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start start', 'end end'],
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, { stiffness: 100, damping: 20 });
+
+  // SCROLL TRANSFORMATIONS
+  const heroScale = useTransform(smoothProgress, [0, 0.15], [1, 0.92]);
+  const heroOpacity = useTransform(smoothProgress, [0, 0.15], [1, 0.2]);
+  const heroY = useTransform(smoothProgress, [0, 0.15], [0, -50]);
+
+  const glowOrbY = useTransform(smoothProgress, [0, 1], ['0%', '80%']);
+  const laserBeamHeight = useTransform(smoothProgress, [0.1, 0.9], ['0%', '100%']);
 
   const triggerLeapConfetti = () => {
     confetti({
@@ -112,59 +129,51 @@ export const ServicePage: React.FC<ServicePageProps> = ({
   ];
 
   return (
-    <div className="bg-[#050505] text-[#D4D4D8] min-h-screen relative overflow-hidden font-sans pt-28 pb-24 selection:bg-[#FF7A1A] selection:text-white">
-      
-      {/* BACKGROUND ATMOSPHERIC LIGHTING */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none -z-10" />
+    <div
+      ref={containerRef}
+      className="bg-[#050505] text-[#D4D4D8] min-h-screen relative overflow-hidden font-sans pt-28 pb-24 selection:bg-[#FF7A1A] selection:text-white"
+    >
+      {/* SCROLL-DRIVEN AMBIENT LIGHTING ORB */}
+      <motion.div
+        style={{ y: glowOrbY }}
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#FF7A1A]/20 via-[#FF7A1A]/5 to-transparent blur-[160px] pointer-events-none -z-10"
+      />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 relative z-10">
+      {/* SCROLL-DRIVEN LASER STREAM LINE */}
+      <motion.div
+        style={{ height: laserBeamHeight }}
+        className="fixed left-4 md:left-12 top-0 w-0.5 bg-gradient-to-b from-transparent via-[#FF7A1A] to-transparent pointer-events-none z-20 opacity-70"
+      />
+
+      {/* BACKGROUND MESH */}
+      <div className="fixed inset-0 bg-[size:4rem_4rem] bg-[linear-gradient(to_right,#FF7A1A08_1px,transparent_1px),linear-gradient(to_bottom,#FF7A1A08_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_40%,#000_80%,transparent_100%)] pointer-events-none z-0" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32 relative z-10">
         
         {/* ========================================================================= */}
-        {/* HERO SECTION WITH STAGGERED MOTION REVEALS */}
+        {/* HERO SECTION WITH SCROLL-LINKED SCALE & OPACITY TRANSFORMS */}
         {/* ========================================================================= */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          style={{ scale: heroScale, opacity: heroOpacity, y: heroY }}
           className="text-center max-w-4xl mx-auto space-y-6 pt-4"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121215] border border-zinc-800 text-xs font-sans font-semibold text-[#FF7A1A] shadow-md"
-          >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121215] border border-zinc-800 text-xs font-sans font-semibold text-[#FF7A1A] shadow-md">
             <Sparkles className="w-3.5 h-3.5 text-[#FF7A1A] animate-pulse" />
             <span>FULL-SERVICE DIGITAL STUDIO ARCHITECTURE</span>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.08]"
-          >
+          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.08]">
             Full-Service Digital Excellence. <br />
             <span className="bg-gradient-to-r from-white via-zinc-200 to-[#FF7A1A] bg-clip-text text-transparent">
               Engineered For Scale.
             </span>
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="text-base sm:text-xl font-medium text-zinc-300 max-w-2xl mx-auto leading-relaxed"
-          >
+          <p className="text-base sm:text-xl font-medium text-zinc-300 max-w-2xl mx-auto leading-relaxed">
             We partner with ambitious founders and marketing leaders to build enterprise brand systems, high-converting web engines, and automated revenue funnels.
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-            className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => {
                 triggerLeapConfetti();
@@ -182,15 +191,10 @@ export const ServicePage: React.FC<ServicePageProps> = ({
             >
               Back To Overview
             </button>
-          </motion.div>
+          </div>
 
           {/* QUICK TELEMETRY HIGHLIGHT BAR */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.5 }}
-            className="pt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs font-sans font-semibold text-zinc-400 border-t border-zinc-800/80 max-w-3xl mx-auto"
-          >
+          <div className="pt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs font-sans font-semibold text-zinc-400 border-t border-zinc-800/80 max-w-3xl mx-auto">
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-[#FF7A1A]" />
               <span>100/100 LIGHTHOUSE BENCHMARK</span>
@@ -203,11 +207,11 @@ export const ServicePage: React.FC<ServicePageProps> = ({
               <ShieldCheck className="w-4 h-4 text-[#FF7A1A]" />
               <span>END-TO-END GROWTH ENGINE</span>
             </div>
-          </motion.div>
+          </div>
         </motion.section>
 
         {/* ========================================================================= */}
-        {/* SERVICES CATEGORY FILTER TABS WITH INTERACTIVE SPRING ANIMATION */}
+        {/* SERVICES CATEGORY FILTER TABS WITH SCROLL REVEAL */}
         {/* ========================================================================= */}
         <section className="space-y-12">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-b border-zinc-800 pb-6">
@@ -227,7 +231,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 <button
                   key={tab.id}
                   onClick={() => setSelectedCategory(tab.id)}
-                  className={`px-4 py-2 rounded-xl text-xs font-sans font-semibold transition-all cursor-pointer relative ${
+                  className={`px-4 py-2 rounded-xl text-xs font-sans font-semibold transition-all cursor-pointer ${
                     selectedCategory === tab.id
                       ? 'bg-[#FF7A1A] text-white shadow-lg shadow-[#FF7A1A]/30 scale-105'
                       : 'bg-[#121215] border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700'
@@ -239,61 +243,58 @@ export const ServicePage: React.FC<ServicePageProps> = ({
             </div>
           </div>
 
-          {/* 8 CORE SERVICES HIGH-CRAFT ANIMATED GRID (WITHOUT GREEN BADGES) */}
+          {/* 8 CORE SERVICES SCROLL-DRIVEN RESPONSIVE GRID */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <AnimatePresence mode="popLayout">
-              {filteredServices.map((srv, idx) => {
-                const IconComponent = srv.icon;
-                return (
-                  <motion.div
-                    key={srv.id}
-                    layout
-                    initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                    animate={{ opacity: 1, scale: 1, y: 0 }}
-                    exit={{ opacity: 0, scale: 0.9, y: -20 }}
-                    transition={{ duration: 0.4, delay: idx * 0.05 }}
-                    whileHover={{ y: -6 }}
-                    className="p-8 sm:p-10 rounded-3xl bg-[#0A0A0C] border border-zinc-800/90 hover:border-[#FF7A1A]/70 transition-all duration-300 space-y-6 relative overflow-hidden group shadow-xl"
-                  >
-                    <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+            {filteredServices.map((srv, idx) => {
+              const IconComponent = srv.icon;
+              return (
+                <motion.div
+                  key={srv.id}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.6, delay: idx * 0.08 }}
+                  whileHover={{ y: -8 }}
+                  className="p-8 sm:p-10 rounded-3xl bg-[#0A0A0C] border border-zinc-800/90 hover:border-[#FF7A1A]/70 transition-all duration-300 space-y-6 relative overflow-hidden group shadow-xl"
+                >
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
-                    <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-[#121215] border border-zinc-800 text-[#FF7A1A] flex items-center justify-center group-hover:bg-[#FF7A1A] group-hover:text-white transition-all shadow-md group-hover:scale-110">
-                        <IconComponent className="w-6 h-6" />
-                      </div>
+                  <div className="flex items-center justify-between">
+                    <div className="w-12 h-12 rounded-2xl bg-[#121215] border border-zinc-800 text-[#FF7A1A] flex items-center justify-center group-hover:bg-[#FF7A1A] group-hover:text-white transition-all shadow-md group-hover:scale-110">
+                      <IconComponent className="w-6 h-6" />
                     </div>
+                  </div>
 
-                    <div className="space-y-2">
-                      <h3 className="font-display text-2xl font-black text-white group-hover:text-[#FF7A1A] transition-colors">
-                        {srv.title}
-                      </h3>
-                      <p className="text-xs font-mono font-bold text-[#FF7A1A]">{srv.subtitle}</p>
-                      <p className="text-xs sm:text-sm text-zinc-300 font-medium leading-relaxed pt-1">
-                        {srv.description}
-                      </p>
-                    </div>
+                  <div className="space-y-2">
+                    <h3 className="font-display text-2xl font-black text-white group-hover:text-[#FF7A1A] transition-colors">
+                      {srv.title}
+                    </h3>
+                    <p className="text-xs font-mono font-bold text-[#FF7A1A]">{srv.subtitle}</p>
+                    <p className="text-xs sm:text-sm text-zinc-300 font-medium leading-relaxed pt-1">
+                      {srv.description}
+                    </p>
+                  </div>
 
-                    {/* DELIVERABLES LIST */}
-                    <div className="space-y-2 pt-2 border-t border-zinc-800/80">
-                      <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-zinc-400">WHAT WE DELIVER</span>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {srv.deliverables.map((item, dIdx) => (
-                          <div key={dIdx} className="flex items-center gap-2 text-xs font-medium text-zinc-300">
-                            <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7A1A] shrink-0" />
-                            <span>{item}</span>
-                          </div>
-                        ))}
-                      </div>
+                  {/* DELIVERABLES LIST */}
+                  <div className="space-y-2 pt-2 border-t border-zinc-800/80">
+                    <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-zinc-400">WHAT WE DELIVER</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      {srv.deliverables.map((item, dIdx) => (
+                        <div key={dIdx} className="flex items-center gap-2 text-xs font-medium text-zinc-300">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7A1A] shrink-0" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
                     </div>
-                  </motion.div>
-                );
-              })}
-            </AnimatePresence>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* ENGAGEMENT PROCESS (4 STEP ROADMAP WITH STAGGERED SCROLL ANIMATIONS) */}
+        {/* ENGAGEMENT PROCESS (4 STEP ROADMAP WITH SCROLL MOTION) */}
         {/* ========================================================================= */}
         <section className="space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -311,12 +312,12 @@ export const ServicePage: React.FC<ServicePageProps> = ({
             ].map((st, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="p-6 rounded-2xl bg-[#0A0A0C] border border-zinc-800 hover:border-[#FF7A1A]/50 transition-all space-y-3 text-left group"
+                viewport={{ once: true, margin: '-50px' }}
+                transition={{ duration: 0.6, delay: idx * 0.12 }}
+                whileHover={{ y: -6 }}
+                className="p-6 rounded-2xl bg-[#0A0A0C] border border-zinc-800 hover:border-[#FF7A1A]/60 transition-all space-y-3 text-left group"
               >
                 <span className="font-mono text-3xl font-black text-[#FF7A1A] group-hover:scale-110 inline-block transition-transform">{st.num}</span>
                 <h4 className="font-display text-lg font-black text-white">{st.title}</h4>
@@ -337,8 +338,12 @@ export const ServicePage: React.FC<ServicePageProps> = ({
 
           <div className="space-y-4">
             {faqs.map((faq, fIdx) => (
-              <div
+              <motion.div
                 key={fIdx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: fIdx * 0.08 }}
                 className="rounded-2xl bg-[#0A0A0C] border border-zinc-800 overflow-hidden"
               >
                 <button
@@ -353,7 +358,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                     {faq.a}
                   </div>
                 )}
-              </div>
+              </motion.div>
             ))}
           </div>
         </section>
@@ -362,7 +367,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         {/* FINAL CONVERSION CALL TO ACTION */}
         {/* ========================================================================= */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
