@@ -163,58 +163,60 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* PINTEREST-INSPIRED SINGLE VERTICAL COLUMN EDITORIAL TIMELINE (ZERO BOXES) */}
-        <div className="relative max-w-4xl mx-auto py-4 text-left">
+        {/* PINTEREST-INSPIRED PERFECT 4-COLUMN HORIZONTAL ROW PIPELINE (ZERO BOXES) */}
+        <div className="relative max-w-7xl mx-auto py-4 text-left">
           
-          {/* CONTINUOUS VERTICAL CONNECTING LASER LINE */}
-          <div className="absolute top-10 bottom-10 left-8 sm:left-10 w-0.5 bg-gradient-to-b from-[#F97316] via-[#FB923C] to-[#EA580C] opacity-70 pointer-events-none" />
+          {/* HORIZONTAL CONTINUOUS CONNECTING LASER LINE (VISIBLE ON DESKTOP) */}
+          <div className="absolute top-10 left-12 right-12 h-0.5 bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C] opacity-70 pointer-events-none hidden lg:block" />
 
-          {/* 4 EDITORIAL VERTICAL COLUMN STEPS */}
-          <div className="space-y-14 sm:space-y-20 relative">
+          {/* 4 HORIZONTAL COLUMNS PIPELINE */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 relative">
             {fastTrackSteps.map((step, idx) => {
               return (
                 <motion.div
                   key={step.id}
-                  initial={{ opacity: 0, x: -25 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex items-start gap-6 sm:gap-10 relative"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.6, delay: idx * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-col items-start space-y-4 relative"
                 >
-                  {/* STEP NUMBER & NODE BADGE (SITTING DIRECTLY ON VERTICAL LINE) */}
-                  <div className="relative shrink-0 pt-1">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl sm:text-3xl font-black shadow-xl shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 relative z-10">
-                      {step.num}
+                  {/* STEP NUMBER & NODE BADGE (SITTING DIRECTLY ON HORIZONTAL LINE) */}
+                  <div className="flex items-center gap-3 w-full">
+                    <div className="relative shrink-0">
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br from-[#F97316] via-[#FB923C] to-[#EA580C] text-white flex items-center justify-center font-display text-2xl sm:text-3xl font-black shadow-xl shadow-[#F97316]/30 border-2 border-[#FDBA74]/50 relative z-10">
+                        {step.num}
+                      </div>
+                      <span className="absolute -inset-2 rounded-full border border-[#F97316]/30 animate-ping opacity-25" />
                     </div>
-                    <span className="absolute -inset-2 rounded-full border border-[#F97316]/30 animate-ping opacity-25" />
-                  </div>
 
-                  {/* STEP CONTENT & NARRATIVE (SINGLE COLUMN FLOW) */}
-                  <div className="space-y-4 pt-1 flex-1">
-                    <div className="flex items-center gap-3 flex-wrap">
-                      <span className="text-xs font-mono font-bold px-3 py-1 rounded-full bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/30 uppercase tracking-wider">
+                    <div className="flex flex-col">
+                      <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-[#F97316]/10 text-[#F97316] border border-[#F97316]/30 uppercase tracking-wider w-max mb-1">
                         {step.timeframe}
                       </span>
-                      <span className="text-xs font-bold uppercase tracking-wider text-zinc-400">
+                      <span className="text-[11px] font-bold uppercase tracking-wider text-zinc-400">
                         {step.badgeText}
                       </span>
                     </div>
+                  </div>
 
+                  {/* STEP CONTENT & NARRATIVE (HORIZONTAL ROW FLOW) */}
+                  <div className="space-y-3 pt-1 w-full">
                     <div>
                       <h3
-                        className={`font-display text-2xl sm:text-4xl font-extrabold tracking-tight leading-tight ${
+                        className={`font-display text-xl sm:text-2xl font-extrabold tracking-tight leading-tight ${
                           isDarkMode ? 'text-white' : 'text-[#111111]'
                         }`}
                       >
                         {step.headline}
                       </h3>
-                      <div className="text-sm font-bold text-[#F97316] mt-1 tracking-tight">
+                      <div className="text-xs font-bold text-[#F97316] mt-1 tracking-tight">
                         {step.title}
                       </div>
                     </div>
 
                     <p
-                      className={`text-sm sm:text-base leading-relaxed font-normal max-w-2xl ${
+                      className={`text-xs sm:text-sm leading-relaxed font-normal ${
                         isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
                       }`}
                     >
@@ -222,11 +224,11 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     </p>
 
                     {/* Open Bullet Milestones (No Card Enclosures) */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 max-w-2xl">
+                    <div className="space-y-2 pt-1">
                       {step.keyPoints.map((point, pIdx) => (
-                        <div key={pIdx} className="flex items-center gap-2.5 text-xs sm:text-sm font-semibold">
-                          <div className="w-5 h-5 rounded-full bg-[#F97316]/15 text-[#F97316] flex items-center justify-center shrink-0 border border-[#F97316]/30">
-                            <Check className="w-3 h-3" />
+                        <div key={pIdx} className="flex items-start gap-2 text-xs font-semibold">
+                          <div className="w-4 h-4 rounded-full bg-[#F97316]/15 text-[#F97316] flex items-center justify-center shrink-0 border border-[#F97316]/30 mt-0.5">
+                            <Check className="w-2.5 h-2.5" />
                           </div>
                           <span className={isDarkMode ? 'text-zinc-200' : 'text-zinc-800'}>{point}</span>
                         </div>
@@ -237,9 +239,9 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     <motion.div
                       animate={{ y: [-2, 2, -2] }}
                       transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                      className="pt-1 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-xs font-semibold text-[#F97316] shadow-sm"
+                      className="pt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F97316]/10 border border-[#F97316]/40 text-[11px] font-semibold text-[#F97316] shadow-sm"
                     >
-                      <Sparkles className="w-3.5 h-3.5 shrink-0" />
+                      <Sparkles className="w-3 h-3 shrink-0" />
                       <span>"{step.annotation}"</span>
                     </motion.div>
                   </div>
