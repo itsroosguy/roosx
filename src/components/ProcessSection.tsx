@@ -27,6 +27,10 @@ import {
   Rocket,
   ArrowRight,
   ArrowLeft,
+  CheckCircle2,
+  Activity,
+  Cpu,
+  Sparkles,
 } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -61,10 +65,10 @@ const processColumnsData: ProcessColumnData[] = [
       'We analyze your business, target audience, and competitors to identify clear opportunities that help your brand stand out and attract the right customers.',
     icon: Compass,
     subNodes: [
-      { title: 'Business Audit', desc: 'Evaluate your brand, website, and growth blockers', icon: FileText },
-      { title: 'Market Research', desc: 'Understand competitor strategies and positioning', icon: PieChart },
-      { title: 'Audience Insights', desc: 'Identify who your best customers are and what they need', icon: Users },
-      { title: 'Growth Roadmap', desc: 'Clear plan of action tailored to your goals', icon: MapPin },
+      { title: 'Business Audit', desc: 'Evaluate brand & growth blockers', icon: FileText },
+      { title: 'Market Research', desc: 'Understand competitor positioning', icon: PieChart },
+      { title: 'Audience Insights', desc: 'Identify ideal buyer profiles', icon: Users },
+      { title: 'Growth Roadmap', desc: 'Action plan tailored to goals', icon: MapPin },
     ],
   },
   {
@@ -76,10 +80,10 @@ const processColumnsData: ProcessColumnData[] = [
       'We refine your brand positioning and messaging so potential customers understand your value immediately and trust your business.',
     icon: Target,
     subNodes: [
-      { title: 'Brand Positioning', desc: 'Define what makes your business unique', icon: Flag },
-      { title: 'Messaging Strategy', desc: 'Clear, persuasive copy that resonates', icon: MessageSquare },
-      { title: 'Customer Journey', desc: 'Simple, direct path from visitor to customer', icon: Users },
-      { title: 'Action Plan', desc: 'Prioritized steps for maximum impact', icon: Map },
+      { title: 'Brand Positioning', desc: 'Define unique value proposition', icon: Flag },
+      { title: 'Messaging Strategy', desc: 'Persuasive conversion copy', icon: MessageSquare },
+      { title: 'Customer Journey', desc: 'Direct path to conversion', icon: Users },
+      { title: 'Action Plan', desc: 'Prioritized high-impact steps', icon: Map },
     ],
   },
   {
@@ -91,10 +95,10 @@ const processColumnsData: ProcessColumnData[] = [
       'We design memorable visual identities, websites, and user experiences that build trust, look professional, and drive real business results.',
     icon: Palette,
     subNodes: [
-      { title: 'Brand Identity', desc: 'Logos, color palettes, typography, and visual assets', icon: Layers },
-      { title: 'Website Design', desc: 'Modern, responsive designs tailored for conversion', icon: Layout },
-      { title: 'UI / UX Design', desc: 'Intuitive interfaces your visitors love using', icon: Smartphone },
-      { title: 'Motion & Visuals', desc: 'Engaging visuals that make your brand stand out', icon: Video },
+      { title: 'Brand Identity', desc: 'Logos, colors & visual assets', icon: Layers },
+      { title: 'Website Design', desc: 'Modern high-converting design', icon: Layout },
+      { title: 'UI / UX Design', desc: 'Intuitive user interface flow', icon: Smartphone },
+      { title: 'Motion & Visuals', desc: 'Engaging interactive motion', icon: Video },
     ],
   },
   {
@@ -106,10 +110,10 @@ const processColumnsData: ProcessColumnData[] = [
       'We build custom, high-speed websites and digital systems engineered to perform effortlessly across all devices.',
     icon: Code2,
     subNodes: [
-      { title: 'Web Development', desc: 'Clean, high-speed frontend and backend code', icon: Code },
-      { title: 'Content Management', desc: 'Easy-to-update CMS platforms for your team', icon: Database },
-      { title: 'Workflow Automation', desc: 'Smart tools that save time and manual effort', icon: Bot },
-      { title: 'Integrations', desc: 'Connect your website with your CRM and tools', icon: Zap },
+      { title: 'Web Development', desc: 'High-speed frontend & backend', icon: Code },
+      { title: 'Content Management', desc: 'Flexible CMS architecture', icon: Database },
+      { title: 'Workflow Automation', desc: 'Smart automated workflows', icon: Bot },
+      { title: 'Integrations', desc: 'CRM & API connection nodes', icon: Zap },
     ],
   },
   {
@@ -121,10 +125,10 @@ const processColumnsData: ProcessColumnData[] = [
       'We optimize your digital presence, search visibility, and conversion flow to keep attracting new customers and growing your revenue.',
     icon: TrendingUp,
     subNodes: [
-      { title: 'SEO & Visibility', desc: 'Help the right customers find you on Google', icon: Search },
-      { title: 'Performance Analytics', desc: 'Track key metrics and user engagement', icon: BarChart2 },
-      { title: 'Conversion Tuning', desc: 'Optimize pages to increase leads and sales', icon: Filter },
-      { title: 'Growth Optimization', desc: 'Ongoing improvements to sustain momentum', icon: Rocket },
+      { title: 'SEO & Visibility', desc: 'High Google search ranking', icon: Search },
+      { title: 'Performance Analytics', desc: 'Real-time telemetry insights', icon: BarChart2 },
+      { title: 'Conversion Tuning', desc: 'CRO & funnel optimization', icon: Filter },
+      { title: 'Growth Optimization', desc: 'Continuous scaling iterations', icon: Rocket },
     ],
   },
 ];
@@ -134,6 +138,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   isDarkMode = false,
 }) => {
   const [activeStep, setActiveStep] = useState<number>(0);
+  const [activeTheme, setActiveTheme] = useState<'orange' | 'dark' | 'glass'>('orange');
 
   const currentStage = processColumnsData[activeStep];
 
@@ -190,7 +195,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
               isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
             }`}
           >
-            We combine strategy, design, and technology to build brands that attract the right audience and drive sustainable revenue.
+            Experience our interactive strategy engine—how we transform ambitious ideas into category-defining digital brands.
           </p>
         </motion.div>
 
@@ -268,7 +273,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </div>
         </div>
 
-        {/* 2. MASTER STAGE SHOWCASE CONSOLE DECK */}
+        {/* 2. MASTER STAGE INTERACTIVE BLUEPRINT ENGINE */}
         <AnimatePresence mode="wait">
           <motion.div
             key={currentStage.id}
@@ -287,10 +292,13 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
-              {/* LEFT COLUMN: STRATEGY & NARRATIVE (6 COLS) */}
-              <div className="lg:col-span-6 space-y-6 text-left">
-                {/* Main Stage Headline & Tagline */}
+              {/* LEFT COLUMN: STRATEGY & NARRATIVE (5 COLS) */}
+              <div className="lg:col-span-5 space-y-6 text-left">
                 <div>
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F97316]/10 border border-[#F97316]/30 text-xs font-mono font-bold text-[#F97316] uppercase tracking-widest mb-3">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>Phase {currentStage.num} • Blueprint Engine</span>
+                  </div>
                   <h3
                     className={`font-display text-3xl sm:text-5xl font-black tracking-tight leading-none ${
                       isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
@@ -312,8 +320,33 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   {currentStage.description}
                 </p>
 
+                {/* Sub-Deliverables Interactive Chips */}
+                <div className="space-y-2 pt-2">
+                  <div className="text-xs font-bold uppercase tracking-wider text-[#F97316]">
+                    Key Deliverables Architecture
+                  </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                    {currentStage.subNodes.map((sub, idx) => {
+                      const SubIcon = sub.icon;
+                      return (
+                        <div
+                          key={idx}
+                          className={`flex items-center gap-2.5 px-3 py-2 rounded-xl border text-xs font-semibold transition-all ${
+                            isDarkMode
+                              ? 'bg-[#18181B] border-[#27272A] text-zinc-200 hover:border-[#F97316]/50'
+                              : 'bg-zinc-50 border-[#E4E4E7] text-zinc-800 hover:border-[#F97316]/50'
+                          }`}
+                        >
+                          <SubIcon className="w-3.5 h-3.5 text-[#F97316] shrink-0" />
+                          <span className="truncate">{sub.title}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
                 {/* Stage Controls */}
-                <div className="pt-2 flex items-center gap-3 flex-wrap">
+                <div className="pt-4 flex items-center gap-3 flex-wrap">
                   <div className="flex items-center gap-2">
                     <button
                       onClick={prevStep}
@@ -350,47 +383,222 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 </div>
               </div>
 
-              {/* RIGHT COLUMN: CAPABILITY TILES MATRIX (6 COLS) */}
-              <div className="lg:col-span-6 space-y-4">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  {currentStage.subNodes.map((sub, sIdx) => {
-                    const SubIcon = sub.icon;
+              {/* RIGHT COLUMN: INTERACTIVE TACTILE PROTOTYPE CANVAS DECK (7 COLS) */}
+              <div className="lg:col-span-7">
+                <div
+                  className={`rounded-2xl border p-5 sm:p-6 relative overflow-hidden transition-all duration-500 shadow-inner ${
+                    isDarkMode
+                      ? 'bg-[#0E0E11] border-[#27272A]'
+                      : 'bg-zinc-900 border-zinc-800 text-white'
+                  }`}
+                >
+                  {/* Top Canvas Bar */}
+                  <div className="flex items-center justify-between pb-4 mb-4 border-b border-zinc-800 text-xs font-mono text-zinc-400">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                      <span className="ml-2 font-bold text-zinc-300">ROOS_CANVAS // {currentStage.id.toUpperCase()}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Activity className="w-3.5 h-3.5 text-[#F97316] animate-pulse" />
+                      <span className="text-[#F97316] font-bold uppercase">LIVE ENGINE</span>
+                    </div>
+                  </div>
 
-                    return (
-                      <motion.div
-                        key={sIdx}
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.35, delay: sIdx * 0.06 }}
-                        whileHover={{ y: -4, scale: 1.02 }}
-                        className={`p-4 rounded-2xl border transition-all duration-300 text-left flex flex-col justify-between ${
-                          isDarkMode
-                            ? 'bg-[#18181B] border-[#27272A] hover:border-[#F97316] hover:shadow-lg hover:shadow-[#F97316]/20'
-                            : 'bg-[#FAFAFA] border-[#E4E4E7] hover:border-[#F97316] hover:bg-white hover:shadow-lg hover:shadow-[#F97316]/15'
-                        }`}
-                      >
-                        <div className="flex items-center gap-3 mb-2">
-                          <div className="w-8 h-8 rounded-xl bg-[#F97316]/15 text-[#F97316] flex items-center justify-center shrink-0 border border-[#F97316]/30">
-                            <SubIcon className="w-4 h-4" />
+                  {/* DYNAMIC STAGE PROTOTYPE WIDGET CANVAS */}
+                  {currentStage.id === 'discover' && (
+                    <div className="space-y-4 py-2">
+                      {/* Radar Sweep & Opportunity Scanner */}
+                      <div className="relative h-44 rounded-xl bg-black/60 border border-zinc-800 flex items-center justify-center overflow-hidden">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(249,115,22,0.15)_0%,transparent_70%)]" />
+                        <div className="w-32 h-32 rounded-full border border-[#F97316]/30 flex items-center justify-center relative">
+                          <div className="w-20 h-20 rounded-full border border-[#F97316]/20 flex items-center justify-center">
+                            <Compass className="w-8 h-8 text-[#F97316] animate-spin-slow" />
                           </div>
-                          <span
-                            className={`font-display text-sm font-bold tracking-tight ${
-                              isDarkMode ? 'text-[#FAFAFA]' : 'text-[#111111]'
-                            }`}
-                          >
-                            {sub.title}
-                          </span>
+                          <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 4, repeat: Infinity, ease: 'linear' }}
+                            className="absolute inset-0 rounded-full border-t-2 border-[#F97316]"
+                          />
                         </div>
-                        <p
-                          className={`text-xs leading-relaxed font-medium ${
-                            isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
+                        {/* Floating Opportunity Metrics */}
+                        <div className="absolute top-3 left-4 bg-[#18181B]/90 border border-zinc-700 px-2.5 py-1 rounded-lg text-[10px] font-mono text-zinc-300">
+                          <span className="text-[#F97316] font-bold">AUDIENCE GAP:</span> 94% ALIGNED
+                        </div>
+                        <div className="absolute bottom-3 right-4 bg-[#18181B]/90 border border-zinc-700 px-2.5 py-1 rounded-lg text-[10px] font-mono text-zinc-300">
+                          <span className="text-emerald-400 font-bold">GROWTH POTENTIAL:</span> 3.4X
+                        </div>
+                      </div>
+
+                      {/* Interactive Audit Telemetry Bar */}
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="p-3 rounded-xl bg-zinc-800/40 border border-zinc-700/50 text-left">
+                          <div className="text-[10px] font-mono text-zinc-400">COMPETITOR BENCHMARK</div>
+                          <div className="text-lg font-bold text-white mt-0.5">Top 5% Category</div>
+                        </div>
+                        <div className="p-3 rounded-xl bg-zinc-800/40 border border-zinc-700/50 text-left">
+                          <div className="text-[10px] font-mono text-zinc-400">BRAND REASONING</div>
+                          <div className="text-lg font-bold text-[#F97316] mt-0.5">High Clarity</div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentStage.id === 'define' && (
+                    <div className="space-y-4 py-2">
+                      {/* Strategic 2x2 Positioning Matrix */}
+                      <div className="relative h-44 rounded-xl bg-black/60 border border-zinc-800 p-4 flex flex-col justify-between overflow-hidden">
+                        <div className="absolute inset-0 grid grid-cols-2 grid-rows-2 divide-x divide-y divide-zinc-800/60 pointer-events-none" />
+                        <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500 z-10">
+                          <span>HIGH IMPACT</span>
+                          <span className="text-[#F97316] font-bold">YOUR BRAND PEAK ZONE</span>
+                        </div>
+                        
+                        {/* Target Node */}
+                        <div className="relative z-10 flex items-center justify-center">
+                          <motion.div
+                            animate={{ scale: [1, 1.1, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                            className="flex items-center gap-2 bg-[#F97316] text-white px-3 py-1.5 rounded-full font-bold text-xs shadow-lg shadow-[#F97316]/50"
+                          >
+                            <Target className="w-4 h-4" />
+                            <span>Optimal Positioning</span>
+                          </motion.div>
+                        </div>
+
+                        <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500 z-10">
+                          <span>LOW CLARITY</span>
+                          <span>MAXIMUM CLARITY</span>
+                        </div>
+                      </div>
+
+                      {/* Positioning Pillars */}
+                      <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-800/40 border border-zinc-700/50 text-xs font-mono">
+                        <span className="text-zinc-400">CORE VALUE:</span>
+                        <span className="text-white font-bold">Sustainable Brand Authority</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentStage.id === 'design' && (
+                    <div className="space-y-4 py-2">
+                      {/* Live Design Sandbox & Theme Switcher */}
+                      <div className="p-4 rounded-xl bg-black/60 border border-zinc-800 space-y-3">
+                        <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
+                          <span>LIVE COMPONENT SANDBOX</span>
+                          <div className="flex items-center gap-1.5">
+                            <button
+                              onClick={() => setActiveTheme('orange')}
+                              className={`w-4 h-4 rounded-full bg-[#F97316] ring-2 transition-all ${
+                                activeTheme === 'orange' ? 'ring-white scale-110' : 'ring-transparent'
+                              }`}
+                            />
+                            <button
+                              onClick={() => setActiveTheme('dark')}
+                              className={`w-4 h-4 rounded-full bg-zinc-800 ring-2 transition-all ${
+                                activeTheme === 'dark' ? 'ring-white scale-110' : 'ring-transparent'
+                              }`}
+                            />
+                            <button
+                              onClick={() => setActiveTheme('glass')}
+                              className={`w-4 h-4 rounded-full bg-emerald-500 ring-2 transition-all ${
+                                activeTheme === 'glass' ? 'ring-white scale-110' : 'ring-transparent'
+                              }`}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Interactive Dynamic Theme Card Preview */}
+                        <div
+                          className={`p-4 rounded-xl border transition-all duration-500 text-left ${
+                            activeTheme === 'orange'
+                              ? 'bg-gradient-to-br from-[#F97316] to-[#EA580C] text-white border-[#FDBA74]'
+                              : activeTheme === 'dark'
+                              ? 'bg-zinc-900 border-zinc-700 text-white'
+                              : 'bg-emerald-950 border-emerald-700 text-emerald-100'
                           }`}
                         >
-                          {sub.desc}
-                        </p>
-                      </motion.div>
-                    );
-                  })}
+                          <div className="text-xs font-bold uppercase tracking-wider opacity-80">
+                            Design System Specimen
+                          </div>
+                          <div className="text-lg font-black mt-1">Conversion Architecture</div>
+                          <div className="mt-2 text-xs opacity-90">
+                            Built with precision typography and micro-interactions.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentStage.id === 'build' && (
+                    <div className="space-y-4 py-2">
+                      {/* Code Execution & High-Speed Telemetry Terminal */}
+                      <div className="p-4 rounded-xl bg-black/80 border border-zinc-800 font-mono text-xs text-left space-y-2">
+                        <div className="flex items-center justify-between text-zinc-500 border-b border-zinc-800 pb-2">
+                          <span>SYSTEM TELEMETRY</span>
+                          <span className="text-emerald-400 font-bold">100% HEALTHY</span>
+                        </div>
+                        <div className="text-emerald-400">✓ Compiling React 18 + Vite 6.0 Build...</div>
+                        <div className="text-zinc-300">✓ LCP Speed Score: 0.4s (Ultra Fast)</div>
+                        <div className="text-zinc-300">✓ Server Response: 12ms Edge Response</div>
+                        <div className="text-[#F97316] font-bold">⚡ Performance Score: 99 / 100</div>
+                      </div>
+
+                      {/* Code Architecture Badge */}
+                      <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-800/40 border border-zinc-700/50 text-xs font-mono text-zinc-300">
+                        <span className="flex items-center gap-2">
+                          <Cpu className="w-4 h-4 text-[#F97316]" />
+                          <span>Clean Architecture</span>
+                        </span>
+                        <span className="text-emerald-400 font-bold">Ready For Production</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentStage.id === 'scale' && (
+                    <div className="space-y-4 py-2">
+                      {/* Growth Trajectory Curve Graph */}
+                      <div className="relative h-44 rounded-xl bg-black/60 border border-zinc-800 p-4 flex flex-col justify-between overflow-hidden">
+                        <div className="flex justify-between items-center text-xs font-mono">
+                          <span className="text-zinc-400">REVENUE TRAJECTORY</span>
+                          <span className="text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                            +180% IMPACT
+                          </span>
+                        </div>
+
+                        {/* Animated SVG Ascending Curve */}
+                        <div className="relative h-20 w-full flex items-end">
+                          <svg className="w-full h-full" viewBox="0 0 300 80">
+                            <motion.path
+                              initial={{ pathLength: 0 }}
+                              animate={{ pathLength: 1 }}
+                              transition={{ duration: 1.5, ease: 'easeOut' }}
+                              d="M0,70 Q75,60 150,35 T300,10"
+                              fill="none"
+                              stroke="#22C55E"
+                              strokeWidth="3"
+                            />
+                          </svg>
+                        </div>
+
+                        <div className="flex justify-between items-center text-[10px] font-mono text-zinc-500">
+                          <span>MONTH 01</span>
+                          <span>MONTH 03</span>
+                          <span className="text-white font-bold">SCALE PEAK</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between p-3 rounded-xl bg-zinc-800/40 border border-zinc-700/50 text-xs font-mono text-zinc-300">
+                        <span className="flex items-center gap-2">
+                          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                          <span>Continuous Funnel Tuning</span>
+                        </span>
+                        <span className="text-[#F97316] font-bold">Active Engine</span>
+                      </div>
+                    </div>
+                  )}
+
                 </div>
               </div>
 
