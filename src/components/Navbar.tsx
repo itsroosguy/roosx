@@ -10,6 +10,7 @@ interface NavbarProps {
   onToggleTheme: () => void;
   onNavigateServices?: () => void;
   onNavigateAbout?: () => void;
+  onNavigatePhilosophy?: () => void;
   onNavigateHome?: () => void;
 }
 
@@ -19,6 +20,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleTheme,
   onNavigateServices,
   onNavigateAbout,
+  onNavigatePhilosophy,
   onNavigateHome,
 }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -35,6 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const navLinks = [
     { name: 'Services', href: '#services', action: onNavigateServices },
     { name: 'About', href: '#about', action: onNavigateAbout },
+    { name: 'Philosophy', href: '#philosophy', action: onNavigatePhilosophy },
     { name: 'Process', href: '#process', action: onNavigateHome },
     { name: 'Works', href: '#portfolio', action: onNavigateHome },
     { name: 'FAQ', href: '#faq', action: onNavigateHome },

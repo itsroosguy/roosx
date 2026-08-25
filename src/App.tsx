@@ -15,16 +15,18 @@ import { ProjectModal } from './components/ProjectModal';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
 import { ServicesPage } from './components/ServicesPage';
 import { AboutPage } from './components/AboutPage';
+import { PhilosophyPage } from './components/PhilosophyPage';
 import { Project } from './types';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'services' | 'about'>(() => {
+  const [currentView, setCurrentView] = useState<'home' | 'services' | 'about' | 'philosophy'>(() => {
     const hash = window.location.hash;
     if (hash === '#about') return 'about';
     if (hash === '#services') return 'services';
+    if (hash === '#philosophy') return 'philosophy';
     return 'home';
   });
 
@@ -35,6 +37,8 @@ export function App() {
         setCurrentView('about');
       } else if (hash === '#services') {
         setCurrentView('services');
+      } else if (hash === '#philosophy') {
+        setCurrentView('philosophy');
       } else {
         setCurrentView('home');
       }
@@ -71,6 +75,11 @@ export function App() {
           setCurrentView('about');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onNavigatePhilosophy={() => {
+          window.location.hash = '#philosophy';
+          setCurrentView('philosophy');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         onNavigateHome={() => {
           window.location.hash = '';
           setCurrentView('home');
@@ -84,6 +93,7 @@ export function App() {
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}
           onNavigateHome={() => {
+            window.location.hash = '';
             setCurrentView('home');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
@@ -93,6 +103,17 @@ export function App() {
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}
           onNavigateHome={() => {
+            window.location.hash = '';
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      ) : currentView === 'philosophy' ? (
+        <PhilosophyPage
+          onOpenInquiry={() => setIsInquiryOpen(true)}
+          isDarkMode={isDarkMode}
+          onNavigateHome={() => {
+            window.location.hash = '';
             setCurrentView('home');
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
