@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Target, Pencil, Code, TrendingUp, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
+import { Search, Target, Pencil, Code, TrendingUp, CheckCircle2, Sparkles } from 'lucide-react';
 
 interface ProcessSectionProps {
   onOpenInquiry?: () => void;
@@ -110,7 +110,6 @@ const process5StepCards: StepCard[] = [
 ];
 
 export const ProcessSection: React.FC<ProcessSectionProps> = ({
-  onOpenInquiry,
   isDarkMode = true,
 }) => {
   const [activeCardId, setActiveCardId] = useState<string>('discover');
@@ -132,7 +131,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         }`}
       />
 
-      {/* Subtle Ambient Spotlight behind Active Card */}
+      {/* Ambient Spotlight behind Active Card */}
       <div
         style={{
           background: `radial-gradient(circle, ${activeStep.glowColor} 0%, transparent 70%)`,
@@ -166,8 +165,8 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* SLEEK OBSIDIAN BLACK EXPANDING ACCORDION DECK */}
-        <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 max-w-7xl mx-auto min-h-[460px] sm:min-h-[490px] select-none">
+        {/* LOCKED HEIGHT EXPANDING HORIZONTAL ACCORDION DECK */}
+        <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 max-w-7xl mx-auto h-[430px] sm:h-[450px] select-none">
           {process5StepCards.map((card) => {
             const isActive = card.id === activeCardId;
             const IconComp = card.icon;
@@ -178,13 +177,13 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 onClick={() => setActiveCardId(card.id)}
                 onMouseEnter={() => setActiveCardId(card.id)}
                 animate={{
-                  flex: isActive ? (window.innerWidth > 1024 ? 3.5 : 1) : 1,
+                  flex: isActive ? (window.innerWidth > 1024 ? 3.2 : 1) : 1,
                 }}
-                transition={{ type: 'spring', stiffness: 200, damping: 22 }}
+                transition={{ type: 'spring', stiffness: 220, damping: 24 }}
                 style={{
                   boxShadow: isActive ? `0 20px 50px ${card.glowColor}` : '0 4px 20px rgba(0,0,0,0.6)',
                 }}
-                className={`rounded-3xl p-6 border cursor-pointer relative overflow-hidden backdrop-blur-2xl transition-colors duration-500 flex flex-col justify-between text-left ${
+                className={`rounded-3xl p-5 sm:p-6 border cursor-pointer relative overflow-hidden backdrop-blur-2xl transition-colors duration-500 flex flex-col justify-between text-left h-full ${
                   isActive ? 'bg-[#121215] text-white' : 'bg-[#0A0A0C] text-zinc-400'
                 } ${card.borderColor} ${
                   isActive
@@ -192,8 +191,8 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     : 'opacity-80 hover:opacity-100 hover:border-zinc-700'
                 }`}
               >
-                {/* Top Number */}
-                <div className="flex items-center justify-between z-10 relative">
+                {/* Top Number & Accent Bar */}
+                <div className="flex items-center justify-between z-10 relative shrink-0">
                   <div className="space-y-1">
                     <span
                       style={{ color: card.color }}
@@ -211,7 +210,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 </div>
 
                 {/* Center Content: Icon + Title + Description + Deliverables */}
-                <div className="py-4 space-y-4 z-10 relative">
+                <div className="py-2 space-y-3 z-10 relative flex-1 flex flex-col justify-center">
                   {/* Circular Icon Container */}
                   <div
                     style={{
@@ -219,17 +218,17 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                       backgroundColor: `${card.color}15`,
                       color: card.color,
                     }}
-                    className="w-14 h-14 rounded-full border-2 flex items-center justify-center shadow-lg transition-transform duration-300"
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 flex items-center justify-center shadow-lg transition-transform duration-300 shrink-0"
                   >
-                    <IconComp className="w-7 h-7" />
+                    <IconComp className="w-6 h-6 sm:w-7 sm:h-7" />
                   </div>
 
                   {/* Title & Tagline */}
-                  <div className="space-y-1">
-                    <h3 className="font-display text-xl sm:text-2xl font-black text-white leading-tight">
+                  <div className="space-y-0.5 shrink-0">
+                    <h3 className="font-display text-lg sm:text-xl font-black text-white leading-tight">
                       {card.title}
                     </h3>
-                    <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-medium">
+                    <p className="text-xs text-zinc-300 leading-relaxed font-medium line-clamp-2">
                       {card.tagline}
                     </p>
                   </div>
@@ -238,24 +237,24 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   <AnimatePresence>
                     {isActive && (
                       <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.35 }}
-                        className="space-y-4 pt-3 border-t border-zinc-800"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="space-y-3 pt-2 border-t border-zinc-800 shrink-0"
                       >
-                        <p className="text-xs text-zinc-300 leading-relaxed">
+                        <p className="text-xs text-zinc-300 leading-relaxed line-clamp-2">
                           {card.description}
                         </p>
 
-                        <div className="space-y-2">
+                        <div className="space-y-1.5">
                           <span
                             style={{ color: card.color }}
                             className="text-[10px] font-mono font-bold uppercase tracking-wider block"
                           >
-                            KEY DELIVERABLES:
+                            STAGE DELIVERABLES:
                           </span>
-                          <div className="space-y-1.5">
+                          <div className="space-y-1">
                             {card.deliverables.map((item, dIdx) => (
                               <div
                                 key={dIdx}
@@ -263,29 +262,12 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                               >
                                 <CheckCircle2
                                   style={{ color: card.color }}
-                                  className="w-4 h-4 shrink-0"
+                                  className="w-3.5 h-3.5 shrink-0"
                                 />
-                                <span>{item}</span>
+                                <span className="truncate">{item}</span>
                               </div>
                             ))}
                           </div>
-                        </div>
-
-                        <div className="pt-2">
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              onOpenInquiry?.();
-                            }}
-                            style={{
-                              backgroundColor: card.color,
-                              boxShadow: `0 8px 25px ${card.glowColor}`,
-                            }}
-                            className="w-full sm:w-auto px-5 py-2.5 rounded-full text-white text-xs font-mono font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity cursor-pointer"
-                          >
-                            <span>Book Phase {card.num} Audit</span>
-                            <ArrowRight className="w-4 h-4" />
-                          </button>
                         </div>
                       </motion.div>
                     )}
@@ -293,7 +275,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 </div>
 
                 {/* Bottom Micro Indicator Dots */}
-                <div className="flex items-center gap-1.5 pt-2 z-10 relative">
+                <div className="flex items-center gap-1.5 pt-1 z-10 relative shrink-0">
                   <div
                     style={{ backgroundColor: card.color }}
                     className="w-2.5 h-2.5 rounded-full"
@@ -323,7 +305,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#121215]/90 border border-[#EF4444]/40 text-xs sm:text-sm font-mono font-bold text-zinc-200 backdrop-blur-xl shadow-xl shadow-[#EF4444]/10 group hover:border-[#EF4444] transition-all">
             <Sparkles className="w-4 h-4 text-[#EF4444] animate-pulse shrink-0" />
             <span className="tracking-wide">
-              Hover or click any phase card to smoothly expand its full execution deliverables.
+              Hover or click any phase card to inspect its execution deliverables.
             </span>
           </div>
         </motion.div>
