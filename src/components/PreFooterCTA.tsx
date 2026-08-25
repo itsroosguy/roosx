@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Calendar, ArrowRight } from 'lucide-react';
+import { Calendar, ArrowRight } from 'lucide-react';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
 interface PreFooterCTAProps {
@@ -45,11 +45,7 @@ export const PreFooterCTA: React.FC<PreFooterCTAProps> = ({
           {/* Top Laser Accent Beam */}
           <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#EA580C]" />
 
-          {/* Badge Pill */}
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-widest bg-[#F97316]/15 text-[#F97316] border border-[#F97316]/30 mb-6 shadow-sm">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Ready To Scale Your Brand?</span>
-          </div>
+
 
           {/* User Requested Impact Narrative */}
           <h2
