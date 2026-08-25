@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Preloader } from './components/Preloader';
 import { AmbientGlow } from './components/AmbientGlow';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -25,6 +26,9 @@ export function App() {
         isDarkMode ? 'dark bg-[#0A0A0A] text-[#D4D4D8]' : 'bg-white text-[#111111]'
       }`}
     >
+      {/* 3-Second Circular Gauge Telemetry Preloader */}
+      <Preloader isDarkMode={isDarkMode} />
+
       {/* Interactive Brand Ambient Glow Overlay */}
       <AmbientGlow />
 
