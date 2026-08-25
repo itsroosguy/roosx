@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Target, Pencil, Code, TrendingUp, CheckCircle2, ArrowRight, Sparkles } from 'lucide-react';
+import { Search, Target, Pencil, Code, TrendingUp, CheckCircle2, ArrowRight, Sparkles, Flame } from 'lucide-react';
 
 interface ProcessSectionProps {
   onOpenInquiry?: () => void;
@@ -96,6 +96,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
   isDarkMode = true,
 }) => {
   const [activeCardId, setActiveCardId] = useState<string>('discover');
+  const [hoveredCardId, setHoveredCardId] = useState<string | null>(null);
   const activeStep = process5StepCards.find((c) => c.id === activeCardId) || process5StepCards[0];
 
   return (
@@ -114,12 +115,18 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
         }`}
       />
 
-      {/* Ambient Orange Glow Spotlight */}
-      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[1000px] h-[550px] bg-radial from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none" />
+      {/* Dynamic Animated Spotlight following Active Card */}
+      <motion.div
+        animate={{
+          x: process5StepCards.findIndex((c) => c.id === activeCardId) * 80 - 160,
+        }}
+        transition={{ type: 'spring', stiffness: 120, damping: 20 }}
+        className="absolute top-1/3 left-1/2 w-[800px] h-[450px] bg-radial from-[#FF7A1A]/22 via-[#FF7A1A]/5 to-transparent blur-[140px] pointer-events-none"
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
         
-        {/* HEADER BLOCK (CENTERED TOP TITLE) */}
+        {/* HEADER BLOCK */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -143,14 +150,15 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* 2-COLUMN SIDE-BY-SIDE LAYOUT: LEFT STACKED CARDS | RIGHT EXPANDED CONTENT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch max-w-7xl mx-auto">
+        {/* 60% LEFT | 40% RIGHT SPLIT CONTAINER */}
+        <div className="flex flex-col lg:flex-row items-center lg:items-stretch gap-8 max-w-7xl mx-auto">
           
-          {/* LEFT COLUMN: LEFT-ALIGNED COMPACT 3D OVERLAPPING CARDS */}
-          <div className="lg:col-span-5 relative min-h-[380px] sm:min-h-[400px] flex items-center justify-start py-2 select-none overflow-x-auto sm:overflow-visible">
+          {/* 60% LEFT COLUMN: LEFT-ALIGNED 3D STEPPED OVERLAPPING DECK WITH MAX ANIMATION */}
+          <div className="w-full lg:w-[60%] relative min-h-[380px] sm:min-h-[410px] flex items-center justify-start py-2 select-none overflow-x-auto sm:overflow-visible">
             <div className="relative w-full h-[350px] flex items-center justify-start">
               {process5StepCards.map((card, idx) => {
                 const isActive = card.id === activeCardId;
+                const isHovered = card.id === hoveredCardId;
                 const IconComp = card.icon;
                 const activeIdx = process5StepCards.findIndex((c) => c.id === activeCardId);
                 const offsetFromActive = idx - activeIdx;
@@ -159,67 +167,89 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   <motion.div
                     key={card.id}
                     onClick={() => setActiveCardId(card.id)}
+                    onMouseEnter={() => setHoveredCardId(card.id)}
+                    onMouseLeave={() => setHoveredCardId(null)}
                     animate={{
-                      x: idx * (window.innerWidth > 640 ? 68 : 52),
-                      y: isActive ? -8 : Math.abs(idx) * 2,
-                      scale: isActive ? 1.04 : 0.96,
-                      zIndex: isActive ? 50 : 30 - Math.abs(offsetFromActive),
+                      x: idx * (window.innerWidth > 640 ? 92 : 62),
+                      y: isActive ? -14 : isHovered ? -6 : Math.abs(idx) * 2,
+                      scale: isActive ? 1.06 : isHovered ? 1.02 : 0.96,
+                      rotate: isActive ? 0 : (idx - 2) * 1.5,
+                      zIndex: isActive ? 50 : isHovered ? 45 : 30 - Math.abs(offsetFromActive),
                     }}
-                    transition={{ type: 'spring', stiffness: 220, damping: 22 }}
-                    className={`w-44 sm:w-48 h-[310px] sm:h-[330px] rounded-2xl p-4 border text-left cursor-pointer transition-all duration-300 shadow-2xl backdrop-blur-xl flex flex-col justify-between absolute left-0 ${
+                    transition={{ type: 'spring', stiffness: 220, damping: 20 }}
+                    whileHover={{ y: -8 }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`w-48 sm:w-56 h-[320px] sm:h-[340px] rounded-3xl p-5 border text-left cursor-pointer transition-colors duration-300 shadow-2xl backdrop-blur-xl flex flex-col justify-between absolute left-0 ${
                       isActive
-                        ? 'bg-[#121215] text-white border-[#FF7A1A] ring-2 ring-[#FF7A1A]/40 shadow-[0_15px_40px_rgba(255,122,26,0.35)]'
-                        : 'bg-[#0A0A0C] text-zinc-400 border-zinc-800 hover:border-zinc-700 hover:text-white'
+                        ? 'bg-[#141417] text-white border-[#FF7A1A] ring-2 ring-[#FF7A1A]/40 shadow-[0_20px_50px_rgba(255,122,26,0.4)]'
+                        : isHovered
+                        ? 'bg-[#101014] text-white border-zinc-700 shadow-xl'
+                        : 'bg-[#0A0A0C] text-zinc-400 border-zinc-800/80 hover:text-white'
                     }`}
                   >
-                    {/* Top Step Number */}
-                    <div className="space-y-1">
-                      <div
-                        className={`text-lg sm:text-xl font-mono font-extrabold transition-colors ${
-                          isActive ? 'text-[#FF7A1A]' : 'text-zinc-500'
-                        }`}
-                      >
-                        {card.num}
+                    {/* Top Step Number + Active Pulse Badge */}
+                    <div className="flex items-center justify-between">
+                      <div className="space-y-1">
+                        <div
+                          className={`text-xl sm:text-2xl font-mono font-extrabold transition-colors ${
+                            isActive ? 'text-[#FF7A1A]' : 'text-zinc-500'
+                          }`}
+                        >
+                          {card.num}
+                        </div>
+                        <div
+                          className={`w-6 h-0.5 rounded-full transition-all ${
+                            isActive ? 'bg-[#FF7A1A] w-8' : 'bg-zinc-700'
+                          }`}
+                        />
                       </div>
-                      <div
-                        className={`w-5 h-0.5 rounded-full transition-colors ${
-                          isActive ? 'bg-[#FF7A1A]' : 'bg-zinc-700'
-                        }`}
-                      />
+
+                      {isActive && (
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          className="px-2 py-0.5 rounded-full bg-[#FF7A1A]/20 border border-[#FF7A1A]/50 text-[10px] font-mono font-bold text-[#FF7A1A] flex items-center gap-1"
+                        >
+                          <Flame className="w-3 h-3 text-[#FF7A1A] animate-bounce" />
+                          <span>ACTIVE</span>
+                        </motion.div>
+                      )}
                     </div>
 
                     {/* Icon Center */}
                     <div className="my-auto py-2 flex justify-start">
-                      <div
-                        className={`w-11 h-11 rounded-xl flex items-center justify-center transition-all ${
+                      <motion.div
+                        animate={isActive ? { rotate: [0, -8, 8, 0], scale: [1, 1.15, 1] } : {}}
+                        transition={{ duration: 0.5 }}
+                        className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all ${
                           isActive
-                            ? 'bg-[#FF7A1A]/10 border border-[#FF7A1A]/40 text-[#FF7A1A] scale-110 shadow-md shadow-[#FF7A1A]/20'
+                            ? 'bg-[#FF7A1A]/15 border border-[#FF7A1A]/50 text-[#FF7A1A] shadow-lg shadow-[#FF7A1A]/20'
                             : 'bg-zinc-900 border border-zinc-800 text-zinc-400'
                         }`}
                       >
-                        <IconComp className="w-5 h-5" />
-                      </div>
+                        <IconComp className="w-6 h-6" />
+                      </motion.div>
                     </div>
 
                     {/* Title & Tagline */}
-                    <div className="space-y-0.5 pt-1.5 border-t border-zinc-800/80">
+                    <div className="space-y-0.5 pt-2 border-t border-zinc-800/80">
                       <h3
-                        className={`font-display text-base sm:text-lg font-extrabold transition-colors ${
+                        className={`font-display text-lg sm:text-xl font-extrabold transition-colors ${
                           isActive ? 'text-white' : 'text-zinc-300'
                         }`}
                       >
                         {card.title}
                       </h3>
-                      <p className="text-[11px] text-zinc-400 leading-tight font-medium line-clamp-2">
+                      <p className="text-xs text-zinc-400 leading-tight font-medium line-clamp-2">
                         {card.tagline}
                       </p>
                     </div>
 
                     {/* Bottom Micro Indicator Dot Bar */}
-                    <div className="pt-2 flex items-center gap-1">
+                    <div className="pt-2 flex items-center gap-1.5">
                       <div
                         className={`h-0.5 rounded-full transition-all ${
-                          isActive ? 'w-3 bg-[#FF7A1A]' : 'w-1.5 bg-zinc-700'
+                          isActive ? 'w-4 bg-[#FF7A1A]' : 'w-2 bg-zinc-700'
                         }`}
                       />
                       <div
@@ -235,67 +265,81 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
             </div>
           </div>
 
-          {/* RIGHT COLUMN: ACTIVE CARD EXPANDED CONTENT DISPLAY */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
+          {/* 40% RIGHT COLUMN: NO CONTAINER BOX (CLEAN HIGH-ANIMATION DIRECT PRESENTATION) */}
+          <div className="w-full lg:w-[40%] flex flex-col justify-center text-left">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeStep.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.35 }}
-                className="w-full p-6 sm:p-8 rounded-3xl bg-[#0C0C0C] border border-[#FF7A1A]/40 text-left space-y-6 shadow-2xl relative overflow-hidden h-full flex flex-col justify-between"
+                initial={{ opacity: 0, x: 30, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, x: -30, filter: 'blur(8px)' }}
+                transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                className="space-y-6 py-2"
               >
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C]" />
-
-                {/* Header Info */}
+                {/* Header Badge & Title */}
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between flex-wrap gap-3 border-b border-zinc-800 pb-4">
-                    <div className="flex items-center gap-3">
-                      <span className="text-3xl font-mono font-black text-[#FF7A1A]">
-                        {activeStep.num}
+                  <div className="flex items-center gap-3">
+                    <span className="text-4xl font-mono font-black text-[#FF7A1A]">
+                      {activeStep.num}
+                    </span>
+                    <div>
+                      <span className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-widest block">
+                        PHASE {activeStep.num} • {activeStep.title.toUpperCase()}
                       </span>
-                      <div>
-                        <span className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider">
-                          PHASE {activeStep.num} • {activeStep.title.toUpperCase()}
-                        </span>
-                        <h4 className="font-display text-2xl font-bold text-white">
-                          {activeStep.headline}
-                        </h4>
-                      </div>
+                      <h3 className="font-display text-2xl sm:text-3xl font-black text-white leading-tight">
+                        {activeStep.headline}
+                      </h3>
                     </div>
-
-                    <button
-                      onClick={onOpenInquiry}
-                      className="px-4 py-2 rounded-full bg-[#FF7A1A] text-white text-xs font-mono font-bold flex items-center gap-2 hover:bg-[#EA580C] transition-all shadow-lg shadow-[#FF7A1A]/30 cursor-pointer"
-                    >
-                      <span>Book Phase Audit</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
                   </div>
 
-                  <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+                  <p className="text-sm sm:text-base text-zinc-300 leading-relaxed pt-1">
                     {activeStep.description}
                   </p>
                 </div>
 
-                {/* Deliverables */}
+                {/* Staggered Deliverables Checklist (No Box, Clean List) */}
                 <div className="space-y-3 pt-2">
-                  <span className="text-xs font-mono font-bold text-zinc-400 uppercase tracking-wider">
-                    STAGE DELIVERABLES & OUTCOMES:
-                  </span>
-                  <div className="space-y-2.5">
-                    {activeStep.deliverables.map((item, dIdx) => (
-                      <div
-                        key={dIdx}
-                        className="p-3.5 rounded-2xl bg-[#050505] border border-zinc-800 text-xs sm:text-sm font-semibold text-zinc-200 flex items-center gap-3"
-                      >
-                        <CheckCircle2 className="w-4 h-4 text-[#FF7A1A] shrink-0" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
+                  <div className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-wider flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-[#FF7A1A] animate-pulse" />
+                    <span>STAGE DELIVERABLES & OUTCOMES</span>
                   </div>
+
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    variants={{
+                      visible: { transition: { staggerChildren: 0.08 } },
+                      hidden: {},
+                    }}
+                    className="space-y-2.5"
+                  >
+                    {activeStep.deliverables.map((item, dIdx) => (
+                      <motion.div
+                        key={dIdx}
+                        variants={{
+                          hidden: { opacity: 0, x: 20 },
+                          visible: { opacity: 1, x: 0 },
+                        }}
+                        className="p-3.5 rounded-2xl bg-[#0B0B0E]/80 border border-zinc-800/90 text-xs sm:text-sm font-semibold text-zinc-200 flex items-center gap-3 shadow-md hover:border-[#FF7A1A]/40 transition-colors"
+                      >
+                        <CheckCircle2 className="w-4.5 h-4.5 text-[#FF7A1A] shrink-0" />
+                        <span>{item}</span>
+                      </motion.div>
+                    ))}
+                  </motion.div>
                 </div>
+
+                {/* Action CTA Button */}
+                <div className="pt-2">
+                  <button
+                    onClick={onOpenInquiry}
+                    className="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-[#FF7A1A] to-[#EA580C] text-white text-xs font-mono font-bold flex items-center justify-center gap-2.5 hover:shadow-[0_10px_30px_rgba(255,122,26,0.4)] hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer shadow-lg"
+                  >
+                    <span>Book Phase {activeStep.num} Audit</span>
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+
               </motion.div>
             </AnimatePresence>
           </div>
@@ -313,7 +357,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#121215]/90 border border-[#FF7A1A]/40 text-xs sm:text-sm font-mono font-bold text-zinc-200 backdrop-blur-xl shadow-xl shadow-[#FF7A1A]/10 group hover:border-[#FF7A1A] transition-all">
             <Sparkles className="w-4 h-4 text-[#FF7A1A] animate-pulse shrink-0" />
             <span className="tracking-wide">
-              Click any left-stacked card to reveal its detailed execution deliverables on the right.
+              Click any left-stacked card to reveal its animated deliverables on the right.
             </span>
           </div>
         </motion.div>
