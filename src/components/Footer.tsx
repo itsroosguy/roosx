@@ -54,8 +54,9 @@ export const Footer: React.FC<FooterProps> = ({
                 <Logo isScrolled={true} isDarkMode={isDarkMode} />
               </a>
 
-              <p className="text-sm leading-relaxed max-w-sm text-left font-medium">
-                Roos StudioX helps businesses build stronger brands, create high-performing digital experiences and develop scalable systems for growth. We combine strategy, design and technology to attract the right audience, strengthen customer trust and drive measurable business results. Our focus is simple: turning digital presence into sustainable growth.
+              <p className="text-sm leading-relaxed max-w-md text-left font-medium">
+                Roos StudioX helps businesses build stronger brands, create high-performing digital experiences and develop scalable systems for growth. We combine strategy, design and technology to attract the right audience, strengthen customer trust and drive measurable business results.
+                <span className="block mt-1.5 font-semibold">Our focus is simple: turning digital presence into sustainable growth.</span>
               </p>
 
               {/* Clickable Direct Contact Links */}
