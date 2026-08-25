@@ -120,7 +120,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10 text-center">
         
-        {/* HEADER BLOCK (RESTORED ORIGINAL SECTION TITLE WITH SILVER SHADE) */}
+        {/* HEADER BLOCK (PREMIUM WORLD-CLASS AGENCY HEADLINE) */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -132,10 +132,10 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
             className={`font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08]`}
           >
             <span className="bg-gradient-to-r from-white via-zinc-300 to-zinc-400 bg-clip-text text-transparent block pb-1">
-              How We Step In & Get You
+              Our 5-Phase Execution Methodology
             </span>
             <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent inline-block pb-2 pt-1">
-              To The Goal Fast.
+              Built For High-Velocity Growth.
             </span>
           </h2>
         </motion.div>
@@ -201,7 +201,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                     className={`absolute top-3 right-3 flex items-center justify-center gap-1.5 transition-all duration-300 shadow-md cursor-pointer ${
                       isActive
                         ? 'px-3 py-1.5 rounded-full bg-[#FF7A1A] text-white text-xs font-mono font-bold shadow-[#FF7A1A]/40'
-                        : 'w-8 h-8 rounded-full bg-[#27272A] text-white hover:bg-[#FF7A1A]'
+                        : 'w-8 h-8 rounded-full bg-[#27272A] text-[#FFFFFF] hover:bg-[#FF7A1A]'
                     }`}
                   >
                     {isActive && <span>{card.ctaLabel}</span>}
@@ -209,7 +209,7 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                   </button>
                 </div>
 
-                {/* Card Title (Metallic Silver Gradient Title, Badge Removed) */}
+                {/* Card Title (Metallic Silver Gradient Title) */}
                 <div className="space-y-2 pt-2">
                   <h3 className="font-display text-lg sm:text-xl font-extrabold leading-tight bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
                     {card.name}
