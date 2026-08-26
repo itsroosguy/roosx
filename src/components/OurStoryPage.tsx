@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Shield, Sparkles, Flame, Scale, Users, Target, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { KangarooMascot } from './mascot/KangarooMascot';
@@ -87,15 +87,33 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   onNavigateWorks,
 }) => {
   const [activePillar, setActivePillar] = useState<number>(1);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  // MOUSE PARALLAX PHYSICS SPRINGS
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 120 };
+  const smoothMouseX = useSpring(mouseX, springConfig);
+  const smoothMouseY = useSpring(mouseY, springConfig);
+
+  // 3D TILT MAPS
+  const rotateX = useTransform(smoothMouseY, [-400, 400], [6, -6]);
+  const rotateY = useTransform(smoothMouseX, [-600, 600], [-8, 8]);
+  const mascotRotate = useTransform(smoothMouseX, [-600, 600], [-12, 12]);
+  const mascotY = useTransform(smoothMouseY, [-400, 400], [-10, 10]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+      const { innerWidth, innerHeight } = window;
+      const offsetX = e.clientX - innerWidth / 2;
+      const offsetY = e.clientY - innerHeight / 2;
+      mouseX.set(offsetX);
+      mouseY.set(offsetY);
     };
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+  }, [mouseX, mouseY]);
 
   const triggerLeapConfetti = () => {
     confetti({
@@ -156,13 +174,13 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       isDarkMode ? 'bg-[#050505] text-[#D4D4D8]' : 'bg-[#FAF9F6] text-[#111111]'
     }`}>
       
-      {/* 1. CURSOR-FOLLOWING AMBIENT GLOW SPOTLIGHT */}
-      <div
+      {/* 1. DYNAMIC MOUSE-FOLLOWING AMBIENT GLOW LIGHTING ORB */}
+      <motion.div
         style={{
-          left: `${mousePos.x}px`,
-          top: `${mousePos.y}px`,
+          x: smoothMouseX,
+          y: smoothMouseY,
         }}
-        className="fixed w-[750px] h-[750px] rounded-full bg-radial from-[#FF6B00]/14 via-[#FF6B00]/3 to-transparent blur-[160px] pointer-events-none -translate-x-1/2 -translate-y-1/2 z-0 transition-opacity duration-500"
+        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[850px] h-[850px] rounded-full bg-radial from-[#FF7A1A]/16 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none z-0 transition-opacity duration-500"
       />
 
       {/* 2. BACKGROUND ARCHITECTURAL MESH */}
@@ -175,10 +193,13 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-24">
         
         {/* ========================================================================= */}
-        {/* DD.NYC STYLE KINETIC TEXT REVEAL MANIFESTO SECTION */}
+        {/* DD.NYC STYLE KINETIC TEXT REVEAL MANIFESTO SECTION WITH 3D MOUSE TILT */}
         {/* ========================================================================= */}
         <section className="pt-6 sm:pt-12 space-y-12">
-          <div className="max-w-3xl space-y-8 text-left">
+          <motion.div
+            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+            className="max-w-3xl space-y-8 text-left transition-transform duration-200 ease-out"
+          >
             
             {/* MAIN EDITORIAL STATEMENT WORD-BY-WORD KINETIC REVEAL */}
             <h1 className="font-display text-xl sm:text-3xl md:text-[34px] font-normal leading-[1.5] tracking-[-0.015em]">
@@ -201,9 +222,11 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               />
             </h1>
 
-            {/* RIGHT-ALIGNED SEE OUR WORK CALLOUT LINK */}
+            {/* RIGHT-ALIGNED SEE OUR WORK CALLOUT LINK WITH MAGNETIC HOVER */}
             <div className="flex justify-end pt-2">
               <motion.a
+                whileHover={{ scale: 1.05, x: 5 }}
+                whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 1.2 }}
@@ -271,7 +294,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               <span>ROOS STUDIOX® CREATIVE SERVICES & STORY</span>
               <div className="w-12 h-px bg-[#FF7A1A]" />
             </motion.div>
-          </div>
+          </motion.div>
         </section>
 
         {/* ========================================================================= */}
@@ -279,11 +302,14 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         {/* ========================================================================= */}
         <section className="space-y-16 pt-8 border-t border-zinc-800/80">
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <div className="flex justify-center mb-2">
+            <motion.div
+              style={{ rotate: mascotRotate, y: mascotY }}
+              className="flex justify-center mb-2 transition-transform duration-200 ease-out"
+            >
               <div className="w-20 h-20 flex items-center justify-center filter drop-shadow-[0_10px_25px_rgba(255,107,0,0.3)]">
                 <KangarooMascot />
               </div>
-            </div>
+            </motion.div>
 
             <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#FF7A1A]">OUR GUIDING PHILOSOPHY</span>
             <h2 className={`font-display text-3xl sm:text-5xl font-black ${
@@ -310,6 +336,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-50px' }}
                     transition={{ duration: 0.6, delay: idx * 0.08 }}
+                    whileHover={{ scale: 1.02 }}
                     onClick={() => setActivePillar(idx + 1)}
                     className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 cursor-pointer group ${
                       isEven ? 'md:flex-row' : 'md:flex-row-reverse'
@@ -386,7 +413,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 triggerLeapConfetti();
                 onOpenInquiry();
               }}
-              className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF7A1A] text-white font-mono font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#FF8833] transition-all shadow-[0_15px_40px_rgba(255,122,26,0.45)] cursor-pointer flex items-center justify-center gap-3 group"
+              className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF7A1A] text-white font-mono font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#FF8833] transition-all shadow-[0_15px_40px_rgba(255,122,26,0.45)] cursor-pointer flex items-center justify-center gap-3 group hover:scale-105 active:scale-95"
             >
               <span>Take Your Next Leap</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -394,7 +421,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
 
             <button
               onClick={onNavigateHome}
-              className={`w-full sm:w-auto px-8 py-5 rounded-full font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer ${
+              className={`w-full sm:w-auto px-8 py-5 rounded-full font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer hover:scale-105 active:scale-95 ${
                 isDarkMode
                   ? 'bg-[#121215] border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700'
                   : 'bg-white border border-zinc-300 text-zinc-700 hover:text-black hover:border-zinc-400'
