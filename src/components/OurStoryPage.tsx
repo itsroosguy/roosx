@@ -115,12 +115,12 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   const rotateX = useTransform(smoothMouseY, [-400, 400], [3, -3]);
   const rotateY = useTransform(smoothMouseX, [-600, 600], [-5, 5]);
 
-  // SCROLL-DRIVEN HERO TEXT SCALE DOWN MAP (STARTS HUGE FILLING PAGE, SHRINKS TO 1.0 ON SCROLL)
-  const rawLeadScale = useTransform(scrollYProgress, [0, 0.22], [1.32, 1]);
-  const leadScale = useSpring(rawLeadScale, { stiffness: 140, damping: 25 });
+  // SCROLL-DRIVEN HERO TEXT ZOOM OUT MAP (FILLS 100% SCREEN ON OPEN, ZOOMS OUT ON SCROLL)
+  const rawLeadScale = useTransform(scrollYProgress, [0, 0.35], [1.85, 1]);
+  const leadScale = useSpring(rawLeadScale, { stiffness: 90, damping: 22 });
 
-  const rawLeadY = useTransform(scrollYProgress, [0, 0.22], [30, 0]);
-  const leadY = useSpring(rawLeadY, { stiffness: 140, damping: 25 });
+  const rawLeadY = useTransform(scrollYProgress, [0, 0.35], [70, 0]);
+  const leadY = useSpring(rawLeadY, { stiffness: 90, damping: 22 });
 
   // BOUNCE SLIDE MAPS FOR BOTTOM RIGHT LABEL ON FULL REVEAL
   const labelX = useTransform(scrollYProgress, [0.8, 0.98], [120, 0]);
@@ -214,16 +214,16 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         {/* ========================================================================= */}
         {/* DD.NYC STYLE SCROLL-DRIVEN TEXT REVEAL MANIFESTO SECTION */}
         {/* ========================================================================= */}
-        <section ref={manifestoRef} className="pt-8 sm:pt-12 space-y-8">
+        <section ref={manifestoRef} className="pt-8 sm:pt-12 space-y-10 min-h-[85vh] flex flex-col justify-center">
           <motion.div
             style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-            className="max-w-6xl space-y-8 text-left transition-transform duration-200 ease-out"
+            className="max-w-7xl w-full space-y-10 text-left transition-transform duration-200 ease-out"
           >
             
-            {/* MAIN EDITORIAL LEAD (STARTS FULL PAGE HUGE, SMOOTHLY SHRINKS TO NORMAL ON SCROLL) */}
+            {/* MAIN EDITORIAL LEAD (FULL SCREEN MASSIVE ON OPEN, ZOOMS OUT ON SCROLL) */}
             <motion.h1
               style={{ scale: leadScale, y: leadY, originX: 0, originY: 0 }}
-              className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold sm:font-extrabold leading-[1.18] tracking-[-0.035em] transition-shadow"
+              className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-bold sm:font-extrabold leading-[1.15] tracking-[-0.04em] transition-shadow"
             >
               <ScrollTextBlock
                 text="More than a creative studio, we're a growth partner helping businesses turn bold ideas into brands, experiences and momentum."
