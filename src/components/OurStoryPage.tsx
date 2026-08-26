@@ -115,6 +115,13 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   const rotateX = useTransform(smoothMouseY, [-400, 400], [3, -3]);
   const rotateY = useTransform(smoothMouseX, [-600, 600], [-5, 5]);
 
+  // SCROLL-DRIVEN HERO TEXT SCALE DOWN MAP (STARTS HUGE FILLING PAGE, SHRINKS TO 1.0 ON SCROLL)
+  const rawLeadScale = useTransform(scrollYProgress, [0, 0.22], [1.32, 1]);
+  const leadScale = useSpring(rawLeadScale, { stiffness: 140, damping: 25 });
+
+  const rawLeadY = useTransform(scrollYProgress, [0, 0.22], [30, 0]);
+  const leadY = useSpring(rawLeadY, { stiffness: 140, damping: 25 });
+
   // BOUNCE SLIDE MAPS FOR BOTTOM RIGHT LABEL ON FULL REVEAL
   const labelX = useTransform(scrollYProgress, [0.8, 0.98], [120, 0]);
   const labelOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
@@ -213,8 +220,11 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             className="max-w-6xl space-y-8 text-left transition-transform duration-200 ease-out"
           >
             
-            {/* MAIN EDITORIAL LEAD (ONLY FIRST SENTENCE IS 2X BOLD) */}
-            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold sm:font-extrabold leading-[1.18] tracking-[-0.035em]">
+            {/* MAIN EDITORIAL LEAD (STARTS FULL PAGE HUGE, SMOOTHLY SHRINKS TO NORMAL ON SCROLL) */}
+            <motion.h1
+              style={{ scale: leadScale, y: leadY, originX: 0, originY: 0 }}
+              className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold sm:font-extrabold leading-[1.18] tracking-[-0.035em] transition-shadow"
+            >
               <ScrollTextBlock
                 text="More than a creative studio, we're a growth partner helping businesses turn bold ideas into brands, experiences and momentum."
                 progress={scrollYProgress}
@@ -224,7 +234,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 highlightWords={['growth', 'partner', 'momentum']}
                 fontWeightClassName="font-bold sm:font-extrabold"
               />
-            </h1>
+            </motion.h1>
 
             {/* SECONDARY STATEMENT (OLD NORMAL SIZE) */}
             <p className="font-display text-xl sm:text-2xl md:text-[30px] font-normal leading-[1.5] tracking-[-0.015em] pt-2">
