@@ -224,7 +224,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             className="max-w-7xl w-full space-y-10 text-left transition-transform duration-200 ease-out"
           >
             
-            {/* MAIN EDITORIAL LEAD (+30% WIDER SECTION & EXACT LINE BREAKS) */}
+            {/* MAIN EDITORIAL LEAD (+30% WIDER SECTION & 4 EXACT LINE BREAKS) */}
             <motion.h1
               style={{ scale: leadScale, y: leadY, originX: 0, originY: 0 }}
               className="w-full lg:w-[130%] max-w-[1450px] font-display text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-bold sm:font-extrabold leading-[1.15] tracking-[-0.04em] transition-shadow"
@@ -233,19 +233,29 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 text="More than a creative studio,"
                 progress={scrollYProgress}
                 startProgress={0.05}
-                endProgress={0.12}
+                endProgress={0.10}
                 isDarkMode={isDarkMode}
                 highlightWords={[]}
                 fontWeightClassName="font-bold sm:font-extrabold"
               />
               <br />
               <ScrollTextBlock
-                text="we're a growth partner helping businesses turn bold ideas into"
+                text="we're a growth partner helping"
                 progress={scrollYProgress}
-                startProgress={0.12}
-                endProgress={0.22}
+                startProgress={0.10}
+                endProgress={0.16}
                 isDarkMode={isDarkMode}
                 highlightWords={['growth', 'partner']}
+                fontWeightClassName="font-bold sm:font-extrabold"
+              />
+              <br />
+              <ScrollTextBlock
+                text="businesses turn bold ideas into"
+                progress={scrollYProgress}
+                startProgress={0.16}
+                endProgress={0.22}
+                isDarkMode={isDarkMode}
+                highlightWords={[]}
                 fontWeightClassName="font-bold sm:font-extrabold"
               />
               <br />
