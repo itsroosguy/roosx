@@ -224,18 +224,38 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             className="max-w-7xl w-full space-y-10 text-left transition-transform duration-200 ease-out"
           >
             
-            {/* MAIN EDITORIAL LEAD (FULL SCREEN MASSIVE ON OPEN, ZOOMS OUT ON SCROLL) */}
+            {/* MAIN EDITORIAL LEAD (WITH EXPLICIT LINE BREAKS) */}
             <motion.h1
               style={{ scale: leadScale, y: leadY, originX: 0, originY: 0 }}
               className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-bold sm:font-extrabold leading-[1.15] tracking-[-0.04em] transition-shadow"
             >
               <ScrollTextBlock
-                text="More than a creative studio, we're a growth partner helping businesses turn bold ideas into brands, experiences and momentum."
+                text="More than a creative studio,"
                 progress={scrollYProgress}
                 startProgress={0.05}
-                endProgress={0.25}
+                endProgress={0.12}
                 isDarkMode={isDarkMode}
-                highlightWords={['growth', 'partner', 'momentum']}
+                highlightWords={[]}
+                fontWeightClassName="font-bold sm:font-extrabold"
+              />
+              <br />
+              <ScrollTextBlock
+                text="we're a growth partner helping businesses"
+                progress={scrollYProgress}
+                startProgress={0.12}
+                endProgress={0.20}
+                isDarkMode={isDarkMode}
+                highlightWords={['growth', 'partner']}
+                fontWeightClassName="font-bold sm:font-extrabold"
+              />
+              <br />
+              <ScrollTextBlock
+                text="turn bold ideas into brands, experiences and momentum."
+                progress={scrollYProgress}
+                startProgress={0.20}
+                endProgress={0.28}
+                isDarkMode={isDarkMode}
+                highlightWords={['momentum']}
                 fontWeightClassName="font-bold sm:font-extrabold"
               />
             </motion.h1>
