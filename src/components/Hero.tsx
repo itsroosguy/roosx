@@ -212,6 +212,42 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
 
         </div>
 
+        {/* HIGH-IMPACT MINIMALIST GROWTH METRICS BAR */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className={`w-full max-w-[1180px] mx-auto mt-10 pt-6 border-t flex flex-wrap items-center justify-around gap-4 text-center transition-colors duration-500 ${
+            isDarkMode ? 'border-zinc-800/80 text-zinc-300' : 'border-zinc-200 text-zinc-700'
+          }`}
+        >
+          <div className="space-y-0.5">
+            <span className="font-display text-xl sm:text-2xl font-black text-[#FF7A1A]">₹50Cr+</span>
+            <p className="text-[11px] font-sans font-semibold uppercase tracking-wider text-zinc-400">Client Revenue Impact</p>
+          </div>
+
+          <div className={`h-8 w-px hidden sm:block ${isDarkMode ? 'bg-zinc-800' : 'bg-zinc-200'}`} />
+
+          <div className="space-y-0.5">
+            <span className="font-display text-xl sm:text-2xl font-black text-[#FF7A1A]">100/100</span>
+            <p className="text-[11px] font-sans font-semibold uppercase tracking-wider text-zinc-400">Google Speed Benchmark</p>
+          </div>
+
+          <div className={`h-8 w-px hidden sm:block ${isDarkMode ? 'bg-zinc-800' : 'bg-zinc-200'}`} />
+
+          <div className="space-y-0.5">
+            <span className="font-display text-xl sm:text-2xl font-black text-[#FF7A1A]">30+</span>
+            <p className="text-[11px] font-sans font-semibold uppercase tracking-wider text-zinc-400">Brands Transformed</p>
+          </div>
+
+          <div className={`h-8 w-px hidden sm:block ${isDarkMode ? 'bg-zinc-800' : 'bg-zinc-200'}`} />
+
+          <div className="space-y-0.5">
+            <span className="font-display text-xl sm:text-2xl font-black text-[#FF7A1A]">100%</span>
+            <p className="text-[11px] font-sans font-semibold uppercase tracking-wider text-zinc-400">On-Time Sprint Delivery</p>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
