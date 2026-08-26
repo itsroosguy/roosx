@@ -184,16 +184,17 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
           : 'bg-[linear-gradient(to_right,#E4E4E760_1px,transparent_1px),linear-gradient(to_bottom,#E4E4E760_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_40%,#fff_80%,transparent_100%)]'
       }`} />
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
         
         {/* ========================================================================= */}
-        {/* SECTION 1: PRIMARY EDITORIAL STATEMENT WITH RIGHT-ALIGNED LINK */}
+        {/* DD.NYC STYLE KINETIC TEXT REVEAL MANIFESTO SECTION */}
         {/* ========================================================================= */}
-        <section className="pt-4 sm:pt-6">
+        <section className="pt-4 sm:pt-6 space-y-8">
           <motion.div
             style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-            className="space-y-6 text-left transition-transform duration-200 ease-out"
+            className="max-w-3xl space-y-6 text-left transition-transform duration-200 ease-out"
           >
+            
             {/* MAIN EDITORIAL STATEMENT WORD-BY-WORD KINETIC REVEAL */}
             <h1 className="font-display text-xl sm:text-3xl md:text-[34px] font-normal leading-[1.5] tracking-[-0.015em]">
               <KineticTextReveal
@@ -215,8 +216,8 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               />
             </h1>
 
-            {/* RIGHT-ALIGNED SEE OUR WORK CALLOUT LINK (SAFE WITHIN CONTAINER BOUNDS) */}
-            <div className="flex justify-end pr-2 pt-2">
+            {/* RIGHT-ALIGNED SEE OUR WORK CALLOUT LINK */}
+            <div className="flex justify-end pt-1">
               <motion.a
                 whileHover={{ scale: 1.05, x: 4 }}
                 whileTap={{ scale: 0.95 }}
@@ -229,39 +230,20 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                   if (onNavigateWorks) onNavigateWorks();
                   else window.location.hash = '#works';
                 }}
-                className="text-[#FF7A1A] font-semibold text-base sm:text-lg hover:underline inline-flex items-center gap-2 cursor-pointer transition-colors group px-3 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30"
+                className="text-[#FF7A1A] font-semibold text-base sm:text-lg hover:underline inline-flex items-center gap-2 cursor-pointer transition-colors group"
               >
                 <span>See our work</span>
-                <ArrowRight className="w-4 h-4 inline group-hover:translate-x-1.5 transition-transform" />
+                <ArrowRight className="w-5 h-5 inline group-hover:translate-x-1.5 transition-transform" />
               </motion.a>
             </div>
-          </motion.div>
-        </section>
 
-        {/* ========================================================================= */}
-        {/* SECTION 2: DISTINCT SECONDARY NARRATIVE CARD SECTION */}
-        {/* ========================================================================= */}
-        <section className="pt-2">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className={`p-6 sm:p-10 rounded-3xl border space-y-6 relative overflow-hidden backdrop-blur-xl shadow-xl ${
-              isDarkMode
-                ? 'bg-[#0A0A0D]/90 border-zinc-800/80'
-                : 'bg-white/90 border-zinc-200 shadow-md'
-            }`}
-          >
-            <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent opacity-60" />
-
-            {/* 2-COLUMN PARAGRAPHS */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
               <motion.p
                 initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
                 whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
                 className={`text-sm sm:text-base font-normal leading-relaxed ${
                   isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
                 }`}
@@ -273,7 +255,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
                 whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
                 className={`text-sm sm:text-base font-normal leading-relaxed ${
                   isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
                 }`}
@@ -282,30 +264,34 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               </motion.p>
             </div>
 
-            {/* CLOSING PARAGRAPH */}
+            {/* PARAGRAPH 5 CLOSING STATEMENT */}
             <motion.p
               initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
               whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className={`text-base sm:text-lg font-medium leading-relaxed pt-2 border-t ${
-                isDarkMode ? 'text-zinc-200 border-zinc-800/80' : 'text-zinc-800 border-zinc-200'
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className={`text-base sm:text-lg font-medium leading-relaxed max-w-3xl pt-1 ${
+                isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
               }`}
             >
               At Roos StudioX, we don't chase trends or build for short-term attention. We create brands, experiences, and growth engines designed to help businesses move forward with confidence and take meaningful leaps toward their goals.
             </motion.p>
 
-            {/* DD.NYC STYLE SIGNATURE LABEL RIGHT ALIGNED INSIDE CARD */}
-            <div className="flex justify-end pt-2">
-              <span className="text-[11px] font-mono tracking-widest text-[#FF7A1A] uppercase font-semibold">
-                ROOS STUDIOX® CREATIVE SERVICES & STORY
-              </span>
-            </div>
+            {/* DD.NYC STYLE SIGNATURE LABEL RIGHT ALIGNED */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="flex items-center justify-end pt-4 text-xs font-mono tracking-widest text-zinc-500 uppercase"
+            >
+              <span>ROOS STUDIOX® CREATIVE SERVICES & STORY</span>
+            </motion.div>
           </motion.div>
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 3: THE 6 KANGAROO PHILOSOPHY PILLARS */}
+        {/* THE 6 KANGAROO PHILOSOPHY PILLARS */}
         {/* ========================================================================= */}
         <section className="space-y-8 pt-4 border-t border-zinc-800/60">
           <div className="text-center max-w-3xl mx-auto space-y-2">
@@ -385,7 +371,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* SECTION 4: FINAL CLOSING MANIFESTO & CTA */}
+        {/* FINAL CLOSING MANIFESTO & CTA */}
         {/* ========================================================================= */}
         <section className="py-8 text-center space-y-6 relative">
           <div className="w-3/4 h-0.5 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent mx-auto opacity-60" />
