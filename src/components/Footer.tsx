@@ -99,7 +99,7 @@ export const Footer: React.FC<FooterProps> = () => {
           {/* BRAND COLUMN (5 COLS) */}
           <div className="md:col-span-5 space-y-6">
             <a href="#" className="inline-block">
-              <Logo isScrolled={true} isDarkMode={true} />
+              <Logo isScrolled={false} isDarkMode={true} />
             </a>
 
             <p className="text-sm sm:text-base leading-relaxed text-zinc-300 font-medium max-w-md">
