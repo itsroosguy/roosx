@@ -176,7 +176,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   ];
 
   return (
-    <div className={`min-h-screen relative overflow-hidden font-sans pt-28 pb-20 transition-colors duration-500 selection:bg-[#FF7A1A] selection:text-white ${
+    <div className={`min-h-screen relative overflow-hidden font-sans pt-36 sm:pt-44 pb-20 transition-colors duration-500 selection:bg-[#FF7A1A] selection:text-white ${
       isDarkMode ? 'bg-[#050505] text-[#D4D4D8]' : 'bg-[#FAF9F6] text-[#111111]'
     }`}>
       
@@ -201,7 +201,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         {/* ========================================================================= */}
         {/* DD.NYC STYLE SCROLL-DRIVEN TEXT REVEAL MANIFESTO SECTION */}
         {/* ========================================================================= */}
-        <section ref={manifestoRef} className="pt-4 sm:pt-6 space-y-8">
+        <section ref={manifestoRef} className="pt-8 sm:pt-12 space-y-8">
           <motion.div
             style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
             className="max-w-3xl space-y-6 text-left transition-transform duration-200 ease-out"
