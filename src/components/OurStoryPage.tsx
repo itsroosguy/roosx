@@ -262,14 +262,14 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
 
             {/* DD.NYC STYLE BOTTOM ACCENT LINE & CATEGORY LABEL */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex items-center gap-4 pt-8 text-xs font-mono tracking-widest text-zinc-500 uppercase"
+              className="flex items-center justify-end gap-4 pt-8 text-xs font-mono tracking-widest text-zinc-500 uppercase"
             >
-              <div className="w-12 h-px bg-[#FF7A1A]" />
               <span>ROOS STUDIOX® CREATIVE SERVICES & STORY</span>
+              <div className="w-12 h-px bg-[#FF7A1A]" />
             </motion.div>
           </div>
         </section>
