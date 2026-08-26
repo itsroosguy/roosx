@@ -15,26 +15,30 @@ import { ProjectModal } from './components/ProjectModal';
 import { ProjectInquiryModal } from './components/ProjectInquiryModal';
 import { OurStoryPage } from './components/OurStoryPage';
 import { ServicePage } from './components/ServicePage';
+import { WorksPage } from './components/WorksPage';
 import { Project } from './types';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'our-story' | 'services'>(() => {
+  const [currentView, setCurrentView] = useState<'home' | 'our-story' | 'services' | 'works'>(() => {
     const hash = window.location.hash;
-    if (hash === '#our-story' || hash === '#story') return 'our-story';
+    if (hash === '#our-story' || hash === '#story' || hash === '#about') return 'our-story';
     if (hash === '#services') return 'services';
+    if (hash === '#works' || hash === '#portfolio') return 'works';
     return 'home';
   });
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash;
-      if (hash === '#our-story' || hash === '#story') {
+      if (hash === '#our-story' || hash === '#story' || hash === '#about') {
         setCurrentView('our-story');
       } else if (hash === '#services') {
         setCurrentView('services');
+      } else if (hash === '#works' || hash === '#portfolio') {
+        setCurrentView('works');
       } else {
         setCurrentView('home');
       }
@@ -71,6 +75,11 @@ export function App() {
           setCurrentView('services');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onNavigateWorks={() => {
+          window.location.hash = '#works';
+          setCurrentView('works');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         onNavigateHome={() => {
           window.location.hash = '';
           setCurrentView('home');
@@ -91,6 +100,17 @@ export function App() {
         />
       ) : currentView === 'services' ? (
         <ServicePage
+          onOpenInquiry={() => setIsInquiryOpen(true)}
+          isDarkMode={isDarkMode}
+          onNavigateHome={() => {
+            window.location.hash = '';
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      ) : currentView === 'works' ? (
+        <WorksPage
+          onSelectProject={(project) => setSelectedProject(project)}
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}
           onNavigateHome={() => {
