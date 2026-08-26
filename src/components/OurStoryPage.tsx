@@ -12,6 +12,7 @@ interface OurStoryPageProps {
 
 export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   onOpenInquiry,
+  isDarkMode = true,
   onNavigateHome,
 }) => {
   const [activePillar, setActivePillar] = useState<number>(1);
@@ -54,39 +55,41 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
     {
       num: '03',
       title: 'Built to Leap 30 Feet.',
-      description: 'A kangaroo can leap up to 30 feet in one bound — that\'s 4x to 8x more progress in a single move. We create strategies and systems that deliver the kind of growth that multiplies your brand\'s impact.',
-      tag: 'MULTIPLIED GROWTH',
+      description: 'A kangaroo doesn\'t take small steps. It leaps. We don\'t design for marginal gains — we build for exponential leaps in growth, authority and customer acquisition.',
+      tag: 'EXPONENTIAL GROWTH',
       icon: Flame,
       side: 'left',
     },
     {
       num: '04',
       title: 'Balance That Drives Growth.',
-      description: 'The tail keeps a kangaroo balanced and in control. We bring balance to your brand — aligning creativity, technology and marketing so every move is stable, smart and sustainable.',
-      tag: 'STABLE & SUSTAINABLE',
+      description: 'The kangaroo uses its tail for balance while moving at high speeds. We maintain the balance between bold creative design and strategic business goals.',
+      tag: 'BALANCED STRATEGY',
       icon: Scale,
       side: 'right',
     },
     {
       num: '05',
       title: 'Stronger Together.',
-      description: 'Kangaroos move in mobs, looking out for each other. We work as an extension of your team — collaborating, challenging and supporting you at every stage of your growth journey.',
-      tag: 'TEAM MOB COLLABORATION',
+      description: 'Kangaroos travel in a mob for strength, protection and speed. We operate as an extension of your team — aligning vision, effort and execution.',
+      tag: 'DEEP COLLABORATION',
       icon: Users,
       side: 'left',
     },
     {
       num: '06',
       title: 'Always Looking Ahead.',
-      description: 'Kangaroos are always alert and aware of what\'s ahead. We stay ahead of trends, technology and market shifts — so your brand is always future-ready.',
-      tag: 'FUTURE READY',
+      description: 'A kangaroo cannot walk backwards. It only moves forward. We build with future-proof tech and scalable strategy so your business is always moving forward.',
+      tag: 'FORWARD MOTION',
       icon: Target,
       side: 'right',
     },
   ];
 
   return (
-    <div className="bg-[#050505] text-white min-h-screen relative overflow-hidden font-sans selection:bg-[#FF6B00] selection:text-white pt-28 pb-24">
+    <div className={`min-h-screen relative overflow-hidden font-sans pt-28 pb-24 transition-colors duration-500 selection:bg-[#FF6B00] selection:text-white ${
+      isDarkMode ? 'bg-[#050505] text-[#D4D4D8]' : 'bg-[#FAF9F6] text-[#111111]'
+    }`}>
       
       {/* 1. CURSOR-FOLLOWING AMBIENT GLOW SPOTLIGHT */}
       <div
@@ -106,7 +109,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
         {/* ========================================================================= */}
-        {/* HEADER SECTION WITH FLOATING SLIGHTLY BIGGER KANGAROO MASCOT */}
+        {/* HEADER SECTION WITH FLOATING KANGAROO MASCOT */}
         {/* ========================================================================= */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -122,134 +125,115 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
           </div>
 
           {/* MAIN TITLE */}
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] text-white">
+          <h1 className={`font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] ${
+            isDarkMode ? 'text-white' : 'text-[#111111]'
+          }`}>
             The 6 Kangaroo <br className="hidden sm:block" />
-            <span className="bg-gradient-to-r from-white via-zinc-100 to-zinc-300 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FF6B00] via-[#FF8F3A] to-amber-500 bg-clip-text text-transparent">
               Philosophy Pillars
             </span>
           </h1>
 
-          {/* SUBTITLE */}
-          <p className="text-base sm:text-xl font-medium text-zinc-400">
-            Inspired by nature. Built for growth.
+          {/* SUBHEADING / MANIFESTO STATEMENT */}
+          <p className={`text-base sm:text-xl font-medium max-w-2xl mx-auto leading-relaxed ${
+            isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+          }`}>
+            Inspired by nature. Built for growth. Discover the core values that guide how we build brands, websites, and business momentum.
           </p>
         </motion.div>
 
         {/* ========================================================================= */}
-        {/* FLAWLESS ALTERNATING S-CURVE TIMELINE (ZERO OVERLAP, PERFECT FLOW) */}
+        {/* UNBOXED ALTERNATING S-CURVE TIMELINE DISPLAY */}
         {/* ========================================================================= */}
         <div className="relative py-8">
           
-          {/* CENTRAL GLOWING ROAD LINE (DESKTOP & MOBILE) */}
-          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-1 bg-gradient-to-b from-[#FF6B00]/20 via-[#FF6B00]/70 to-[#FF6B00]/20 pointer-events-none z-0 hidden md:block">
-            <div className="absolute inset-0 bg-[#FF6B00] blur-[4px] opacity-60" />
-          </div>
+          {/* CENTRAL S-CURVE TIMELINE GUIDELINE */}
+          <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-0.5 bg-gradient-to-b from-transparent via-[#FF6B00]/40 to-transparent pointer-events-none hidden md:block" />
 
-          {/* 6 UNBOXED PILLAR NODES IN PERFECT ALTERNATING SEQUENCE */}
-          <div className="space-y-16 md:space-y-24 relative z-10">
-            {pillars.map((pil, idx) => {
-              const pNum = idx + 1;
-              const isActive = activePillar === pNum;
-              const IconComp = pil.icon;
-              const isLeft = pil.side === 'left';
-
+          <div className="space-y-16 sm:space-y-24">
+            {pillars.map((pillar, idx) => {
+              const isEven = idx % 2 === 0;
+              const IconComponent = pillar.icon;
               return (
                 <motion.div
-                  key={idx}
+                  key={pillar.num}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-50px' }}
                   transition={{ duration: 0.6, delay: idx * 0.08 }}
-                  onMouseEnter={() => setActivePillar(pNum)}
-                  onClick={() => setActivePillar(pNum)}
-                  className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 cursor-pointer ${
-                    isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
+                  onClick={() => setActivePillar(idx + 1)}
+                  className={`flex flex-col md:flex-row items-center gap-8 md:gap-16 cursor-pointer group ${
+                    isEven ? 'md:flex-row' : 'md:flex-row-reverse'
                   }`}
                 >
-                  {/* TEXT CONTENT COLUMN */}
-                  <div className={`w-full md:w-1/2 space-y-3 ${isLeft ? 'md:text-right' : 'md:text-left'}`}>
-                    {/* NODE NUMBER & CAPSULE */}
-                    <div className={`flex items-center gap-3 ${isLeft ? 'md:justify-end' : 'md:justify-start'}`}>
-                      <span className="font-mono text-3xl sm:text-4xl font-black text-[#FF6B00]">
-                        {pil.num}
-                      </span>
-                      <span
-                        className={`inline-block px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider ${
-                          isActive
-                            ? 'bg-[#FF6B00]/20 text-[#FF6B00] border border-[#FF6B00]/60'
-                            : 'bg-[#121215] text-zinc-400 border border-zinc-800'
-                        }`}
-                      >
-                        {pil.tag}
+                  {/* TEXT COLUMN */}
+                  <div className={`w-full md:w-1/2 space-y-3 ${
+                    isEven ? 'md:text-right md:pr-4' : 'md:text-left md:pl-4'
+                  }`}>
+                    <div className={`flex items-center gap-3 ${
+                      isEven ? 'md:justify-end' : 'md:justify-start'
+                    }`}>
+                      <span className="font-mono text-xl font-black text-[#FF6B00]">{pillar.num}</span>
+                      <span className="px-3 py-1 rounded-full bg-[#FF6B00]/15 text-[#FF6B00] font-mono text-[10px] font-bold border border-[#FF6B00]/30 uppercase tracking-wider">
+                        {pillar.tag}
                       </span>
                     </div>
 
-                    {/* TITLE */}
-                    <h3 className="font-display text-2xl sm:text-3xl font-black text-white leading-tight">
-                      {pil.title}
+                    <h3 className={`font-display text-2xl sm:text-3xl font-black transition-colors ${
+                      isDarkMode ? 'text-white group-hover:text-[#FF6B00]' : 'text-[#111111] group-hover:text-[#FF6B00]'
+                    }`}>
+                      {pillar.title}
                     </h3>
 
-                    {/* DESCRIPTION */}
-                    <p className="text-sm sm:text-base text-zinc-300 font-medium leading-relaxed max-w-lg">
-                      {pil.description}
+                    <p className={`text-sm sm:text-base font-medium leading-relaxed max-w-lg ${
+                      isEven ? 'md:ml-auto' : 'md:mr-auto'
+                    } ${isDarkMode ? 'text-zinc-300' : 'text-zinc-600'}`}>
+                      {pillar.description}
                     </p>
                   </div>
 
-                  {/* CENTRAL CIRCULAR GLOWING NODE ICON */}
-                  <div className="relative shrink-0 z-20 my-2 md:my-0">
-                    <div
-                      className={`w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 ${
-                        isActive
-                          ? 'bg-[#FF6B00] text-white shadow-[0_0_40px_#FF6B00] scale-110'
-                          : 'bg-[#121215] text-[#FF6B00] border border-[#FF6B00]/50 shadow-md'
-                      }`}
-                    >
-                      <IconComp className="w-6 h-6" />
+                  {/* CENTER FLOATING MASCOT / ICON NODE (NO RECTANGLE BOX) */}
+                  <div className="relative flex items-center justify-center shrink-0 z-10">
+                    <div className={`w-14 h-14 rounded-full border-2 flex items-center justify-center transition-all duration-500 ${
+                      activePillar === idx + 1
+                        ? 'bg-[#FF6B00] border-[#FF6B00] text-white shadow-[0_0_30px_rgba(255,107,0,0.6)] scale-110'
+                        : isDarkMode
+                          ? 'bg-[#0A0A0C] border-zinc-800 text-zinc-400 group-hover:border-[#FF6B00]/60 group-hover:text-white'
+                          : 'bg-white border-zinc-300 text-zinc-600 group-hover:border-[#FF6B00]/60 group-hover:text-[#111111]'
+                    }`}>
+                      <IconComponent className="w-6 h-6" />
                     </div>
                   </div>
 
-                  {/* EMPTY BALANCING COLUMN FOR PERFECT GRID S-CURVE ALIGNMENT */}
+                  {/* BALANCING SPACE FOR ALTERNATING LAYOUT */}
                   <div className="hidden md:block w-1/2" />
                 </motion.div>
               );
             })}
           </div>
-
-          {/* NEXT LEAP WAYPOINT MILESTONE (BOTTOM CENTER) */}
-          <div className="pt-20 flex justify-center">
-            <motion.div
-              animate={{ scale: [1, 1.06, 1] }}
-              transition={{ duration: 2.5, repeat: Infinity }}
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#FF6B00] text-white font-mono text-xs font-black uppercase tracking-widest shadow-[0_0_40px_rgba(255,107,0,0.6)] border border-[#FF8F3A]"
-            >
-              <div className="w-3.5 h-3.5 rounded-full bg-white animate-ping" />
-              <span>NEXT LEAP WAYPOINT</span>
-            </motion.div>
-          </div>
-
         </div>
 
         {/* ========================================================================= */}
-        {/* BOTTOM STATEMENT NARRATIVE (UNBOXED OPEN ATMOSPHERIC FEEL) */}
+        {/* FINAL CLOSING MANIFESTO & CTA */}
         {/* ========================================================================= */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="py-12 text-center space-y-4 relative overflow-hidden"
-        >
-          <div className="w-3/4 h-0.5 bg-gradient-to-r from-transparent via-[#FF6B00] to-transparent mx-auto mb-6 opacity-60" />
+        <section className="py-12 text-center space-y-8 relative">
+          <div className="w-3/4 h-0.5 bg-gradient-to-r from-transparent via-[#FF6B00] to-transparent mx-auto opacity-60" />
 
-          <p className="text-base sm:text-xl font-medium text-zinc-300">
-            At Roos StudioX, we don't just build brands.
-          </p>
+          <div className="space-y-4 max-w-3xl mx-auto">
+            <span className="text-xs font-mono font-bold uppercase tracking-widest text-[#FF6B00]">READY FOR YOUR NEXT LEAP?</span>
+            <h2 className={`font-display text-3xl sm:text-5xl font-black ${
+              isDarkMode ? 'text-white' : 'text-[#111111]'
+            }`}>
+              At Roos StudioX, we don't just build brands.
+            </h2>
+            <p className={`text-base sm:text-xl font-medium max-w-2xl mx-auto leading-relaxed ${
+              isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+            }`}>
+              We build the strength, momentum and confidence to help your business take its next great leap.
+            </p>
+          </div>
 
-          <h2 className="font-display text-2xl sm:text-4xl md:text-5xl font-black text-[#FF6B00] leading-snug max-w-4xl mx-auto">
-            We build the strength, momentum and confidence to help your business take its next great leap.
-          </h2>
-
-          <div className="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => {
                 triggerLeapConfetti();
@@ -257,18 +241,22 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               }}
               className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF6B00] text-white font-mono font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#FF8833] transition-all shadow-[0_15px_40px_rgba(255,107,0,0.45)] cursor-pointer flex items-center justify-center gap-3 group"
             >
-              <span>Book Your Free Growth Audit</span>
+              <span>Take Your Next Leap</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
               onClick={onNavigateHome}
-              className="w-full sm:w-auto px-8 py-5 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-mono font-bold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer"
+              className={`w-full sm:w-auto px-8 py-5 rounded-full font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer ${
+                isDarkMode
+                  ? 'bg-[#121215] border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700'
+                  : 'bg-white border border-zinc-300 text-zinc-700 hover:text-black hover:border-zinc-400'
+              }`}
             >
-              Back to Home
+              Back to Overview
             </button>
           </div>
-        </motion.div>
+        </section>
 
       </div>
     </div>

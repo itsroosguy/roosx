@@ -11,6 +11,7 @@ interface ServicePageProps {
 
 export const ServicePage: React.FC<ServicePageProps> = ({
   onOpenInquiry,
+  isDarkMode = true,
   onNavigateHome,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -164,7 +165,9 @@ export const ServicePage: React.FC<ServicePageProps> = ({
   return (
     <div
       ref={containerRef}
-      className="bg-[#050505] text-[#D4D4D8] min-h-screen relative overflow-hidden font-sans pt-28 pb-24 selection:bg-[#FF7A1A] selection:text-white"
+      className={`min-h-screen relative overflow-hidden font-sans pt-28 pb-24 transition-colors duration-500 selection:bg-[#FF7A1A] selection:text-white ${
+        isDarkMode ? 'bg-[#050505] text-[#D4D4D8]' : 'bg-[#FAF9F6] text-[#111111]'
+      }`}
     >
       {/* BACKGROUND ATMOSPHERIC LIGHTING */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none -z-10" />
@@ -183,14 +186,18 @@ export const ServicePage: React.FC<ServicePageProps> = ({
             <span>ROOS STUDIOX • DIGITAL GROWTH & MARKETING SERVICES</span>
           </div>
 
-          <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight text-white leading-[1.08]">
+          <h1 className={`font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] ${
+            isDarkMode ? 'text-white' : 'text-[#111111]'
+          }`}>
             We Help Ambitious Businesses Build Strong Brands & <br className="hidden sm:block" />
-            <span className="bg-gradient-to-r from-white via-zinc-200 to-[#FF7A1A] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF8833] to-amber-500 bg-clip-text text-transparent">
               Drive Real Growth.
             </span>
           </h1>
 
-          <p className="text-base sm:text-xl font-medium text-zinc-300 max-w-2xl mx-auto leading-relaxed">
+          <p className={`text-base sm:text-xl font-medium max-w-2xl mx-auto leading-relaxed ${
+            isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+          }`}>
             From brand strategy and high-converting websites to digital marketing and workflow automation, we deliver end-to-end solutions that help your business scale.
           </p>
 
