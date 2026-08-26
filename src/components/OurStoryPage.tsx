@@ -240,19 +240,19 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               />
               <br />
               <ScrollTextBlock
-                text="we're a growth partner helping businesses"
+                text="we're a growth partner helping businesses turn bold ideas into brands,"
                 progress={scrollYProgress}
                 startProgress={0.12}
-                endProgress={0.20}
+                endProgress={0.22}
                 isDarkMode={isDarkMode}
                 highlightWords={['growth', 'partner']}
                 fontWeightClassName="font-bold sm:font-extrabold"
               />
               <br />
               <ScrollTextBlock
-                text="turn bold ideas into brands, experiences and momentum."
+                text="experiences and momentum."
                 progress={scrollYProgress}
-                startProgress={0.20}
+                startProgress={0.22}
                 endProgress={0.28}
                 isDarkMode={isDarkMode}
                 highlightWords={['momentum']}
