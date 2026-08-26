@@ -11,17 +11,18 @@ export const DoctorStrangePortalMascot: React.FC<DoctorStrangePortalMascotProps>
 }) => {
   const baseUrl = (import.meta as any).env?.BASE_URL || '/';
   const kangarooImg = `${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}kangaroo_portal.png`;
-  // MOUSE PARALLAX TILT PHYSICS
+
+  // REALISTIC 3D STUDIO PARALLAX TILT PHYSICS
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
-  const springConfig = { damping: 20, stiffness: 100 };
+  const springConfig = { damping: 25, stiffness: 120 };
   const smoothMouseX = useSpring(mouseX, springConfig);
   const smoothMouseY = useSpring(mouseY, springConfig);
 
-  const rotateX = useTransform(smoothMouseY, [-300, 300], [8, -8]);
-  const rotateY = useTransform(smoothMouseX, [-300, 300], [-10, 10]);
-  const portalScale = useTransform(smoothMouseX, [-300, 300], [0.98, 1.02]);
+  const rotateX = useTransform(smoothMouseY, [-300, 300], [5, -5]);
+  const rotateY = useTransform(smoothMouseX, [-300, 300], [-7, 7]);
+  const lightShiftX = useTransform(smoothMouseX, [-300, 300], [-30, 30]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -40,142 +41,46 @@ export const DoctorStrangePortalMascot: React.FC<DoctorStrangePortalMascotProps>
     <div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative flex items-center justify-center py-6 select-none perspective-1000 ${className}`}
+      className={`relative flex items-center justify-center py-10 select-none perspective-1000 ${className}`}
     >
       <motion.div
-        style={{ rotateX, rotateY, scale: portalScale }}
-        className="relative flex items-center justify-center transition-transform duration-100 ease-out"
+        style={{ rotateX, rotateY }}
+        className="relative flex items-center justify-center transition-transform duration-150 ease-out"
       >
         {/* ========================================================================= */}
-        {/* DOCTOR STRANGE SLING RING PORTAL BACKGROUND EFFECTS */}
+        {/* PHOTOREALISTIC STUDIO LIGHTING & VOLUMETRIC BACKDROP */}
         {/* ========================================================================= */}
         
-        {/* 1. INTENSE FIERY AMBIENT RADIAL GLOW */}
-        <div className="absolute w-[320px] h-[320px] sm:w-[460px] sm:h-[460px] rounded-full bg-radial from-[#FF7A1A] via-[#FF4500]/60 to-transparent blur-3xl opacity-75 animate-pulse pointer-events-none" />
-        <div className="absolute w-[240px] h-[240px] sm:w-[360px] sm:h-[360px] rounded-full bg-radial from-[#FFD700]/70 via-[#FF6B00]/40 to-transparent blur-2xl opacity-90 pointer-events-none" />
+        {/* 1. SOFT VOLUMETRIC KEY LIGHT BEAM */}
+        <motion.div
+          style={{ x: lightShiftX }}
+          className="absolute -top-12 w-[340px] sm:w-[500px] h-[400px] sm:h-[550px] rounded-full bg-gradient-to-b from-[#FF7A1A]/22 via-[#FF7A1A]/8 to-transparent blur-3xl pointer-events-none opacity-85"
+        />
 
-        {/* 2. ROTATING SLING RING PORTAL SVG RINGS */}
-        <div className="absolute w-[300px] h-[300px] sm:w-[440px] sm:h-[440px] pointer-events-none">
-          {/* Ring 1: Clockwise Outer Fire Ring */}
-          <motion.svg
-            animate={{ rotate: 360 }}
-            transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
-            className="absolute inset-0 w-full h-full filter drop-shadow-[0_0_20px_#FF7A1A]"
-            viewBox="0 0 200 200"
-          >
-            <circle
-              cx="100"
-              cy="100"
-              r="90"
-              fill="none"
-              stroke="#FF7A1A"
-              strokeWidth="3.5"
-              strokeDasharray="18 12 6 12 24 10"
-              strokeLinecap="round"
-            />
-            <circle
-              cx="100"
-              cy="100"
-              r="85"
-              fill="none"
-              stroke="#FFD700"
-              strokeWidth="2"
-              strokeDasharray="8 14 16 10"
-              strokeLinecap="round"
-            />
-          </motion.svg>
+        {/* 2. REALISTIC WARM STUDIO AMBIENT GLOW */}
+        <div className="absolute w-[280px] sm:w-[420px] h-[280px] sm:h-[420px] rounded-full bg-radial from-[#FF7A1A]/15 via-[#FF6B00]/5 to-transparent blur-2xl pointer-events-none" />
 
-          {/* Ring 2: Counter-Clockwise Inner Flame Ring */}
-          <motion.svg
-            animate={{ rotate: -360 }}
-            transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
-            className="absolute inset-0 w-full h-full filter drop-shadow-[0_0_25px_#FF4500]"
-            viewBox="0 0 200 200"
-          >
-            <circle
-              cx="100"
-              cy="100"
-              r="78"
-              fill="none"
-              stroke="#FF4500"
-              strokeWidth="4"
-              strokeDasharray="12 18 30 14"
-              strokeLinecap="round"
-            />
-            <circle
-              cx="100"
-              cy="100"
-              r="72"
-              fill="none"
-              stroke="#FFA500"
-              strokeWidth="2.5"
-              strokeDasharray="20 10 10 10"
-              strokeLinecap="round"
-            />
-          </motion.svg>
-
-          {/* Ring 3: Fast Inner Mystical Core Ring */}
-          <motion.svg
-            animate={{ rotate: 360 }}
-            transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
-            className="absolute inset-0 w-full h-full filter drop-shadow-[0_0_30px_#FFD700]"
-            viewBox="0 0 200 200"
-          >
-            <circle
-              cx="100"
-              cy="100"
-              r="64"
-              fill="none"
-              stroke="#FFF"
-              strokeWidth="3"
-              strokeDasharray="6 14 12 8"
-              strokeLinecap="round"
-            />
-          </motion.svg>
-
-          {/* 3. FLOATING PORTAL SPARK NODES */}
-          {[...Array(12)].map((_, i) => (
-            <motion.div
-              key={i}
-              animate={{
-                rotate: [i * 30, i * 30 + 360],
-                scale: [0.8, 1.3, 0.8],
-                opacity: [0.6, 1, 0.6],
-              }}
-              transition={{
-                rotate: { duration: 8 + (i % 4), repeat: Infinity, ease: 'linear' },
-                scale: { duration: 2 + (i % 3), repeat: Infinity, ease: 'easeInOut' },
-                opacity: { duration: 1.5 + (i % 2), repeat: Infinity, ease: 'easeInOut' },
-              }}
-              className="absolute inset-0 flex items-center justify-center pointer-events-none"
-            >
-              <div
-                style={{
-                  transform: `rotate(${i * 30}deg) translate(145px) rotate(-${i * 30}deg)`,
-                }}
-                className="w-2.5 h-2.5 rounded-full bg-[#FFD700] shadow-[0_0_12px_#FF7A1A]"
-              />
-            </motion.div>
-          ))}
-        </div>
+        {/* 3. GROUNDED REALISTIC FLOOR CONTACT SHADOW */}
+        <div className="absolute -bottom-8 w-[240px] sm:w-[360px] h-[36px] rounded-[100%] bg-black/90 blur-xl pointer-events-none z-0" />
+        <div className="absolute -bottom-6 w-[180px] sm:w-[260px] h-[20px] rounded-[100%] bg-black blur-md pointer-events-none z-0" />
 
         {/* ========================================================================= */}
-        {/* KANGAROO MASCOT CHARACTER IN FRONT OF PORTAL */}
+        {/* KANGAROO MASCOT CHARACTER ON PHOTOREALISTIC STUDIO STAGE */}
         {/* ========================================================================= */}
         <motion.div
-          animate={{ y: [-6, 6, -6] }}
-          transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-          className="relative z-10 filter drop-shadow-[0_15px_45px_rgba(255,122,26,0.6)] hover:drop-shadow-[0_20px_60px_rgba(255,122,26,0.85)] transition-all duration-300"
+          animate={{ y: [-4, 4, -4] }}
+          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+          className="relative z-10 filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.7)] hover:drop-shadow-[0_25px_50px_rgba(255,122,26,0.35)] transition-all duration-300"
         >
           <img
             src={kangarooImg}
-            alt="Roos StudioX Mascot stepping through Doctor Strange Portal"
-            className="w-auto h-[320px] sm:h-[440px] md:h-[500px] object-contain cursor-pointer transition-transform duration-300 hover:scale-105"
+            alt="Roos StudioX Kangaroo Mascot"
+            className="w-auto h-[340px] sm:h-[460px] md:h-[520px] object-contain cursor-pointer transition-transform duration-300 hover:scale-[1.02]"
           />
         </motion.div>
 
-        {/* PORTAL FLOOR LIGHT ELLIPSE */}
-        <div className="absolute -bottom-6 w-[280px] sm:w-[380px] h-[30px] rounded-full bg-radial from-[#FF7A1A]/70 via-[#FF4500]/30 to-transparent blur-xl pointer-events-none z-0" />
+        {/* SOFT WARM RIM REFLECTION ON FLOOR */}
+        <div className="absolute -bottom-10 w-[260px] sm:w-[380px] h-[16px] rounded-full bg-[#FF7A1A]/20 blur-md pointer-events-none z-0" />
 
       </motion.div>
     </div>
