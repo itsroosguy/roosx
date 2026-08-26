@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, MotionValue } from 'framer-motion';
 import { Shield, Sparkles, Flame, Scale, Users, Target, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { MascotOrbitShowcase } from './MascotOrbitShowcase';
 
 interface OurStoryPageProps {
   onOpenInquiry: () => void;
@@ -365,13 +364,6 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             </motion.div>
 
           </motion.div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* MASCOT 5 STRATEGIC ORBIT NODES SHOWCASE */}
-        {/* ========================================================================= */}
-        <section className="py-4 relative">
-          <MascotOrbitShowcase isDarkMode={isDarkMode} />
         </section>
 
         {/* ========================================================================= */}
