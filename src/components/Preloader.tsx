@@ -25,7 +25,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
         setTimeout(() => {
           setIsFinished(true);
           if (onComplete) onComplete();
-        }, 350);
+        }, 300);
       }
     }, INTERVAL_TIME);
 
@@ -35,10 +35,10 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   // Dynamic Phase Text
   const getPhaseText = (p: number) => {
     if (p < 25) return 'INITIALIZING DIGITAL CORE';
-    if (p < 50) return 'SYNCHRONIZING BRAND STRATEGY';
+    if (p < 50) return 'SYNCHRONIZING 3D SPATIAL GRID';
     if (p < 75) return 'BUILDING CREATIVE MOMENTUM';
-    if (p < 95) return 'POLISHING DIGITAL EXPERIENCE';
-    return 'WELCOME TO ROOS STUDIOX';
+    if (p < 92) return 'PREPARING HYPER-WARP ENTER';
+    return 'ENTER 3D STUDIOX';
   };
 
   // SVG Circular Gauge calculations (radius = 95)
@@ -51,34 +51,42 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
   const logoStrokeDashoffset = logoPathLength - (progress / 100) * logoPathLength;
   const logoFillOpacity = progress > 70 ? (progress - 70) / 30 : 0;
 
+  // 16 Radiating 3D Warp Tunnel Speed Lines
+  const warpLines = Array.from({ length: 16 }, (_, i) => i * (360 / 16));
+
   return (
     <AnimatePresence mode="wait">
       {!isFinished && (
         <motion.div
           key="preloaderCurtain"
-          initial={{ opacity: 1 }}
+          initial={{ opacity: 1, scale: 1 }}
           exit={{
             opacity: 0,
-            scale: 1.04,
-            transition: { duration: 0.85, ease: [0.76, 0, 0.24, 1] },
+            scale: 3.6,
+            rotateZ: 6,
+            filter: 'blur(20px)',
+            transition: { duration: 0.95, ease: [0.7, 0, 0.15, 1] },
           }}
-          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050508] text-white select-none overflow-hidden"
+          style={{ transformStyle: 'preserve-3d', perspective: 1200 }}
+          className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#040406] text-white select-none overflow-hidden"
         >
           {/* ========================================================================= */}
-          {/* TOP & BOTTOM CINEMATIC DUAL SHUTTERS (EXIT ANIMATION) */}
+          {/* 3D WARP TUNNEL VELOCITY SPEED LINES (ACCELERATE ON 100%) */}
           {/* ========================================================================= */}
-          
-          {/* Top Curtain */}
-          <motion.div
-            exit={{ y: '-100%', transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] } }}
-            className="absolute top-0 left-0 right-0 h-1/2 bg-[#050508] z-0"
-          />
-
-          {/* Bottom Curtain */}
-          <motion.div
-            exit={{ y: '100%', transition: { duration: 0.9, ease: [0.76, 0, 0.24, 1] } }}
-            className="absolute bottom-0 left-0 right-0 h-1/2 bg-[#050508] z-0"
-          />
+          <div className="absolute inset-0 pointer-events-none z-10 flex items-center justify-center">
+            {warpLines.map((deg, i) => (
+              <motion.div
+                key={`warp-${i}`}
+                style={{ rotate: deg }}
+                animate={{
+                  opacity: progress > 60 ? [0.1, 0.8, 0.1] : 0.08,
+                  scaleY: progress > 80 ? [1, 2.5, 1] : 1,
+                }}
+                transition={{ duration: 1.5, repeat: Infinity, delay: i * 0.05 }}
+                className="absolute w-[2px] h-[55vh] origin-bottom bg-gradient-to-t from-transparent via-[#FF7A1A]/50 to-transparent"
+              />
+            ))}
+          </div>
 
           {/* ========================================================================= */}
           {/* CREATIVE BACKGROUND VOLUMETRIC ATMOSPHERE & SCANNER */}
@@ -87,21 +95,21 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           {/* Dynamic Radial Ambient Aura */}
           <motion.div
             animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.2, 0.35, 0.2],
+              scale: [1, 1.25, 1],
+              opacity: [0.2, 0.45, 0.2],
             }}
             transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,122,26,0.28)_0%,transparent_60%)] pointer-events-none z-10"
+            className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,122,26,0.32)_0%,transparent_60%)] pointer-events-none z-10"
           />
 
-          {/* Architectural Tech Grid */}
-          <div className="absolute inset-0 bg-[size:4rem_4rem] bg-[linear-gradient(to_right,#FF7A1A0a_1px,transparent_1px),linear-gradient(to_bottom,#FF7A1A0a_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none z-10" />
+          {/* Architectural 3D Grid Grid */}
+          <div className="absolute inset-0 bg-[size:4rem_4rem] bg-[linear-gradient(to_right,#FF7A1A0d_1px,transparent_1px),linear-gradient(to_bottom,#FF7A1A0d_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_75%_75%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none z-10" />
 
           {/* Vertical Laser Beam Scanner */}
           <motion.div
             animate={{ y: ['-100%', '200%'] }}
-            transition={{ duration: 3, repeat: Infinity, ease: 'linear' }}
-            className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent via-[#FF7A1A]/15 to-transparent pointer-events-none z-10"
+            transition={{ duration: 2.8, repeat: Infinity, ease: 'linear' }}
+            className="absolute top-0 left-0 right-0 h-36 bg-gradient-to-b from-transparent via-[#FF7A1A]/20 to-transparent pointer-events-none z-10"
           />
 
           {/* ========================================================================= */}
@@ -116,7 +124,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
                 ROOS STUDIOX®
               </span>
               <span className="font-mono text-[9px] text-[#FF7A1A] tracking-wider uppercase">
-                SYSTEM INITIALIZING
+                3D SPATIAL CORE
               </span>
             </div>
           </div>
@@ -132,26 +140,26 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           </div>
 
           {/* Left Audio Equalizer Visualizer */}
-          <div className="absolute left-6 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-1 z-20 pointer-events-none">
+          <div className="absolute left-6 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-1.5 z-20 pointer-events-none">
             {[40, 75, 55, 90, 30, 65, 80, 45].map((h, i) => (
               <motion.div
                 key={`left-eq-${i}`}
                 animate={{ width: [`${h * 0.4}%`, `${h}%`, `${h * 0.4}%`] }}
                 transition={{ duration: 1.2 + i * 0.1, repeat: Infinity, ease: 'easeInOut' }}
-                className="h-0.5 bg-[#FF7A1A]/60 rounded-full"
+                className="h-0.5 bg-[#FF7A1A]/70 rounded-full shadow-[0_0_8px_#FF7A1A]"
                 style={{ width: `${h}%` }}
               />
             ))}
           </div>
 
           {/* Right Audio Equalizer Visualizer */}
-          <div className="absolute right-6 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-1 items-end z-20 pointer-events-none">
+          <div className="absolute right-6 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-1.5 items-end z-20 pointer-events-none">
             {[60, 35, 85, 40, 95, 50, 70, 30].map((h, i) => (
               <motion.div
                 key={`right-eq-${i}`}
                 animate={{ width: [`${h * 0.4}%`, `${h}%`, `${h * 0.4}%`] }}
                 transition={{ duration: 1.2 + i * 0.1, repeat: Infinity, ease: 'easeInOut' }}
-                className="h-0.5 bg-[#FF7A1A]/60 rounded-full"
+                className="h-0.5 bg-[#FF7A1A]/70 rounded-full shadow-[0_0_8px_#FF7A1A]"
                 style={{ width: `${h}%` }}
               />
             ))}
@@ -160,14 +168,14 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
           {/* Bottom Left HUD */}
           <div className="absolute bottom-6 left-6 sm:bottom-10 sm:left-10 z-20 pointer-events-none hidden sm:block">
             <span className="font-mono text-[10px] text-zinc-400 tracking-widest uppercase block">
-              POSITION // 001_HQ
+              POSITION // 3D_WARP_TUNNEL
             </span>
           </div>
 
           {/* Bottom Right HUD */}
           <div className="absolute bottom-6 right-6 sm:bottom-10 sm:right-10 z-20 pointer-events-none hidden sm:block">
             <span className="font-mono text-[10px] text-zinc-400 tracking-widest uppercase block">
-              ROOS_CORE_v2.0
+              ENTER_MODE // 3D_IMMERSIVE
             </span>
           </div>
 
@@ -182,7 +190,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
               {/* 1. Outer Spinning Dashed Orbit Tech Ring */}
               <motion.div
                 animate={{ rotate: 360 }}
-                transition={{ duration: 22, repeat: Infinity, ease: 'linear' }}
+                transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
                 className="absolute inset-0 pointer-events-none flex items-center justify-center"
               >
                 <svg className="w-full h-full" viewBox="0 0 220 220">
@@ -193,7 +201,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
                     fill="none"
                     stroke="#FF7A1A"
                     strokeWidth="1.5"
-                    strokeOpacity="0.3"
+                    strokeOpacity="0.35"
                     strokeDasharray="4 8"
                   />
                 </svg>
@@ -202,7 +210,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
               {/* 2. Counter-Rotating Tick Marks Ring */}
               <motion.div
                 animate={{ rotate: -360 }}
-                transition={{ duration: 35, repeat: Infinity, ease: 'linear' }}
+                transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
                 className="absolute inset-0 pointer-events-none flex items-center justify-center scale-105"
               >
                 <svg className="w-full h-full" viewBox="0 0 220 220">
@@ -213,14 +221,14 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
                     fill="none"
                     stroke="#FF7A1A"
                     strokeWidth="1"
-                    strokeOpacity="0.18"
+                    strokeOpacity="0.22"
                     strokeDasharray="2 12"
                   />
                 </svg>
               </motion.div>
 
               {/* 3. Main Progress Gauge SVG */}
-              <svg className="w-full h-full transform -rotate-90 filter drop-shadow-[0_0_20px_rgba(255,122,26,0.45)]" viewBox="0 0 220 220">
+              <svg className="w-full h-full transform -rotate-90 filter drop-shadow-[0_0_22px_rgba(255,122,26,0.5)]" viewBox="0 0 220 220">
                 <defs>
                   <linearGradient id="brandGaugeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stopColor="#FF7A1A" />
@@ -258,7 +266,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
               <div className="absolute inset-0 flex items-center justify-center p-14 sm:p-16 pointer-events-none">
                 <svg
                   viewBox="0 0 301.51 558.76"
-                  className="w-full h-full object-contain filter drop-shadow-[0_0_25px_rgba(255,122,26,0.6)]"
+                  className="w-full h-full object-contain filter drop-shadow-[0_0_28px_rgba(255,122,26,0.65)]"
                 >
                   <defs>
                     <linearGradient id="logoStrokeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -301,7 +309,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
 
             {/* TELEMETRY COUNTER & PHASE DISPLAY */}
             <div className="mt-8 flex flex-col items-center text-center space-y-2">
-              <div className="font-display text-5xl sm:text-6xl font-black tracking-tighter bg-gradient-to-r from-[#FF7A1A] via-[#FFA665] to-white bg-clip-text text-transparent filter drop-shadow-[0_0_16px_rgba(255,122,26,0.45)]">
+              <div className="font-display text-5xl sm:text-6xl font-black tracking-tighter bg-gradient-to-r from-[#FF7A1A] via-[#FFA665] to-white bg-clip-text text-transparent filter drop-shadow-[0_0_18px_rgba(255,122,26,0.5)]">
                 {progress < 10 ? `0${progress}` : progress}
                 <span className="text-xl sm:text-2xl text-[#FF7A1A] font-mono ml-1">%</span>
               </div>
