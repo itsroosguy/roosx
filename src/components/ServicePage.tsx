@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Compass, Shield, Laptop, Code2, Search, TrendingUp, Cpu, Layers, CheckCircle2, ChevronRight, Sparkles, Flame, Check } from 'lucide-react';
+import { ArrowRight, Compass, Shield, Laptop, Code2, Search, TrendingUp, Cpu, Layers, CheckCircle2, ChevronRight, Flame, Check } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface ServicePageProps {
@@ -173,7 +173,11 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-[160px] pointer-events-none -z-10" />
 
       {/* BACKGROUND MESH */}
-      <div className="fixed inset-0 bg-[size:4rem_4rem] bg-[linear-gradient(to_right,#FF7A1A08_1px,transparent_1px),linear-gradient(to_bottom,#FF7A1A08_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_40%,#000_80%,transparent_100%)] pointer-events-none z-0" />
+      <div className={`fixed inset-0 bg-[size:4rem_4rem] pointer-events-none z-0 ${
+        isDarkMode
+          ? 'bg-[linear-gradient(to_right,#FF7A1A08_1px,transparent_1px),linear-gradient(to_bottom,#FF7A1A08_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_40%,#000_80%,transparent_100%)]'
+          : 'bg-[linear-gradient(to_right,#E4E4E760_1px,transparent_1px),linear-gradient(to_bottom,#E4E4E760_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_40%,#fff_80%,transparent_100%)]'
+      }`} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28 relative z-10">
         
@@ -181,17 +185,13 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         {/* HERO SECTION */}
         {/* ========================================================================= */}
         <section className="text-center max-w-4xl mx-auto space-y-6 pt-4">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121215] border border-zinc-800 text-xs font-sans font-semibold text-[#FF7A1A] shadow-md">
-            <Sparkles className="w-3.5 h-3.5 text-[#FF7A1A]" />
-            <span>ROOS STUDIOX • DIGITAL GROWTH & MARKETING SERVICES</span>
-          </div>
-
           <h1 className={`font-display text-4xl sm:text-6xl md:text-7xl font-black tracking-tight leading-[1.08] ${
             isDarkMode ? 'text-white' : 'text-[#111111]'
           }`}>
-            We Help Ambitious Businesses Build Strong Brands & <br className="hidden sm:block" />
+            We Help Ambitious Businesses <br />
+            Build Strong Brands & <br />
             <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF8833] to-amber-500 bg-clip-text text-transparent">
-              Drive Real Growth.
+              Drive Real Growth
             </span>
           </h1>
 
@@ -215,14 +215,20 @@ export const ServicePage: React.FC<ServicePageProps> = ({
 
             <button
               onClick={onNavigateHome}
-              className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer hover:scale-105 active:scale-95"
+              className={`w-full sm:w-auto px-8 py-4 rounded-full font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer hover:scale-105 active:scale-95 ${
+                isDarkMode
+                  ? 'bg-[#121215] border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700'
+                  : 'bg-white border border-zinc-300 text-zinc-700 hover:text-black hover:border-zinc-400 shadow-sm'
+              }`}
             >
               Back To Overview
             </button>
           </div>
 
           {/* HIGHLIGHT PROOFS */}
-          <div className="pt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs font-sans font-semibold text-zinc-300 border-t border-zinc-800/80 max-w-3xl mx-auto">
+          <div className={`pt-8 flex flex-wrap items-center justify-center gap-6 sm:gap-12 text-xs font-sans font-semibold border-t max-w-3xl mx-auto ${
+            isDarkMode ? 'text-zinc-300 border-zinc-800/80' : 'text-zinc-700 border-zinc-300'
+          }`}>
             <div className="flex items-center gap-2">
               <Check className="w-4 h-4 text-[#FF7A1A]" />
               <span>CLEAR UPFRONT PRICING</span>
@@ -242,10 +248,16 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         {/* SERVICES CATEGORY FILTER TABS */}
         {/* ========================================================================= */}
         <section className="space-y-12">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-b border-zinc-800 pb-6">
+          <div className={`flex flex-col sm:flex-row items-center justify-between gap-6 border-b pb-6 ${
+            isDarkMode ? 'border-zinc-800' : 'border-zinc-200'
+          }`}>
             <div>
-              <h2 className="font-display text-2xl sm:text-4xl font-black text-white">Our Core Services</h2>
-              <p className="text-xs sm:text-sm text-zinc-400 font-medium">Select a category below to explore specific services.</p>
+              <h2 className={`font-display text-2xl sm:text-4xl font-black ${
+                isDarkMode ? 'text-white' : 'text-[#111111]'
+              }`}>Our Core Services</h2>
+              <p className={`text-xs sm:text-sm font-medium ${
+                isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+              }`}>Select a category below to explore specific services.</p>
             </div>
 
             <div className="flex flex-wrap items-center gap-2">
@@ -262,7 +274,9 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                   className={`px-4 py-2 rounded-xl text-xs font-sans font-semibold transition-all cursor-pointer ${
                     selectedCategory === tab.id
                       ? 'bg-[#FF7A1A] text-white shadow-lg shadow-[#FF7A1A]/30 scale-105'
-                      : 'bg-[#121215] border border-zinc-800 text-zinc-400 hover:text-white hover:border-zinc-700'
+                      : isDarkMode
+                        ? 'bg-[#121215] border border-zinc-800 text-zinc-400 hover:text-white'
+                        : 'bg-white border border-zinc-300 text-zinc-600 hover:text-black shadow-sm'
                   }`}
                 >
                   {tab.label}
@@ -285,32 +299,48 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                     exit={{ opacity: 0, scale: 0.95, y: -20 }}
                     transition={{ duration: 0.4, delay: idx * 0.05 }}
                     whileHover={{ y: -6 }}
-                    className="p-8 sm:p-10 rounded-3xl bg-[#0A0A0C] border border-zinc-800/90 hover:border-[#FF7A1A]/70 transition-all duration-300 space-y-6 relative overflow-hidden group shadow-xl"
+                    className={`p-8 sm:p-10 rounded-3xl border transition-all duration-300 space-y-6 relative overflow-hidden group shadow-xl ${
+                      isDarkMode
+                        ? 'bg-[#0A0A0C] border-zinc-800/90 hover:border-[#FF7A1A]/70'
+                        : 'bg-white border-zinc-200 hover:border-[#FF7A1A]/70 shadow-md'
+                    }`}
                   >
                     <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-2xl bg-[#121215] border border-zinc-800 text-[#FF7A1A] flex items-center justify-center group-hover:bg-[#FF7A1A] group-hover:text-white transition-all shadow-md group-hover:scale-110">
+                      <div className={`w-12 h-12 rounded-2xl border text-[#FF7A1A] flex items-center justify-center group-hover:bg-[#FF7A1A] group-hover:text-white transition-all shadow-md group-hover:scale-110 ${
+                        isDarkMode ? 'bg-[#121215] border-zinc-800' : 'bg-zinc-100 border-zinc-200'
+                      }`}>
                         <IconComponent className="w-6 h-6" />
                       </div>
                     </div>
 
                     <div className="space-y-2">
-                      <h3 className="font-display text-2xl font-black text-white group-hover:text-[#FF7A1A] transition-colors">
+                      <h3 className={`font-display text-2xl font-black transition-colors ${
+                        isDarkMode ? 'text-white group-hover:text-[#FF7A1A]' : 'text-[#111111] group-hover:text-[#FF7A1A]'
+                      }`}>
                         {srv.title}
                       </h3>
                       <p className="text-xs font-sans font-bold text-[#FF7A1A]">{srv.subtitle}</p>
-                      <p className="text-xs sm:text-sm text-zinc-300 font-medium leading-relaxed pt-1">
+                      <p className={`text-xs sm:text-sm font-medium leading-relaxed pt-1 ${
+                        isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+                      }`}>
                         {srv.description}
                       </p>
                     </div>
 
                     {/* DELIVERABLES LIST */}
-                    <div className="space-y-2 pt-2 border-t border-zinc-800/80">
-                      <span className="text-[11px] font-sans font-bold uppercase tracking-wider text-zinc-400">KEY DELIVERABLES</span>
+                    <div className={`space-y-2 pt-2 border-t ${
+                      isDarkMode ? 'border-zinc-800/80' : 'border-zinc-200'
+                    }`}>
+                      <span className={`text-[11px] font-sans font-bold uppercase tracking-wider ${
+                        isDarkMode ? 'text-zinc-400' : 'text-zinc-500'
+                      }`}>KEY DELIVERABLES</span>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                         {srv.deliverables.map((item, dIdx) => (
-                          <div key={dIdx} className="flex items-center gap-2 text-xs font-medium text-zinc-300">
+                          <div key={dIdx} className={`flex items-center gap-2 text-xs font-medium ${
+                            isDarkMode ? 'text-zinc-300' : 'text-zinc-700'
+                          }`}>
                             <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7A1A] shrink-0" />
                             <span>{item}</span>
                           </div>
@@ -329,16 +359,22 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         {/* ========================================================================= */}
         <section className="space-y-12 py-4">
           <div className="text-center max-w-3xl mx-auto space-y-3">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#121215] border border-zinc-800 text-xs font-sans font-semibold text-[#FF7A1A]">
+            <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-sans font-semibold text-[#FF7A1A] ${
+              isDarkMode ? 'bg-[#121215] border border-zinc-800' : 'bg-orange-50 border border-orange-200'
+            }`}>
               <Flame className="w-3.5 h-3.5 text-[#FF7A1A]" />
               <span>WHY BUSINESSES SWITCH TO US</span>
             </div>
 
-            <h2 className="font-display text-3xl sm:text-5xl font-black text-white">
+            <h2 className={`font-display text-3xl sm:text-5xl font-black ${
+              isDarkMode ? 'text-white' : 'text-[#111111]'
+            }`}>
               Traditional Agency <span className="text-rose-500 font-mono">VS</span> <span className="text-[#FF7A1A]">Roos StudioX</span>
             </h2>
 
-            <p className="text-xs sm:text-sm text-zinc-400 font-medium max-w-2xl mx-auto">
+            <p className={`text-xs sm:text-sm font-medium max-w-2xl mx-auto ${
+              isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+            }`}>
               Compare how our modern approach delivers better speed, transparency, and lead generation for your business.
             </p>
           </div>
@@ -354,7 +390,9 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                   className={`px-4 py-2 rounded-xl text-xs font-sans font-bold transition-all cursor-pointer ${
                     activeComparisonIndex === idx
                       ? 'bg-[#FF7A1A] text-white shadow-lg shadow-[#FF7A1A]/30 scale-105'
-                      : 'bg-[#121215] text-zinc-400 border border-zinc-800 hover:text-white'
+                      : isDarkMode
+                        ? 'bg-[#121215] text-zinc-400 border border-zinc-800 hover:text-white'
+                        : 'bg-white text-zinc-600 border border-zinc-300 hover:text-black shadow-sm'
                   }`}
                 >
                   0{idx + 1}. {c.feature}
@@ -376,26 +414,34 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                     className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch"
                   >
                     {/* LEFT: TRADITIONAL AGENCY */}
-                    <div className="p-8 sm:p-10 rounded-3xl bg-[#0A0708] border border-rose-500/30 space-y-4 text-left shadow-xl">
+                    <div className={`p-8 sm:p-10 rounded-3xl border border-rose-500/30 space-y-4 text-left shadow-xl ${
+                      isDarkMode ? 'bg-[#0A0708]' : 'bg-rose-50/50'
+                    }`}>
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-xs font-bold text-rose-500 uppercase tracking-wider">TRADITIONAL AGENCY</span>
-                        <span className="px-3 py-1 rounded-full bg-rose-500/15 text-rose-400 font-sans text-xs font-bold border border-rose-500/30">
+                        <span className="px-3 py-1 rounded-full bg-rose-500/15 text-rose-500 font-sans text-xs font-bold border border-rose-500/30">
                           {activeComp.tradBadge}
                         </span>
                       </div>
 
-                      <h3 className="font-display text-2xl font-black text-rose-200">
+                      <h3 className={`font-display text-2xl font-black ${
+                        isDarkMode ? 'text-rose-200' : 'text-rose-950'
+                      }`}>
                         {activeComp.tradTitle}
                       </h3>
                       
-                      <p className="text-xs sm:text-sm text-zinc-400 font-medium leading-relaxed">
+                      <p className={`text-xs sm:text-sm font-medium leading-relaxed ${
+                        isDarkMode ? 'text-zinc-400' : 'text-zinc-700'
+                      }`}>
                         {activeComp.tradDesc}
                       </p>
                     </div>
 
                     {/* RIGHT: ROOS STUDIOX */}
-                    <div className="p-8 sm:p-10 rounded-3xl bg-[#0F0F14] border-2 border-[#FF7A1A] space-y-4 text-left shadow-[0_15px_45px_rgba(255,122,26,0.25)] relative overflow-hidden">
-                      <div className="absolute top-0 left-0 right-0 h-1 bg.gradient-to-r from-[#FF7A1A] to-[#FF8833]" />
+                    <div className={`p-8 sm:p-10 rounded-3xl border-2 border-[#FF7A1A] space-y-4 text-left shadow-[0_15px_45px_rgba(255,122,26,0.25)] relative overflow-hidden ${
+                      isDarkMode ? 'bg-[#0F0F14]' : 'bg-amber-50/30'
+                    }`}>
+                      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF7A1A] to-[#FF8833]" />
 
                       <div className="flex items-center justify-between">
                         <span className="font-mono text-xs font-bold text-[#FF7A1A] uppercase tracking-wider">ROOS STUDIOX APPROACH</span>
@@ -404,11 +450,15 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                         </span>
                       </div>
 
-                      <h3 className="font-display text-2xl font-black text-white">
+                      <h3 className={`font-display text-2xl font-black ${
+                        isDarkMode ? 'text-white' : 'text-[#111111]'
+                      }`}>
                         {activeComp.roosTitle}
                       </h3>
 
-                      <p className="text-xs sm:text-sm text-zinc-200 font-medium leading-relaxed">
+                      <p className={`text-xs sm:text-sm font-medium leading-relaxed ${
+                        isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
+                      }`}>
                         {activeComp.roosDesc}
                       </p>
                     </div>
@@ -426,8 +476,12 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         <section className="space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF7A1A]">SIMPLE & TRANSPARENT PROCESS</span>
-            <h2 className="font-display text-3xl sm:text-5xl font-black text-white">How We Work With You</h2>
-            <p className="text-xs sm:text-sm text-zinc-400 font-medium">A structured 4-step process designed to get your business live and generating results quickly.</p>
+            <h2 className={`font-display text-3xl sm:text-5xl font-black ${
+              isDarkMode ? 'text-white' : 'text-[#111111]'
+            }`}>How We Work With You</h2>
+            <p className={`text-xs sm:text-sm font-medium ${
+              isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+            }`}>A structured 4-step process designed to get your business live and generating results quickly.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -437,10 +491,16 @@ export const ServicePage: React.FC<ServicePageProps> = ({
               { num: '03', title: 'Development & Launch', desc: 'We build your fast custom website, integrate automations, and launch smoothly.' },
               { num: '04', title: 'Growth & Support', desc: 'We run ad campaigns, optimize Google SEO rankings, and provide continuous updates.' },
             ].map((st, idx) => (
-              <div key={idx} className="p-6 rounded-2xl bg-[#0A0A0C] border border-zinc-800 space-y-3 text-left">
+              <div key={idx} className={`p-6 rounded-2xl border space-y-3 text-left ${
+                isDarkMode ? 'bg-[#0A0A0C] border-zinc-800' : 'bg-white border-zinc-200 shadow-md'
+              }`}>
                 <span className="font-mono text-3xl font-black text-[#FF7A1A]">{st.num}</span>
-                <h4 className="font-display text-lg font-black text-white">{st.title}</h4>
-                <p className="text-xs text-zinc-400 font-medium leading-relaxed">{st.desc}</p>
+                <h4 className={`font-display text-lg font-black ${
+                  isDarkMode ? 'text-white' : 'text-[#111111]'
+                }`}>{st.title}</h4>
+                <p className={`text-xs font-medium leading-relaxed ${
+                  isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                }`}>{st.desc}</p>
               </div>
             ))}
           </div>
@@ -452,24 +512,32 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         <section className="space-y-10 max-w-4xl mx-auto">
           <div className="text-center space-y-3">
             <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF7A1A]">FREQUENTLY ASKED QUESTIONS</span>
-            <h2 className="font-display text-3xl sm:text-5xl font-black text-white">Everything You Need To Know</h2>
+            <h2 className={`font-display text-3xl sm:text-5xl font-black ${
+              isDarkMode ? 'text-white' : 'text-[#111111]'
+            }`}>Everything You Need To Know</h2>
           </div>
 
           <div className="space-y-4">
             {faqs.map((faq, fIdx) => (
               <div
                 key={fIdx}
-                className="rounded-2xl bg-[#0A0A0C] border border-zinc-800 overflow-hidden"
+                className={`rounded-2xl border overflow-hidden ${
+                  isDarkMode ? 'bg-[#0A0A0C] border-zinc-800' : 'bg-white border-zinc-200 shadow-sm'
+                }`}
               >
                 <button
                   onClick={() => setActiveFaq(activeFaq === fIdx ? null : fIdx)}
-                  className="w-full p-6 text-left font-display text-base sm:text-lg font-black text-white flex items-center justify-between gap-4 cursor-pointer"
+                  className={`w-full p-6 text-left font-display text-base sm:text-lg font-black flex items-center justify-between gap-4 cursor-pointer ${
+                    isDarkMode ? 'text-white' : 'text-[#111111]'
+                  }`}
                 >
                   <span>{faq.q}</span>
                   <ChevronRight className={`w-5 h-5 text-[#FF7A1A] transition-transform ${activeFaq === fIdx ? 'rotate-90' : ''}`} />
                 </button>
                 {activeFaq === fIdx && (
-                  <div className="px-6 pb-6 text-xs sm:text-sm text-zinc-300 font-medium leading-relaxed border-t border-zinc-800/40 pt-4">
+                  <div className={`px-6 pb-6 text-xs sm:text-sm font-medium leading-relaxed border-t pt-4 ${
+                    isDarkMode ? 'text-zinc-300 border-zinc-800/40' : 'text-zinc-600 border-zinc-200'
+                  }`}>
                     {faq.a}
                   </div>
                 )}
@@ -481,14 +549,20 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         {/* ========================================================================= */}
         {/* FINAL CONVERSION CALL TO ACTION */}
         {/* ========================================================================= */}
-        <section className="p-10 sm:p-16 rounded-[36px] bg-[#0A0A0C] border border-[#FF7A1A]/40 text-center space-y-6 relative overflow-hidden backdrop-blur-2xl shadow-2xl">
+        <section className={`p-10 sm:p-16 rounded-[36px] border text-center space-y-6 relative overflow-hidden backdrop-blur-2xl shadow-2xl ${
+          isDarkMode ? 'bg-[#0A0A0C] border-[#FF7A1A]/40' : 'bg-white border-[#FF7A1A]/40'
+        }`}>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent" />
 
-          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black text-white tracking-tight">
+          <h2 className={`font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight ${
+            isDarkMode ? 'text-white' : 'text-[#111111]'
+          }`}>
             Ready To Grow Your Business?
           </h2>
 
-          <p className="text-base sm:text-xl font-medium text-zinc-300 max-w-2xl mx-auto">
+          <p className={`text-base sm:text-xl font-medium max-w-2xl mx-auto ${
+            isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+          }`}>
             Book a free strategy call to discuss your goals and get a custom growth roadmap.
           </p>
 
@@ -506,7 +580,11 @@ export const ServicePage: React.FC<ServicePageProps> = ({
 
             <button
               onClick={onNavigateHome}
-              className="w-full sm:w-auto px-8 py-5 rounded-full bg-[#121215] border border-zinc-800 text-zinc-300 font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider hover:text-white hover:border-zinc-700 transition-all cursor-pointer hover:scale-105 active:scale-95"
+              className={`w-full sm:w-auto px-8 py-5 rounded-full font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer hover:scale-105 active:scale-95 ${
+                isDarkMode
+                  ? 'bg-[#121215] border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700'
+                  : 'bg-zinc-100 border border-zinc-300 text-zinc-800 hover:text-black shadow-sm'
+              }`}
             >
               Back To Home
             </button>
