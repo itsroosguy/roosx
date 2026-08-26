@@ -210,7 +210,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             className="max-w-5xl space-y-8 text-left transition-transform duration-200 ease-out"
           >
             
-            {/* MAIN EDITORIAL STATEMENT SCROLL REVEAL (ONLY THIS IMAGE TEXT IS 2X & BOLD) */}
+            {/* MAIN EDITORIAL LEAD (ONLY FIRST SENTENCE IS 2X BOLD) */}
             <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold sm:font-extrabold leading-[1.18] tracking-[-0.035em]">
               <ScrollTextBlock
                 text="Roos StudioX® is a creative growth studio built for businesses that want more than just a website, logo, or marketing campaign."
@@ -221,7 +221,10 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 highlightWords={['Roos', 'StudioX®', 'growth']}
                 fontWeightClassName="font-bold sm:font-extrabold"
               />
-              {' '}
+            </h1>
+
+            {/* SECONDARY STATEMENT (OLD NORMAL SIZE) */}
+            <p className="font-display text-xl sm:text-2xl md:text-[30px] font-normal leading-[1.5] tracking-[-0.015em] pt-2">
               <ScrollTextBlock
                 text="We partner with ambitious brands to build strong foundations, create meaningful digital experiences, and develop growth systems that scale."
                 progress={scrollYProgress}
@@ -229,7 +232,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 endProgress={0.45}
                 isDarkMode={isDarkMode}
                 highlightWords={['ambitious', 'growth']}
-                fontWeightClassName="font-bold sm:font-extrabold"
+                fontWeightClassName="font-normal"
               />
               {' '}
               <ScrollTextBlock
@@ -239,9 +242,9 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 endProgress={0.6}
                 isDarkMode={isDarkMode}
                 highlightWords={['strategy', 'design', 'technology']}
-                fontWeightClassName="font-bold sm:font-extrabold"
+                fontWeightClassName="font-normal"
               />
-            </h1>
+            </p>
 
             {/* RIGHT-ALIGNED SEE OUR WORK CALLOUT LINK */}
             <div className="flex justify-end pt-1">
