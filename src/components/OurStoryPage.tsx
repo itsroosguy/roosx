@@ -116,7 +116,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             className="max-w-5xl space-y-8 text-left"
           >
             {/* PARAGRAPH 1 & 2 LARGE EDITORIAL STATEMENT */}
-            <h1 className={`font-display text-2xl sm:text-4xl md:text-[42px] font-normal leading-[1.35] tracking-[-0.02em] ${
+            <h1 className={`font-display text-2xl sm:text-4xl md:text-[42px] font-normal leading-[1.65] sm:leading-[1.6] tracking-[-0.015em] ${
               isDarkMode ? 'text-white' : 'text-[#111111]'
             }`}>
               Roos StudioX® is a creative growth studio built for businesses that want more than just a website, logo, or marketing campaign.{' '}
@@ -131,7 +131,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                   if (onNavigateWorks) onNavigateWorks();
                   else window.location.hash = '#works';
                 }}
-                className="text-[#FF7A1A] font-semibold hover:underline inline-flex items-center gap-1 cursor-pointer transition-colors group"
+                className="text-[#FF7A1A] font-semibold hover:underline inline-flex items-center gap-1 cursor-pointer transition-colors group ml-1"
               >
                 <span>See our work</span>
                 <ArrowRight className="w-5 h-5 inline group-hover:translate-x-1 transition-transform" />
@@ -139,14 +139,14 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             </h1>
 
             {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
-              <p className={`text-base sm:text-lg font-normal leading-relaxed ${
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-6">
+              <p className={`text-base sm:text-lg font-normal leading-[1.85] ${
                 isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
               }`}>
                 We're not a traditional agency focused on delivering isolated services. We work as an extension of your team, connecting every piece of your business journey—from positioning and branding to websites, automation, and customer acquisition—into one cohesive growth ecosystem.
               </p>
 
-              <p className={`text-base sm:text-lg font-normal leading-relaxed ${
+              <p className={`text-base sm:text-lg font-normal leading-[1.85] ${
                 isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
               }`}>
                 Our name is inspired by the kangaroo, a symbol of strength, momentum, and forward movement. Just as every leap begins with powerful foundations, we believe sustainable business growth starts with clarity, strategy, and systems that are built to last.
@@ -154,7 +154,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             </div>
 
             {/* PARAGRAPH 5 CLOSING STATEMENT */}
-            <p className={`text-lg sm:text-xl font-medium leading-relaxed max-w-3xl ${
+            <p className={`text-lg sm:text-xl font-medium leading-[1.8] max-w-3xl pt-2 ${
               isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
             }`}>
               At Roos StudioX, we don't chase trends or build for short-term attention. We create brands, experiences, and growth engines designed to help businesses move forward with confidence and take meaningful leaps toward their goals.
