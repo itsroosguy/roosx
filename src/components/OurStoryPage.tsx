@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, useMotionValue, useSpring, useTransform, useScroll, MotionValue } from 'framer-motion';
 import { Shield, Sparkles, Flame, Scale, Users, Target, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
@@ -10,72 +10,75 @@ interface OurStoryPageProps {
   onNavigateWorks?: () => void;
 }
 
-// HIGH-CRAFT WORD-BY-WORD KINETIC REVEAL COMPONENT
-const KineticTextReveal: React.FC<{
+// SCROLL-DRIVEN WORD-BY-WORD TEXT REVEAL COMPONENT
+const ScrollWord: React.FC<{
+  word: string;
+  progress: MotionValue<number>;
+  range: [number, number];
+  isDarkMode?: boolean;
+  isHighlight?: boolean;
+}> = ({ word, progress, range, isDarkMode = true, isHighlight = false }) => {
+  const opacity = useTransform(progress, range, [0.15, 1]);
+  const y = useTransform(progress, range, [6, 0]);
+
+  return (
+    <span className="relative inline-block mr-[0.25em] last:mr-0 select-none">
+      {/* Ghost Background Word */}
+      <span className={`opacity-15 pointer-events-none ${
+        isDarkMode ? 'text-zinc-600' : 'text-zinc-300'
+      }`}>
+        {word}
+      </span>
+
+      {/* Active Revealing Word */}
+      <motion.span
+        style={{ opacity, y }}
+        className={`absolute inset-0 ${
+          isHighlight
+            ? 'text-[#FF7A1A] font-medium drop-shadow-[0_0_12px_rgba(255,122,26,0.35)]'
+            : isDarkMode
+              ? 'text-white'
+              : 'text-[#111111]'
+        }`}
+      >
+        {word}
+      </motion.span>
+    </span>
+  );
+};
+
+const ScrollTextBlock: React.FC<{
   text: string;
+  progress: MotionValue<number>;
+  startProgress: number;
+  endProgress: number;
   className?: string;
   isDarkMode?: boolean;
   highlightWords?: string[];
-}> = ({ text, className = '', isDarkMode = true, highlightWords = [] }) => {
+}> = ({ text, progress, startProgress, endProgress, className = '', isDarkMode = true, highlightWords = [] }) => {
   const words = text.split(' ');
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.025,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const wordVariants = {
-    hidden: {
-      opacity: 0,
-      y: 20,
-      filter: 'blur(8px)',
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        duration: 0.6,
-        ease: [0.16, 1, 0.3, 1],
-      },
-    },
-  };
+  const step = (endProgress - startProgress) / words.length;
 
   return (
-    <motion.span
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: '-40px' }}
-      className={`inline-block ${className}`}
-    >
+    <span className={`inline-block ${className}`}>
       {words.map((word, i) => {
         const cleanWord = word.replace(/[^a-zA-Z0-9®]/g, '');
         const isHighlight = highlightWords.some(hw => cleanWord.toLowerCase().includes(hw.toLowerCase()));
+        const wordStart = startProgress + i * step;
+        const wordEnd = wordStart + step * 1.5;
 
         return (
-          <motion.span
+          <ScrollWord
             key={i}
-            variants={wordVariants}
-            className={`inline-block mr-[0.25em] ${
-              isHighlight
-                ? 'text-[#FF7A1A] font-medium drop-shadow-[0_0_12px_rgba(255,122,26,0.3)]'
-                : isDarkMode
-                  ? 'text-white'
-                  : 'text-[#111111]'
-            }`}
-          >
-            {word}
-          </motion.span>
+            word={word}
+            progress={progress}
+            range={[wordStart, Math.min(wordEnd, endProgress)]}
+            isDarkMode={isDarkMode}
+            isHighlight={isHighlight}
+          />
         );
       })}
-    </motion.span>
+    </span>
   );
 };
 
@@ -86,6 +89,13 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   onNavigateWorks,
 }) => {
   const [activePillar, setActivePillar] = useState<number>(1);
+  const manifestoRef = useRef<HTMLDivElement>(null);
+
+  // SCROLL PROGRESS OVER MANIFESTO SECTION
+  const { scrollYProgress } = useScroll({
+    target: manifestoRef,
+    offset: ['start 75%', 'end 35%'],
+  });
 
   // MOUSE PARALLAX PHYSICS SPRINGS
   const mouseX = useMotionValue(0);
@@ -96,8 +106,13 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   const smoothMouseY = useSpring(mouseY, springConfig);
 
   // 3D TILT MAPS
-  const rotateX = useTransform(smoothMouseY, [-400, 400], [4, -4]);
-  const rotateY = useTransform(smoothMouseX, [-600, 600], [-6, 6]);
+  const rotateX = useTransform(smoothMouseY, [-400, 400], [3, -3]);
+  const rotateY = useTransform(smoothMouseX, [-600, 600], [-5, 5]);
+
+  // BOUNCE SLIDE MAPS FOR BOTTOM RIGHT LABEL ON FULL REVEAL
+  const labelX = useTransform(scrollYProgress, [0.8, 0.98], [120, 0]);
+  const labelOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
+  const labelScale = useTransform(scrollYProgress, [0.8, 0.9, 1], [0.85, 1.08, 1]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -184,30 +199,39 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
         
         {/* ========================================================================= */}
-        {/* DD.NYC STYLE KINETIC TEXT REVEAL MANIFESTO SECTION */}
+        {/* DD.NYC STYLE SCROLL-DRIVEN TEXT REVEAL MANIFESTO SECTION */}
         {/* ========================================================================= */}
-        <section className="pt-4 sm:pt-6 space-y-8">
+        <section ref={manifestoRef} className="pt-4 sm:pt-6 space-y-8">
           <motion.div
             style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
             className="max-w-3xl space-y-6 text-left transition-transform duration-200 ease-out"
           >
             
-            {/* MAIN EDITORIAL STATEMENT WORD-BY-WORD KINETIC REVEAL */}
+            {/* MAIN EDITORIAL STATEMENT SCROLL REVEAL */}
             <h1 className="font-display text-xl sm:text-3xl md:text-[34px] font-normal leading-[1.5] tracking-[-0.015em]">
-              <KineticTextReveal
+              <ScrollTextBlock
                 text="Roos StudioX® is a creative growth studio built for businesses that want more than just a website, logo, or marketing campaign."
+                progress={scrollYProgress}
+                startProgress={0.05}
+                endProgress={0.25}
                 isDarkMode={isDarkMode}
                 highlightWords={['Roos', 'StudioX®', 'growth']}
               />
               {' '}
-              <KineticTextReveal
+              <ScrollTextBlock
                 text="We partner with ambitious brands to build strong foundations, create meaningful digital experiences, and develop growth systems that scale."
+                progress={scrollYProgress}
+                startProgress={0.25}
+                endProgress={0.45}
                 isDarkMode={isDarkMode}
                 highlightWords={['ambitious', 'growth']}
               />
               {' '}
-              <KineticTextReveal
+              <ScrollTextBlock
                 text="By combining strategy, design, technology, and marketing, we help businesses transform ideas into brands, brands into experiences, and experiences into measurable growth."
+                progress={scrollYProgress}
+                startProgress={0.45}
+                endProgress={0.6}
                 isDarkMode={isDarkMode}
                 highlightWords={['strategy', 'design', 'technology']}
               />
@@ -218,9 +242,6 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               <motion.a
                 whileHover={{ scale: 1.05, x: 4 }}
                 whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 1 }}
                 href="#works"
                 onClick={(e) => {
                   e.preventDefault();
@@ -236,54 +257,54 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
 
             {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
-              <motion.p
-                initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                className={`text-sm sm:text-base font-normal leading-relaxed ${
-                  isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
-                }`}
-              >
-                We're not a traditional agency focused on delivering isolated services. We work as an extension of your team, connecting every piece of your business journey—from positioning and branding to websites, automation, and customer acquisition—into one cohesive growth ecosystem.
-              </motion.p>
+              <p className={`text-sm sm:text-base font-normal leading-relaxed ${
+                isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+              }`}>
+                <ScrollTextBlock
+                  text="We're not a traditional agency focused on delivering isolated services. We work as an extension of your team, connecting every piece of your business journey—from positioning and branding to websites, automation, and customer acquisition—into one cohesive growth ecosystem."
+                  progress={scrollYProgress}
+                  startProgress={0.6}
+                  endProgress={0.75}
+                  isDarkMode={isDarkMode}
+                />
+              </p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
-                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className={`text-sm sm:text-base font-normal leading-relaxed ${
-                  isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
-                }`}
-              >
-                Our name is inspired by the kangaroo, a symbol of strength, momentum, and forward movement. Just as every leap begins with powerful foundations, we believe sustainable business growth starts with clarity, strategy, and systems that are built to last.
-              </motion.p>
+              <p className={`text-sm sm:text-base font-normal leading-relaxed ${
+                isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+              }`}>
+                <ScrollTextBlock
+                  text="Our name is inspired by the kangaroo, a symbol of strength, momentum, and forward movement. Just as every leap begins with powerful foundations, we believe sustainable business growth starts with clarity, strategy, and systems that are built to last."
+                  progress={scrollYProgress}
+                  startProgress={0.75}
+                  endProgress={0.88}
+                  isDarkMode={isDarkMode}
+                />
+              </p>
             </div>
 
             {/* PARAGRAPH 5 CLOSING STATEMENT */}
-            <motion.p
-              initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
-              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className={`text-base sm:text-lg font-medium leading-relaxed max-w-3xl pt-1 ${
-                isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
-              }`}
-            >
-              At Roos StudioX, we don't chase trends or build for short-term attention. We create brands, experiences, and growth engines designed to help businesses move forward with confidence and take meaningful leaps toward their goals.
-            </motion.p>
+            <p className={`text-base sm:text-lg font-medium leading-relaxed max-w-3xl pt-1 ${
+              isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
+            }`}>
+              <ScrollTextBlock
+                text="At Roos StudioX, we don't chase trends or build for short-term attention. We create brands, experiences, and growth engines designed to help businesses move forward with confidence and take meaningful leaps toward their goals."
+                progress={scrollYProgress}
+                startProgress={0.88}
+                endProgress={0.98}
+                isDarkMode={isDarkMode}
+              />
+            </p>
 
-            {/* DD.NYC STYLE SIGNATURE LABEL RIGHT ALIGNED */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="flex items-center justify-end pt-4 text-xs font-mono tracking-widest text-zinc-500 uppercase"
-            >
-              <span>ROOS STUDIOX® CREATIVE SERVICES & STORY</span>
-            </motion.div>
+            {/* BOUNCY SLIDE IN FROM RIGHT CORNER WHEN FULL PARAGRAPH IS REVEALED */}
+            <div className="flex justify-end pt-4 overflow-hidden">
+              <motion.div
+                style={{ x: labelX, opacity: labelOpacity, scale: labelScale }}
+                className="text-xs font-mono tracking-widest text-zinc-500 uppercase flex items-center gap-2"
+              >
+                <span>ROOS STUDIOX® CREATIVE SERVICES & STORY</span>
+              </motion.div>
+            </div>
+
           </motion.div>
         </section>
 
@@ -291,8 +312,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         {/* THE 6 KANGAROO PHILOSOPHY PILLARS */}
         {/* ========================================================================= */}
         <section className="space-y-8 pt-4 border-t border-zinc-800/60">
-          <div className="text-center max-w-3xl mx-auto space-y-2 pt-2">
-
+          <div className="text-center max-w-3xl mx-auto space-y-2">
             <h2 className={`font-display text-2xl sm:text-4xl font-black ${
               isDarkMode ? 'text-white' : 'text-[#111111]'
             }`}>
