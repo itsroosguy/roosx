@@ -272,26 +272,26 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
 
             {/* SECONDARY CONTENT BLOCK (HIDDEN ON INITIAL SCREEN LOAD, REVEALED ON DOWN SCROLL) */}
             <motion.div style={{ opacity: secondaryOpacity, y: secondaryY }} className="space-y-8">
-              {/* SECONDARY STATEMENT (OLD NORMAL SIZE) */}
+              {/* SECONDARY STATEMENT (USER MANIFESTO TEXT) */}
               <p className="font-display text-xl sm:text-2xl md:text-[30px] font-normal leading-[1.5] tracking-[-0.015em] pt-2">
                 <ScrollTextBlock
-                  text="We partner with ambitious brands to build strong foundations, create meaningful digital experiences and develop growth systems that scale."
+                  text="Before every leap, there is preparation. Before every success, there are countless decisions nobody sees. The strongest brands aren't built by chance. They're built through clarity, consistency and a willingness to keep moving forward when others stand still."
                   progress={scrollYProgress}
                   startProgress={0.25}
-                  endProgress={0.45}
+                  endProgress={0.48}
                   isDarkMode={isDarkMode}
-                  highlightWords={['ambitious', 'growth']}
+                  highlightWords={['leap', 'clarity', 'consistency']}
                   fontWeightClassName="font-normal"
                 />
-                {' '}
+                <br /><br />
                 <ScrollTextBlock
-                  text="By combining strategy, design, technology and marketing, we help businesses transform ideas into brands, brands into experiences and experiences into measurable growth."
+                  text="Roos StudioX exists for businesses ready to take that journey."
                   progress={scrollYProgress}
-                  startProgress={0.45}
-                  endProgress={0.6}
+                  startProgress={0.48}
+                  endProgress={0.60}
                   isDarkMode={isDarkMode}
-                  highlightWords={['strategy', 'design', 'technology']}
-                  fontWeightClassName="font-normal"
+                  highlightWords={['Roos', 'StudioX', 'journey']}
+                  fontWeightClassName="font-semibold"
                 />
               </p>
 
