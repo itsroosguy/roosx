@@ -41,15 +41,15 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
     setHoveredNode(null);
   };
 
-  // MATHEMATICALLY BALANCED PENTAGONAL ORBIT NODES (R=250px, CENTER=350,350)
+  // MATHEMATICALLY PERFECT ORBIT NODES (VIEWBOX 800x800, CENTER=400,400, R=260px)
   const orbitNodes = [
     {
       id: 1,
       title: 'Foundation Before Growth',
       subtitle: 'Strong brands are built on strategy, not guesswork.',
       icon: Target,
-      cx: 350,
-      cy: 100,
+      cx: 400,
+      cy: 140, // 400 - 260 (12 o'clock top apex)
       layoutType: 'top',
       delay: 0.1,
     },
@@ -58,8 +58,8 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Partnership Over Projects',
       subtitle: 'We work alongside our clients, not just for them.',
       icon: Users,
-      cx: 133.5,
-      cy: 225,
+      cx: 174.85, // 400 - 260*cos(30) = 174.85 (10 o'clock)
+      cy: 270,    // 400 - 260*sin(30) = 270
       layoutType: 'left',
       delay: 0.2,
     },
@@ -68,8 +68,8 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Systems Over Shortcuts',
       subtitle: 'Sustainable growth is created through scalable processes and smart execution.',
       icon: Settings,
-      cx: 133.5,
-      cy: 475,
+      cx: 200.83, // 400 - 260*cos(40) = 200.83 (7:30 o'clock)
+      cy: 567.12, // 400 + 260*sin(40) = 567.12
       layoutType: 'left',
       delay: 0.3,
     },
@@ -78,8 +78,8 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Momentum Over Noise',
       subtitle: 'Growth comes from consistent forward movement, not random tactics.',
       icon: TrendingUp,
-      cx: 566.5,
-      cy: 225,
+      cx: 625.15, // 400 + 260*cos(30) = 625.15 (2 o'clock)
+      cy: 270,    // 400 - 260*sin(30) = 270
       layoutType: 'right',
       delay: 0.4,
     },
@@ -88,8 +88,8 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Meaningful Leaps',
       subtitle: 'We focus on outcomes that create lasting impact, not temporary wins.',
       icon: Star,
-      cx: 566.5,
-      cy: 475,
+      cx: 599.17, // 400 + 260*cos(40) = 599.17 (4:30 o'clock)
+      cy: 567.12, // 400 + 260*sin(40) = 567.12
       layoutType: 'right',
       delay: 0.5,
     },
@@ -107,16 +107,16 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
         {/* ========================================================================= */}
         <motion.div
           style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-          className="relative w-[340px] h-[340px] sm:w-[580px] sm:h-[580px] md:w-[760px] md:h-[760px] lg:w-[860px] lg:h-[860px] flex items-center justify-center transition-transform duration-150 ease-out"
+          className="relative w-[340px] h-[340px] sm:w-[580px] sm:h-[580px] md:w-[760px] md:h-[760px] lg:w-[900px] lg:h-[900px] flex items-center justify-center transition-transform duration-150 ease-out"
         >
-          {/* SVG ORBIT CIRCLE (EXACT MATCHING R=250 CENTER=350,350) */}
+          {/* SVG ORBIT CIRCLE (EXACT MATCHING R=260 CENTER=400,400) */}
           <div className="absolute inset-0 pointer-events-none z-0">
-            <svg className="w-full h-full filter drop-shadow-[0_0_18px_rgba(255,122,26,0.45)]" viewBox="0 0 700 700">
+            <svg className="w-full h-full filter drop-shadow-[0_0_18px_rgba(255,122,26,0.45)]" viewBox="0 0 800 800">
               {/* Outer Dashed Orbit Ring */}
               <circle
-                cx="350"
-                cy="350"
-                r="250"
+                cx="400"
+                cy="400"
+                r="260"
                 fill="none"
                 stroke="#FF7A1A"
                 strokeWidth="2"
@@ -125,9 +125,9 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
               />
               {/* Solid Orange Orbit Ring */}
               <circle
-                cx="350"
-                cy="350"
-                r="250"
+                cx="400"
+                cy="400"
+                r="260"
                 fill="none"
                 stroke="#FF7A1A"
                 strokeWidth="1.75"
@@ -142,7 +142,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
             transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
             className="absolute inset-0 pointer-events-none flex items-center justify-center z-10"
           >
-            <div className="w-4 h-4 rounded-full bg-[#FFD700] shadow-[0_0_24px_#FF7A1A] transform -translate-y-[250px]" />
+            <div className="w-4 h-4 rounded-full bg-[#FFD700] shadow-[0_0_24px_#FF7A1A] transform -translate-y-[260px]" />
           </motion.div>
 
           {/* Central Radial Ambient Aura */}
@@ -151,7 +151,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
           {/* CENTER 3D KANGAROO MASCOT STAGE */}
           <div className="relative z-20 flex flex-col items-center justify-center">
             {/* Mascot Vignette Backdrop Portal Ring */}
-            <div className="absolute w-[210px] h-[210px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-[#FF7A1A]/45 bg-[#050508]/92 shadow-[0_0_70px_rgba(255,122,26,0.32)] pointer-events-none z-0" />
+            <div className="absolute w-[200px] h-[200px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] rounded-full border border-[#FF7A1A]/45 bg-[#050508]/92 shadow-[0_0_70px_rgba(255,122,26,0.32)] pointer-events-none z-0" />
             
             {/* Mascot Image */}
             <motion.div
@@ -162,7 +162,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
               <img
                 src={kangarooImg}
                 alt="Roos StudioX Mascot"
-                className="w-auto h-[210px] sm:h-[300px] md:h-[380px] object-contain transition-transform duration-300 hover:scale-105"
+                className="w-auto h-[200px] sm:h-[280px] md:h-[350px] object-contain transition-transform duration-300 hover:scale-105"
               />
             </motion.div>
           </div>
@@ -182,12 +182,12 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
                 onMouseEnter={() => setHoveredNode(node.id)}
                 onMouseLeave={() => setHoveredNode(null)}
                 style={{
-                  left: `${(node.cx / 700) * 100}%`,
-                  top: `${(node.cy / 700) * 100}%`,
+                  left: `${(node.cx / 800) * 100}%`,
+                  top: `${(node.cy / 800) * 100}%`,
                 }}
                 className="absolute z-30 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
               >
-                {/* 1. THE CIRCLE ICON BUTTON (LOCKED TO CX, CY) */}
+                {/* 1. THE CIRCLE ICON BUTTON (LOCKED EXACTLY ON THE ORBIT RING) */}
                 <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-300 relative z-20 ${
                   isHovered
                     ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_30px_rgba(255,122,26,0.95)] scale-110'
@@ -198,9 +198,9 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
                   <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
 
-                {/* 2. THE TEXT CARD (DECOUPLED AND OFFSET) */}
+                {/* 2. THE TEXT CARD (POSITIONED OUTSIDE THE ORBIT RING WITH ZERO OVERLAP) */}
                 {node.layoutType === 'top' && (
-                  <div className="absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 text-center w-[200px] sm:w-[260px] md:w-[280px] pointer-events-auto">
+                  <div className="absolute bottom-[calc(100%+14px)] left-1/2 -translate-x-1/2 text-center w-[220px] sm:w-[280px] md:w-[320px] pointer-events-auto">
                     <h3 className={`font-display text-xs sm:text-base md:text-lg font-bold transition-colors ${
                       isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
                     }`}>
@@ -215,7 +215,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
                 )}
 
                 {node.layoutType === 'left' && (
-                  <div className="absolute right-[calc(100%+16px)] top-1/2 -translate-y-1/2 text-right w-[140px] sm:w-[220px] md:w-[270px] pointer-events-auto">
+                  <div className="absolute right-[calc(100%+20px)] top-1/2 -translate-y-1/2 text-right w-[150px] sm:w-[230px] md:w-[280px] pointer-events-auto">
                     <h3 className={`font-display text-xs sm:text-base md:text-lg font-bold transition-colors ${
                       isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
                     }`}>
@@ -230,7 +230,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
                 )}
 
                 {node.layoutType === 'right' && (
-                  <div className="absolute left-[calc(100%+16px)] top-1/2 -translate-y-1/2 text-left w-[140px] sm:w-[220px] md:w-[270px] pointer-events-auto">
+                  <div className="absolute left-[calc(100%+20px)] top-1/2 -translate-y-1/2 text-left w-[150px] sm:w-[230px] md:w-[280px] pointer-events-auto">
                     <h3 className={`font-display text-xs sm:text-base md:text-lg font-bold transition-colors ${
                       isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
                     }`}>
