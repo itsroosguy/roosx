@@ -35,7 +35,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       icon: Compass,
       title: 'Brand Strategy & Positioning',
       subtitle: 'Position your brand clearly so customers choose you over competitors.',
-      description: 'We analyze your market, define your core messaging, and position your business so clients immediately understand your value.',
+      description: 'We analyze your market, define your core messaging and position your business so clients immediately understand your value.',
       deliverables: ['Market Positioning Plan', 'Customer Persona Insights', 'Brand Messaging Framework', 'Competitor Analysis'],
     },
     {
@@ -44,7 +44,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       icon: Shield,
       title: 'Visual Identity & Logo Design',
       subtitle: 'Create a memorable brand identity that builds instant trust.',
-      description: 'We design modern logo marks, color schemes, typography, and visual assets that give your business a professional corporate look.',
+      description: 'We design modern logo marks, color schemes, typography and visual assets that give your business a professional corporate look.',
       deliverables: ['Logo & Brand Guidelines', 'Color Palette & Typography', 'Business Card & Stationery Design', 'Social Media Asset Templates'],
     },
     {
@@ -61,8 +61,8 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       category: 'engineering',
       icon: Code2,
       title: 'Web Development & Speed Optimization',
-      subtitle: 'Build fast, secure, and reliable websites using modern tech.',
-      description: 'We develop custom React and Next.js websites that load instantly, rank well on Google, and work seamlessly across all devices.',
+      subtitle: 'Build fast, secure and reliable websites using modern tech.',
+      description: 'We develop custom React and Next.js websites that load instantly, rank well on Google and work seamlessly across all devices.',
       deliverables: ['Fast Custom Next.js Coding', 'Easy Content Management System (CMS)', 'Mobile & Google Speed Optimization', 'SSL & Security Setup'],
     },
     {
@@ -71,7 +71,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       icon: Search,
       title: 'SEO & Google Search Ranking',
       subtitle: 'Rank higher on Google for keywords your buyers search for.',
-      description: 'We optimize your website code, fix technical issues, and target high-intent keywords to get your business consistent organic traffic.',
+      description: 'We optimize your website code, fix technical issues and target high-intent keywords to get your business consistent organic traffic.',
       deliverables: ['Complete Google & Technical SEO Audit', 'Target Keyword Research', 'On-Page SEO Optimization', 'Monthly Keyword Ranking Reports'],
     },
     {
@@ -80,7 +80,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       icon: TrendingUp,
       title: 'Digital Marketing & Paid Ad Campaigns',
       subtitle: 'Run targeted ad campaigns across Meta & Google for proven ROI.',
-      description: 'We create and manage high-converting ad campaigns that reach the right audience, generate qualified leads, and grow your sales.',
+      description: 'We create and manage high-converting ad campaigns that reach the right audience, generate qualified leads and grow your sales.',
       deliverables: ['Google & Meta Ad Setup', 'High-Converting Ad Landing Pages', 'Ad Copywriting & Banner Creatives', 'Weekly Performance Reporting'],
     },
     {
@@ -89,7 +89,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       icon: Cpu,
       title: 'Business Process & CRM Automation',
       subtitle: 'Automate lead follow-ups and daily operational tasks.',
-      description: 'Save hours of manual effort by setting up automated WhatsApp/Email lead follow-ups, CRM updates, and customer management flows.',
+      description: 'Save hours of manual effort by setting up automated WhatsApp/Email lead follow-ups, CRM updates and customer management flows.',
       deliverables: ['Automated Lead Notifications', 'CRM Setup (HubSpot / Zoho)', 'Email & WhatsApp Auto-Responders', 'Invoice & Booking Automations'],
     },
     {
@@ -97,8 +97,8 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       category: 'engineering',
       icon: Layers,
       title: 'Custom Web Applications & SaaS',
-      subtitle: 'Develop custom web apps, customer portals, and internal tools.',
-      description: 'Full-stack development for custom software, web portals, and SaaS dashboards tailored to your exact business requirements.',
+      subtitle: 'Develop custom web apps, customer portals and internal tools.',
+      description: 'Full-stack development for custom software, web portals and SaaS dashboards tailored to your exact business requirements.',
       deliverables: ['Product Requirement & Scope', 'Custom SaaS Dashboard UI', 'Secure Database & API Setup', 'Cloud Server Deployment'],
     },
   ];
