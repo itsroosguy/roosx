@@ -178,7 +178,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         {/* DD.NYC STYLE KINETIC TEXT REVEAL MANIFESTO SECTION */}
         {/* ========================================================================= */}
         <section className="pt-6 sm:pt-12 space-y-12">
-          <div className="max-w-5xl space-y-8 text-left">
+          <div className="max-w-3xl space-y-8 text-left">
             
             {/* MAIN EDITORIAL STATEMENT WORD-BY-WORD KINETIC REVEAL */}
             <h1 className="font-display text-xl sm:text-3xl md:text-[34px] font-normal leading-[1.5] tracking-[-0.015em]">
