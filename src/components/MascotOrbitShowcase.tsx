@@ -41,7 +41,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
     setHoveredNode(null);
   };
 
-  // EXACT POLAR COORDINATE NODES ON R=250px CIRCLE
+  // EXACT POLAR COORDINATE NODES ON R=250px CIRCLE (CENTER=350,350)
   const orbitNodes = [
     {
       id: 1,
@@ -58,8 +58,8 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Partnership Over Projects',
       subtitle: 'We work alongside our clients, not just for them.',
       icon: Users,
-      cx: 115.1,
-      cy: 264.5,
+      cx: 108.5,
+      cy: 285.3,
       layoutType: 'left',
       delay: 0.2,
     },
@@ -68,8 +68,8 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Systems Over Shortcuts',
       subtitle: 'Sustainable growth is created through scalable processes and smart execution.',
       icon: Settings,
-      cx: 158.5,
-      cy: 510.7,
+      cx: 145.2,
+      cy: 493.4,
       layoutType: 'left',
       delay: 0.3,
     },
@@ -78,8 +78,8 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Momentum Over Noise',
       subtitle: 'Growth comes from consistent forward movement, not random tactics.',
       icon: TrendingUp,
-      cx: 584.9,
-      cy: 264.5,
+      cx: 591.5,
+      cy: 285.3,
       layoutType: 'right',
       delay: 0.4,
     },
@@ -88,8 +88,8 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Meaningful Leaps',
       subtitle: 'We focus on outcomes that create lasting impact, not temporary wins.',
       icon: Star,
-      cx: 541.5,
-      cy: 510.7,
+      cx: 554.8,
+      cy: 493.4,
       layoutType: 'right',
       delay: 0.5,
     },
@@ -152,7 +152,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
           {/* ========================================================================= */}
           <div className="relative z-20 flex flex-col items-center justify-center">
             {/* Mascot Vignette Backdrop Portal Ring */}
-            <div className="absolute w-[220px] h-[220px] md:w-[360px] md:h-[360px] rounded-full border border-[#FF7A1A]/40 bg-[#050508]/90 shadow-[0_0_60px_rgba(255,122,26,0.3)] pointer-events-none z-0" />
+            <div className="absolute w-[220px] h-[220px] md:w-[340px] md:h-[340px] rounded-full border border-[#FF7A1A]/40 bg-[#050508]/90 shadow-[0_0_60px_rgba(255,122,26,0.3)] pointer-events-none z-0" />
             
             {/* Mascot Image */}
             <motion.div
@@ -163,13 +163,13 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
               <img
                 src={kangarooImg}
                 alt="Roos StudioX Mascot"
-                className="w-auto h-[240px] md:h-[400px] object-contain transition-transform duration-300 hover:scale-105"
+                className="w-auto h-[220px] sm:h-[320px] md:h-[380px] object-contain transition-transform duration-300 hover:scale-105"
               />
             </motion.div>
           </div>
 
           {/* ========================================================================= */}
-          {/* 5 POLAR COORDINATE ORBIT NODES (ICON CENTERED 100% ON RING) */}
+          {/* 5 ABSOLUTELY ANCHORED ORBIT NODES (CIRCLE ICON LOCKED TO CX, CY) */}
           {/* ========================================================================= */}
           {orbitNodes.map((node) => {
             const IconComp = node.icon;
@@ -190,91 +190,60 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
                 }}
                 className="absolute z-30 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
               >
-                {/* Node Container by Layout Type */}
-                {node.layoutType === 'top' && (
-                  <div className="flex flex-col items-center text-center max-w-[240px] sm:max-w-[280px]">
-                    {/* Circle Icon Centered Exactly on Point */}
-                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
-                      isHovered
-                        ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_30px_rgba(255,122,26,0.9)] scale-110'
-                        : isDarkMode
-                          ? 'bg-[#09090D] border-[#FF7A1A] text-[#FF7A1A] shadow-[0_0_15px_rgba(255,122,26,0.4)] group-hover:bg-[#FF7A1A] group-hover:text-white'
-                          : 'bg-white border-[#FF7A1A] text-[#FF7A1A] group-hover:bg-[#FF7A1A] group-hover:text-white'
-                    }`}>
-                      <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
-                    </div>
+                {/* 1. THE CIRCLE ICON BUTTON (ANCHORED EXACTLY AT 0,0 OFFSET) */}
+                <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-300 relative z-20 ${
+                  isHovered
+                    ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_30px_rgba(255,122,26,0.9)] scale-110'
+                    : isDarkMode
+                      ? 'bg-[#09090D] border-[#FF7A1A] text-[#FF7A1A] shadow-[0_0_15px_rgba(255,122,26,0.4)] group-hover:bg-[#FF7A1A] group-hover:text-white'
+                      : 'bg-white border-[#FF7A1A] text-[#FF7A1A] group-hover:bg-[#FF7A1A] group-hover:text-white'
+                }`}>
+                  <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
+                </div>
 
-                    {/* Text Below Circle */}
-                    <div className="pt-2 space-y-1">
-                      <h3 className={`font-display text-sm sm:text-base font-bold transition-colors ${
-                        isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
-                      }`}>
-                        {node.title}
-                      </h3>
-                      <p className={`text-xs font-normal leading-tight ${
-                        isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
-                      }`}>
-                        {node.subtitle}
-                      </p>
-                    </div>
+                {/* 2. THE TEXT CARD (POSITIONED DECOUPLED FROM CIRCLE ICON) */}
+                {node.layoutType === 'top' && (
+                  <div className="absolute top-[calc(100%+8px)] left-1/2 -translate-x-1/2 text-center w-[220px] sm:w-[260px] pointer-events-auto">
+                    <h3 className={`font-display text-sm sm:text-base font-bold transition-colors ${
+                      isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
+                    }`}>
+                      {node.title}
+                    </h3>
+                    <p className={`text-xs font-normal leading-tight pt-0.5 ${
+                      isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                    }`}>
+                      {node.subtitle}
+                    </p>
                   </div>
                 )}
 
                 {node.layoutType === 'left' && (
-                  <div className="flex flex-row-reverse items-center gap-3 sm:gap-4 text-right">
-                    {/* Circle Icon Centered Exactly on Point */}
-                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-300 ${
-                      isHovered
-                        ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_30px_rgba(255,122,26,0.9)] scale-110'
-                        : isDarkMode
-                          ? 'bg-[#09090D] border-[#FF7A1A] text-[#FF7A1A] shadow-[0_0_15px_rgba(255,122,26,0.4)] group-hover:bg-[#FF7A1A] group-hover:text-white'
-                          : 'bg-white border-[#FF7A1A] text-[#FF7A1A] group-hover:bg-[#FF7A1A] group-hover:text-white'
+                  <div className="absolute right-[calc(100%+14px)] top-1/2 -translate-y-1/2 text-right w-[160px] sm:w-[220px] md:w-[250px] pointer-events-auto">
+                    <h3 className={`font-display text-sm sm:text-base font-bold transition-colors ${
+                      isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
                     }`}>
-                      <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
-                    </div>
-
-                    {/* Text to the Left of Circle */}
-                    <div className="space-y-1 max-w-[160px] sm:max-w-[220px]">
-                      <h3 className={`font-display text-sm sm:text-base font-bold transition-colors ${
-                        isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
-                      }`}>
-                        {node.title}
-                      </h3>
-                      <p className={`text-xs font-normal leading-tight ${
-                        isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
-                      }`}>
-                        {node.subtitle}
-                      </p>
-                    </div>
+                      {node.title}
+                    </h3>
+                    <p className={`text-xs font-normal leading-tight pt-0.5 ${
+                      isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                    }`}>
+                      {node.subtitle}
+                    </p>
                   </div>
                 )}
 
                 {node.layoutType === 'right' && (
-                  <div className="flex flex-row items-center gap-3 sm:gap-4 text-left">
-                    {/* Circle Icon Centered Exactly on Point */}
-                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-300 ${
-                      isHovered
-                        ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_30px_rgba(255,122,26,0.9)] scale-110'
-                        : isDarkMode
-                          ? 'bg-[#09090D] border-[#FF7A1A] text-[#FF7A1A] shadow-[0_0_15px_rgba(255,122,26,0.4)] group-hover:bg-[#FF7A1A] group-hover:text-white'
-                          : 'bg-white border-[#FF7A1A] text-[#FF7A1A] group-hover:bg-[#FF7A1A] group-hover:text-white'
+                  <div className="absolute left-[calc(100%+14px)] top-1/2 -translate-y-1/2 text-left w-[160px] sm:w-[220px] md:w-[250px] pointer-events-auto">
+                    <h3 className={`font-display text-sm sm:text-base font-bold transition-colors ${
+                      isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
                     }`}>
-                      <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
-                    </div>
-
-                    {/* Text to the Right of Circle */}
-                    <div className="space-y-1 max-w-[160px] sm:max-w-[220px]">
-                      <h3 className={`font-display text-sm sm:text-base font-bold transition-colors ${
-                        isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
-                      }`}>
-                        {node.title}
-                      </h3>
-                      <p className={`text-xs font-normal leading-tight ${
-                        isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
-                      }`}>
-                        {node.subtitle}
-                      </p>
-                    </div>
+                      {node.title}
+                    </h3>
+                    <p className={`text-xs font-normal leading-tight pt-0.5 ${
+                      isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                    }`}>
+                      {node.subtitle}
+                    </p>
                   </div>
                 )}
               </motion.div>
