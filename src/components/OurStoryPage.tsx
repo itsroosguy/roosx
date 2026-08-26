@@ -216,12 +216,12 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             {/* MAIN EDITORIAL LEAD (ONLY FIRST SENTENCE IS 2X BOLD) */}
             <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold sm:font-extrabold leading-[1.18] tracking-[-0.035em]">
               <ScrollTextBlock
-                text="Roos StudioX® is a creative growth studio built for businesses that want more than just a website, logo or marketing campaign."
+                text="More than a creative studio, we're a growth partner helping businesses turn bold ideas into brands, experiences and momentum."
                 progress={scrollYProgress}
                 startProgress={0.05}
                 endProgress={0.25}
                 isDarkMode={isDarkMode}
-                highlightWords={['Roos', 'StudioX®', 'growth']}
+                highlightWords={['growth', 'partner', 'momentum']}
                 fontWeightClassName="font-bold sm:font-extrabold"
               />
             </h1>
