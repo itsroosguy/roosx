@@ -224,10 +224,10 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             className="max-w-7xl w-full space-y-10 text-left transition-transform duration-200 ease-out"
           >
             
-            {/* MAIN EDITORIAL LEAD (WITH EXPLICIT LINE BREAKS) */}
+            {/* MAIN EDITORIAL LEAD (+30% WIDER SECTION & EXACT LINE BREAKS) */}
             <motion.h1
               style={{ scale: leadScale, y: leadY, originX: 0, originY: 0 }}
-              className="font-display text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-bold sm:font-extrabold leading-[1.15] tracking-[-0.04em] transition-shadow"
+              className="w-full lg:w-[130%] max-w-[1450px] font-display text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-bold sm:font-extrabold leading-[1.15] tracking-[-0.04em] transition-shadow"
             >
               <ScrollTextBlock
                 text="More than a creative studio,"
@@ -240,7 +240,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               />
               <br />
               <ScrollTextBlock
-                text="we're a growth partner helping businesses turn bold ideas into brands,"
+                text="we're a growth partner helping businesses turn bold ideas into"
                 progress={scrollYProgress}
                 startProgress={0.12}
                 endProgress={0.22}
@@ -250,7 +250,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               />
               <br />
               <ScrollTextBlock
-                text="experiences and momentum."
+                text="brands, experiences and momentum."
                 progress={scrollYProgress}
                 startProgress={0.22}
                 endProgress={0.28}
