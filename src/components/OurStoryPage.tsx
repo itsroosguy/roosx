@@ -26,7 +26,7 @@ const ScrollWord: React.FC<{
   const activeWeightClass = isHighlight ? 'font-black' : fontWeightClassName;
 
   return (
-    <span className={`relative inline-block mr-[0.45em] last:mr-0 select-none ${activeWeightClass}`}>
+    <span className={`relative inline-block mr-[0.22em] last:mr-0 select-none ${activeWeightClass}`}>
       {/* Ghost Background Word */}
       <span className={`opacity-15 pointer-events-none ${activeWeightClass} ${
         isDarkMode ? 'text-zinc-600' : 'text-zinc-300'
@@ -202,7 +202,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
           : 'bg-[linear-gradient(to_right,#E4E4E760_1px,transparent_1px),linear-gradient(to_bottom,#E4E4E760_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_40%,#fff_80%,transparent_100%)]'
       }`} />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
         
         {/* ========================================================================= */}
         {/* DD.NYC STYLE SCROLL-DRIVEN TEXT REVEAL MANIFESTO SECTION */}
@@ -210,7 +210,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         <section ref={manifestoRef} className="pt-8 sm:pt-12 space-y-8">
           <motion.div
             style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-            className="max-w-5xl space-y-8 text-left transition-transform duration-200 ease-out"
+            className="max-w-6xl space-y-8 text-left transition-transform duration-200 ease-out"
           >
             
             {/* MAIN EDITORIAL LEAD (ONLY FIRST SENTENCE IS 2X BOLD) */}
