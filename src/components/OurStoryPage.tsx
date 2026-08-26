@@ -319,7 +319,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                   isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
                 }`}>
                   <ScrollTextBlock
-                    text="We're not a traditional agency focused on delivering isolated services. We work as an extension of your team, connecting every piece of your business journey—from positioning and branding to websites, automation and customer acquisition—into one cohesive growth ecosystem."
+                    text="We're not a traditional agency focused on delivering isolated services. We work as an extension of your team, connecting every piece of your business journey from positioning and branding to websites, automation and customer acquisition into one cohesive growth ecosystem."
                     progress={scrollYProgress}
                     startProgress={0.6}
                     endProgress={0.75}
