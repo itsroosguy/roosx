@@ -35,10 +35,10 @@ const ScrollWord: React.FC<{
         style={{ opacity, y }}
         className={`absolute inset-0 ${
           isHighlight
-            ? 'text-[#FF7A1A] font-medium drop-shadow-[0_0_12px_rgba(255,122,26,0.35)]'
+            ? 'text-[#FF7A1A] font-black drop-shadow-[0_0_16px_rgba(255,122,26,0.45)]'
             : isDarkMode
-              ? 'text-white'
-              : 'text-[#111111]'
+              ? 'text-white font-extrabold'
+              : 'text-[#111111] font-extrabold'
         }`}
       >
         {word}
@@ -204,11 +204,11 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         <section ref={manifestoRef} className="pt-8 sm:pt-12 space-y-8">
           <motion.div
             style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-            className="max-w-3xl space-y-6 text-left transition-transform duration-200 ease-out"
+            className="max-w-5xl space-y-8 text-left transition-transform duration-200 ease-out"
           >
             
-            {/* MAIN EDITORIAL STATEMENT SCROLL REVEAL */}
-            <h1 className="font-display text-xl sm:text-3xl md:text-[34px] font-normal leading-[1.5] tracking-[-0.015em]">
+            {/* MAIN EDITORIAL STATEMENT SCROLL REVEAL (2X SIZE & BOLD WEIGHT) */}
+            <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold sm:font-extrabold leading-[1.18] tracking-[-0.035em]">
               <ScrollTextBlock
                 text="Roos StudioX® is a creative growth studio built for businesses that want more than just a website, logo, or marketing campaign."
                 progress={scrollYProgress}
