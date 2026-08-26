@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ArrowRight, Compass, Shield, Laptop, Code2, Search, TrendingUp, Cpu, Layers, CheckCircle2, ChevronRight, Sparkles, BarChart, Zap, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Compass, Shield, Laptop, Code2, Search, TrendingUp, Cpu, Layers, CheckCircle2, ChevronRight, Sparkles, BarChart, Zap, ShieldCheck, XCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface ServicePageProps {
@@ -120,6 +120,39 @@ export const ServicePage: React.FC<ServicePageProps> = ({
   const filteredServices = selectedCategory === 'all'
     ? services
     : services.filter(s => s.category === selectedCategory);
+
+  const comparisonData = [
+    {
+      feature: 'Strategic Focus & Core Objective',
+      traditional: 'Sells disconnected deliverables (a logo, a site, an ad) with zero accountability for business revenue.',
+      roos: 'Engineers an integrated growth engine connecting brand positioning, web speed, and sales automation to drive revenue.',
+    },
+    {
+      feature: 'Execution Velocity & Speed',
+      traditional: 'Months of agency bureaucracy, slow review cycles, and bloated account management layers.',
+      roos: 'Production-ready delivery in 4 to 6 weeks using modern Next.js stacks and 90-day momentum sprints.',
+    },
+    {
+      feature: 'Technical Architecture & Performance',
+      traditional: 'Heavy WordPress or Webflow templates loaded with plugins causing 4s+ page load delays and low conversions.',
+      roos: 'Next.js & React headless engineering, 100/100 Lighthouse performance benchmark, and sub-100ms load times.',
+    },
+    {
+      feature: 'Operations & AI Automation',
+      traditional: '100% manual repetitive tasks, lost lead follow-ups, fragmented emails, and zero automated workflows.',
+      roos: 'Custom AI neural agents, automated CRM lead routing, and 24/7 back-office operations eliminating 85% friction.',
+    },
+    {
+      feature: 'Pricing & Value Alignment',
+      traditional: 'Billable hour padding, scope-creep add-ons, and high retainer fees with zero performance metrics.',
+      roos: 'Flat-rate productized sprints, transparent ROI telemetry, and outcome-oriented value alignment.',
+    },
+    {
+      feature: 'Partnership Relationship',
+      traditional: 'Vendor-client relationship where work is handed off to junior offshore execution teams.',
+      roos: 'Senior strategic growth partner working directly as an extension of your leadership team.',
+    },
+  ];
 
   const faqs = [
     { q: 'How does Roos StudioX differ from traditional digital agencies?', a: 'Traditional agencies sell isolated deliverables (a logo, a site, an ad). We engineer complete growth engines where strategy, high-speed code, performance marketing, and AI automation work together to drive measurable revenue.' },
@@ -322,6 +355,68 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 <span className="font-mono text-3xl font-black text-[#FF7A1A] group-hover:scale-110 inline-block transition-transform">{st.num}</span>
                 <h4 className="font-display text-lg font-black text-white">{st.title}</h4>
                 <p className="text-xs text-zinc-400 font-medium leading-relaxed">{st.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* TRADITIONAL AGENCY VS. ROOS STUDIOX COMPARISON MATRIX */}
+        {/* ========================================================================= */}
+        <section className="space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF7A1A]">WHY WE ARE DIFFERENT</span>
+            <h2 className="font-display text-3xl sm:text-5xl font-black text-white">Traditional Agency vs. Roos StudioX</h2>
+            <p className="text-xs sm:text-sm text-zinc-400 font-medium">See why growth-stage brands switch from legacy marketing vendors to our integrated growth engine.</p>
+          </div>
+
+          <div className="space-y-4 max-w-5xl mx-auto">
+            {/* COMPARISON HEADER BAR */}
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 rounded-2xl bg-[#121215] border border-zinc-800 font-sans text-xs font-bold uppercase tracking-wider hidden md:grid">
+              <div className="md:col-span-4 text-zinc-400">DIMENSION</div>
+              <div className="md:col-span-4 text-rose-400 flex items-center gap-1.5">
+                <XCircle className="w-4 h-4 text-rose-400" />
+                <span>TRADITIONAL AGENCY</span>
+              </div>
+              <div className="md:col-span-4 text-[#FF7A1A] flex items-center gap-1.5">
+                <Sparkles className="w-4 h-4 text-[#FF7A1A]" />
+                <span>ROOS STUDIOX ENGINE</span>
+              </div>
+            </div>
+
+            {/* COMPARISON ROWS */}
+            {comparisonData.map((row, rIdx) => (
+              <motion.div
+                key={rIdx}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: rIdx * 0.08 }}
+                className="grid grid-cols-1 md:grid-cols-12 gap-4 p-6 sm:p-8 rounded-3xl bg-[#0A0A0C] border border-zinc-800/90 hover:border-[#FF7A1A]/50 transition-all text-left items-start group shadow-md"
+              >
+                {/* FEATURE DIMENSION */}
+                <div className="md:col-span-4 space-y-1">
+                  <span className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider block md:hidden">DIMENSION</span>
+                  <h4 className="font-display text-lg font-black text-white group-hover:text-[#FF7A1A] transition-colors">
+                    {row.feature}
+                  </h4>
+                </div>
+
+                {/* TRADITIONAL AGENCY */}
+                <div className="md:col-span-4 space-y-1 p-4 rounded-2xl bg-rose-500/5 border border-rose-500/20">
+                  <span className="text-[10px] font-mono font-bold text-rose-400 uppercase tracking-wider block md:hidden">TRADITIONAL AGENCY</span>
+                  <p className="text-xs sm:text-sm text-zinc-300 font-medium leading-relaxed">
+                    {row.traditional}
+                  </p>
+                </div>
+
+                {/* ROOS STUDIOX */}
+                <div className="md:col-span-4 space-y-1 p-4 rounded-2xl bg-[#FF7A1A]/10 border border-[#FF7A1A]/40 shadow-inner">
+                  <span className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider block md:hidden">ROOS STUDIOX</span>
+                  <p className="text-xs sm:text-sm text-white font-semibold leading-relaxed">
+                    {row.roos}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
