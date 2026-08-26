@@ -24,8 +24,8 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
   const smoothMouseX = useSpring(mouseX, springConfig);
   const smoothMouseY = useSpring(mouseY, springConfig);
 
-  const rotateX = useTransform(smoothMouseY, [-400, 400], [6, -6]);
-  const rotateY = useTransform(smoothMouseX, [-600, 600], [-8, 8]);
+  const rotateX = useTransform(smoothMouseY, [-400, 400], [5, -5]);
+  const rotateY = useTransform(smoothMouseX, [-600, 600], [-7, 7]);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -41,15 +41,16 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
     setHoveredNode(null);
   };
 
+  // EXACT POLAR COORDINATE NODES ON R=250px CIRCLE
   const orbitNodes = [
     {
       id: 1,
       title: 'Foundation Before Growth',
       subtitle: 'Strong brands are built on strategy, not guesswork.',
       icon: Target,
-      position: 'top-0 left-1/2 -translate-x-1/2 -translate-y-1/2',
-      textAlign: 'text-center',
-      cardAlign: 'items-center',
+      cx: 350,
+      cy: 100,
+      layoutType: 'top',
       delay: 0.1,
     },
     {
@@ -57,9 +58,9 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Partnership Over Projects',
       subtitle: 'We work alongside our clients, not just for them.',
       icon: Users,
-      position: 'top-[26%] left-0 sm:left-[2%] md:left-[5%] -translate-y-1/2',
-      textAlign: 'text-right',
-      cardAlign: 'items-end',
+      cx: 115.1,
+      cy: 264.5,
+      layoutType: 'left',
       delay: 0.2,
     },
     {
@@ -67,9 +68,9 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Systems Over Shortcuts',
       subtitle: 'Sustainable growth is created through scalable processes and smart execution.',
       icon: Settings,
-      position: 'bottom-[12%] left-0 sm:left-[2%] md:left-[5%] translate-y-1/2',
-      textAlign: 'text-right',
-      cardAlign: 'items-end',
+      cx: 158.5,
+      cy: 510.7,
+      layoutType: 'left',
       delay: 0.3,
     },
     {
@@ -77,9 +78,9 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Momentum Over Noise',
       subtitle: 'Growth comes from consistent forward movement, not random tactics.',
       icon: TrendingUp,
-      position: 'top-[26%] right-0 sm:right-[2%] md:right-[5%] -translate-y-1/2',
-      textAlign: 'text-left',
-      cardAlign: 'items-start',
+      cx: 584.9,
+      cy: 264.5,
+      layoutType: 'right',
       delay: 0.4,
     },
     {
@@ -87,9 +88,9 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       title: 'Meaningful Leaps',
       subtitle: 'We focus on outcomes that create lasting impact, not temporary wins.',
       icon: Star,
-      position: 'bottom-[12%] right-0 sm:right-[2%] md:right-[5%] translate-y-1/2',
-      textAlign: 'text-left',
-      cardAlign: 'items-start',
+      cx: 541.5,
+      cy: 510.7,
+      layoutType: 'right',
       delay: 0.5,
     },
   ];
@@ -99,40 +100,37 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
       <div
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className="max-w-6xl mx-auto px-4 sm:px-6 relative perspective-1000"
+        className="max-w-6xl mx-auto px-4 relative perspective-1000 flex flex-col items-center"
       >
         <motion.div
           style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-          className="relative min-h-[620px] sm:min-h-[720px] md:min-h-[780px] flex items-center justify-center py-10 transition-transform duration-150 ease-out"
+          className="relative w-[340px] h-[340px] sm:w-[560px] sm:h-[560px] md:w-[700px] md:h-[700px] flex items-center justify-center transition-transform duration-150 ease-out"
         >
           {/* ========================================================================= */}
-          {/* BACKGROUND ORBIT SVG ARC & LIGHT GLOW */}
+          {/* SVG ORBIT CIRCLE (EXACT MATCHING R=250 CENTER=350,350) */}
           {/* ========================================================================= */}
-          
-          {/* Central Radial Ambient Aura */}
-          <div className="absolute w-[360px] h-[360px] sm:w-[520px] sm:h-[520px] rounded-full bg-radial from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-3xl pointer-events-none" />
-
-          {/* SVG Orbit Arc Ring */}
-          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <svg className="w-[320px] h-[320px] sm:w-[560px] sm:h-[560px] md:w-[680px] md:h-[680px] filter drop-shadow-[0_0_15px_rgba(255,122,26,0.35)]" viewBox="0 0 500 500">
+          <div className="absolute inset-0 pointer-events-none z-0">
+            <svg className="w-full h-full filter drop-shadow-[0_0_15px_rgba(255,122,26,0.4)]" viewBox="0 0 700 700">
+              {/* Outer Dashed Orbit Ring */}
               <circle
-                cx="250"
-                cy="250"
-                r="215"
+                cx="350"
+                cy="350"
+                r="250"
                 fill="none"
                 stroke="#FF7A1A"
                 strokeWidth="2"
                 strokeOpacity="0.45"
                 strokeDasharray="6 6"
               />
+              {/* Solid Orange Orbit Ring */}
               <circle
-                cx="250"
-                cy="250"
-                r="215"
+                cx="350"
+                cy="350"
+                r="250"
                 fill="none"
                 stroke="#FF7A1A"
                 strokeWidth="1.5"
-                strokeOpacity="0.8"
+                strokeOpacity="0.85"
               />
             </svg>
           </div>
@@ -141,34 +139,37 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 25, repeat: Infinity, ease: 'linear' }}
-            className="absolute w-[320px] h-[320px] sm:w-[560px] sm:h-[560px] md:w-[680px] md:h-[680px] pointer-events-none flex items-center justify-center"
+            className="absolute inset-0 pointer-events-none flex items-center justify-center z-10"
           >
-            <div className="w-3 h-3 rounded-full bg-[#FFD700] shadow-[0_0_18px_#FF7A1A] transform -translate-y-[160px] sm:-translate-y-[280px] md:-translate-y-[340px]" />
+            <div className="w-3.5 h-3.5 rounded-full bg-[#FFD700] shadow-[0_0_20px_#FF7A1A] transform -translate-y-[250px]" />
           </motion.div>
+
+          {/* Central Radial Ambient Aura */}
+          <div className="absolute w-[320px] h-[320px] md:w-[420px] md:h-[420px] rounded-full bg-radial from-[#FF7A1A]/16 via-[#FF7A1A]/4 to-transparent blur-3xl pointer-events-none z-0" />
 
           {/* ========================================================================= */}
           {/* CENTER 3D KANGAROO MASCOT STAGE */}
           {/* ========================================================================= */}
           <div className="relative z-20 flex flex-col items-center justify-center">
             {/* Mascot Vignette Backdrop Portal Ring */}
-            <div className="absolute w-[240px] h-[240px] sm:w-[340px] sm:h-[340px] md:w-[400px] md:h-[400px] rounded-full border border-[#FF7A1A]/40 bg-[#050508]/85 shadow-[0_0_60px_rgba(255,122,26,0.25)] pointer-events-none z-0" />
+            <div className="absolute w-[220px] h-[220px] md:w-[360px] md:h-[360px] rounded-full border border-[#FF7A1A]/40 bg-[#050508]/90 shadow-[0_0_60px_rgba(255,122,26,0.3)] pointer-events-none z-0" />
             
             {/* Mascot Image */}
             <motion.div
-              animate={{ y: [-5, 5, -5] }}
+              animate={{ y: [-4, 4, -4] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut' }}
-              className="relative z-10 filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.8)]"
+              className="relative z-10 filter drop-shadow-[0_15px_35px_rgba(0,0,0,0.85)]"
             >
               <img
                 src={kangarooImg}
                 alt="Roos StudioX Mascot"
-                className="w-auto h-[260px] sm:h-[380px] md:h-[450px] object-contain transition-transform duration-300 hover:scale-105"
+                className="w-auto h-[240px] md:h-[400px] object-contain transition-transform duration-300 hover:scale-105"
               />
             </motion.div>
           </div>
 
           {/* ========================================================================= */}
-          {/* 5 ORBIT STRATEGIC NODES */}
+          {/* 5 POLAR COORDINATE ORBIT NODES (ICON CENTERED 100% ON RING) */}
           {/* ========================================================================= */}
           {orbitNodes.map((node) => {
             const IconComp = node.icon;
@@ -183,37 +184,99 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
                 transition={{ duration: 0.6, delay: node.delay }}
                 onMouseEnter={() => setHoveredNode(node.id)}
                 onMouseLeave={() => setHoveredNode(null)}
-                className={`absolute z-30 cursor-pointer ${node.position} flex flex-col ${node.cardAlign} max-w-[200px] sm:max-w-[240px] md:max-w-[280px] group`}
+                style={{
+                  left: `${(node.cx / 700) * 100}%`,
+                  top: `${(node.cy / 700) * 100}%`,
+                }}
+                className="absolute z-30 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
               >
-                {/* Node Glowing Circle Button */}
-                <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 flex items-center justify-center mb-3 transition-all duration-300 ${
-                  isHovered
-                    ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_30px_rgba(255,122,26,0.85)] scale-110'
-                    : isDarkMode
-                      ? 'bg-[#09090D]/90 border-[#FF7A1A]/60 text-[#FF7A1A] group-hover:border-[#FF7A1A] group-hover:shadow-[0_0_20px_rgba(255,122,26,0.5)]'
-                      : 'bg-white border-[#FF7A1A]/60 text-[#FF7A1A] group-hover:border-[#FF7A1A]'
-                }`}>
-                  <IconComp className="w-5 h-5 sm:w-6 sm:h-6 transition-transform duration-300 group-hover:scale-110" />
-                </div>
+                {/* Node Container by Layout Type */}
+                {node.layoutType === 'top' && (
+                  <div className="flex flex-col items-center text-center max-w-[240px] sm:max-w-[280px]">
+                    {/* Circle Icon Centered Exactly on Point */}
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                      isHovered
+                        ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_30px_rgba(255,122,26,0.9)] scale-110'
+                        : isDarkMode
+                          ? 'bg-[#09090D] border-[#FF7A1A] text-[#FF7A1A] shadow-[0_0_15px_rgba(255,122,26,0.4)] group-hover:bg-[#FF7A1A] group-hover:text-white'
+                          : 'bg-white border-[#FF7A1A] text-[#FF7A1A] group-hover:bg-[#FF7A1A] group-hover:text-white'
+                    }`}>
+                      <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
+                    </div>
 
-                {/* Node Title & Subtitle */}
-                <div className={`${node.textAlign} space-y-1`}>
-                  <h3 className={`font-display text-sm sm:text-base md:text-lg font-bold leading-tight transition-colors duration-200 ${
-                    isHovered
-                      ? 'text-[#FF7A1A]'
-                      : isDarkMode
-                        ? 'text-white group-hover:text-[#FF7A1A]'
-                        : 'text-[#111111] group-hover:text-[#FF7A1A]'
-                  }`}>
-                    {node.title}
-                  </h3>
+                    {/* Text Below Circle */}
+                    <div className="pt-2 space-y-1">
+                      <h3 className={`font-display text-sm sm:text-base font-bold transition-colors ${
+                        isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
+                      }`}>
+                        {node.title}
+                      </h3>
+                      <p className={`text-xs font-normal leading-tight ${
+                        isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                      }`}>
+                        {node.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                )}
 
-                  <p className={`text-xs sm:text-xs font-normal leading-relaxed ${
-                    isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
-                  }`}>
-                    {node.subtitle}
-                  </p>
-                </div>
+                {node.layoutType === 'left' && (
+                  <div className="flex flex-row-reverse items-center gap-3 sm:gap-4 text-right">
+                    {/* Circle Icon Centered Exactly on Point */}
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-300 ${
+                      isHovered
+                        ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_30px_rgba(255,122,26,0.9)] scale-110'
+                        : isDarkMode
+                          ? 'bg-[#09090D] border-[#FF7A1A] text-[#FF7A1A] shadow-[0_0_15px_rgba(255,122,26,0.4)] group-hover:bg-[#FF7A1A] group-hover:text-white'
+                          : 'bg-white border-[#FF7A1A] text-[#FF7A1A] group-hover:bg-[#FF7A1A] group-hover:text-white'
+                    }`}>
+                      <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
+                    </div>
+
+                    {/* Text to the Left of Circle */}
+                    <div className="space-y-1 max-w-[160px] sm:max-w-[220px]">
+                      <h3 className={`font-display text-sm sm:text-base font-bold transition-colors ${
+                        isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
+                      }`}>
+                        {node.title}
+                      </h3>
+                      <p className={`text-xs font-normal leading-tight ${
+                        isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                      }`}>
+                        {node.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                )}
+
+                {node.layoutType === 'right' && (
+                  <div className="flex flex-row items-center gap-3 sm:gap-4 text-left">
+                    {/* Circle Icon Centered Exactly on Point */}
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 shrink-0 flex items-center justify-center transition-all duration-300 ${
+                      isHovered
+                        ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_30px_rgba(255,122,26,0.9)] scale-110'
+                        : isDarkMode
+                          ? 'bg-[#09090D] border-[#FF7A1A] text-[#FF7A1A] shadow-[0_0_15px_rgba(255,122,26,0.4)] group-hover:bg-[#FF7A1A] group-hover:text-white'
+                          : 'bg-white border-[#FF7A1A] text-[#FF7A1A] group-hover:bg-[#FF7A1A] group-hover:text-white'
+                    }`}>
+                      <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
+                    </div>
+
+                    {/* Text to the Right of Circle */}
+                    <div className="space-y-1 max-w-[160px] sm:max-w-[220px]">
+                      <h3 className={`font-display text-sm sm:text-base font-bold transition-colors ${
+                        isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
+                      }`}>
+                        {node.title}
+                      </h3>
+                      <p className={`text-xs font-normal leading-tight ${
+                        isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                      }`}>
+                        {node.subtitle}
+                      </p>
+                    </div>
+                  </div>
+                )}
               </motion.div>
             );
           })}
@@ -227,7 +290,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-center pt-8 space-y-2 border-t border-zinc-800/40 relative z-20"
+          className="text-center pt-8 sm:pt-12 space-y-2 relative z-20"
         >
           <span className="text-[11px] font-mono tracking-widest text-[#FF7A1A] uppercase font-bold">
             IN SIMPLE TERMS
