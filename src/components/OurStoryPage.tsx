@@ -199,7 +199,10 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 isDarkMode={isDarkMode}
                 highlightWords={['strategy', 'design', 'technology']}
               />
-              {' '}
+            </h1>
+
+            {/* RIGHT-ALIGNED SEE OUR WORK CALLOUT LINK */}
+            <div className="flex justify-end pt-2">
               <motion.a
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -210,12 +213,12 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                   if (onNavigateWorks) onNavigateWorks();
                   else window.location.hash = '#works';
                 }}
-                className="text-[#FF7A1A] font-semibold hover:underline inline-flex items-center gap-1 cursor-pointer transition-colors group ml-1"
+                className="text-[#FF7A1A] font-semibold text-lg sm:text-xl hover:underline inline-flex items-center gap-2 cursor-pointer transition-colors group"
               >
                 <span>See our work</span>
-                <ArrowRight className="w-4 h-4 inline group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5 inline group-hover:translate-x-1.5 transition-transform" />
               </motion.a>
-            </h1>
+            </div>
 
             {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK WITH BLUR REVEAL */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
