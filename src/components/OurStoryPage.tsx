@@ -11,6 +11,75 @@ interface OurStoryPageProps {
   onNavigateWorks?: () => void;
 }
 
+// HIGH-CRAFT WORD-BY-WORD KINETIC REVEAL COMPONENT
+const KineticTextReveal: React.FC<{
+  text: string;
+  className?: string;
+  isDarkMode?: boolean;
+  highlightWords?: string[];
+}> = ({ text, className = '', isDarkMode = true, highlightWords = [] }) => {
+  const words = text.split(' ');
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.025,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const wordVariants = {
+    hidden: {
+      opacity: 0,
+      y: 20,
+      filter: 'blur(8px)',
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      filter: 'blur(0px)',
+      transition: {
+        duration: 0.6,
+        ease: [0.16, 1, 0.3, 1],
+      },
+    },
+  };
+
+  return (
+    <motion.span
+      variants={containerVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: '-40px' }}
+      className={`inline-block ${className}`}
+    >
+      {words.map((word, i) => {
+        const cleanWord = word.replace(/[^a-zA-Z0-9®]/g, '');
+        const isHighlight = highlightWords.some(hw => cleanWord.toLowerCase().includes(hw.toLowerCase()));
+
+        return (
+          <motion.span
+            key={i}
+            variants={wordVariants}
+            className={`inline-block mr-[0.25em] ${
+              isHighlight
+                ? 'text-[#FF7A1A] font-medium drop-shadow-[0_0_12px_rgba(255,122,26,0.3)]'
+                : isDarkMode
+                  ? 'text-white'
+                  : 'text-[#111111]'
+            }`}
+          >
+            {word}
+          </motion.span>
+        );
+      })}
+    </motion.span>
+  );
+};
+
 export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   onOpenInquiry,
   isDarkMode = true,
@@ -106,25 +175,35 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-24">
         
         {/* ========================================================================= */}
-        {/* DD.NYC STYLE EDITORIAL MANIFESTO SECTION */}
+        {/* DD.NYC STYLE KINETIC TEXT REVEAL MANIFESTO SECTION */}
         {/* ========================================================================= */}
         <section className="pt-6 sm:pt-12 space-y-12">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-5xl space-y-8 text-left"
-          >
-            {/* PARAGRAPH 1 & 2 EDITORIAL STATEMENT */}
-            <h1 className={`font-display text-xl sm:text-3xl md:text-[34px] font-normal leading-[1.5] tracking-[-0.015em] ${
-              isDarkMode ? 'text-white' : 'text-[#111111]'
-            }`}>
-              Roos StudioX® is a creative growth studio built for businesses that want more than just a website, logo, or marketing campaign.{' '}
-              <span className={isDarkMode ? 'text-zinc-300' : 'text-zinc-700'}>
-                We partner with ambitious brands to build strong foundations, create meaningful digital experiences, and develop growth systems that scale.
-              </span>{' '}
-              By combining strategy, design, technology, and marketing, we help businesses transform ideas into brands, brands into experiences, and experiences into measurable growth.{' '}
-              <a
+          <div className="max-w-5xl space-y-8 text-left">
+            
+            {/* MAIN EDITORIAL STATEMENT WORD-BY-WORD KINETIC REVEAL */}
+            <h1 className="font-display text-xl sm:text-3xl md:text-[34px] font-normal leading-[1.5] tracking-[-0.015em]">
+              <KineticTextReveal
+                text="Roos StudioX® is a creative growth studio built for businesses that want more than just a website, logo, or marketing campaign."
+                isDarkMode={isDarkMode}
+                highlightWords={['Roos', 'StudioX®', 'growth']}
+              />
+              {' '}
+              <KineticTextReveal
+                text="We partner with ambitious brands to build strong foundations, create meaningful digital experiences, and develop growth systems that scale."
+                isDarkMode={isDarkMode}
+                highlightWords={['ambitious', 'growth']}
+              />
+              {' '}
+              <KineticTextReveal
+                text="By combining strategy, design, technology, and marketing, we help businesses transform ideas into brands, brands into experiences, and experiences into measurable growth."
+                isDarkMode={isDarkMode}
+                highlightWords={['strategy', 'design', 'technology']}
+              />
+              {' '}
+              <motion.a
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
                 href="#works"
                 onClick={(e) => {
                   e.preventDefault();
@@ -135,37 +214,61 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               >
                 <span>See our work</span>
                 <ArrowRight className="w-4 h-4 inline group-hover:translate-x-1 transition-transform" />
-              </a>
+              </motion.a>
             </h1>
 
-            {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK */}
+            {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK WITH BLUR REVEAL */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
-              <p className={`text-sm sm:text-base font-normal leading-relaxed ${
-                isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
-              }`}>
+              <motion.p
+                initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+                className={`text-sm sm:text-base font-normal leading-relaxed ${
+                  isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+                }`}
+              >
                 We're not a traditional agency focused on delivering isolated services. We work as an extension of your team, connecting every piece of your business journey—from positioning and branding to websites, automation, and customer acquisition—into one cohesive growth ecosystem.
-              </p>
+              </motion.p>
 
-              <p className={`text-sm sm:text-base font-normal leading-relaxed ${
-                isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
-              }`}>
+              <motion.p
+                initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+                whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className={`text-sm sm:text-base font-normal leading-relaxed ${
+                  isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+                }`}
+              >
                 Our name is inspired by the kangaroo, a symbol of strength, momentum, and forward movement. Just as every leap begins with powerful foundations, we believe sustainable business growth starts with clarity, strategy, and systems that are built to last.
-              </p>
+              </motion.p>
             </div>
 
-            {/* PARAGRAPH 5 CLOSING STATEMENT */}
-            <p className={`text-base sm:text-lg font-medium leading-relaxed max-w-3xl pt-2 ${
-              isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
-            }`}>
+            {/* PARAGRAPH 5 CLOSING STATEMENT WITH SMOOTH REVEAL */}
+            <motion.p
+              initial={{ opacity: 0, y: 20, filter: 'blur(6px)' }}
+              whileInView={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className={`text-base sm:text-lg font-medium leading-relaxed max-w-3xl pt-2 ${
+                isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
+              }`}
+            >
               At Roos StudioX, we don't chase trends or build for short-term attention. We create brands, experiences, and growth engines designed to help businesses move forward with confidence and take meaningful leaps toward their goals.
-            </p>
+            </motion.p>
 
             {/* DD.NYC STYLE BOTTOM ACCENT LINE & CATEGORY LABEL */}
-            <div className="flex items-center gap-4 pt-8 text-xs font-mono tracking-widest text-zinc-500 uppercase">
-              <div className="w-12 h-px bg-zinc-600" />
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="flex items-center gap-4 pt-8 text-xs font-mono tracking-widest text-zinc-500 uppercase"
+            >
+              <div className="w-12 h-px bg-[#FF7A1A]" />
               <span>ROOS STUDIOX® CREATIVE SERVICES & STORY</span>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </section>
 
         {/* ========================================================================= */}
