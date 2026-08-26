@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { ArrowRight, Compass, Shield, Laptop, Code2, Search, TrendingUp, Cpu, Layers, CheckCircle2, ChevronRight, Sparkles, BarChart, Zap, ShieldCheck, XCircle } from 'lucide-react';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import { ArrowRight, Compass, Shield, Laptop, Code2, Search, TrendingUp, Cpu, Layers, CheckCircle2, ChevronRight, Sparkles, BarChart, Zap, ShieldCheck, XCircle, Flame, ZapOff, Activity } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface ServicePageProps {
@@ -16,6 +16,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
+  const [activeComparisonIndex, setActiveComparisonIndex] = useState<number>(0);
 
   // SCROLL-DRIVEN MOTION PHYSICS
   const { scrollYProgress } = useScroll({
@@ -35,8 +36,8 @@ export const ServicePage: React.FC<ServicePageProps> = ({
 
   const triggerLeapConfetti = () => {
     confetti({
-      particleCount: 100,
-      spread: 80,
+      particleCount: 120,
+      spread: 90,
       origin: { y: 0.7 },
       colors: ['#FF7A1A', '#FF8833', '#FFFFFF', '#EA580C'],
     });
@@ -121,36 +122,51 @@ export const ServicePage: React.FC<ServicePageProps> = ({
     ? services
     : services.filter(s => s.category === selectedCategory);
 
-  const comparisonData = [
+  const crazyComparisons = [
     {
-      feature: 'Strategic Focus & Core Objective',
-      traditional: 'Sells disconnected deliverables (a logo, a site, an ad) with zero accountability for business revenue.',
-      roos: 'Engineers an integrated growth engine connecting brand positioning, web speed, and sales automation to drive revenue.',
+      feature: 'CORE OBJECTIVE',
+      tradTitle: 'Deliverable Machine',
+      tradBadge: '💸 WASTED CAPITAL',
+      tradDesc: 'Sells static PDF decks, slow websites, and random ad campaigns with ZERO accountability for revenue.',
+      roosTitle: 'Revenue Engine',
+      roosBadge: '🚀 4.8X GROWTH MULTIPLIER',
+      roosDesc: 'Engineers an integrated growth system linking brand authority, sub-100ms web speed, and sales automation.',
     },
     {
-      feature: 'Execution Velocity & Speed',
-      traditional: 'Months of agency bureaucracy, slow review cycles, and bloated account management layers.',
-      roos: 'Production-ready delivery in 4 to 6 weeks using modern Next.js stacks and 90-day momentum sprints.',
+      feature: 'BUILD VELOCITY',
+      tradTitle: '6-Month Bureaucracy',
+      tradBadge: '🐌 SLOW AS A SNAIL',
+      tradDesc: 'Endless account manager meetings, bloated review cycles, and months of waiting for simple site edits.',
+      roosTitle: '4-Week Sprint Engine',
+      roosBadge: '⚡ HYPER-SPEED EXECUTION',
+      roosDesc: 'Production-ready Next.js deployment in 4 to 6 weeks, operating on continuous 90-day momentum sprints.',
     },
     {
-      feature: 'Technical Architecture & Performance',
-      traditional: 'Heavy WordPress or Webflow templates loaded with plugins causing 4s+ page load delays and low conversions.',
-      roos: 'Next.js & React headless engineering, 100/100 Lighthouse performance benchmark, and sub-100ms load times.',
+      feature: 'WEB SPEED & TECH',
+      tradTitle: 'WordPress Plugin Chaos',
+      tradBadge: '⚠️ 4.8s LOAD DELAY',
+      tradDesc: 'Heavy, slow templates loaded with security flaws, broken plugins, and terrible Lighthouse scores.',
+      roosTitle: 'Sub-100ms Next.js Architecture',
+      roosBadge: '💯 100/100 LIGHTHOUSE',
+      roosDesc: 'Custom React & Next.js headless code with WebGL micro-interactions and zero technical debt.',
     },
     {
-      feature: 'Operations & AI Automation',
-      traditional: '100% manual repetitive tasks, lost lead follow-ups, fragmented emails, and zero automated workflows.',
-      roos: 'Custom AI neural agents, automated CRM lead routing, and 24/7 back-office operations eliminating 85% friction.',
+      feature: 'OPERATIONS & AI',
+      tradTitle: '100% Manual Friction',
+      tradBadge: '🤯 HUMAN BOTTLENECK',
+      tradDesc: 'Manual data entry, lost lead follow-ups, messy spreadsheets, and zero automated workflows.',
+      roosTitle: 'Autonomous Neural AI Workflows',
+      roosBadge: '🤖 85% FRICTION ELIMINATED',
+      roosDesc: 'Custom AI agents and instant CRM lead routing that execute 24/7 back-office tasks automatically.',
     },
     {
-      feature: 'Pricing & Value Alignment',
-      traditional: 'Billable hour padding, scope-creep add-ons, and high retainer fees with zero performance metrics.',
-      roos: 'Flat-rate productized sprints, transparent ROI telemetry, and outcome-oriented value alignment.',
-    },
-    {
-      feature: 'Partnership Relationship',
-      traditional: 'Vendor-client relationship where work is handed off to junior offshore execution teams.',
-      roos: 'Senior strategic growth partner working directly as an extension of your leadership team.',
+      feature: 'TRANSPARENCY & PRICING',
+      tradTitle: 'Billable Hour Padding',
+      tradBadge: '❌ SCOPE-CREEP TRAP',
+      tradDesc: 'Vague invoices, padded hourly billing, and expensive retainer traps with no performance benchmarks.',
+      roosTitle: 'Flat-Rate Productized Sprints',
+      roosBadge: '🎯 FULL ATTRIBUTION ROI',
+      roosDesc: 'Transparent productized pricing, real-time telemetry dashboards, and total outcome alignment.',
     },
   ];
 
@@ -169,7 +185,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       {/* SCROLL-DRIVEN AMBIENT LIGHTING ORB */}
       <motion.div
         style={{ y: glowOrbY }}
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-gradient-to-b from-[#FF7A1A]/20 via-[#FF7A1A]/5 to-transparent blur-[160px] pointer-events-none -z-10"
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[1100px] h-[550px] bg-gradient-to-b from-[#FF7A1A]/22 via-[#FF7A1A]/5 to-transparent blur-[170px] pointer-events-none -z-10"
       />
 
       {/* SCROLL-DRIVEN LASER STREAM LINE */}
@@ -184,7 +200,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-32 relative z-10">
         
         {/* ========================================================================= */}
-        {/* HERO SECTION WITH SCROLL-LINKED SCALE & OPACITY TRANSFORMS */}
+        {/* HERO SECTION */}
         {/* ========================================================================= */}
         <motion.section
           style={{ scale: heroScale, opacity: heroOpacity, y: heroY }}
@@ -244,7 +260,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         </motion.section>
 
         {/* ========================================================================= */}
-        {/* SERVICES CATEGORY FILTER TABS WITH SCROLL REVEAL */}
+        {/* SERVICES CATEGORY FILTER TABS */}
         {/* ========================================================================= */}
         <section className="space-y-12">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-b border-zinc-800 pb-6">
@@ -276,7 +292,7 @@ export const ServicePage: React.FC<ServicePageProps> = ({
             </div>
           </div>
 
-          {/* 8 CORE SERVICES SCROLL-DRIVEN RESPONSIVE GRID */}
+          {/* 8 CORE SERVICES GRID */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filteredServices.map((srv, idx) => {
               const IconComponent = srv.icon;
@@ -327,7 +343,131 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* ENGAGEMENT PROCESS (4 STEP ROADMAP WITH SCROLL MOTION) */}
+        {/* HIGH-OCTANE "CRAZY" TRADITIONAL VS. ROOS BATTLE ARENA SECTION */}
+        {/* ========================================================================= */}
+        <section className="space-y-12 py-8">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-rose-500/20 via-[#FF7A1A]/20 to-[#FF7A1A]/30 border border-[#FF7A1A]/50 text-xs font-mono font-black text-[#FF7A1A] shadow-lg shadow-[#FF7A1A]/20">
+              <Flame className="w-4 h-4 text-[#FF7A1A] animate-pulse" />
+              <span>THE ULTIMATE AGENCY COMPARISON ARENA</span>
+            </div>
+
+            <h2 className="font-display text-4xl sm:text-6xl font-black text-white">
+              Traditional Agency <span className="text-rose-500 font-mono">VS</span> <span className="text-[#FF7A1A]">Roos StudioX</span>
+            </h2>
+
+            <p className="text-sm sm:text-base text-zinc-400 font-medium max-w-2xl mx-auto">
+              See why growth-stage brands abandon legacy marketing vendors for our hyper-powered execution engine.
+            </p>
+          </div>
+
+          {/* CRAZY INTERACTIVE ARENA CARD & SELECTOR */}
+          <div className="space-y-8 max-w-6xl mx-auto">
+            
+            {/* DIMENSION TAB SELECTOR */}
+            <div className="flex flex-wrap justify-center gap-2">
+              {crazyComparisons.map((c, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveComparisonIndex(idx)}
+                  className={`px-5 py-2.5 rounded-2xl text-xs font-mono font-extrabold transition-all cursor-pointer ${
+                    activeComparisonIndex === idx
+                      ? 'bg-gradient-to-r from-[#FF7A1A] to-[#FF8833] text-white shadow-xl shadow-[#FF7A1A]/40 scale-105 border border-[#FF8F3A]'
+                      : 'bg-[#121215] text-zinc-400 border border-zinc-800 hover:text-white hover:border-zinc-700'
+                  }`}
+                >
+                  0{idx + 1}. {c.feature}
+                </button>
+              ))}
+            </div>
+
+            {/* DYNAMIC CRAZY COMPARISON BATTLEFIELD DISPLAY */}
+            <AnimatePresence mode="wait">
+              {(() => {
+                const activeComp = crazyComparisons[activeComparisonIndex];
+                return (
+                  <motion.div
+                    key={activeComparisonIndex}
+                    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                    transition={{ duration: 0.4 }}
+                    className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch"
+                  >
+                    {/* LEFT SIDE: TRADITIONAL AGENCY (GLITCHY DULL WAR ZONE) */}
+                    <div className="p-8 sm:p-12 rounded-[32px] bg-[#0A0708] border border-rose-500/30 space-y-6 relative overflow-hidden text-left shadow-2xl group">
+                      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-rose-600 via-rose-500 to-transparent" />
+                      
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center border border-rose-500/30">
+                            <ZapOff className="w-5 h-5" />
+                          </div>
+                          <span className="font-mono text-xs font-extrabold text-rose-500 uppercase tracking-widest">TRADITIONAL AGENCY</span>
+                        </div>
+
+                        <span className="px-3 py-1 rounded-full bg-rose-500/15 text-rose-400 font-mono text-[11px] font-black border border-rose-500/30">
+                          {activeComp.tradBadge}
+                        </span>
+                      </div>
+
+                      <div className="space-y-3 pt-2">
+                        <h3 className="font-display text-2xl sm:text-3xl font-black text-rose-200">
+                          {activeComp.tradTitle}
+                        </h3>
+                        <p className="text-sm sm:text-base text-zinc-400 font-medium leading-relaxed">
+                          {activeComp.tradDesc}
+                        </p>
+                      </div>
+
+                      <div className="pt-4 border-t border-rose-500/20 flex items-center gap-2 text-xs font-mono text-rose-400 font-bold">
+                        <XCircle className="w-4 h-4 text-rose-500" />
+                        <span>RESULT: HIGH FRICTION & LOST MOMENTUM</span>
+                      </div>
+                    </div>
+
+                    {/* RIGHT SIDE: ROOS STUDIOX (HYPER-NEON GLOWING POWERHOUSE) */}
+                    <div className="p-8 sm:p-12 rounded-[32px] bg-[#0F0F14] border-2 border-[#FF7A1A] space-y-6 relative overflow-hidden text-left shadow-[0_20px_60px_rgba(255,122,26,0.35)] group">
+                      <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-[#FF7A1A] via-[#FF8833] to-amber-400 animate-pulse" />
+                      <div className="absolute -right-20 -bottom-20 w-64 h-64 bg-[#FF7A1A]/20 rounded-full blur-3xl pointer-events-none" />
+
+                      <div className="flex items-center justify-between relative z-10">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-xl bg-[#FF7A1A] text-white flex items-center justify-center shadow-lg shadow-[#FF7A1A]/40">
+                            <Activity className="w-5 h-5" />
+                          </div>
+                          <span className="font-mono text-xs font-black text-[#FF7A1A] uppercase tracking-widest">ROOS STUDIOX ENGINE</span>
+                        </div>
+
+                        <span className="px-3.5 py-1 rounded-full bg-[#FF7A1A]/20 text-[#FF7A1A] font-mono text-[11px] font-extrabold border border-[#FF7A1A]/60 shadow-md">
+                          {activeComp.roosBadge}
+                        </span>
+                      </div>
+
+                      <div className="space-y-3 pt-2 relative z-10">
+                        <h3 className="font-display text-2xl sm:text-3xl font-black text-white group-hover:text-[#FF7A1A] transition-colors">
+                          {activeComp.roosTitle}
+                        </h3>
+                        <p className="text-sm sm:text-base text-zinc-200 font-medium leading-relaxed">
+                          {activeComp.roosDesc}
+                        </p>
+                      </div>
+
+                      <div className="pt-4 border-t border-[#FF7A1A]/40 flex items-center gap-2 text-xs font-mono text-[#FF7A1A] font-bold relative z-10">
+                        <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
+                        <span>RESULT: EXPONENTIAL BRAND MOMENTUM</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })()}
+            </AnimatePresence>
+
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
+        {/* ENGAGEMENT PROCESS */}
         {/* ========================================================================= */}
         <section className="space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -355,68 +495,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                 <span className="font-mono text-3xl font-black text-[#FF7A1A] group-hover:scale-110 inline-block transition-transform">{st.num}</span>
                 <h4 className="font-display text-lg font-black text-white">{st.title}</h4>
                 <p className="text-xs text-zinc-400 font-medium leading-relaxed">{st.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* ========================================================================= */}
-        {/* TRADITIONAL AGENCY VS. ROOS STUDIOX COMPARISON MATRIX */}
-        {/* ========================================================================= */}
-        <section className="space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF7A1A]">WHY WE ARE DIFFERENT</span>
-            <h2 className="font-display text-3xl sm:text-5xl font-black text-white">Traditional Agency vs. Roos StudioX</h2>
-            <p className="text-xs sm:text-sm text-zinc-400 font-medium">See why growth-stage brands switch from legacy marketing vendors to our integrated growth engine.</p>
-          </div>
-
-          <div className="space-y-4 max-w-5xl mx-auto">
-            {/* COMPARISON HEADER BAR */}
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-4 p-4 rounded-2xl bg-[#121215] border border-zinc-800 font-sans text-xs font-bold uppercase tracking-wider hidden md:grid">
-              <div className="md:col-span-4 text-zinc-400">DIMENSION</div>
-              <div className="md:col-span-4 text-rose-400 flex items-center gap-1.5">
-                <XCircle className="w-4 h-4 text-rose-400" />
-                <span>TRADITIONAL AGENCY</span>
-              </div>
-              <div className="md:col-span-4 text-[#FF7A1A] flex items-center gap-1.5">
-                <Sparkles className="w-4 h-4 text-[#FF7A1A]" />
-                <span>ROOS STUDIOX ENGINE</span>
-              </div>
-            </div>
-
-            {/* COMPARISON ROWS */}
-            {comparisonData.map((row, rIdx) => (
-              <motion.div
-                key={rIdx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: rIdx * 0.08 }}
-                className="grid grid-cols-1 md:grid-cols-12 gap-4 p-6 sm:p-8 rounded-3xl bg-[#0A0A0C] border border-zinc-800/90 hover:border-[#FF7A1A]/50 transition-all text-left items-start group shadow-md"
-              >
-                {/* FEATURE DIMENSION */}
-                <div className="md:col-span-4 space-y-1">
-                  <span className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider block md:hidden">DIMENSION</span>
-                  <h4 className="font-display text-lg font-black text-white group-hover:text-[#FF7A1A] transition-colors">
-                    {row.feature}
-                  </h4>
-                </div>
-
-                {/* TRADITIONAL AGENCY */}
-                <div className="md:col-span-4 space-y-1 p-4 rounded-2xl bg-rose-500/5 border border-rose-500/20">
-                  <span className="text-[10px] font-mono font-bold text-rose-400 uppercase tracking-wider block md:hidden">TRADITIONAL AGENCY</span>
-                  <p className="text-xs sm:text-sm text-zinc-300 font-medium leading-relaxed">
-                    {row.traditional}
-                  </p>
-                </div>
-
-                {/* ROOS STUDIOX */}
-                <div className="md:col-span-4 space-y-1 p-4 rounded-2xl bg-[#FF7A1A]/10 border border-[#FF7A1A]/40 shadow-inner">
-                  <span className="text-[10px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider block md:hidden">ROOS STUDIOX</span>
-                  <p className="text-xs sm:text-sm text-white font-semibold leading-relaxed">
-                    {row.roos}
-                  </p>
-                </div>
               </motion.div>
             ))}
           </div>
