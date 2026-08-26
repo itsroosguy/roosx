@@ -17,7 +17,8 @@ const ScrollWord: React.FC<{
   range: [number, number];
   isDarkMode?: boolean;
   isHighlight?: boolean;
-}> = ({ word, progress, range, isDarkMode = true, isHighlight = false }) => {
+  fontWeightClassName?: string;
+}> = ({ word, progress, range, isDarkMode = true, isHighlight = false, fontWeightClassName = 'font-normal' }) => {
   const opacity = useTransform(progress, range, [0.15, 1]);
   const y = useTransform(progress, range, [6, 0]);
 
@@ -35,10 +36,10 @@ const ScrollWord: React.FC<{
         style={{ opacity, y }}
         className={`absolute inset-0 ${
           isHighlight
-            ? 'text-[#FF7A1A] font-black drop-shadow-[0_0_16px_rgba(255,122,26,0.45)]'
+            ? 'text-[#FF7A1A] font-extrabold drop-shadow-[0_0_16px_rgba(255,122,26,0.45)]'
             : isDarkMode
-              ? 'text-white font-extrabold'
-              : 'text-[#111111] font-extrabold'
+              ? `text-white ${fontWeightClassName}`
+              : `text-[#111111] ${fontWeightClassName}`
         }`}
       >
         {word}
@@ -55,7 +56,8 @@ const ScrollTextBlock: React.FC<{
   className?: string;
   isDarkMode?: boolean;
   highlightWords?: string[];
-}> = ({ text, progress, startProgress, endProgress, className = '', isDarkMode = true, highlightWords = [] }) => {
+  fontWeightClassName?: string;
+}> = ({ text, progress, startProgress, endProgress, className = '', isDarkMode = true, highlightWords = [], fontWeightClassName = 'font-normal' }) => {
   const words = text.split(' ');
   const step = (endProgress - startProgress) / words.length;
 
@@ -75,6 +77,7 @@ const ScrollTextBlock: React.FC<{
             range={[wordStart, Math.min(wordEnd, endProgress)]}
             isDarkMode={isDarkMode}
             isHighlight={isHighlight}
+            fontWeightClassName={fontWeightClassName}
           />
         );
       })}
@@ -207,7 +210,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             className="max-w-5xl space-y-8 text-left transition-transform duration-200 ease-out"
           >
             
-            {/* MAIN EDITORIAL STATEMENT SCROLL REVEAL (2X SIZE & BOLD WEIGHT) */}
+            {/* MAIN EDITORIAL STATEMENT SCROLL REVEAL (ONLY THIS IMAGE TEXT IS 2X & BOLD) */}
             <h1 className="font-display text-3xl sm:text-5xl md:text-6xl lg:text-[68px] font-bold sm:font-extrabold leading-[1.18] tracking-[-0.035em]">
               <ScrollTextBlock
                 text="Roos StudioX® is a creative growth studio built for businesses that want more than just a website, logo, or marketing campaign."
@@ -216,6 +219,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 endProgress={0.25}
                 isDarkMode={isDarkMode}
                 highlightWords={['Roos', 'StudioX®', 'growth']}
+                fontWeightClassName="font-bold sm:font-extrabold"
               />
               {' '}
               <ScrollTextBlock
@@ -225,6 +229,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 endProgress={0.45}
                 isDarkMode={isDarkMode}
                 highlightWords={['ambitious', 'growth']}
+                fontWeightClassName="font-bold sm:font-extrabold"
               />
               {' '}
               <ScrollTextBlock
@@ -234,6 +239,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 endProgress={0.6}
                 isDarkMode={isDarkMode}
                 highlightWords={['strategy', 'design', 'technology']}
+                fontWeightClassName="font-bold sm:font-extrabold"
               />
             </h1>
 
@@ -255,8 +261,8 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               </motion.a>
             </div>
 
-            {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2">
+            {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK (NORMAL SIZE, MOVED DOWN SLIGHTLY) */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 sm:pt-10">
               <p className={`text-sm sm:text-base font-normal leading-relaxed ${
                 isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
               }`}>
