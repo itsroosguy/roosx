@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, MotionValue } from 'framer-motion';
 import { Shield, Sparkles, Flame, Scale, Users, Target, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { DoctorStrangePortalMascot } from './DoctorStrangePortalMascot';
+import { MascotOrbitShowcase } from './MascotOrbitShowcase';
 
 interface OurStoryPageProps {
   onOpenInquiry: () => void;
@@ -368,10 +368,10 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* DOCTOR STRANGE SLING RING PORTAL MASCOT SHOWCASE */}
+        {/* MASCOT 5 STRATEGIC ORBIT NODES SHOWCASE */}
         {/* ========================================================================= */}
         <section className="py-4 relative">
-          <DoctorStrangePortalMascot isDarkMode={isDarkMode} />
+          <MascotOrbitShowcase isDarkMode={isDarkMode} />
         </section>
 
         {/* ========================================================================= */}
