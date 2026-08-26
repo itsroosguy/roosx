@@ -22,10 +22,12 @@ const ScrollWord: React.FC<{
   const opacity = useTransform(progress, range, [0.15, 1]);
   const y = useTransform(progress, range, [6, 0]);
 
+  const activeWeightClass = isHighlight ? 'font-black' : fontWeightClassName;
+
   return (
-    <span className={`relative inline-block mr-[0.3em] last:mr-0 select-none ${fontWeightClassName}`}>
+    <span className={`relative inline-block mr-[0.45em] last:mr-0 select-none ${activeWeightClass}`}>
       {/* Ghost Background Word */}
-      <span className={`opacity-15 pointer-events-none ${
+      <span className={`opacity-15 pointer-events-none ${activeWeightClass} ${
         isDarkMode ? 'text-zinc-600' : 'text-zinc-300'
       }`}>
         {word}
@@ -34,12 +36,12 @@ const ScrollWord: React.FC<{
       {/* Active Revealing Word */}
       <motion.span
         style={{ opacity, y }}
-        className={`absolute inset-0 whitespace-nowrap ${
+        className={`absolute inset-0 whitespace-nowrap ${activeWeightClass} ${
           isHighlight
-            ? 'text-[#FF7A1A] font-black drop-shadow-[0_0_16px_rgba(255,122,26,0.45)]'
+            ? 'text-[#FF7A1A] drop-shadow-[0_0_16px_rgba(255,122,26,0.45)]'
             : isDarkMode
-              ? `text-white ${fontWeightClassName}`
-              : `text-[#111111] ${fontWeightClassName}`
+              ? 'text-white'
+              : 'text-[#111111]'
         }`}
       >
         {word}
