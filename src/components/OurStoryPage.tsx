@@ -358,7 +358,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                   style={{ x: labelX, opacity: labelOpacity, scale: labelScale }}
                   className="text-xs font-mono tracking-widest text-zinc-500 uppercase flex items-center gap-2"
                 >
-                  <span>ROOS STUDIOX® CREATIVE SERVICES & STORY</span>
+                  <span>ROOS STUDIOX® CREATIVE SERVICES & ABOUT</span>
                 </motion.div>
               </div>
             </motion.div>
