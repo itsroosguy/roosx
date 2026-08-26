@@ -4,6 +4,7 @@ declare const styles: {
   readonly headSubsystem: string;
   readonly headAsset: string;
   readonly eyesAsset: string;
+  readonly blinking: string;
   readonly eyeSocketBounds: string;
   readonly socketLeft: string;
   readonly socketRight: string;

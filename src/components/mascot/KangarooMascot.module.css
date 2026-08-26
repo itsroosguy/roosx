@@ -52,7 +52,12 @@
   object-fit: contain;
   pointer-events: none;
   z-index: 2;
-  will-change: transform;
+  will-change: transform, opacity;
+  transition: opacity 0.08s ease-in-out;
+}
+
+.blinking {
+  opacity: 0.15;
 }
 
 .eyeSocketBounds {

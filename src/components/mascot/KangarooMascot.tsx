@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './KangarooMascot.module.css';
 
 interface KangarooMascotProps {
@@ -10,12 +10,13 @@ export const KangarooMascot: React.FC<KangarooMascotProps> = ({ className = '' }
   const layerEyesRef = useRef<HTMLImageElement>(null);
   const socketLeftRef = useRef<HTMLDivElement>(null);
   const socketRightRef = useRef<HTMLDivElement>(null);
+  const [isBlinking, setIsBlinking] = useState<boolean>(false);
 
   useEffect(() => {
-    const HEAD_LERP = 0.06;
-    const EYES_LERP = 0.12;
-    const MAX_EYE_RADIUS_X = 3.2;
-    const MAX_EYE_RADIUS_Y = 2.4;
+    const HEAD_LERP = 0.07;
+    const EYES_LERP = 0.14;
+    const MAX_EYE_RADIUS_X = 3.6;
+    const MAX_EYE_RADIUS_Y = 2.8;
 
     let animFrameId: number;
     let pointer = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
@@ -23,7 +24,30 @@ export const KangarooMascot: React.FC<KangarooMascotProps> = ({ className = '' }
     let targetNormPointer = { x: 0, y: 0 };
 
     let headState = { yaw: 0, pitch: 0, roll: 0, tx: 0, ty: 0 };
-    let eyesOffset = { x: 0, y: 0, targetX: 0, targetY: 0 };
+    let eyesOffset = { x: 0, y: 0, vx: 0, vy: 0, saccadeX: 0, saccadeY: 0 };
+
+    // Organic Random Blinking Engine
+    let blinkTimeout: ReturnType<typeof setTimeout>;
+    const scheduleNextBlink = () => {
+      const delay = Math.random() * 4000 + 3500;
+      blinkTimeout = setTimeout(() => {
+        setIsBlinking(true);
+        setTimeout(() => {
+          setIsBlinking(false);
+          scheduleNextBlink();
+        }, 140);
+      }, delay);
+    };
+
+    scheduleNextBlink();
+
+    // Idle Saccades Micro-Jitter
+    const saccadeInterval = setInterval(() => {
+      if (Math.random() > 0.45) {
+        eyesOffset.saccadeX = (Math.random() - 0.5) * 1.8;
+        eyesOffset.saccadeY = (Math.random() - 0.5) * 1.4;
+      }
+    }, 2000);
 
     const handlePointerMove = (e: MouseEvent | PointerEvent) => {
       pointer.x = e.clientX;
@@ -74,30 +98,44 @@ export const KangarooMascot: React.FC<KangarooMascotProps> = ({ className = '' }
       };
     };
 
-    const animate = () => {
+    let startTime = performance.now();
+
+    const animate = (now: number) => {
       animFrameId = requestAnimationFrame(animate);
+      const time = (now - startTime) * 0.001;
 
       normPointer.x += (targetNormPointer.x - normPointer.x) * HEAD_LERP;
       normPointer.y += (targetNormPointer.y - normPointer.y) * HEAD_LERP;
 
-      // Eyeball tracking
+      // Eyeball tracking with spring physics & velocity overshoot
       const targetEyes = calculateEyeballClampedVector();
-      eyesOffset.targetX = targetEyes.x;
-      eyesOffset.targetY = targetEyes.y;
+      const desiredX = targetEyes.x + eyesOffset.saccadeX;
+      const desiredY = targetEyes.y + eyesOffset.saccadeY;
 
-      eyesOffset.x += (eyesOffset.targetX - eyesOffset.x) * EYES_LERP;
-      eyesOffset.y += (eyesOffset.targetY - eyesOffset.y) * EYES_LERP;
+      const ax = (desiredX - eyesOffset.x) * EYES_LERP;
+      const ay = (desiredY - eyesOffset.y) * EYES_LERP;
+      eyesOffset.vx = (eyesOffset.vx + ax) * 0.78;
+      eyesOffset.vy = (eyesOffset.vy + ay) * 0.78;
+
+      eyesOffset.x += eyesOffset.vx;
+      eyesOffset.y += eyesOffset.vy;
+
+      // Decay micro-saccade offset
+      eyesOffset.saccadeX *= 0.92;
+      eyesOffset.saccadeY *= 0.92;
 
       if (layerEyesRef.current) {
         layerEyesRef.current.style.transform = `translate3d(${eyesOffset.x.toFixed(2)}px, ${eyesOffset.y.toFixed(2)}px, 0)`;
       }
 
-      // Head 20% responsive motion
-      const targetYaw = normPointer.x * 8.0;
-      const targetPitch = -normPointer.y * 5.0;
-      const targetRoll = normPointer.x * 2.5;
-      const targetTx = normPointer.x * 8.0;
-      const targetTy = -normPointer.y * 4.0 + 0.5;
+      // Head 3D motion + ambient breathing sine wave
+      const breathingY = Math.sin(time * 2.2) * 1.5;
+
+      const targetYaw = normPointer.x * 8.5;
+      const targetPitch = -normPointer.y * 5.5;
+      const targetRoll = normPointer.x * 2.8;
+      const targetTx = normPointer.x * 8.5;
+      const targetTy = -normPointer.y * 4.5 + breathingY;
 
       headState.yaw += (targetYaw - headState.yaw) * HEAD_LERP;
       headState.pitch += (targetPitch - headState.pitch) * HEAD_LERP;
@@ -116,7 +154,7 @@ export const KangarooMascot: React.FC<KangarooMascotProps> = ({ className = '' }
       }
     };
 
-    animate();
+    animate(performance.now());
 
     return () => {
       window.removeEventListener('pointermove', handlePointerMove);
@@ -124,6 +162,8 @@ export const KangarooMascot: React.FC<KangarooMascotProps> = ({ className = '' }
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchstart', handleTouchMove);
       cancelAnimationFrame(animFrameId);
+      clearTimeout(blinkTimeout);
+      clearInterval(saccadeInterval);
     };
   }, []);
 
@@ -133,7 +173,12 @@ export const KangarooMascot: React.FC<KangarooMascotProps> = ({ className = '' }
 
       <div ref={headSubsystemRef} className={styles.headSubsystem}>
         <img src="/Head 1.png" alt="Head Asset" className={styles.headAsset} />
-        <img ref={layerEyesRef} src="/eye balls.png" alt="Eye Balls" className={styles.eyesAsset} />
+        <img
+          ref={layerEyesRef}
+          src="/eye balls.png"
+          alt="Eye Balls"
+          className={`${styles.eyesAsset} ${isBlinking ? styles.blinking : ''}`}
+        />
 
         <div ref={socketLeftRef} className={`${styles.eyeSocketBounds} ${styles.socketLeft}`} />
         <div ref={socketRightRef} className={`${styles.eyeSocketBounds} ${styles.socketRight}`} />

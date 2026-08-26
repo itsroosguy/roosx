@@ -1,47 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Interactive Kangaroo Mascot</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title-[#FF7A1A]>Roos StudioX® Ultra-Premium Mascot Eye Tracking</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Premium Standalone CSS */
+    :root {
+      --bg-color: #050508;
+      --accent-color: #FF7A1A;
+      --eye-highlight: rgba(255, 255, 255, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      min-h-screen;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 450px;
+      height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+    }
+
+    /* Ambient Spotlight & Floor Shadows */
+    .spotlight {
+      position: absolute;
+      top: -10%;
+      width: 380px;
+      height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 122, 26, 0.18) 0%, rgba(255, 122, 26, 0.04) 50%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .floor-shadow {
+      position: absolute;
+      bottom: 20px;
+      width: 260px;
+      height: 35px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.85);
+      filter: blur(12px);
+      transform: scaleY(0.4);
+    }
+
+    /* Mascot Layers */
+    .mascot-body {
+      position: absolute;
+      bottom: 0;
+      width: 320px;
+      height: auto;
+      z-index: 1;
+      filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.7));
+    }
+
+    .head-subsystem {
+      position: absolute;
+      top: 20px;
+      width: 280px;
+      height: 300px;
+      z-index: 2;
+      transform-style: preserve-3d;
+      transition: transform 0.05s ease-out;
+    }
+
+    .mascot-head {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: auto;
+      z-index: 2;
+    }
+
+    .eyes-container {
+      position: absolute;
+      top: 110px;
+      left: 70px;
+      width: 140px;
+      height: 60px;
+      z-index: 3;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    /* Eyeball & Eyelid Overlay */
+    .eye-socket {
+      position: relative;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: inset 0 3px 8px rgba(0,0,0,0.3), 0 0 12px rgba(255,122,26,0.25);
+    }
+
+    .iris-pupil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 32px;
+      height: 32px;
+      margin-top: -16px;
+      margin-left: -16px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #5d2b0e 0%, #291104 60%, #0d0401 100%);
+      box-shadow: 0 0 8px rgba(0,0,0,0.6);
+      transition: transform 0.04s ease-out;
+    }
+
+    .pupil {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 16px;
+      height: 16px;
+      margin-top: -8px;
+      margin-left: -8px;
+      border-radius: 50%;
+      background: #050508;
+      transition: transform 0.15s ease-out;
+    }
+
+    .reflection-highlight-1 {
+      position: absolute;
+      top: 18%;
+      left: 22%;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 4px #ffffff;
+    }
+
+    .reflection-highlight-2 {
+      position: absolute;
+      bottom: 22%;
+      right: 25%;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.7);
+    }
+
+    /* Eyelids for Organic Blink */
+    .eyelid-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: #e6600c;
+      transform-origin: top;
+      transform: scaleY(0);
+      transition: transform 0.08s ease-in-out;
+      z-index: 4;
+    }
+
+    .eyelid-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background: #d85404;
+      transform-origin: bottom;
+      transform: scaleY(0);
+      transition: transform 0.08s ease-in-out;
+      z-index: 4;
+    }
+
+    .eyelid-top.blinking, .eyelid-bottom.blinking {
+      transform: scaleY(1) !important;
+    }
+
+    /* HUD Metrics Overlay */
+    .hud-metrics {
+      position: absolute;
+      bottom: 25px;
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--accent-color);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Clean Stage -->
-  <main class="mascot-stage">
-    
-    <!-- Mascot Viewport & Registered Assembly -->
-    <div class="mascot-viewport">
-      <div id="mascot-container" class="mascot-container">
-        
-        <!-- Asset 1: Body 1.png (Static Base Anchor) -->
-        <img id="layer-body" src="Body 1.png" alt="Body" class="mascot-asset body-asset" />
+  <!-- 3D Mascot Stage -->
+  <div className="canvas-container">
+    <div className="spotlight"></div>
+    <div className="floor-shadow"></div>
 
-        <!-- Head Sub-System (Decoupled, 20% Controlled Movement) -->
-        <div id="head-subsystem" class="head-subsystem">
-          
-          <!-- Asset 2: Head 1.png (Decoupled Top Layer) -->
-          <img id="layer-head" src="Head 1.png" alt="Head" class="mascot-asset head-asset" />
+    <!-- Static Torso Anchor -->
+    <img src="Body 1.png" alt="Mascot Body" class="mascot-body" />
 
-          <!-- Asset 3: eye balls.png (Eyeballs Layer, Clamped inside eye sockets) -->
-          <img id="layer-eyes" src="eye balls.png" alt="Eyes" class="mascot-asset eyes-asset" />
+    <!-- 3D Subsystem Head & Interactive Eyes -->
+    <div id="head-subsystem" className="head-subsystem">
+      <img src="Head 1.png" alt="Mascot Head" class="mascot-head" />
 
-          <div id="eye-bounds-left" class="eye-socket-bounds eye-socket-left"></div>
-          <div id="eye-bounds-right" class="eye-socket-bounds eye-socket-right"></div>
-
+      <!-- Interactive Socket Eyes Layer -->
+      <div id="eyes-container" className="eyes-container">
+        <!-- Left Eye Socket -->
+        <div id="eye-socket-left" className="eye-socket">
+          <div id="iris-left" className="iris-pupil">
+            <div id="pupil-left" className="pupil"></div>
+            <div className="reflection-highlight-1"></div>
+            <div className="reflection-highlight-2"></div>
+          </div>
+          <div className="eyelid-top"></div>
+          <div className="eyelid-bottom"></div>
         </div>
 
+        <!-- Right Eye Socket -->
+        <div id="eye-socket-right" className="eye-socket">
+          <div id="iris-right" className="iris-pupil">
+            <div id="pupil-right" className="pupil"></div>
+            <div className="reflection-highlight-1"></div>
+            <div className="reflection-highlight-2"></div>
+          </div>
+          <div className="eyelid-top"></div>
+          <div className="eyelid-bottom"></div>
+        </div>
       </div>
-
-      <!-- Studio Ground Shadow -->
-      <div class="mascot-floor-shadow"></div>
     </div>
+  </div>
 
-  </main>
+  <div className="hud-metrics">
+    [ EYE_TRACKING // SACCADES_ACTIVE // 60_FPS ]
+  </div>
 
   <script src="app.js"></script>
 </body>
