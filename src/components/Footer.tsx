@@ -7,9 +7,7 @@ interface FooterProps {
   isDarkMode?: boolean;
 }
 
-export const Footer: React.FC<FooterProps> = ({
-  isDarkMode = true,
-}) => {
+export const Footer: React.FC<FooterProps> = () => {
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
   const [copiedText, setCopiedText] = useState<string | null>(null);
@@ -53,11 +51,7 @@ export const Footer: React.FC<FooterProps> = ({
 
   return (
     <footer
-      className={`relative z-10 w-full pt-20 pb-12 border-t transition-colors duration-500 overflow-hidden font-sans ${
-        isDarkMode
-          ? 'bg-[#050505] text-[#D4D4D8] border-zinc-900'
-          : 'bg-[#FAF9F6] text-[#111111] border-zinc-200'
-      }`}
+      className="relative z-10 w-full pt-20 pb-12 border-t border-zinc-900 bg-[#050505] text-[#D4D4D8] overflow-hidden font-sans"
     >
       {/* Top Laser Accent Beam */}
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#FF7A1A]/70 to-transparent" />
@@ -105,7 +99,7 @@ export const Footer: React.FC<FooterProps> = ({
           {/* BRAND COLUMN (5 COLS) */}
           <div className="md:col-span-5 space-y-6">
             <a href="#" className="inline-block">
-              <Logo isScrolled={true} isDarkMode={isDarkMode} />
+              <Logo isScrolled={true} isDarkMode={true} />
             </a>
 
             <p className="text-sm sm:text-base leading-relaxed text-zinc-300 font-medium max-w-md">

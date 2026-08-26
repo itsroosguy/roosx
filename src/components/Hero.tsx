@@ -108,11 +108,15 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
             variants={itemVariants}
             className="font-display text-[38px] sm:text-[54px] md:text-[67px] lg:text-[79px] font-bold tracking-[-0.035em] leading-[1.06] text-center"
           >
-            <span className="text-white block pb-0.5">
+            <span className={`block pb-0.5 ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
               You bring ambition
             </span>
             <span className="block pt-0.5 whitespace-nowrap">
-              <span className="bg-gradient-to-r from-zinc-100 via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+              <span className={`bg-clip-text text-transparent ${
+                isDarkMode
+                  ? 'bg-gradient-to-r from-zinc-100 via-zinc-200 to-zinc-400'
+                  : 'bg-gradient-to-r from-[#18181B] via-[#27272A] to-[#3F3F46]'
+              }`}>
                 We’ll build the{' '}
               </span>
               <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] bg-clip-text text-transparent font-extrabold">
