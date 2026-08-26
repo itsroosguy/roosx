@@ -122,6 +122,10 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   const rawLeadY = useTransform(scrollYProgress, [0, 0.35], [70, 0]);
   const leadY = useSpring(rawLeadY, { stiffness: 90, damping: 22 });
 
+  // SECONDARY TEXT CONTENT REVEAL MAP (HIDDEN ON INITIAL SCREEN LOAD, FADES IN ON SCROLL DOWN)
+  const secondaryOpacity = useTransform(scrollYProgress, [0.06, 0.28], [0, 1]);
+  const secondaryY = useTransform(scrollYProgress, [0.06, 0.28], [40, 0]);
+
   // BOUNCE SLIDE MAPS FOR BOTTOM RIGHT LABEL ON FULL REVEAL
   const labelX = useTransform(scrollYProgress, [0.8, 0.98], [120, 0]);
   const labelOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
@@ -236,96 +240,99 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               />
             </motion.h1>
 
-            {/* SECONDARY STATEMENT (OLD NORMAL SIZE) */}
-            <p className="font-display text-xl sm:text-2xl md:text-[30px] font-normal leading-[1.5] tracking-[-0.015em] pt-2">
-              <ScrollTextBlock
-                text="We partner with ambitious brands to build strong foundations, create meaningful digital experiences and develop growth systems that scale."
-                progress={scrollYProgress}
-                startProgress={0.25}
-                endProgress={0.45}
-                isDarkMode={isDarkMode}
-                highlightWords={['ambitious', 'growth']}
-                fontWeightClassName="font-normal"
-              />
-              {' '}
-              <ScrollTextBlock
-                text="By combining strategy, design, technology and marketing, we help businesses transform ideas into brands, brands into experiences and experiences into measurable growth."
-                progress={scrollYProgress}
-                startProgress={0.45}
-                endProgress={0.6}
-                isDarkMode={isDarkMode}
-                highlightWords={['strategy', 'design', 'technology']}
-                fontWeightClassName="font-normal"
-              />
-            </p>
+            {/* SECONDARY CONTENT BLOCK (HIDDEN ON INITIAL SCREEN LOAD, REVEALED ON DOWN SCROLL) */}
+            <motion.div style={{ opacity: secondaryOpacity, y: secondaryY }} className="space-y-8">
+              {/* SECONDARY STATEMENT (OLD NORMAL SIZE) */}
+              <p className="font-display text-xl sm:text-2xl md:text-[30px] font-normal leading-[1.5] tracking-[-0.015em] pt-2">
+                <ScrollTextBlock
+                  text="We partner with ambitious brands to build strong foundations, create meaningful digital experiences and develop growth systems that scale."
+                  progress={scrollYProgress}
+                  startProgress={0.25}
+                  endProgress={0.45}
+                  isDarkMode={isDarkMode}
+                  highlightWords={['ambitious', 'growth']}
+                  fontWeightClassName="font-normal"
+                />
+                {' '}
+                <ScrollTextBlock
+                  text="By combining strategy, design, technology and marketing, we help businesses transform ideas into brands, brands into experiences and experiences into measurable growth."
+                  progress={scrollYProgress}
+                  startProgress={0.45}
+                  endProgress={0.6}
+                  isDarkMode={isDarkMode}
+                  highlightWords={['strategy', 'design', 'technology']}
+                  fontWeightClassName="font-normal"
+                />
+              </p>
 
-            {/* RIGHT-ALIGNED SEE OUR WORK CALLOUT LINK */}
-            <div className="flex justify-end pt-1">
-              <motion.a
-                whileHover={{ scale: 1.05, x: 4 }}
-                whileTap={{ scale: 0.95 }}
-                href="#works"
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (onNavigateWorks) onNavigateWorks();
-                  else window.location.hash = '#works';
-                }}
-                className="text-[#FF7A1A] font-semibold text-base sm:text-lg hover:underline inline-flex items-center gap-2 cursor-pointer transition-colors group"
-              >
-                <span>See our work</span>
-                <ArrowRight className="w-5 h-5 inline group-hover:translate-x-1.5 transition-transform" />
-              </motion.a>
-            </div>
+              {/* RIGHT-ALIGNED SEE OUR WORK CALLOUT LINK */}
+              <div className="flex justify-end pt-1">
+                <motion.a
+                  whileHover={{ scale: 1.05, x: 4 }}
+                  whileTap={{ scale: 0.95 }}
+                  href="#works"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (onNavigateWorks) onNavigateWorks();
+                    else window.location.hash = '#works';
+                  }}
+                  className="text-[#FF7A1A] font-semibold text-base sm:text-lg hover:underline inline-flex items-center gap-2 cursor-pointer transition-colors group"
+                >
+                  <span>See our work</span>
+                  <ArrowRight className="w-5 h-5 inline group-hover:translate-x-1.5 transition-transform" />
+                </motion.a>
+              </div>
 
-            {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK (NORMAL SIZE, MOVED DOWN SLIGHTLY) */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8 sm:pt-10">
-              <p className={`text-sm sm:text-base font-normal leading-relaxed ${
-                isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+              {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK (NORMAL SIZE, MOVED DOWN SLIGHTLY) */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
+                <p className={`text-sm sm:text-base font-normal leading-relaxed ${
+                  isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+                }`}>
+                  <ScrollTextBlock
+                    text="We're not a traditional agency focused on delivering isolated services. We work as an extension of your team, connecting every piece of your business journey—from positioning and branding to websites, automation and customer acquisition—into one cohesive growth ecosystem."
+                    progress={scrollYProgress}
+                    startProgress={0.6}
+                    endProgress={0.75}
+                    isDarkMode={isDarkMode}
+                  />
+                </p>
+
+                <p className={`text-sm sm:text-base font-normal leading-relaxed ${
+                  isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+                }`}>
+                  <ScrollTextBlock
+                    text="Our name is inspired by the kangaroo, a symbol of strength, momentum and forward movement. Just as every leap begins with powerful foundations, we believe sustainable business growth starts with clarity, strategy and systems that are built to last."
+                    progress={scrollYProgress}
+                    startProgress={0.75}
+                    endProgress={0.88}
+                    isDarkMode={isDarkMode}
+                  />
+                </p>
+              </div>
+
+              {/* PARAGRAPH 5 CLOSING STATEMENT */}
+              <p className={`text-base sm:text-lg font-medium leading-relaxed max-w-3xl pt-1 ${
+                isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
               }`}>
                 <ScrollTextBlock
-                  text="We're not a traditional agency focused on delivering isolated services. We work as an extension of your team, connecting every piece of your business journey—from positioning and branding to websites, automation and customer acquisition—into one cohesive growth ecosystem."
+                  text="At Roos StudioX, we don't chase trends or build for short-term attention. We create brands, experiences, and growth engines designed to help businesses move forward with confidence and take meaningful leaps toward their goals."
                   progress={scrollYProgress}
-                  startProgress={0.6}
-                  endProgress={0.75}
+                  startProgress={0.88}
+                  endProgress={0.98}
                   isDarkMode={isDarkMode}
                 />
               </p>
 
-              <p className={`text-sm sm:text-base font-normal leading-relaxed ${
-                isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
-              }`}>
-                <ScrollTextBlock
-                  text="Our name is inspired by the kangaroo, a symbol of strength, momentum and forward movement. Just as every leap begins with powerful foundations, we believe sustainable business growth starts with clarity, strategy and systems that are built to last."
-                  progress={scrollYProgress}
-                  startProgress={0.75}
-                  endProgress={0.88}
-                  isDarkMode={isDarkMode}
-                />
-              </p>
-            </div>
-
-            {/* PARAGRAPH 5 CLOSING STATEMENT */}
-            <p className={`text-base sm:text-lg font-medium leading-relaxed max-w-3xl pt-1 ${
-              isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
-            }`}>
-              <ScrollTextBlock
-                text="At Roos StudioX, we don't chase trends or build for short-term attention. We create brands, experiences, and growth engines designed to help businesses move forward with confidence and take meaningful leaps toward their goals."
-                progress={scrollYProgress}
-                startProgress={0.88}
-                endProgress={0.98}
-                isDarkMode={isDarkMode}
-              />
-            </p>
-
-            {/* BOUNCY SLIDE IN FROM RIGHT CORNER WHEN FULL PARAGRAPH IS REVEALED */}
-            <div className="flex justify-end pt-4 overflow-hidden">
-              <motion.div
-                style={{ x: labelX, opacity: labelOpacity, scale: labelScale }}
-                className="text-xs font-mono tracking-widest text-zinc-500 uppercase flex items-center gap-2"
-              >
-                <span>ROOS STUDIOX® CREATIVE SERVICES & STORY</span>
-              </motion.div>
-            </div>
+              {/* BOUNCY SLIDE IN FROM RIGHT CORNER WHEN FULL PARAGRAPH IS REVEALED */}
+              <div className="flex justify-end pt-4 overflow-hidden">
+                <motion.div
+                  style={{ x: labelX, opacity: labelOpacity, scale: labelScale }}
+                  className="text-xs font-mono tracking-widest text-zinc-500 uppercase flex items-center gap-2"
+                >
+                  <span>ROOS STUDIOX® CREATIVE SERVICES & STORY</span>
+                </motion.div>
+              </div>
+            </motion.div>
 
           </motion.div>
         </section>
