@@ -96,19 +96,20 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
   ];
 
   return (
-    <section className={`py-14 relative overflow-hidden select-none ${className}`}>
+    <section className={`py-12 relative overflow-hidden select-none ${className}`}>
       <div
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className="max-w-7xl mx-auto px-4 relative perspective-1000 flex flex-col items-center"
       >
+        {/* ========================================================================= */}
+        {/* DESKTOP & TABLET 3D ORBIT SHOWCASE */}
+        {/* ========================================================================= */}
         <motion.div
           style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
           className="relative w-[340px] h-[340px] sm:w-[580px] sm:h-[580px] md:w-[760px] md:h-[760px] lg:w-[860px] lg:h-[860px] flex items-center justify-center transition-transform duration-150 ease-out"
         >
-          {/* ========================================================================= */}
           {/* SVG ORBIT CIRCLE (EXACT MATCHING R=250 CENTER=350,350) */}
-          {/* ========================================================================= */}
           <div className="absolute inset-0 pointer-events-none z-0">
             <svg className="w-full h-full filter drop-shadow-[0_0_18px_rgba(255,122,26,0.45)]" viewBox="0 0 700 700">
               {/* Outer Dashed Orbit Ring */}
@@ -147,9 +148,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
           {/* Central Radial Ambient Aura */}
           <div className="absolute w-[320px] h-[320px] md:w-[460px] md:h-[460px] rounded-full bg-radial from-[#FF7A1A]/18 via-[#FF7A1A]/4 to-transparent blur-3xl pointer-events-none z-0" />
 
-          {/* ========================================================================= */}
           {/* CENTER 3D KANGAROO MASCOT STAGE */}
-          {/* ========================================================================= */}
           <div className="relative z-20 flex flex-col items-center justify-center">
             {/* Mascot Vignette Backdrop Portal Ring */}
             <div className="absolute w-[210px] h-[210px] sm:w-[300px] sm:h-[300px] md:w-[380px] md:h-[380px] rounded-full border border-[#FF7A1A]/45 bg-[#050508]/92 shadow-[0_0_70px_rgba(255,122,26,0.32)] pointer-events-none z-0" />
@@ -168,9 +167,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
             </motion.div>
           </div>
 
-          {/* ========================================================================= */}
-          {/* 5 ABSOLUTELY ANCHORED ORBIT NODES (CIRCLE ICON LOCKED TO CX, CY) */}
-          {/* ========================================================================= */}
+          {/* 5 ABSOLUTELY ANCHORED ORBIT NODES */}
           {orbitNodes.map((node) => {
             const IconComp = node.icon;
             const isHovered = hoveredNode === node.id;
@@ -190,7 +187,7 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
                 }}
                 className="absolute z-30 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer group"
               >
-                {/* 1. THE CIRCLE ICON BUTTON (ANCHORED EXACTLY AT 0,0 OFFSET ON RING) */}
+                {/* 1. THE CIRCLE ICON BUTTON (LOCKED TO CX, CY) */}
                 <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 flex items-center justify-center transition-all duration-300 relative z-20 ${
                   isHovered
                     ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_30px_rgba(255,122,26,0.95)] scale-110'
@@ -201,15 +198,15 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
                   <IconComp className="w-5 h-5 sm:w-6 sm:h-6" />
                 </div>
 
-                {/* 2. THE TEXT CARD (POSITIONED DECOUPLED FROM CIRCLE ICON) */}
+                {/* 2. THE TEXT CARD (DECOUPLED AND OFFSET) */}
                 {node.layoutType === 'top' && (
-                  <div className="absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 text-center w-[220px] sm:w-[270px] pointer-events-auto">
-                    <h3 className={`font-display text-sm sm:text-base md:text-lg font-bold transition-colors ${
+                  <div className="absolute top-[calc(100%+10px)] left-1/2 -translate-x-1/2 text-center w-[200px] sm:w-[260px] md:w-[280px] pointer-events-auto">
+                    <h3 className={`font-display text-xs sm:text-base md:text-lg font-bold transition-colors ${
                       isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
                     }`}>
                       {node.title}
                     </h3>
-                    <p className={`text-xs sm:text-xs font-normal leading-snug pt-0.5 ${
+                    <p className={`text-[11px] sm:text-xs font-normal leading-snug pt-0.5 ${
                       isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
                     }`}>
                       {node.subtitle}
@@ -218,13 +215,13 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
                 )}
 
                 {node.layoutType === 'left' && (
-                  <div className="absolute right-[calc(100%+16px)] top-1/2 -translate-y-1/2 text-right w-[160px] sm:w-[230px] md:w-[270px] pointer-events-auto">
-                    <h3 className={`font-display text-sm sm:text-base md:text-lg font-bold transition-colors ${
+                  <div className="absolute right-[calc(100%+16px)] top-1/2 -translate-y-1/2 text-right w-[140px] sm:w-[220px] md:w-[270px] pointer-events-auto">
+                    <h3 className={`font-display text-xs sm:text-base md:text-lg font-bold transition-colors ${
                       isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
                     }`}>
                       {node.title}
                     </h3>
-                    <p className={`text-xs sm:text-xs font-normal leading-snug pt-0.5 ${
+                    <p className={`text-[11px] sm:text-xs font-normal leading-snug pt-0.5 ${
                       isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
                     }`}>
                       {node.subtitle}
@@ -233,13 +230,13 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
                 )}
 
                 {node.layoutType === 'right' && (
-                  <div className="absolute left-[calc(100%+16px)] top-1/2 -translate-y-1/2 text-left w-[160px] sm:w-[230px] md:w-[270px] pointer-events-auto">
-                    <h3 className={`font-display text-sm sm:text-base md:text-lg font-bold transition-colors ${
+                  <div className="absolute left-[calc(100%+16px)] top-1/2 -translate-y-1/2 text-left w-[140px] sm:w-[220px] md:w-[270px] pointer-events-auto">
+                    <h3 className={`font-display text-xs sm:text-base md:text-lg font-bold transition-colors ${
                       isHovered ? 'text-[#FF7A1A]' : isDarkMode ? 'text-white' : 'text-[#111111]'
                     }`}>
                       {node.title}
                     </h3>
-                    <p className={`text-xs sm:text-xs font-normal leading-snug pt-0.5 ${
+                    <p className={`text-[11px] sm:text-xs font-normal leading-snug pt-0.5 ${
                       isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
                     }`}>
                       {node.subtitle}
@@ -250,6 +247,39 @@ export const MascotOrbitShowcase: React.FC<MascotOrbitShowcaseProps> = ({
             );
           })}
         </motion.div>
+
+        {/* ========================================================================= */}
+        {/* MOBILE GRID LAYOUT (RESPONSIVE CARDS FOR MOBILE SCREEN SIZES) */}
+        {/* ========================================================================= */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6 md:hidden w-full max-w-xl">
+          {orbitNodes.map((node) => {
+            const IconComp = node.icon;
+            return (
+              <div
+                key={`mobile-${node.id}`}
+                className={`p-4 rounded-xl border flex items-start gap-3.5 transition-all ${
+                  isDarkMode
+                    ? 'bg-[#09090D]/90 border-[#FF7A1A]/40 text-white'
+                    : 'bg-white border-[#FF7A1A]/40 text-[#111111]'
+                }`}
+              >
+                <div className="w-10 h-10 rounded-full border-2 border-[#FF7A1A] text-[#FF7A1A] flex items-center justify-center shrink-0">
+                  <IconComp className="w-5 h-5" />
+                </div>
+                <div className="space-y-0.5">
+                  <h3 className="font-display text-sm font-bold text-[#FF7A1A]">
+                    {node.title}
+                  </h3>
+                  <p className={`text-xs font-normal leading-relaxed ${
+                    isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                  }`}>
+                    {node.subtitle}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
 
         {/* ========================================================================= */}
         {/* BOTTOM FOOTER CALLOUT SUMMARY */}
