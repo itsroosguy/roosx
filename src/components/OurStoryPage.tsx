@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Shield, Sparkles, Flame, Scale, Users, Target, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { KangarooMascot } from './mascot/KangarooMascot';
 
 interface OurStoryPageProps {
   onOpenInquiry: () => void;
@@ -99,8 +98,6 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   // 3D TILT MAPS
   const rotateX = useTransform(smoothMouseY, [-400, 400], [4, -4]);
   const rotateY = useTransform(smoothMouseX, [-600, 600], [-6, 6]);
-  const mascotRotate = useTransform(smoothMouseX, [-600, 600], [-10, 10]);
-  const mascotY = useTransform(smoothMouseY, [-400, 400], [-8, 8]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -294,15 +291,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         {/* THE 6 KANGAROO PHILOSOPHY PILLARS */}
         {/* ========================================================================= */}
         <section className="space-y-8 pt-4 border-t border-zinc-800/60">
-          <div className="text-center max-w-3xl mx-auto space-y-2">
-            <motion.div
-              style={{ rotate: mascotRotate, y: mascotY }}
-              className="flex justify-center mb-1 transition-transform duration-200 ease-out"
-            >
-              <div className="w-16 h-16 flex items-center justify-center filter drop-shadow-[0_10px_25px_rgba(255,107,0,0.3)]">
-                <KangarooMascot />
-              </div>
-            </motion.div>
+          <div className="text-center max-w-3xl mx-auto space-y-2 pt-2">
 
             <h2 className={`font-display text-2xl sm:text-4xl font-black ${
               isDarkMode ? 'text-white' : 'text-[#111111]'
