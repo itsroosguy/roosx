@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, MotionValue } from 'framer-motion';
-import { Shield, Sparkles, Flame, Scale, Users, Target, ArrowRight, Linkedin, CheckCircle2, Globe } from 'lucide-react';
+import { Shield, Sparkles, Flame, Scale, Users, Target, ArrowRight, Linkedin, CheckCircle2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface OurStoryPageProps {
@@ -93,7 +93,6 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   onNavigateHome,
   onNavigateWorks,
 }) => {
-  const [activePillar, setActivePillar] = useState<number>(1);
   const manifestoRef = useRef<HTMLDivElement>(null);
 
   // SCROLL PROGRESS OVER MANIFESTO SECTION
@@ -114,18 +113,18 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
   const rotateX = useTransform(smoothMouseY, [-400, 400], [3, -3]);
   const rotateY = useTransform(smoothMouseX, [-600, 600], [-5, 5]);
 
-  // SCROLL-DRIVEN HERO TEXT ZOOM OUT MAP (FILLS 100% SCREEN ON OPEN, ZOOMS OUT ON SCROLL)
+  // SCROLL-DRIVEN HERO TEXT ZOOM OUT MAP
   const rawLeadScale = useTransform(scrollYProgress, [0, 0.35], [1.85, 1]);
   const leadScale = useSpring(rawLeadScale, { stiffness: 90, damping: 22 });
 
   const rawLeadY = useTransform(scrollYProgress, [0, 0.35], [70, 0]);
   const leadY = useSpring(rawLeadY, { stiffness: 90, damping: 22 });
 
-  // SECONDARY TEXT CONTENT REVEAL MAP (HIDDEN ON INITIAL SCREEN LOAD, FADES IN ON SCROLL DOWN)
+  // SECONDARY TEXT CONTENT REVEAL MAP
   const secondaryOpacity = useTransform(scrollYProgress, [0.06, 0.28], [0, 1]);
   const secondaryY = useTransform(scrollYProgress, [0.06, 0.28], [40, 0]);
 
-  // BOUNCE SLIDE MAPS FOR BOTTOM RIGHT LABEL ON FULL REVEAL
+  // BOUNCE SLIDE MAPS FOR BOTTOM RIGHT LABEL
   const labelX = useTransform(scrollYProgress, [0.8, 0.98], [120, 0]);
   const labelOpacity = useTransform(scrollYProgress, [0.8, 0.95], [0, 1]);
   const labelScale = useTransform(scrollYProgress, [0.8, 0.9, 1], [0.85, 1.08, 1]);
@@ -212,7 +211,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
           : 'bg-[linear-gradient(to_right,#E4E4E760_1px,transparent_1px),linear-gradient(to_bottom,#E4E4E760_1px,transparent_1px)] [mask-image:radial-gradient(ellipse_90%_90%_at_50%_40%,#fff_80%,transparent_100%)]'
       }`} />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-16">
         
         {/* ========================================================================= */}
         {/* DD.NYC STYLE SCROLL-DRIVEN TEXT REVEAL MANIFESTO SECTION */}
@@ -223,7 +222,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             className="max-w-7xl w-full space-y-10 text-left transition-transform duration-200 ease-out"
           >
             
-            {/* MAIN EDITORIAL LEAD (+30% WIDER SECTION & 4 EXACT LINE BREAKS) */}
+            {/* MAIN EDITORIAL LEAD */}
             <motion.h1
               style={{ scale: leadScale, y: leadY, originX: 0, originY: 0 }}
               className="w-full lg:w-[130%] max-w-[1450px] font-display text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-bold sm:font-extrabold leading-[1.15] tracking-[-0.04em] transition-shadow"
@@ -269,9 +268,8 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               />
             </motion.h1>
 
-            {/* SECONDARY CONTENT BLOCK (HIDDEN ON INITIAL SCREEN LOAD, REVEALED ON DOWN SCROLL) */}
+            {/* SECONDARY CONTENT BLOCK */}
             <motion.div style={{ opacity: secondaryOpacity, y: secondaryY }} className="space-y-8">
-              {/* SECONDARY STATEMENT (USER MANIFESTO TEXT) */}
               <p className="font-display text-xl sm:text-2xl md:text-[30px] font-normal leading-[1.5] tracking-[-0.015em] pt-2">
                 <ScrollTextBlock
                   text="Before every leap, there is preparation. Before every success, there are countless decisions nobody sees. The strongest brands aren't built by chance. They're built through clarity, consistency and a willingness to keep moving forward when others stand still."
@@ -294,7 +292,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 />
               </p>
 
-              {/* RIGHT-ALIGNED SEE OUR WORK CALLOUT LINK */}
+              {/* SEE OUR WORK LINK */}
               <div className="flex justify-end pt-1">
                 <motion.a
                   whileHover={{ scale: 1.05, x: 4 }}
@@ -312,7 +310,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 </motion.a>
               </div>
 
-              {/* PARAGRAPH 3 & 4 SECONDARY EDITORIAL BLOCK (NORMAL SIZE, MOVED DOWN SLIGHTLY) */}
+              {/* SECONDARY EDITORIAL BLOCK */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
                 <p className={`text-sm sm:text-base font-normal leading-relaxed ${
                   isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
@@ -339,70 +337,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 </p>
               </div>
 
-              {/* FOUNDER STORY & LINKEDIN TRUST CARD */}
-              <div className={`p-8 sm:p-10 rounded-3xl border relative overflow-hidden backdrop-blur-2xl transition-all shadow-2xl my-6 ${
-                isDarkMode ? 'bg-[#0A0A0C]/90 border-zinc-800/90 shadow-black/80' : 'bg-white border-zinc-200 shadow-xl'
-              }`}>
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-zinc-800/70">
-                  <div className="flex items-center gap-4">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#FF7A1A] via-[#FFA665] to-amber-500 p-0.5 shadow-lg shadow-[#FF7A1A]/30 shrink-0">
-                      <div className="w-full h-full rounded-full bg-[#0F0F12] flex items-center justify-center font-display font-black text-xl text-[#FF7A1A]">
-                        PA
-                      </div>
-                    </div>
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <h3 className={`font-display text-xl font-bold ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
-                          Praveen Aryan
-                        </h3>
-                        <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
-                      </div>
-                      <p className="text-xs font-mono font-semibold text-[#FF7A1A] uppercase tracking-wider">
-                        Founder & Managing Director • Roos StudioX
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* LINKEDIN VERIFIED BUTTON */}
-                  <a
-                    href="https://www.linkedin.com/in/itsroosguy/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0077B5] hover:bg-[#005E93] text-white text-xs font-mono font-bold uppercase tracking-wider transition-all shadow-md cursor-pointer shrink-0 group"
-                  >
-                    <Linkedin className="w-4 h-4 fill-current" />
-                    <span>Connect on LinkedIn</span>
-                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                  </a>
-                </div>
-
-                <div className="pt-6 space-y-4">
-                  <p className={`text-xs sm:text-sm font-medium leading-relaxed ${
-                    isDarkMode ? 'text-zinc-300' : 'text-zinc-700'
-                  }`}>
-                    "I founded Roos StudioX with a singular mission: to bridge the gap between high-end brand aesthetics and measurable business revenue. Over 7+ years of consulting across international markets in the UAE, Canada, and APAC, I’ve seen brilliant founders struggle with fragmented agencies, bloated budgets, and zero accountability."
-                  </p>
-                  <p className={`text-xs sm:text-sm font-medium leading-relaxed ${
-                    isDarkMode ? 'text-zinc-300' : 'text-zinc-700'
-                  }`}>
-                    "Roos StudioX was built to be different. We operate as an agile, founder-led growth partner combining strategic positioning, 3D spatial design, and intelligent AI automation to turn your digital presence into long-term market authority."
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-4 border-t border-zinc-800/60 flex flex-wrap items-center gap-4 sm:gap-8 text-xs font-mono font-semibold text-zinc-400">
-                  <span className="flex items-center gap-1.5">
-                    <Globe className="w-3.5 h-3.5 text-[#FF7A1A]" />
-                    UAE • Canada • APAC Exposure
-                  </span>
-                  <span className="hidden sm:inline text-zinc-700">•</span>
-                  <span className="flex items-center gap-1.5">
-                    <Shield className="w-3.5 h-3.5 text-[#FF7A1A]" />
-                    7+ Years Advisory Experience
-                  </span>
-                </div>
-              </div>
-
-              {/* PARAGRAPH 5 CLOSING STATEMENT */}
+              {/* CLOSING STATEMENT */}
               <p className={`text-base sm:text-lg font-medium leading-relaxed max-w-3xl pt-1 ${
                 isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
               }`}>
@@ -415,7 +350,6 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 />
               </p>
 
-              {/* BOUNCY SLIDE IN FROM RIGHT CORNER WHEN FULL PARAGRAPH IS REVEALED */}
               <div className="flex justify-end pt-4 overflow-hidden">
                 <motion.div
                   style={{ x: labelX, opacity: labelOpacity, scale: labelScale }}
@@ -430,6 +364,105 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         </section>
 
         {/* ========================================================================= */}
+        {/* DEDICATED EXECUTIVE FOUNDER SHOWCASE SECTION */}
+        {/* ========================================================================= */}
+        <section className={`py-16 sm:py-24 relative z-10 rounded-[36px] border p-8 sm:p-14 overflow-hidden backdrop-blur-2xl transition-all shadow-2xl ${
+          isDarkMode ? 'bg-[#0E0E12]/95 border-zinc-800/90 shadow-black/80' : 'bg-white border-zinc-200 shadow-xl'
+        }`}>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            {/* LEFT COLUMN: EXECUTIVE FOUNDER PORTRAIT PHOTO STAGE (5 COLS) */}
+            <div className="lg:col-span-5 relative group">
+              <div className="relative rounded-[32px] overflow-hidden border-2 border-zinc-800/90 shadow-2xl bg-[#08080A] group-hover:border-[#FF7A1A]/70 transition-all duration-500">
+                <img
+                  src="/images/praveen-aryan.png"
+                  alt="Praveen Aryan — Founder & Managing Director, Roos StudioX"
+                  className="w-full h-auto max-h-[560px] object-cover object-center group-hover:scale-105 transition-transform duration-700 filter contrast-[1.05]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-85" />
+                
+                {/* FLOATING FOUNDER BADGE ON PHOTO */}
+                <div className="absolute bottom-6 left-6 right-6 p-4 rounded-2xl bg-black/80 backdrop-blur-md border border-white/15 flex items-center justify-between">
+                  <div>
+                    <h4 className="font-display text-lg font-bold text-white flex items-center gap-2">
+                      Praveen Aryan <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
+                    </h4>
+                    <p className="text-[11px] font-mono text-[#FF7A1A] uppercase tracking-wider font-semibold">
+                      Founder & Managing Director
+                    </p>
+                  </div>
+                  <a
+                    href="https://www.linkedin.com/in/itsroosguy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2.5 rounded-full bg-[#0077B5] hover:bg-[#005E93] text-white transition-all shadow-md shrink-0"
+                    aria-label="LinkedIn profile"
+                  >
+                    <Linkedin className="w-4 h-4 fill-current" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Ambient Backlight Glow */}
+              <div className="absolute -inset-4 bg-gradient-to-tr from-[#FF7A1A]/20 to-transparent rounded-[40px] blur-2xl -z-10 group-hover:from-[#FF7A1A]/35 transition-all duration-500" />
+            </div>
+
+            {/* RIGHT COLUMN: EXECUTIVE FOUNDER NARRATIVE & TRUST MATRIX (7 COLS) */}
+            <div className="lg:col-span-7 space-y-6 text-left">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+                <Shield className="w-3.5 h-3.5" /> FOUNDER-LED EXECUTION • STRATEGIC ADVISORY
+              </div>
+
+              <h2 className="font-display text-3xl sm:text-5xl font-black text-white leading-tight">
+                Building Growth Engines That Stand The Test of Scale
+              </h2>
+
+              <div className="space-y-4 text-zinc-300 text-sm sm:text-base font-medium leading-relaxed">
+                <p className="border-l-2 border-[#FF7A1A] pl-4 italic text-zinc-200">
+                  "I founded Roos StudioX with a singular mission: to bridge the gap between high-end brand aesthetics and measurable business revenue."
+                </p>
+                <p>
+                  Over 7+ years of strategic consulting across international markets in the UAE, Canada, and APAC, I’ve seen brilliant founders struggle with fragmented agencies, bloated budgets, and zero accountability.
+                </p>
+                <p>
+                  Roos StudioX was built to be different. We operate as an agile, founder-led growth partner combining strategic positioning, 3D spatial design, and intelligent AI automation to turn your digital presence into long-term market authority.
+                </p>
+              </div>
+
+              {/* METRICS & LINKEDIN CALLOUT */}
+              <div className="pt-6 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-6">
+                <div className="grid grid-cols-3 gap-6">
+                  <div>
+                    <span className="font-mono text-2xl font-black text-white block">7+ Yrs</span>
+                    <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">Global Advisory</span>
+                  </div>
+                  <div>
+                    <span className="font-mono text-2xl font-black text-white block">UAE • CA</span>
+                    <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">Market Reach</span>
+                  </div>
+                  <div>
+                    <span className="font-mono text-2xl font-black text-[#FF7A1A] block">100%</span>
+                    <span className="text-[11px] font-mono text-zinc-400 uppercase tracking-wider block">Founder-Led</span>
+                  </div>
+                </div>
+
+                <a
+                  href="https://www.linkedin.com/in/itsroosguy/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 rounded-full bg-[#0077B5] hover:bg-[#005E93] text-white font-mono text-xs font-bold uppercase tracking-wider transition-all shadow-lg shadow-[#0077B5]/30 inline-flex items-center gap-2 group cursor-pointer"
+                >
+                  <Linkedin className="w-4 h-4 fill-current" />
+                  <span>Connect on LinkedIn</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        {/* ========================================================================= */}
         {/* THE 6 KANGAROO PHILOSOPHY PILLARS */}
         {/* ========================================================================= */}
         <section className="space-y-8 pt-4 border-t border-zinc-800/60">
@@ -441,105 +474,92 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             </h2>
             <p className={`text-xs sm:text-sm font-medium ${
               isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
-            }`}>Discover the core values that guide how we build brands, websites, and business momentum.</p>
+            }`}>
+              Our operating principles for building long-term business momentum.
+            </p>
           </div>
 
-          <div className="relative py-2">
-            <div className="absolute left-1/2 top-0 bottom-0 -translate-x-1/2 w-0.5 bg-gradient-to-b from-transparent via-[#FF7A1A]/40 to-transparent pointer-events-none hidden md:block" />
-
-            <div className="space-y-6 sm:space-y-8">
-              {pillars.map((pillar, idx) => {
-                const isEven = idx % 2 === 0;
-                const IconComponent = pillar.icon;
-                return (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-30px' }}
-                    transition={{ duration: 0.5, delay: idx * 0.05 }}
-                    whileHover={{ scale: 1.01 }}
-                    onClick={() => setActivePillar(idx + 1)}
-                    className={`flex flex-col md:flex-row items-center gap-6 md:gap-12 cursor-pointer group ${
-                      isEven ? 'md:flex-row' : 'md:flex-row-reverse'
-                    }`}
-                  >
-                    <div className={`w-full md:w-1/2 space-y-1.5 ${
-                      isEven ? 'md:text-right md:pr-4' : 'md:text-left md:pl-4'
-                    }`}>
-                      <h3 className={`font-display text-xl sm:text-2xl font-black transition-colors ${
-                        isDarkMode ? 'text-white group-hover:text-[#FF7A1A]' : 'text-[#111111] group-hover:text-[#FF7A1A]'
-                      }`}>
-                        {pillar.title}
-                      </h3>
-
-                      <p className={`text-xs sm:text-sm font-medium leading-relaxed max-w-lg ${
-                        isEven ? 'md:ml-auto' : 'md:mr-auto'
-                      } ${isDarkMode ? 'text-zinc-300' : 'text-zinc-600'}`}>
-                        {pillar.description}
-                      </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pillars.map((pillar, idx) => {
+              const IconComp = pillar.icon;
+              return (
+                <motion.div
+                  key={pillar.num}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.08 }}
+                  className={`p-8 rounded-3xl border space-y-4 text-left relative overflow-hidden transition-all duration-300 hover:scale-[1.02] shadow-xl ${
+                    isDarkMode
+                      ? 'bg-[#0E0E12] border-zinc-800/90 hover:border-[#FF7A1A]/60'
+                      : 'bg-white border-zinc-200 hover:border-[#FF7A1A]/60 shadow-md'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-2xl font-black text-[#FF7A1A]">{pillar.num}</span>
+                    <div className="w-10 h-10 rounded-2xl bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-[#FF7A1A] flex items-center justify-center">
+                      <IconComp className="w-5 h-5" />
                     </div>
+                  </div>
 
-                    <div className="relative flex items-center justify-center shrink-0 z-10">
-                      <div className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
-                        activePillar === idx + 1
-                          ? 'bg-[#FF7A1A] border-[#FF7A1A] text-white shadow-[0_0_25px_rgba(255,122,26,0.6)] scale-105'
-                          : isDarkMode
-                            ? 'bg-[#0A0A0C] border-zinc-800 text-zinc-400 group-hover:border-[#FF7A1A]/60 group-hover:text-white'
-                            : 'bg-white border-zinc-300 text-zinc-600 group-hover:border-[#FF7A1A]/60 group-hover:text-[#111111]'
-                      }`}>
-                        <IconComponent className="w-5 h-5" />
-                      </div>
-                    </div>
+                  <h3 className={`font-display text-xl font-bold ${
+                    isDarkMode ? 'text-white' : 'text-[#111111]'
+                  }`}>
+                    {pillar.title}
+                  </h3>
 
-                    <div className="hidden md:block w-1/2" />
-                  </motion.div>
-                );
-              })}
-            </div>
+                  <p className={`text-xs sm:text-sm leading-relaxed font-medium ${
+                    isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                  }`}>
+                    {pillar.description}
+                  </p>
+                </motion.div>
+              );
+            })}
           </div>
         </section>
 
         {/* ========================================================================= */}
-        {/* FINAL CLOSING MANIFESTO & CTA */}
+        {/* CALL TO ACTION */}
         {/* ========================================================================= */}
-        <section className="py-8 text-center space-y-6 relative">
-          <div className="w-3/4 h-0.5 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent mx-auto opacity-60" />
+        <section className={`p-10 sm:p-16 rounded-[36px] border text-center space-y-6 relative overflow-hidden backdrop-blur-2xl shadow-2xl ${
+          isDarkMode ? 'bg-[#0A0A0C] border-[#FF7A1A]/40' : 'bg-white border-[#FF7A1A]/40'
+        }`}>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-[#FF7A1A] to-transparent" />
 
-          <div className="space-y-3 max-w-3xl mx-auto">
-            <h2 className={`font-display text-2xl sm:text-4xl font-black ${
-              isDarkMode ? 'text-white' : 'text-[#111111]'
-            }`}>
-              At Roos StudioX, we don't just build brands.
-            </h2>
-            <p className={`text-sm sm:text-lg font-medium max-w-2xl mx-auto leading-relaxed ${
-              isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
-            }`}>
-              We build the strength, momentum and confidence to help your business take its next great leap.
-            </p>
-          </div>
+          <h2 className={`font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight ${
+            isDarkMode ? 'text-white' : 'text-[#111111]'
+          }`}>
+            Ready To Build Your Momentum?
+          </h2>
 
-          <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <p className={`text-base sm:text-xl font-medium max-w-2xl mx-auto ${
+            isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+          }`}>
+            Partner directly with Alpha Roos to elevate your brand authority and engineer scalable growth systems.
+          </p>
+
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => {
                 triggerLeapConfetti();
                 onOpenInquiry();
               }}
-              className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF7A1A] text-white font-mono font-extrabold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#FF8833] transition-all shadow-[0_15px_40px_rgba(255,122,26,0.45)] cursor-pointer flex items-center justify-center gap-3 group hover:scale-105 active:scale-95"
+              className="w-full sm:w-auto px-10 py-5 rounded-full bg-[#FF7A1A] hover:bg-[#FF8833] text-white font-sans font-extrabold text-xs sm:text-sm uppercase tracking-wider transition-all shadow-lg shadow-[#FF7A1A]/30 cursor-pointer flex items-center justify-center gap-3 group hover:scale-105 active:scale-95"
             >
-              <span>Take Your Next Leap</span>
+              <span>Schedule Strategic Consultation</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
 
             <button
               onClick={onNavigateHome}
-              className={`w-full sm:w-auto px-8 py-5 rounded-full font-mono font-bold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer hover:scale-105 active:scale-95 ${
+              className={`w-full sm:w-auto px-8 py-5 rounded-full font-sans font-semibold text-xs sm:text-sm uppercase tracking-wider transition-all cursor-pointer hover:scale-105 active:scale-95 ${
                 isDarkMode
                   ? 'bg-[#121215] border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700'
-                  : 'bg-white border border-zinc-300 text-zinc-700 hover:text-black hover:border-zinc-400'
+                  : 'bg-zinc-100 border border-zinc-300 text-zinc-800 hover:text-black shadow-sm'
               }`}
             >
-              Back to Overview
+              Back To Home
             </button>
           </div>
         </section>
