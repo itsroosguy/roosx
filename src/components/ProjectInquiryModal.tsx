@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles, Send, CheckCircle2, ArrowRight, ArrowLeft, Calendar, Rocket, Layers, MessageSquare, Mail, Loader2 } from 'lucide-react';
+import { X, Send, CheckCircle2, ArrowRight, ArrowLeft, Calendar, Rocket, Layers, MessageSquare, Mail, Loader2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { InquiryFormData } from '../types';
 
@@ -150,12 +150,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
         >
           {/* Header Banner */}
           <div className="relative px-6 py-6 sm:px-8 sm:py-7 border-b border-[#27272A] bg-gradient-to-r from-[#141418] via-[#0F0F12] to-[#141418]">
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-mono text-[10px] sm:text-xs font-bold text-[#FF7A1A] tracking-widest uppercase flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-[#FF7A1A]" />
-                DIRECT PARTNER ENGAGEMENT
-              </span>
-
+            <div className="flex items-center justify-end mb-2">
               <button
                 onClick={onClose}
                 className="w-9 h-9 rounded-full bg-[#1F1F24] text-zinc-400 hover:text-white hover:bg-zinc-700 flex items-center justify-center transition-all cursor-pointer"
