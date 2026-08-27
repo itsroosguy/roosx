@@ -473,12 +473,8 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         {/* ========================================================================= */}
         {/* THE ROOS GROWTH OS (4 PHASE OPERATING SYSTEM) */}
         {/* ========================================================================= */}
-        <section className="space-y-12 py-4">
-          <div className="text-center max-w-3xl mx-auto space-y-4">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
-              <Cpu className="w-3.5 h-3.5" /> THE STRATEGIC OPERATING SYSTEM
-            </div>
-
+        <section className="space-y-10 py-2">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
             <h2 className={`font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight ${
               isDarkMode ? 'text-white' : 'text-[#111111]'
             }`}>
@@ -496,28 +492,24 @@ export const ServicePage: React.FC<ServicePageProps> = ({
             {[
               {
                 num: '01',
-                phase: 'PHASE 1',
                 title: 'Diagnostic & Strategic Positioning',
                 desc: 'We audit your current digital architecture, uncover high-leverage growth opportunities, map competitive gaps, and establish the strategic blueprint for category leadership.',
                 deliverables: ['Strategic Growth Blueprint', 'Positioning Architecture', 'Competitive Audit', 'Technical Roadmap'],
               },
               {
                 num: '02',
-                phase: 'PHASE 2',
                 title: 'Visual Architecture & Motion Craft',
                 desc: 'We design high-contrast brand systems, interactive 3D spatial concepts, motion graphics, and responsive UI components engineered for high-trust user engagement.',
                 deliverables: ['Figma Master System', 'Spatial Motion Assets', 'Interactive Prototypes', 'Design Tokens'],
               },
               {
                 num: '03',
-                phase: 'PHASE 3',
                 title: 'Precision Engineering & AI Build',
                 desc: 'Our engineering team converts design architecture into production-grade React/TypeScript codebases with sub-100ms loading speeds, AI integrations, and bulletproof security.',
                 deliverables: ['Production Codebase', 'WebGL Shader Engine', 'AI API Integration', 'Lighthouse 98+ Audit'],
               },
               {
                 num: '04',
-                phase: 'PHASE 4',
                 title: 'Growth Acceleration & Momentum',
                 desc: 'Rigorous conversion profiling, global CDN deployment, pipeline tracking, and ongoing optimization to ensure continuous revenue scale.',
                 deliverables: ['Production Deployment', 'Conversion Analytics', 'Global Edge CDN', 'Executive Handoff'],
@@ -535,9 +527,6 @@ export const ServicePage: React.FC<ServicePageProps> = ({
                   <div className="flex items-center justify-between mb-6">
                     <span className="font-mono text-3xl font-black text-[#FF7A1A]">
                       {step.num}
-                    </span>
-                    <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/20">
-                      {step.phase}
                     </span>
                   </div>
 
