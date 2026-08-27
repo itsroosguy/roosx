@@ -157,6 +157,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       stage: 'STAGE 01: FOUNDATION',
       title: 'Strong Legs. Stronger Foundation.',
       description: "A kangaroo's powerful legs make every leap possible. We build the strong basement for your business — strategy, branding, systems and structure that support long-term growth.",
+      deliverables: ['Strategic Brand Positioning', 'Identity System', 'Core Messaging Architecture'],
       icon: Shield,
     },
     {
@@ -164,6 +165,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       stage: 'STAGE 02: INCUBATION',
       title: 'Nurturing Every Joey (Startup).',
       description: 'Every business begins as a small idea with big potential. We nurture that potential with care, guidance and expertise — shaping, building and polishing until you\'re ready to take on the world.',
+      deliverables: ['Value Proposition Polish', 'MVP Digital Assets', 'Market Fit Validation'],
       icon: Sparkles,
     },
     {
@@ -171,6 +173,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       stage: 'STAGE 03: EXPONENTIAL LEAP',
       title: 'Built to Leap 30 Feet.',
       description: 'A kangaroo doesn\'t take small steps. It leaps. We don\'t design for marginal gains — we build for exponential leaps in growth, authority and customer acquisition.',
+      deliverables: ['High-Conversion 3D Web Experience', 'Cinematic Motion Design', 'Customer Acquisition Engines'],
       icon: Flame,
     },
     {
@@ -178,6 +181,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       stage: 'STAGE 04: EQUILIBRIUM',
       title: 'Balance That Drives Growth.',
       description: 'The kangaroo uses its tail for balance while moving at high speeds. We maintain the balance between bold creative design and strategic business goals.',
+      deliverables: ['CRO Optimization', 'Multi-Channel Consistency', 'Brand & Performance Balance'],
       icon: Scale,
     },
     {
@@ -185,6 +189,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       stage: 'STAGE 05: SYNERGY',
       title: 'Stronger Together.',
       description: 'Kangaroos travel in a mob for strength, protection and speed. We operate as an extension of your team — aligning vision, effort and execution.',
+      deliverables: ['Dedicated Co-Pilot Partnership', 'Executive Advisory', 'Unified Team Execution'],
       icon: Users,
     },
     {
@@ -192,6 +197,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
       stage: 'STAGE 06: FUTURE HORIZON',
       title: 'Always Looking Ahead.',
       description: 'A kangaroo cannot walk backwards. It only moves forward. We build with future-proof tech and scalable strategy so your business is always moving forward.',
+      deliverables: ['Autonomous AI Automation', 'Scalable Tech Stack', 'Market Leadership Engine'],
       icon: Target,
     },
   ];
@@ -470,7 +476,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* THE 6-STAGE KANGAROO GROWTH JOURNEY ROADMAP (ALTERNATING LEFT & RIGHT) */}
+        {/* THE 6-STAGE KANGAROO GROWTH JOURNEY ROADMAP (INTERACTIVE & ENGAGING) */}
         {/* ========================================================================= */}
         <section className="space-y-16 pt-6">
           <div className="text-center max-w-3xl mx-auto space-y-3">
@@ -506,13 +512,13 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                   <div key={m.num} className="relative flex flex-col lg:flex-row items-center w-full">
                     
                     {/* CENTER TIMELINE MILESTONE NODE DOT */}
-                    <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#0E0E12] border-2 border-[#FF7A1A] hidden lg:flex items-center justify-center shadow-lg shadow-[#FF7A1A]/40 z-20">
-                      <div className="w-3 h-3 rounded-full bg-[#FF7A1A] animate-ping" />
+                    <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[#0E0E12] border-2 border-[#FF7A1A] hidden lg:flex items-center justify-center shadow-lg shadow-[#FF7A1A]/50 z-20 transition-transform duration-300 hover:scale-125 cursor-pointer">
+                      <div className="w-3.5 h-3.5 rounded-full bg-[#FF7A1A] animate-ping" />
                     </div>
 
                     {/* CARD WRAPPER WITH ALTERNATING LEFT / RIGHT LAYOUT */}
                     <motion.div
-                      initial={{ opacity: 0, x: isEven ? -30 : 30 }}
+                      initial={{ opacity: 0, x: isEven ? -35 : 35 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       viewport={{ once: true }}
                       transition={{ duration: 0.6, delay: 0.1 }}
@@ -521,28 +527,28 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                       }`}
                     >
                       <div
-                        className={`p-6 sm:p-8 rounded-3xl border relative overflow-hidden backdrop-blur-2xl transition-all duration-300 hover:scale-[1.02] shadow-xl text-left ${
+                        className={`p-6 sm:p-8 rounded-3xl border relative overflow-hidden backdrop-blur-2xl transition-all duration-300 hover:scale-[1.025] hover:border-[#FF7A1A] hover:shadow-[0_0_35px_rgba(255,122,26,0.22)] text-left cursor-pointer group ${
                           isDarkMode
-                            ? 'bg-[#0E0E12]/95 border-zinc-800/90 hover:border-[#FF7A1A]/70 shadow-black/80'
-                            : 'bg-white border-zinc-200 hover:border-[#FF7A1A]/70 shadow-zinc-200'
+                            ? 'bg-[#0E0E12]/95 border-zinc-800/90 shadow-black/80'
+                            : 'bg-white border-zinc-200 shadow-zinc-200'
                         }`}
                       >
                         <div className={`flex items-center justify-between gap-4 pb-4 border-b border-zinc-800/60 ${
                           isEven ? 'lg:flex-row-reverse' : 'flex-row'
                         }`}>
                           <div className={`flex items-center gap-3 ${isEven ? 'lg:flex-row-reverse' : ''}`}>
-                            <span className="font-mono text-3xl font-black text-[#FF7A1A]">{m.num}</span>
+                            <span className="font-mono text-3xl font-black text-[#FF7A1A] group-hover:scale-110 transition-transform">{m.num}</span>
                             <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/20">
                               {m.stage}
                             </span>
                           </div>
 
-                          <div className="w-10 h-10 rounded-2xl bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-[#FF7A1A] flex items-center justify-center shrink-0">
+                          <div className="w-10 h-10 rounded-2xl bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-[#FF7A1A] flex items-center justify-center shrink-0 group-hover:bg-[#FF7A1A] group-hover:text-white transition-colors">
                             <IconComp className="w-5 h-5" />
                           </div>
                         </div>
 
-                        <div className="pt-4 space-y-2">
+                        <div className="pt-4 space-y-3">
                           <h3 className={`font-display text-xl font-extrabold ${
                             isDarkMode ? 'text-white' : 'text-[#111111]'
                           }`}>
@@ -554,6 +560,24 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                           }`}>
                             {m.description}
                           </p>
+
+                          {/* KEY DELIVERABLES CHECKLIST */}
+                          <div className="pt-3 border-t border-zinc-800/50 space-y-1.5">
+                            <span className="text-[10px] font-mono font-semibold text-[#FF7A1A] uppercase tracking-wider block">
+                              Key Deliverables:
+                            </span>
+                            <div className="flex flex-wrap gap-2">
+                              {m.deliverables.map((item, dIdx) => (
+                                <span
+                                  key={dIdx}
+                                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium bg-zinc-900/80 border border-zinc-800 text-zinc-300 group-hover:border-[#FF7A1A]/40 transition-colors"
+                                >
+                                  <CheckCircle2 className="w-3 h-3 text-[#FF7A1A]" />
+                                  {item}
+                                </span>
+                              ))}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </motion.div>
