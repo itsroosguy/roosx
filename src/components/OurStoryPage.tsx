@@ -274,26 +274,27 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               />
             </motion.h1>
 
-            {/* SECONDARY CONTENT BLOCK */}
+            {/* SECONDARY CONTENT BLOCK (CRISP ENGAGING STORYTELLING FORMAT) */}
             <motion.div style={{ opacity: secondaryOpacity, y: secondaryY }} className="space-y-8">
+              {/* SECONDARY STATEMENT */}
               <p className="font-display text-xl sm:text-2xl md:text-[30px] font-normal leading-[1.5] tracking-[-0.015em] pt-2">
                 <ScrollTextBlock
-                  text="Before every leap, there is preparation. Before every success, there are countless decisions nobody sees. The strongest brands aren't built by chance. They're built through clarity, consistency and a willingness to keep moving forward when others stand still."
+                  text="Great brands aren't built by chance. They're forged through strategic clarity, relentless craft, and the willingness to move forward when others stand still."
                   progress={scrollYProgress}
                   startProgress={0.25}
                   endProgress={0.48}
                   isDarkMode={isDarkMode}
-                  highlightWords={['leap', 'clarity', 'consistency']}
+                  highlightWords={['clarity', 'craft', 'forward']}
                   fontWeightClassName="font-normal"
                 />
                 <br /><br />
                 <ScrollTextBlock
-                  text="Roos StudioX exists for businesses ready to take that journey."
+                  text="Roos StudioX exists for ambitious leaders ready to take that leap."
                   progress={scrollYProgress}
                   startProgress={0.48}
                   endProgress={0.60}
                   isDarkMode={isDarkMode}
-                  highlightWords={['Roos', 'StudioX', 'journey']}
+                  highlightWords={['Roos', 'StudioX', 'leap']}
                   fontWeightClassName="font-semibold"
                 />
               </p>
@@ -316,13 +317,13 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 </motion.a>
               </div>
 
-              {/* SECONDARY EDITORIAL BLOCK */}
+              {/* SECONDARY EDITORIAL STORYTELLING BLOCK */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4">
                 <p className={`text-sm sm:text-base font-normal leading-relaxed ${
                   isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
                 }`}>
                   <ScrollTextBlock
-                    text="We're not a traditional agency focused on delivering isolated services. We work as an extension of your team, connecting every piece of your business journey from positioning and branding to websites, automation and customer acquisition into one cohesive growth ecosystem."
+                    text="Most businesses don't stall from a lack of ambition — they stall from fragmented advice and slow execution. We operate as an extension of your leadership team, unifying brand strategy, bespoke websites, and automated AI workflows into one cohesive growth ecosystem."
                     progress={scrollYProgress}
                     startProgress={0.6}
                     endProgress={0.75}
@@ -334,7 +335,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                   isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
                 }`}>
                   <ScrollTextBlock
-                    text="Our name is inspired by the kangaroo, a symbol of strength, momentum and forward movement. Just as every leap begins with powerful foundations, we believe sustainable business growth starts with clarity, strategy and systems that are built to last."
+                    text="Inspired by the kangaroo — a symbol of strength and relentless forward momentum — we build with future-proof tech and scalable strategy so your business is always moving forward with confidence."
                     progress={scrollYProgress}
                     startProgress={0.75}
                     endProgress={0.88}
@@ -348,7 +349,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
               }`}>
                 <ScrollTextBlock
-                  text="At Roos StudioX, we don't chase trends or build for short-term attention. We create brands, experiences, and growth engines designed to help businesses move forward with confidence and take meaningful leaps toward their goals."
+                  text="We don't chase short-term trends. We build high-performance digital ecosystems designed to command market authority."
                   progress={scrollYProgress}
                   startProgress={0.88}
                   endProgress={0.98}
