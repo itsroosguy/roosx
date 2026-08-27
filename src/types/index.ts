@@ -58,7 +58,8 @@ export interface ProcessStep {
 
 export interface InquiryFormData {
   serviceTypes: string[];
-  budgetRange: string;
+  budgetRange?: string;
+  projectStage?: string;
   timeline: string;
   name: string;
   email: string;
