@@ -5,84 +5,103 @@ import { Sparkles, Palette, Layers, Cpu, ArrowRight, Zap } from 'lucide-react';
 
 interface BentoServicesProps {
   onOpenInquiry: () => void;
+  isDarkMode?: boolean;
 }
 
-export const BentoServices: React.FC<BentoServicesProps> = ({ onOpenInquiry }) => {
+export const BentoServices: React.FC<BentoServicesProps> = ({ onOpenInquiry, isDarkMode = true }) => {
   const getIcon = (name: string) => {
     switch (name) {
-      case 'Sparkles': return <Sparkles className="w-6 h-6 text-purple-600" />;
-      case 'Palette': return <Palette className="w-6 h-6 text-sky-600" />;
-      case 'Layers': return <Layers className="w-6 h-6 text-pink-600" />;
-      case 'Cpu': return <Cpu className="w-6 h-6 text-emerald-600" />;
-      default: return <Zap className="w-6 h-6 text-amber-600" />;
+      case 'Sparkles': return <Sparkles className="w-5 h-5 text-[#FF7A1A]" />;
+      case 'Palette': return <Palette className="w-5 h-5 text-[#FF7A1A]" />;
+      case 'Layers': return <Layers className="w-5 h-5 text-[#FF7A1A]" />;
+      case 'Cpu': return <Cpu className="w-5 h-5 text-[#FF7A1A]" />;
+      default: return <Zap className="w-5 h-5 text-[#FF7A1A]" />;
     }
   };
 
   return (
-    <section id="services" className="py-24 relative z-10 bg-slate-100/60">
+    <section id="services" className={`py-24 sm:py-32 relative z-10 transition-colors duration-500 ${
+      isDarkMode ? 'bg-[#0A0A0C] text-white' : 'bg-[#FAF9F6] text-[#111111]'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-sky-200 text-xs font-semibold text-sky-700 mb-4 bg-white">
-            <Zap className="w-3.5 h-3.5" /> Core Capabilities
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+            <Zap className="w-3.5 h-3.5" /> STRATEGIC CORE CAPABILITIES
           </div>
-          <h2 className="font-display text-3xl sm:text-5xl font-extrabold text-slate-900">
-            End-to-End <span className="text-gradient">Digital Mastery</span>
+          
+          <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-[1.08]">
+            Engineered for <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FFA665] to-amber-500 bg-clip-text text-transparent">Business Transformation</span>
           </h2>
-          <p className="mt-4 text-slate-600 text-base sm:text-lg">
-            From preliminary visual strategy to production React deployment and 3D motion, we build digital products engineered for long-term category leadership.
+          
+          <p className={`text-base sm:text-lg font-medium leading-relaxed max-w-2xl mx-auto ${
+            isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+          }`}>
+            We do not sell tasks or design hours. We engineer high-authority brand architectures, digital revenue engines, and automated AI infrastructure designed for enterprise valuation scale.
           </p>
         </div>
 
         {/* Bento Grid Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {SERVICES.map((service, index) => (
             <motion.div
               key={service.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className={`glass-card glass-card-hover rounded-3xl p-8 border border-slate-200/80 flex flex-col justify-between relative overflow-hidden group bg-white ${service.colSpan || 'col-span-1'}`}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              className={`rounded-3xl p-8 border flex flex-col justify-between relative overflow-hidden group transition-all duration-500 hover:scale-[1.02] shadow-xl ${
+                service.colSpan || 'col-span-1'
+              } ${
+                isDarkMode
+                  ? 'bg-[#121215] border-zinc-800/90 hover:border-[#FF7A1A]/60 shadow-black/60'
+                  : 'bg-white border-zinc-200 hover:border-[#FF7A1A]/60 shadow-zinc-200'
+              }`}
             >
               {/* Card Ambient Glow Corner */}
-              <div className="absolute -top-12 -right-12 w-40 h-40 bg-purple-100 rounded-full blur-2xl group-hover:bg-purple-200 transition-colors" />
+              <div className="absolute -top-12 -right-12 w-44 h-44 bg-[#FF7A1A]/10 rounded-full blur-3xl group-hover:bg-[#FF7A1A]/20 transition-colors pointer-events-none" />
 
               <div>
                 {/* Top Badge & Icon */}
                 <div className="flex items-center justify-between mb-6">
-                  <div className="w-12 h-12 rounded-2xl glass-card border border-slate-200 flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform bg-slate-50">
+                  <div className="w-12 h-12 rounded-2xl bg-[#18181C] border border-zinc-800 flex items-center justify-center shadow-md group-hover:scale-110 transition-transform">
                     {getIcon(service.iconName)}
                   </div>
 
                   {service.badge && (
-                    <span className="px-3 py-1 rounded-full text-xs font-semibold bg-purple-100 text-purple-800 border border-purple-200">
+                    <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold tracking-wider uppercase bg-[#FF7A1A]/15 text-[#FF7A1A] border border-[#FF7A1A]/30">
                       {service.badge}
                     </span>
                   )}
                 </div>
 
                 {/* Title & Subtitle */}
-                <h3 className="font-display text-2xl font-bold text-slate-900 group-hover:text-purple-700 transition-colors">
+                <h3 className={`font-display text-2xl font-black transition-colors ${
+                  isDarkMode ? 'text-white group-hover:text-[#FF7A1A]' : 'text-[#111111] group-hover:text-[#FF7A1A]'
+                }`}>
                   {service.title}
                 </h3>
-                <p className="text-xs font-semibold text-purple-700 mt-1">
+                <p className="text-xs font-mono font-semibold text-[#FF7A1A] mt-1.5 uppercase tracking-wider">
                   {service.subtitle}
                 </p>
 
-                <p className="mt-4 text-slate-600 text-sm leading-relaxed">
+                <p className={`mt-4 text-sm leading-relaxed font-medium ${
+                  isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                }`}>
                   {service.description}
                 </p>
               </div>
 
               {/* Tags & Action Link */}
-              <div className="mt-8 pt-6 border-t border-slate-100 flex items-center justify-between flex-wrap gap-4">
-                <div className="flex flex-wrap gap-1.5">
+              <div className="mt-8 pt-6 border-t border-zinc-800/60 flex items-center justify-between flex-wrap gap-4">
+                <div className="flex flex-wrap gap-2">
                   {service.tags.map((tag, idx) => (
                     <span
                       key={idx}
-                      className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-slate-100 text-slate-700 border border-slate-200"
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold ${
+                        isDarkMode ? 'bg-[#18181C] text-zinc-300 border border-zinc-800' : 'bg-zinc-100 text-zinc-700 border border-zinc-200'
+                      }`}
                     >
                       {tag}
                     </span>
@@ -91,13 +110,12 @@ export const BentoServices: React.FC<BentoServicesProps> = ({ onOpenInquiry }) =
 
                 <button
                   onClick={onOpenInquiry}
-                  className="text-xs font-semibold text-slate-900 hover:text-purple-700 flex items-center gap-1 group/btn"
+                  className="text-xs font-bold text-[#FF7A1A] hover:text-[#FFA665] flex items-center gap-1.5 transition-colors cursor-pointer group/btn"
                 >
-                  <span>Commission Service</span>
+                  <span>Initiate Engagement</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-1 transition-transform" />
                 </button>
               </div>
-
             </motion.div>
           ))}
         </div>

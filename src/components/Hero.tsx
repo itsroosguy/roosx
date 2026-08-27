@@ -50,7 +50,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
   };
 
   const scrollToNextSection = () => {
-    const el = document.getElementById('services');
+    const el = document.getElementById('trust-bar');
     if (el) {
       const yOffset = -75;
       const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
@@ -97,7 +97,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
 
       <div className="max-w-[1750px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full flex flex-col items-center">
         
-        {/* 1. TOP CENTER: REFINED 2-LINE HEADLINE (NO PERIOD & SLIGHTLY LARGER FONT SIZE) */}
+        {/* 1. TOP CENTER: REFINED 2-LINE HEADLINE */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -126,7 +126,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
           </motion.h2>
         </motion.div>
 
-        {/* 2. MIDDLE 2-COLUMN GRID (+15% WIDER SECTION CONTAINER) */}
+        {/* 2. MIDDLE 2-COLUMN GRID */}
         <div className="w-full max-w-[1180px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center -mt-3 sm:-mt-6 md:-mt-8 relative z-20">
           
           {/* MASCOT IN CENTER/LEFT (5 COLS) */}
@@ -141,7 +141,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
             </div>
           </motion.div>
 
-          {/* VERTICALLY CENTER-ALIGNED RIGHT COLUMN TEXT, FLOATING PILLS & BUTTON (7 COLS) */}
+          {/* VERTICALLY CENTER-ALIGNED RIGHT COLUMN TEXT & ACTIONS (7 COLS) */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
@@ -149,14 +149,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
             className="lg:col-span-7 flex flex-col items-start justify-center text-left space-y-4 sm:space-y-5 lg:pl-4 py-4"
           >
             <p
-              className={`text-sm sm:text-base md:text-lg font-normal leading-relaxed max-w-[645px] text-left transition-colors duration-500 ${
+              className={`text-sm sm:text-base md:text-lg font-medium leading-relaxed max-w-[645px] text-left transition-colors duration-500 ${
                 isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
               }`}
             >
-              Roos StudioX helps businesses build stronger brands, create high-performing digital experiences and develop scalable systems for growth. We combine strategy, design and technology to attract the right audience, strengthen customer trust and drive measurable business results. Our focus is simple: turning digital presence into sustainable growth.
+              Roos StudioX is a Creative Intelligence Studio partnering with ambitious founders and executive teams to engineer high-authority brands, category-defining digital products, and automated growth infrastructure. We combine strategy, motion design, and AI technology to transform market presence into sustainable business revenue.
             </p>
 
-            {/* ELEGANT FLOATING ANIMATED MICRO-PILLS (PLACED BETWEEN DESCRIPTION & BUTTON) */}
+            {/* ELEGANT FLOATING ANIMATED MICRO-PILLS */}
             <AntiGravityElements isDarkMode={isDarkMode} />
 
             {/* ACTION BUTTON & CIRCULAR ROTATING TEXT DOWN ARROW BADGE */}
@@ -198,7 +198,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenInquiry, isDarkMode }) => {
                   </svg>
                 </motion.div>
 
-                {/* Centered ChevronDown Arrow Badge with Soft Bounce */}
+                {/* Centered ChevronDown Arrow Badge */}
                 <motion.div
                   animate={{ y: [0, 4, 0] }}
                   transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
