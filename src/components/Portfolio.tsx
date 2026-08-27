@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PROJECTS } from '../data/agencyData';
 import { Project } from '../types';
-import { ArrowUpRight, Sparkles } from 'lucide-react';
+import { Eye, ArrowUpRight } from 'lucide-react';
 
 interface PortfolioProps {
   onSelectProject: (project: Project) => void;
@@ -11,16 +11,16 @@ interface PortfolioProps {
 
 export const Portfolio: React.FC<PortfolioProps> = ({
   onSelectProject,
-  isDarkMode = true,
+  isDarkMode = false,
 }) => {
   const [activeCategory, setActiveCategory] = useState<string>('all');
 
   const categories = [
-    { id: 'all', label: 'All Engagements' },
-    { id: '3d-spatial', label: 'Spatial UI & Motion' },
-    { id: 'branding', label: 'Brand Architecture' },
-    { id: 'web-app', label: 'Platforms & Fintech' },
-    { id: 'ai-motion', label: 'AI & Interactive' },
+    { id: 'all', label: 'All Case Studies' },
+    { id: '3d-spatial', label: '3D & Spatial UI' },
+    { id: 'branding', label: 'Brand Identity' },
+    { id: 'web-app', label: 'Web Apps & Fintech' },
+    { id: 'ai-motion', label: 'AI & Motion' },
   ];
 
   const filteredProjects =
@@ -31,8 +31,8 @@ export const Portfolio: React.FC<PortfolioProps> = ({
   return (
     <section
       id="portfolio"
-      className={`relative py-20 sm:py-32 transition-colors duration-500 overflow-hidden ${
-        isDarkMode ? 'bg-[#0A0A0C] text-white' : 'bg-[#FAF9F6] text-[#111111]'
+      className={`relative py-16 sm:py-24 transition-colors duration-500 overflow-hidden ${
+        isDarkMode ? 'bg-[#0A0A0A] text-white' : 'bg-white text-[#111111]'
       }`}
     >
       {/* Background Architectural Mesh */}
@@ -45,46 +45,50 @@ export const Portfolio: React.FC<PortfolioProps> = ({
       />
 
       {/* Dynamic Brand Ambient Backlight */}
-      <div className="absolute top-1/3 right-10 w-96 h-96 bg-[#FF7A1A]/10 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 right-10 w-96 h-96 bg-[#F97316]/10 rounded-full blur-[140px] pointer-events-none" />
 
       <div className="max-w-[1750px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
-          <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
-              <Sparkles className="w-3.5 h-3.5" /> ACTIVE ENGAGEMENTS & PRIVATE BUILDS
-            </div>
-            
-            <h2 className="font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight leading-none">
-              Selected Digital <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FFA665] to-amber-500 bg-clip-text text-transparent">Transformations</span>
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 sm:mb-12">
+          <div>
+            <h2
+              className={`font-display text-3xl sm:text-5xl md:text-6xl font-bold tracking-tighter leading-none ${
+                isDarkMode ? 'text-silver-gradient' : 'text-[#111111]'
+              }`}
+            >
+              Proven Growth{' '}
+              <span className="bg-gradient-to-r from-[#F97316] via-[#FB923C] to-[#FDBA74] bg-clip-text text-transparent">
+                Case Studies
+              </span>
             </h2>
           </div>
 
-          {/* Category Filter Pills */}
+          {/* Category Filter Pills (Mobile Swipeable) */}
           <div
-            className={`flex items-center gap-2 p-1.5 rounded-2xl border backdrop-blur-xl overflow-x-auto scrollbar-none max-w-full shrink-0 ${
+            className={`flex items-center gap-2 p-1.5 rounded-2xl border backdrop-blur-xl overflow-x-auto scrollbar-none max-w-full -mx-2 px-2 sm:mx-0 sm:px-1 shrink-0 ${
               isDarkMode
-                ? 'bg-[#121215] border-zinc-800'
-                : 'bg-white border-zinc-200'
+                ? 'bg-[#18181B]/80 border-[#27272A]'
+                : 'bg-[#FAFAFA] border-[#E4E4E7]'
             }`}
           >
             {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all duration-300 relative cursor-pointer ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-300 relative cursor-pointer ${
                   activeCategory === cat.id
                     ? 'text-white'
                     : isDarkMode
-                    ? 'text-zinc-400 hover:text-white'
-                    : 'text-zinc-600 hover:text-[#111111]'
+                    ? 'text-[#D4D4D8] hover:text-white'
+                    : 'text-[#52525B] hover:text-[#111111]'
                 }`}
               >
                 {activeCategory === cat.id && (
                   <motion.div
                     layoutId="activePortfolioCategoryPill"
-                    className="absolute inset-0 bg-[#FF7A1A] rounded-xl -z-10 shadow-md shadow-[#FF7A1A]/30"
+                    className="absolute inset-0 bg-gradient-to-r from-[#F97316] to-[#EA580C] rounded-xl -z-10 shadow-md shadow-[#F97316]/30"
+                    transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 )}
                 {cat.label}
@@ -93,94 +97,133 @@ export const Portfolio: React.FC<PortfolioProps> = ({
           </div>
         </div>
 
-        {/* 2-COLUMN PROJECT GRID */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory}
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -15 }}
-            transition={{ duration: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10"
-          >
+        {/* ALL 4 CASE STUDIES IN EXACTLY 1 ROW (4 COLUMNS) */}
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 items-stretch">
+          <AnimatePresence>
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4 }}
                 onClick={() => onSelectProject(project)}
-                className={`group relative rounded-[32px] border overflow-hidden cursor-pointer transition-all duration-500 hover:scale-[1.015] shadow-2xl flex flex-col justify-between ${
+                className={`group relative rounded-3xl border overflow-hidden cursor-pointer transition-all duration-500 flex flex-col justify-between backdrop-blur-xl ${
                   isDarkMode
-                    ? 'bg-[#121215] border-zinc-800/90 hover:border-[#FF7A1A]/70 shadow-black/80'
-                    : 'bg-white border-zinc-200 hover:border-[#FF7A1A]/70 shadow-zinc-200'
+                    ? 'bg-[#111111]/90 border-[#27272A] hover:border-[#F97316] hover:shadow-[0_20px_50px_-10px_rgba(249,115,22,0.25)]'
+                    : 'bg-white border-[#E4E4E7] hover:border-[#F97316] hover:shadow-[0_20px_50px_-10px_rgba(249,115,22,0.18)] shadow-xs'
                 }`}
               >
-                {/* Image Container */}
-                <div className="relative aspect-[16/10] overflow-hidden bg-zinc-900">
+                {/* Thumbnail Image Container */}
+                <div className="relative h-48 sm:h-56 w-full overflow-hidden bg-slate-900 shrink-0">
                   <img
                     src={project.thumbnail}
                     alt={project.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent opacity-80 group-hover:opacity-60 transition-opacity" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-transparent opacity-70 group-hover:opacity-40 transition-opacity" />
 
-                  {/* Top Client Badge */}
-                  <div className="absolute top-5 right-5">
-                    <span className="px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md text-white font-mono text-xs font-bold border border-white/20">
-                      {project.client}
+                  {/* Top Badges */}
+                  <div className="absolute top-3 left-3 right-3 flex justify-between items-center z-10">
+                    <span className="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider bg-[#0A0A0A]/85 backdrop-blur-md text-[#FDBA74] border border-[#FDBA74]/40 shadow-sm">
+                      {project.categoryLabel}
+                    </span>
+                    <span className="px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-mono bg-[#0A0A0A]/85 backdrop-blur-md text-white border border-white/20 shadow-sm">
+                      {project.year}
                     </span>
                   </div>
 
-                  {/* Bottom Metric Capsule & Arrow */}
-                  <div className="absolute bottom-5 left-5 right-5 flex items-center justify-between">
-                    {project.metrics && project.metrics.length > 0 && (
-                      <span className="px-3.5 py-1.5 rounded-full bg-[#FF7A1A] text-white font-mono text-xs font-bold shadow-md shadow-[#FF7A1A]/30">
-                        {project.metrics[0].label}: {project.metrics[0].value}
-                      </span>
-                    )}
-
-                    <div className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md text-white flex items-center justify-center group-hover:bg-[#FF7A1A] transition-colors ml-auto">
-                      <ArrowUpRight className="w-5 h-5" />
+                  {/* View Details Floating Hover Button */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="px-4 py-2 rounded-full bg-[#F97316] text-white font-bold text-xs flex items-center gap-1.5 transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 shadow-xl shadow-[#F97316]/40 border border-[#FDBA74]/50">
+                      <Eye className="w-3.5 h-3.5" />
+                      <span>Explore Case Study</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Text Content */}
-                <div className="p-6 sm:p-8 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-wider">
-                      {project.categoryLabel}
-                    </span>
-                    <span className="text-xs font-mono text-zinc-500">{project.year}</span>
-                  </div>
+                {/* Card Info Content */}
+                <div
+                  className={`p-5 sm:p-6 flex flex-col justify-between flex-1 relative z-10 ${
+                    isDarkMode ? 'bg-[#111111]' : 'bg-white'
+                  }`}
+                >
+                  <div>
+                    <div className="flex items-start justify-between gap-3 mb-2">
+                      <div>
+                        <div className="text-[11px] font-mono font-bold text-[#F97316] uppercase tracking-widest mb-0.5">
+                          {project.client}
+                        </div>
+                        <h3
+                          className={`font-display text-lg sm:text-xl font-bold transition-colors leading-tight group-hover:text-[#F97316] ${
+                            isDarkMode ? 'text-white' : 'text-[#111111]'
+                          }`}
+                        >
+                          {project.title}
+                        </h3>
+                      </div>
 
-                  <h3 className={`font-display text-2xl sm:text-3xl font-black transition-colors ${
-                    isDarkMode ? 'text-white group-hover:text-[#FF7A1A]' : 'text-[#111111] group-hover:text-[#FF7A1A]'
-                  }`}>
-                    {project.title}
-                  </h3>
-
-                  <p className={`text-xs sm:text-sm font-medium leading-relaxed ${
-                    isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
-                  }`}>
-                    {project.description}
-                  </p>
-
-                  <div className="flex flex-wrap gap-2 pt-3 border-t border-zinc-800/60">
-                    {project.tags.map((tag, idx) => (
-                      <span
-                        key={idx}
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-mono font-semibold ${
-                          isDarkMode ? 'bg-[#18181C] text-zinc-300 border border-zinc-800' : 'bg-zinc-100 text-zinc-700 border border-zinc-200'
+                      <div
+                        className={`w-8 h-8 rounded-full border flex items-center justify-center shrink-0 transition-all duration-300 shadow-sm ${
+                          isDarkMode
+                            ? 'bg-[#18181B] border-[#27272A] text-white group-hover:bg-[#F97316] group-hover:border-[#F97316]'
+                            : 'bg-[#FAFAFA] border-[#E4E4E7] text-[#111111] group-hover:bg-[#F97316] group-hover:text-white group-hover:border-[#F97316]'
                         }`}
                       >
-                        {tag}
-                      </span>
-                    ))}
+                        <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                      </div>
+                    </div>
+
+                    <p
+                      className={`text-xs sm:text-sm line-clamp-2 leading-relaxed mb-4 ${
+                        isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
+                      }`}
+                    >
+                      {project.description}
+                    </p>
                   </div>
+
+                  {/* Project Metrics snippet */}
+                  <div
+                    className={`pt-3 border-t flex items-center justify-between gap-2 mt-auto ${
+                      isDarkMode ? 'border-[#27272A]' : 'border-[#E4E4E7]'
+                    }`}
+                  >
+                    <div className="flex flex-wrap gap-1.5">
+                      {project.tags.slice(0, 2).map((tag, idx) => (
+                        <span
+                          key={idx}
+                          className={`px-2 py-0.5 rounded-md text-[10px] font-medium border ${
+                            isDarkMode
+                              ? 'bg-[#18181B] text-[#D4D4D8] border-[#27272A]'
+                              : 'bg-[#F4F4F5] text-[#52525B] border-[#E4E4E7]'
+                          }`}
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="text-right shrink-0">
+                      <div className="font-display font-black text-xs sm:text-sm text-[#F97316]">
+                        {project.metrics[0]?.value}
+                      </div>
+                      <div
+                        className={`text-[9px] uppercase font-mono ${
+                          isDarkMode ? 'text-[#D4D4D8]' : 'text-[#52525B]'
+                        }`}
+                      >
+                        {project.metrics[0]?.label}
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-        </AnimatePresence>
+          </AnimatePresence>
+        </motion.div>
 
       </div>
     </section>
