@@ -519,10 +519,10 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                       }`}
                     >
                       <div
-                        className={`p-5 sm:p-6 rounded-2xl border relative overflow-hidden backdrop-blur-2xl transition-all duration-300 hover:scale-[1.02] hover:border-[#FF7A1A] hover:shadow-[0_0_30px_rgba(255,122,26,0.2)] text-left cursor-pointer group ${
+                        className={`p-6 sm:p-7 rounded-2xl border relative overflow-hidden backdrop-blur-2xl transition-all duration-300 hover:scale-[1.02] hover:border-[#FF7A1A] hover:shadow-[0_0_30px_rgba(255,122,26,0.2)] text-left cursor-pointer group ${
                           isDarkMode
                             ? 'bg-[#0E0E12]/95 border-zinc-800/90 shadow-black/80'
-                            : 'bg-white border-zinc-200 shadow-zinc-200'
+                            : 'bg-white border-zinc-200 shadow-zinc-200/80'
                         }`}
                       >
                         <div className={`flex items-center justify-between gap-3 pb-3 border-b ${
@@ -539,34 +539,34 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                           </div>
                         </div>
 
-                        <div className="pt-3 space-y-2">
-                          <h3 className={`font-display text-lg font-extrabold ${
+                        <div className="pt-4 space-y-3">
+                          <h3 className={`font-display text-lg font-extrabold leading-snug ${
                             isDarkMode ? 'text-white' : 'text-[#111111]'
                           }`}>
                             {m.title}
                           </h3>
 
-                          <p className={`text-xs leading-relaxed font-medium ${
-                            isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+                          <p className={`text-xs sm:text-sm leading-relaxed font-medium ${
+                            isDarkMode ? 'text-zinc-300' : 'text-zinc-700'
                           }`}>
                             {m.description}
                           </p>
 
                           {/* KEY DELIVERABLES CHECKLIST */}
-                          <div className={`pt-2 border-t space-y-1 ${
+                          <div className={`pt-3 border-t space-y-1.5 ${
                             isDarkMode ? 'border-zinc-800/50' : 'border-zinc-200'
                           }`}>
                             <div className="flex flex-wrap gap-1.5">
                               {m.deliverables.map((item, dIdx) => (
                                 <span
                                   key={dIdx}
-                                  className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-medium border transition-colors ${
+                                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-mono font-medium border transition-colors ${
                                     isDarkMode
-                                      ? 'bg-zinc-900/80 border-zinc-800 text-zinc-300 group-hover:border-[#FF7A1A]/40'
-                                      : 'bg-zinc-100 border-zinc-200 text-zinc-700 group-hover:border-[#FF7A1A]/40'
+                                      ? 'bg-zinc-900/90 border-zinc-800 text-zinc-300 group-hover:border-[#FF7A1A]/50'
+                                      : 'bg-orange-50/80 border-orange-200/90 text-orange-950 font-semibold group-hover:border-[#FF7A1A]/60'
                                   }`}
                                 >
-                                  <CheckCircle2 className="w-2.5 h-2.5 text-[#FF7A1A]" />
+                                  <CheckCircle2 className="w-3 h-3 text-[#FF7A1A]" />
                                   {item}
                                 </span>
                               ))}
