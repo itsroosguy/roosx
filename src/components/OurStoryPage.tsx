@@ -402,12 +402,18 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
 
             {/* RIGHT COLUMN: EXECUTIVE FOUNDER NARRATIVE & TRUST MATRIX (7 COLS) */}
             <div className="lg:col-span-7 space-y-5 text-left">
-              <h2 className="font-display text-2xl sm:text-4xl font-black text-white leading-tight">
+              <h2 className={`font-display text-2xl sm:text-4xl font-black leading-tight ${
+                isDarkMode ? 'text-white' : 'text-[#111111]'
+              }`}>
                 Building Growth Engines That Stand The Test of Scale
               </h2>
 
-              <div className="space-y-3 text-zinc-300 text-sm font-medium leading-relaxed">
-                <p className="border-l-2 border-[#FF7A1A] pl-3.5 italic text-zinc-200">
+              <div className={`space-y-3 text-sm font-medium leading-relaxed ${
+                isDarkMode ? 'text-zinc-300' : 'text-zinc-700'
+              }`}>
+                <p className={`border-l-2 border-[#FF7A1A] pl-3.5 italic ${
+                  isDarkMode ? 'text-zinc-200' : 'text-zinc-800'
+                }`}>
                   "I founded Roos StudioX with a singular mission: to bridge the gap between high-end brand aesthetics and measurable business revenue."
                 </p>
                 <p>
@@ -419,19 +425,31 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               </div>
 
               {/* METRICS & LINKEDIN CALLOUT */}
-              <div className="pt-4 border-t border-zinc-800/80 flex flex-wrap items-center justify-between gap-4">
+              <div className={`pt-4 border-t flex flex-wrap items-center justify-between gap-4 ${
+                isDarkMode ? 'border-zinc-800/80' : 'border-zinc-200'
+              }`}>
                 <div className="grid grid-cols-3 gap-5">
                   <div>
-                    <span className="font-mono text-xl font-black text-white block">7+ Yrs</span>
-                    <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block">Global Advisory</span>
+                    <span className={`font-mono text-xl font-black block ${
+                      isDarkMode ? 'text-white' : 'text-[#111111]'
+                    }`}>7+ Yrs</span>
+                    <span className={`text-[10px] font-mono uppercase tracking-wider block ${
+                      isDarkMode ? 'text-zinc-400' : 'text-zinc-500'
+                    }`}>Global Advisory</span>
                   </div>
                   <div>
-                    <span className="font-mono text-xl font-black text-white block">UAE • CA</span>
-                    <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block">Market Reach</span>
+                    <span className={`font-mono text-xl font-black block ${
+                      isDarkMode ? 'text-white' : 'text-[#111111]'
+                    }`}>UAE • CA</span>
+                    <span className={`text-[10px] font-mono uppercase tracking-wider block ${
+                      isDarkMode ? 'text-zinc-400' : 'text-zinc-500'
+                    }`}>Market Reach</span>
                   </div>
                   <div>
                     <span className="font-mono text-xl font-black text-[#FF7A1A] block">100%</span>
-                    <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block">Founder-Led</span>
+                    <span className={`text-[10px] font-mono uppercase tracking-wider block ${
+                      isDarkMode ? 'text-zinc-400' : 'text-zinc-500'
+                    }`}>Founder-Led</span>
                   </div>
                 </div>
 
@@ -484,7 +502,9 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                   <div key={m.num} className="relative flex flex-col lg:flex-row items-center w-full">
                     
                     {/* CENTER TIMELINE MILESTONE NODE DOT */}
-                    <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[#0E0E12] border-2 border-[#FF7A1A] hidden lg:flex items-center justify-center shadow-lg shadow-[#FF7A1A]/50 z-20 transition-transform duration-300 hover:scale-125 cursor-pointer">
+                    <div className={`absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border-2 border-[#FF7A1A] hidden lg:flex items-center justify-center shadow-lg shadow-[#FF7A1A]/50 z-20 transition-transform duration-300 hover:scale-125 cursor-pointer ${
+                      isDarkMode ? 'bg-[#0E0E12]' : 'bg-white'
+                    }`}>
                       <div className="w-2.5 h-2.5 rounded-full bg-[#FF7A1A] animate-ping" />
                     </div>
 
@@ -505,7 +525,9 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                             : 'bg-white border-zinc-200 shadow-zinc-200'
                         }`}
                       >
-                        <div className={`flex items-center justify-between gap-3 pb-3 border-b border-zinc-800/60 ${
+                        <div className={`flex items-center justify-between gap-3 pb-3 border-b ${
+                          isDarkMode ? 'border-zinc-800/60' : 'border-zinc-200'
+                        } ${
                           isEven ? 'lg:flex-row-reverse' : 'flex-row'
                         }`}>
                           <div className={`flex items-center gap-2 ${isEven ? 'lg:flex-row-reverse' : ''}`}>
@@ -531,12 +553,18 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                           </p>
 
                           {/* KEY DELIVERABLES CHECKLIST */}
-                          <div className="pt-2 border-t border-zinc-800/50 space-y-1">
+                          <div className={`pt-2 border-t space-y-1 ${
+                            isDarkMode ? 'border-zinc-800/50' : 'border-zinc-200'
+                          }`}>
                             <div className="flex flex-wrap gap-1.5">
                               {m.deliverables.map((item, dIdx) => (
                                 <span
                                   key={dIdx}
-                                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-zinc-900/80 border border-zinc-800 text-zinc-300 group-hover:border-[#FF7A1A]/40 transition-colors"
+                                  className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-mono font-medium border transition-colors ${
+                                    isDarkMode
+                                      ? 'bg-zinc-900/80 border-zinc-800 text-zinc-300 group-hover:border-[#FF7A1A]/40'
+                                      : 'bg-zinc-100 border-zinc-200 text-zinc-700 group-hover:border-[#FF7A1A]/40'
+                                  }`}
                                 >
                                   <CheckCircle2 className="w-2.5 h-2.5 text-[#FF7A1A]" />
                                   {item}
