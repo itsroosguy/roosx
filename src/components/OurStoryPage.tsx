@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useMotionValue, useSpring, useTransform, useScroll, MotionValue } from 'framer-motion';
-import { Shield, Sparkles, Flame, Scale, Users, Target, ArrowRight } from 'lucide-react';
+import { Shield, Sparkles, Flame, Scale, Users, Target, ArrowRight, Linkedin, CheckCircle2, Globe } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface OurStoryPageProps {
@@ -337,6 +337,69 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                     isDarkMode={isDarkMode}
                   />
                 </p>
+              </div>
+
+              {/* FOUNDER STORY & LINKEDIN TRUST CARD */}
+              <div className={`p-8 sm:p-10 rounded-3xl border relative overflow-hidden backdrop-blur-2xl transition-all shadow-2xl my-6 ${
+                isDarkMode ? 'bg-[#0A0A0C]/90 border-zinc-800/90 shadow-black/80' : 'bg-white border-zinc-200 shadow-xl'
+              }`}>
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-zinc-800/70">
+                  <div className="flex items-center gap-4">
+                    <div className="w-16 h-16 rounded-full bg-gradient-to-tr from-[#FF7A1A] via-[#FFA665] to-amber-500 p-0.5 shadow-lg shadow-[#FF7A1A]/30 shrink-0">
+                      <div className="w-full h-full rounded-full bg-[#0F0F12] flex items-center justify-center font-display font-black text-xl text-[#FF7A1A]">
+                        PA
+                      </div>
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className={`font-display text-xl font-bold ${isDarkMode ? 'text-white' : 'text-[#111111]'}`}>
+                          Praveen Aryan
+                        </h3>
+                        <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
+                      </div>
+                      <p className="text-xs font-mono font-semibold text-[#FF7A1A] uppercase tracking-wider">
+                        Founder & Managing Director • Roos StudioX
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* LINKEDIN VERIFIED BUTTON */}
+                  <a
+                    href="https://www.linkedin.com/in/itsroosguy/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0077B5] hover:bg-[#005E93] text-white text-xs font-mono font-bold uppercase tracking-wider transition-all shadow-md cursor-pointer shrink-0 group"
+                  >
+                    <Linkedin className="w-4 h-4 fill-current" />
+                    <span>Connect on LinkedIn</span>
+                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                </div>
+
+                <div className="pt-6 space-y-4">
+                  <p className={`text-xs sm:text-sm font-medium leading-relaxed ${
+                    isDarkMode ? 'text-zinc-300' : 'text-zinc-700'
+                  }`}>
+                    "I founded Roos StudioX with a singular mission: to bridge the gap between high-end brand aesthetics and measurable business revenue. Over 7+ years of consulting across international markets in the UAE, Canada, and APAC, I’ve seen brilliant founders struggle with fragmented agencies, bloated budgets, and zero accountability."
+                  </p>
+                  <p className={`text-xs sm:text-sm font-medium leading-relaxed ${
+                    isDarkMode ? 'text-zinc-300' : 'text-zinc-700'
+                  }`}>
+                    "Roos StudioX was built to be different. We operate as an agile, founder-led growth partner combining strategic positioning, 3D spatial design, and intelligent AI automation to turn your digital presence into long-term market authority."
+                  </p>
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-zinc-800/60 flex flex-wrap items-center gap-4 sm:gap-8 text-xs font-mono font-semibold text-zinc-400">
+                  <span className="flex items-center gap-1.5">
+                    <Globe className="w-3.5 h-3.5 text-[#FF7A1A]" />
+                    UAE • Canada • APAC Exposure
+                  </span>
+                  <span className="hidden sm:inline text-zinc-700">•</span>
+                  <span className="flex items-center gap-1.5">
+                    <Shield className="w-3.5 h-3.5 text-[#FF7A1A]" />
+                    7+ Years Advisory Experience
+                  </span>
+                </div>
               </div>
 
               {/* PARAGRAPH 5 CLOSING STATEMENT */}
