@@ -470,9 +470,9 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* THE 6-STAGE KANGAROO GROWTH JOURNEY ROADMAP */}
+        {/* THE 6-STAGE KANGAROO GROWTH JOURNEY ROADMAP (ALTERNATING LEFT & RIGHT) */}
         {/* ========================================================================= */}
-        <section className="space-y-12 pt-6">
+        <section className="space-y-16 pt-6">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
               <Sparkles className="w-3.5 h-3.5" /> THE LEAP METHODOLOGY • GROWTH ROADMAP
@@ -491,61 +491,77 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
             </p>
           </div>
 
-          {/* CONNECTED TIMELINE JOURNEY ROADMAP */}
-          <div className="relative max-w-5xl mx-auto space-y-8">
+          {/* ALTERNATING ZIG-ZAG ROADMAP CONTAINER WITH CENTER LINE */}
+          <div className="relative max-w-6xl mx-auto">
             
-            {/* VERTICAL CONNECTING TIMELINE GLOW LINE */}
-            <div className="absolute top-8 bottom-8 left-8 sm:left-12 w-0.5 bg-gradient-to-b from-[#FF7A1A] via-[#FFA665] to-[#EA580C] shadow-[0_0_12px_#FF7A1A] hidden sm:block z-0" />
+            {/* GLOWING CENTER VERTICAL LINE */}
+            <div className="absolute top-8 bottom-8 left-1/2 -translate-x-1/2 w-1 bg-gradient-to-b from-[#FF7A1A] via-[#FFA665] to-[#EA580C] shadow-[0_0_18px_#FF7A1A] hidden lg:block z-0 rounded-full" />
 
-            {journeyMilestones.map((m, idx) => {
-              const IconComp = m.icon;
-              return (
-                <motion.div
-                  key={m.num}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.08 }}
-                  className={`p-6 sm:p-8 rounded-3xl border relative overflow-hidden backdrop-blur-2xl transition-all duration-300 hover:scale-[1.015] shadow-xl text-left z-10 sm:ml-20 ${
-                    isDarkMode
-                      ? 'bg-[#0E0E12]/95 border-zinc-800/90 hover:border-[#FF7A1A]/70 shadow-black/80'
-                      : 'bg-white border-zinc-200 hover:border-[#FF7A1A]/70 shadow-zinc-200'
-                  }`}
-                >
-                  {/* TIMELINE NODE DOT ON THE LINE */}
-                  <div className="absolute -left-[56px] top-8 w-8 h-8 rounded-full bg-[#0E0E12] border-2 border-[#FF7A1A] hidden sm:flex items-center justify-center shadow-lg shadow-[#FF7A1A]/40 z-20">
-                    <div className="w-2.5 h-2.5 rounded-full bg-[#FF7A1A] animate-ping" />
-                  </div>
+            <div className="space-y-12 lg:space-y-16">
+              {journeyMilestones.map((m, idx) => {
+                const IconComp = m.icon;
+                const isEven = idx % 2 === 0;
 
-                  <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-zinc-800/60">
-                    <div className="flex items-center gap-3">
-                      <span className="font-mono text-3xl font-black text-[#FF7A1A]">{m.num}</span>
-                      <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/20">
-                        {m.stage}
-                      </span>
+                return (
+                  <div key={m.num} className="relative flex flex-col lg:flex-row items-center w-full">
+                    
+                    {/* CENTER TIMELINE MILESTONE NODE DOT */}
+                    <div className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-[#0E0E12] border-2 border-[#FF7A1A] hidden lg:flex items-center justify-center shadow-lg shadow-[#FF7A1A]/40 z-20">
+                      <div className="w-3 h-3 rounded-full bg-[#FF7A1A] animate-ping" />
                     </div>
 
-                    <div className="w-10 h-10 rounded-2xl bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-[#FF7A1A] flex items-center justify-center shrink-0">
-                      <IconComp className="w-5 h-5" />
-                    </div>
-                  </div>
+                    {/* CARD WRAPPER WITH ALTERNATING LEFT / RIGHT LAYOUT */}
+                    <motion.div
+                      initial={{ opacity: 0, x: isEven ? -30 : 30 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.6, delay: 0.1 }}
+                      className={`w-full lg:w-[46%] ${
+                        isEven ? 'lg:mr-auto lg:text-right' : 'lg:ml-auto lg:text-left'
+                      }`}
+                    >
+                      <div
+                        className={`p-6 sm:p-8 rounded-3xl border relative overflow-hidden backdrop-blur-2xl transition-all duration-300 hover:scale-[1.02] shadow-xl text-left ${
+                          isDarkMode
+                            ? 'bg-[#0E0E12]/95 border-zinc-800/90 hover:border-[#FF7A1A]/70 shadow-black/80'
+                            : 'bg-white border-zinc-200 hover:border-[#FF7A1A]/70 shadow-zinc-200'
+                        }`}
+                      >
+                        <div className={`flex items-center justify-between gap-4 pb-4 border-b border-zinc-800/60 ${
+                          isEven ? 'lg:flex-row-reverse' : 'flex-row'
+                        }`}>
+                          <div className={`flex items-center gap-3 ${isEven ? 'lg:flex-row-reverse' : ''}`}>
+                            <span className="font-mono text-3xl font-black text-[#FF7A1A]">{m.num}</span>
+                            <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/20">
+                              {m.stage}
+                            </span>
+                          </div>
 
-                  <div className="pt-4 space-y-2">
-                    <h3 className={`font-display text-xl font-extrabold ${
-                      isDarkMode ? 'text-white' : 'text-[#111111]'
-                    }`}>
-                      {m.title}
-                    </h3>
+                          <div className="w-10 h-10 rounded-2xl bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-[#FF7A1A] flex items-center justify-center shrink-0">
+                            <IconComp className="w-5 h-5" />
+                          </div>
+                        </div>
 
-                    <p className={`text-xs sm:text-sm leading-relaxed font-medium ${
-                      isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
-                    }`}>
-                      {m.description}
-                    </p>
+                        <div className="pt-4 space-y-2">
+                          <h3 className={`font-display text-xl font-extrabold ${
+                            isDarkMode ? 'text-white' : 'text-[#111111]'
+                          }`}>
+                            {m.title}
+                          </h3>
+
+                          <p className={`text-xs sm:text-sm leading-relaxed font-medium ${
+                            isDarkMode ? 'text-zinc-300' : 'text-zinc-600'
+                          }`}>
+                            {m.description}
+                          </p>
+                        </div>
+                      </div>
+                    </motion.div>
+
                   </div>
-                </motion.div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </section>
 
