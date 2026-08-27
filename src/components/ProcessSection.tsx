@@ -94,7 +94,7 @@ const process5StepCards: StepCard[] = [
 export const ProcessSection: React.FC<ProcessSectionProps> = ({
   isDarkMode = true,
 }) => {
-  const [activeCardId, setActiveCardId] = useState<string>('discover');
+  const [activeCardId, setActiveCardId] = useState<string>('design');
 
   return (
     <section
