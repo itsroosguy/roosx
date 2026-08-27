@@ -425,7 +425,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                   Over 7+ years of strategic consulting across international markets in the UAE, Canada, and APAC, I’ve seen brilliant founders struggle with fragmented agencies, bloated budgets, and zero accountability.
                 </p>
                 <p>
-                  Roos StudioX was built to be different. We operate as an agile, founder-led growth partner combining strategic positioning, 3D spatial design, and intelligent AI automation to turn your digital presence into long-term market authority.
+                  We combine strategy, design, technology and AI automation to create high-performance digital ecosystems that strengthen brands, improve customer experiences and drive sustainable business growth.
                 </p>
               </div>
 
