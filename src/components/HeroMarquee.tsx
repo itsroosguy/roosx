@@ -24,8 +24,8 @@ export const HeroMarquee: React.FC<HeroMarqueeProps> = ({ isDarkMode }) => {
       id="trust-bar"
       className={`w-full py-4 border-y overflow-hidden relative z-20 transition-colors duration-500 ${
         isDarkMode
-          ? 'bg-[#08080A] border-[#27272A]/80 text-zinc-300'
-          : 'bg-[#111111] border-[#111111] text-zinc-200'
+          ? 'bg-[#08080A] border-[#27272A]/80 text-white'
+          : 'bg-[#111111] border-[#111111] text-white'
       }`}
     >
       <div className="flex whitespace-nowrap overflow-hidden">
@@ -41,13 +41,11 @@ export const HeroMarquee: React.FC<HeroMarqueeProps> = ({ isDarkMode }) => {
           {doubleItems.map((item, idx) => (
             <div key={idx} className="flex items-center gap-10 sm:gap-14 shrink-0">
               <span
-                className={`font-mono text-xs sm:text-sm font-bold tracking-[0.18em] uppercase ${
-                  isDarkMode ? 'text-zinc-300' : 'text-zinc-200'
-                }`}
+                className={`font-display text-xs sm:text-sm font-extrabold tracking-[0.2em] uppercase bg-gradient-to-r from-[#F59E0B] via-[#FBBF24] to-[#D97706] bg-clip-text text-transparent filter drop-shadow-[0_0_10px_rgba(251,191,36,0.35)]`}
               >
                 {item}
               </span>
-              <span className="text-[#FF7A1A] font-bold text-xs">•</span>
+              <span className="text-[#FBBF24] font-bold text-xs opacity-80">•</span>
             </div>
           ))}
         </motion.div>
