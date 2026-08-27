@@ -471,36 +471,100 @@ export const ServicePage: React.FC<ServicePageProps> = ({
         </section>
 
         {/* ========================================================================= */}
-        {/* HOW WE WORK WITH YOU (4 STEP PROCESS) */}
+        {/* THE ROOS GROWTH OS (4 PHASE OPERATING SYSTEM) */}
         {/* ========================================================================= */}
-        <section className="space-y-12">
-          <div className="text-center max-w-3xl mx-auto space-y-3">
-            <span className="text-xs font-sans font-bold uppercase tracking-wider text-[#FF7A1A]">SIMPLE & TRANSPARENT PROCESS</span>
-            <h2 className={`font-display text-3xl sm:text-5xl font-black ${
+        <section className="space-y-12 py-4">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FF7A1A]/10 border border-[#FF7A1A]/30 text-xs font-mono font-bold text-[#FF7A1A] uppercase tracking-widest">
+              <Cpu className="w-3.5 h-3.5" /> THE STRATEGIC OPERATING SYSTEM
+            </div>
+
+            <h2 className={`font-display text-3xl sm:text-5xl md:text-6xl font-black tracking-tight ${
               isDarkMode ? 'text-white' : 'text-[#111111]'
-            }`}>How We Work With You</h2>
-            <p className={`text-xs sm:text-sm font-medium ${
+            }`}>
+              The Roos <span className="bg-gradient-to-r from-[#FF7A1A] via-[#FFA665] to-amber-500 bg-clip-text text-transparent">Growth OS</span>
+            </h2>
+
+            <p className={`text-xs sm:text-sm md:text-base font-medium leading-relaxed max-w-2xl mx-auto ${
               isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
-            }`}>A structured 4-step process designed to get your business live and generating results quickly.</p>
+            }`}>
+              We do not follow rigid project checklists. We execute a disciplined 4-phase operating system engineered to reduce market risk, optimize conversion velocity, and drive enterprise scale.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {[
-              { num: '01', title: 'Discovery & Audit', desc: 'We audit your current brand, website, and competitors to define a clear growth plan.' },
-              { num: '02', title: 'Strategy & Design', desc: 'We create high-converting website designs, branding assets, and copywriting for your approval.' },
-              { num: '03', title: 'Development & Launch', desc: 'We build your fast custom website, integrate automations, and launch smoothly.' },
-              { num: '04', title: 'Growth & Support', desc: 'We run ad campaigns, optimize Google SEO rankings, and provide continuous updates.' },
-            ].map((st, idx) => (
-              <div key={idx} className={`p-6 rounded-2xl border space-y-3 text-left ${
-                isDarkMode ? 'bg-[#0A0A0C] border-zinc-800' : 'bg-white border-zinc-200 shadow-md'
-              }`}>
-                <span className="font-mono text-3xl font-black text-[#FF7A1A]">{st.num}</span>
-                <h4 className={`font-display text-lg font-black ${
-                  isDarkMode ? 'text-white' : 'text-[#111111]'
-                }`}>{st.title}</h4>
-                <p className={`text-xs font-medium leading-relaxed ${
-                  isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
-                }`}>{st.desc}</p>
+              {
+                num: '01',
+                phase: 'PHASE 1',
+                title: 'Diagnostic & Strategic Positioning',
+                desc: 'We audit your current digital architecture, uncover high-leverage growth opportunities, map competitive gaps, and establish the strategic blueprint for category leadership.',
+                deliverables: ['Strategic Growth Blueprint', 'Positioning Architecture', 'Competitive Audit', 'Technical Roadmap'],
+              },
+              {
+                num: '02',
+                phase: 'PHASE 2',
+                title: 'Visual Architecture & Motion Craft',
+                desc: 'We design high-contrast brand systems, interactive 3D spatial concepts, motion graphics, and responsive UI components engineered for high-trust user engagement.',
+                deliverables: ['Figma Master System', 'Spatial Motion Assets', 'Interactive Prototypes', 'Design Tokens'],
+              },
+              {
+                num: '03',
+                phase: 'PHASE 3',
+                title: 'Precision Engineering & AI Build',
+                desc: 'Our engineering team converts design architecture into production-grade React/TypeScript codebases with sub-100ms loading speeds, AI integrations, and bulletproof security.',
+                deliverables: ['Production Codebase', 'WebGL Shader Engine', 'AI API Integration', 'Lighthouse 98+ Audit'],
+              },
+              {
+                num: '04',
+                phase: 'PHASE 4',
+                title: 'Growth Acceleration & Momentum',
+                desc: 'Rigorous conversion profiling, global CDN deployment, pipeline tracking, and ongoing optimization to ensure continuous revenue scale.',
+                deliverables: ['Production Deployment', 'Conversion Analytics', 'Global Edge CDN', 'Executive Handoff'],
+              },
+            ].map((step, idx) => (
+              <div
+                key={idx}
+                className={`rounded-3xl p-8 border flex flex-col justify-between relative overflow-hidden transition-all duration-300 hover:scale-[1.02] shadow-xl text-left ${
+                  isDarkMode
+                    ? 'bg-[#0E0E12] border-zinc-800/90 hover:border-[#FF7A1A]/60 shadow-black/70'
+                    : 'bg-white border-zinc-200 hover:border-[#FF7A1A]/60 shadow-zinc-200'
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-6">
+                    <span className="font-mono text-3xl font-black text-[#FF7A1A]">
+                      {step.num}
+                    </span>
+                    <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-[#FF7A1A]/10 text-[#FF7A1A] border border-[#FF7A1A]/20">
+                      {step.phase}
+                    </span>
+                  </div>
+
+                  <h3 className={`font-display text-xl font-bold mb-3 ${
+                    isDarkMode ? 'text-white' : 'text-[#111111]'
+                  }`}>
+                    {step.title}
+                  </h3>
+
+                  <p className={`text-xs leading-relaxed font-medium mb-6 ${
+                    isDarkMode ? 'text-zinc-400' : 'text-zinc-600'
+                  }`}>
+                    {step.desc}
+                  </p>
+                </div>
+
+                <div className="pt-6 border-t border-zinc-800/60 space-y-2">
+                  <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#FF7A1A] block mb-3">
+                    SYSTEM DELIVERABLES
+                  </span>
+                  {step.deliverables.map((item, i) => (
+                    <div key={i} className="flex items-center gap-2 text-xs font-medium text-zinc-300">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7A1A] shrink-0" />
+                      <span>{item}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </div>
