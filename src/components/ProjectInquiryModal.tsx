@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Sparkles, Send, CheckCircle2, ArrowRight, ArrowLeft, Calendar, Rocket, Layers } from 'lucide-react';
+import { X, Sparkles, Send, CheckCircle2, ArrowRight, ArrowLeft, Calendar, Rocket, Layers, MessageSquare, Mail, Loader2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { InquiryFormData } from '../types';
 
@@ -12,6 +12,7 @@ interface ProjectInquiryModalProps {
 export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen, onClose }) => {
   const [step, setStep] = useState<number>(1);
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<InquiryFormData>({
     serviceTypes: ['Web & App Development'],
@@ -37,14 +38,12 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
     'Other / Custom Request',
   ];
 
-  // Exact user-requested Desired Timelines
   const timelineOptions = [
     { label: 'Immediate (Next 2 Weeks)', icon: '⚡' },
     { label: 'Within 1 Month', icon: '📅' },
     { label: 'Flexible / Q4 Planning', icon: '🎯' },
   ];
 
-  // Universal Project Stages (Replaces budget pressure with zero friction)
   const projectStageOptions = [
     { label: 'New Product / Launching from Scratch', desc: 'Building a fresh brand or digital experience' },
     { label: 'Redesign / Upgrade Existing Product', desc: 'Improving performance, UI/UX, or visual identity' },
@@ -56,7 +55,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
     setFormData((prev) => {
       const exists = prev.serviceTypes.includes(service);
       if (exists) {
-        if (prev.serviceTypes.length === 1) return prev; // Keep at least 1
+        if (prev.serviceTypes.length === 1) return prev;
         return { ...prev, serviceTypes: prev.serviceTypes.filter((s) => s !== service) };
       } else {
         return { ...prev, serviceTypes: [...prev.serviceTypes, service] };
@@ -70,8 +69,35 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
     setStep(2);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // FormSubmit AJAX payload dispatch directly to praveen@roosstudiox.com
+    try {
+      await fetch('https://formsubmit.co/ajax/praveen@roosstudiox.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `🚀 New Project Inquiry from ${formData.name}`,
+          _template: 'table',
+          'Client Name': formData.name,
+          'Work Email': formData.email,
+          Company: formData.company || 'N/A',
+          Services: formData.serviceTypes.join(', '),
+          Timeline: formData.timeline,
+          'Project Stage': formData.projectStage || 'N/A',
+          'Project Notes': formData.projectDetails || 'None provided',
+        }),
+      });
+    } catch {
+      // Fallback
+    }
+
+    setIsSubmitting(false);
     setSubmitted(true);
 
     try {
@@ -82,7 +108,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
         colors: ['#FF7A1A', '#FFA665', '#22C55E'],
       });
     } catch {
-      // Fallback silent
+      // Fallback
     }
   };
 
@@ -91,6 +117,16 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
     setSubmitted(false);
     onClose();
   };
+
+  // Pre-filled WhatsApp message for direct 1-click chatting with Praveen (+91 96290 26600)
+  const whatsappText = `Hi Praveen! I just submitted an inquiry on Roos StudioX:
+• Name: ${formData.name}
+• Email: ${formData.email}
+• Company: ${formData.company || 'N/A'}
+• Services: ${formData.serviceTypes.join(', ')}
+• Timeline: ${formData.timeline}`;
+
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=919629026600&text=${encodeURIComponent(whatsappText)}`;
 
   return (
     <AnimatePresence>
@@ -153,7 +189,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
                 {step === 1 && (
                   <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
                     
-                    {/* Name & Email Fields Side-by-Side */}
+                    {/* Name & Email Fields */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-xs font-semibold text-zinc-300 mb-1.5">
@@ -239,7 +275,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
                 )}
 
                 {/* ========================================================================= */}
-                {/* PAGE 2: TIMELINE & PROJECT STAGE (NO CONFUSING BUDGET PRESSURE!) */}
+                {/* PAGE 2: TIMELINE & PROJECT STAGE */}
                 {/* ========================================================================= */}
                 {step === 2 && (
                   <motion.div initial={{ opacity: 0, x: 10 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
@@ -274,7 +310,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
                       </div>
                     </div>
 
-                    {/* Project Stage / Type of Engagement (Universal & Friendly!) */}
+                    {/* Project Stage / Type of Engagement */}
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-zinc-300 mb-3 flex items-center gap-1.5">
                         <Rocket className="w-4 h-4 text-[#FF7A1A]" />
@@ -302,7 +338,7 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
                       </div>
                     </div>
 
-                    {/* Project Vision & Notes (Optional) */}
+                    {/* Project Vision & Notes */}
                     <div>
                       <label className="block text-xs font-semibold text-zinc-300 mb-1.5 flex items-center gap-1.5">
                         <Layers className="w-3.5 h-3.5 text-zinc-400" />
@@ -331,17 +367,27 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
 
                         <button
                           type="submit"
-                          className="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF7A1A] via-[#FFA665] to-[#22C55E] hover:opacity-95 text-white text-sm font-bold flex items-center gap-2 transition-all cursor-pointer shadow-lg shadow-[#FF7A1A]/20"
+                          disabled={isSubmitting}
+                          className="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-[#FF7A1A] via-[#FFA665] to-[#22C55E] hover:opacity-95 text-white text-sm font-bold flex items-center gap-2 transition-all cursor-pointer shadow-lg shadow-[#FF7A1A]/20 disabled:opacity-50"
                         >
-                          <span>Submit & Connect with Alpha Roos</span>
-                          <Send className="w-4 h-4" />
+                          {isSubmitting ? (
+                            <>
+                              <Loader2 className="w-4 h-4 animate-spin" />
+                              <span>Dispatching Email...</span>
+                            </>
+                          ) : (
+                            <>
+                              <span>Submit & Connect with Alpha Roos</span>
+                              <Send className="w-4 h-4" />
+                            </>
+                          )}
                         </button>
                       </div>
 
                       <div className="mt-4 text-center">
                         <span className="text-[11px] text-zinc-500">
                           Direct partner engagement • Transmitting securely to{' '}
-                          <span className="text-[#22C55E] font-medium">praveen@roosstudio.com</span>
+                          <span className="text-[#22C55E] font-medium">praveen@roosstudiox.com</span>
                         </span>
                       </div>
                     </div>
@@ -349,23 +395,51 @@ export const ProjectInquiryModal: React.FC<ProjectInquiryModalProps> = ({ isOpen
                 )}
               </form>
             ) : (
-              /* Success Confirmation Screen */
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-8">
-                <div className="w-16 h-16 rounded-full bg-[#22C55E]/15 text-[#22C55E] flex items-center justify-center mx-auto mb-4 border border-[#22C55E]/30 shadow-lg shadow-[#22C55E]/20">
+              /* Success Confirmation Screen with Email Confirmation + Direct WhatsApp Trigger */
+              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-6 space-y-6">
+                <div className="w-16 h-16 rounded-full bg-[#22C55E]/15 text-[#22C55E] flex items-center justify-center mx-auto border border-[#22C55E]/30 shadow-lg shadow-[#22C55E]/20">
                   <CheckCircle2 className="w-8 h-8" />
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white mb-2">
-                  Partner Brief Received
-                </h3>
-                <p className="text-sm text-zinc-400 max-w-md mx-auto mb-8">
-                  Thank you, <span className="font-bold text-white">{formData.name}</span>. Praveen from Alpha Roos will review your requirements and respond within 24 business hours.
-                </p>
+
+                <div>
+                  <h3 className="font-display text-2xl sm:text-3xl font-extrabold text-white mb-2">
+                    Partner Inquiry Dispatched!
+                  </h3>
+                  <p className="text-sm text-zinc-400 max-w-md mx-auto">
+                    Thank you, <span className="font-bold text-white">{formData.name}</span>. Your project inquiry has been sent directly to <span className="text-emerald-400 font-semibold">praveen@roosstudiox.com</span>.
+                  </p>
+                </div>
+
+                {/* Instant WhatsApp & Email Action Bar */}
+                <div className="p-4 rounded-2xl bg-[#141418] border border-zinc-800 space-y-3 max-w-md mx-auto">
+                  <span className="text-xs text-zinc-300 font-semibold block">
+                    Want an immediate response? Connect directly with Praveen:
+                  </span>
+
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full py-3 px-4 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-black font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md shadow-[#25D366]/20 cursor-pointer"
+                  >
+                    <MessageSquare className="w-4 h-4 fill-black" />
+                    <span>Chat Instantly on WhatsApp (+91 96290 26600)</span>
+                  </a>
+
+                  <a
+                    href={`mailto:praveen@roosstudiox.com?subject=${encodeURIComponent(`Project Follow-up: ${formData.name}`)}`}
+                    className="w-full py-2.5 px-4 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 font-semibold text-xs flex items-center justify-center gap-2 transition-all cursor-pointer"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-[#FF7A1A]" />
+                    <span>Email Direct: praveen@roosstudiox.com</span>
+                  </a>
+                </div>
 
                 <button
                   onClick={resetForm}
                   className="px-8 py-3.5 rounded-2xl bg-[#FF7A1A] hover:bg-[#EA580C] text-white text-sm font-bold transition-all cursor-pointer shadow-lg shadow-[#FF7A1A]/20"
                 >
-                  Close & Done
+                  Done & Close
                 </button>
               </motion.div>
             )}
