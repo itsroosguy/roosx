@@ -203,7 +203,7 @@ export const SectionX: React.FC<SectionXProps> = ({
   return (
     <section
       id="section-x"
-      className={`relative pt-12 pb-20 sm:pb-28 transition-colors duration-500 overflow-hidden ${
+      className={`relative pt-20 sm:pt-28 pb-20 sm:pb-28 transition-colors duration-500 overflow-hidden ${
         isDarkMode ? 'bg-[#0A0A0A]' : 'bg-[#FAFAFA]'
       }`}
     >

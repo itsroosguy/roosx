@@ -148,8 +148,8 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
           </p>
         </motion.div>
 
-        {/* LOCKED HEIGHT UNIFIED ELECTRIC ORANGE ACCORDION DECK */}
-        <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 max-w-7xl mx-auto h-[430px] sm:h-[460px] select-none">
+        {/* UNIFIED ELECTRIC ORANGE ACCORDION DECK */}
+        <div className="flex flex-col lg:flex-row items-stretch justify-center gap-4 max-w-7xl mx-auto h-auto lg:h-[460px] select-none">
           {process5StepCards.map((card) => {
             const isActive = card.id === activeCardId;
             const IconComp = card.icon;
@@ -160,10 +160,10 @@ export const ProcessSection: React.FC<ProcessSectionProps> = ({
                 onClick={() => setActiveCardId(card.id)}
                 onMouseEnter={() => setActiveCardId(card.id)}
                 animate={{
-                  flex: isActive ? (window.innerWidth > 1024 ? 2.3 : 1) : 1,
+                  flex: isActive ? (window.innerWidth >= 1024 ? 2.3 : 1) : 1,
                 }}
                 transition={{ type: 'spring', stiffness: 220, damping: 24 }}
-                className={`rounded-3xl p-5 sm:p-6 border cursor-pointer relative overflow-hidden backdrop-blur-2xl transition-colors duration-500 flex flex-col justify-between text-left h-full ${
+                className={`rounded-3xl p-5 sm:p-6 border cursor-pointer relative overflow-hidden backdrop-blur-2xl transition-colors duration-500 flex flex-col justify-between text-left h-auto min-h-[110px] lg:h-full ${
                   isDarkMode
                     ? isActive
                       ? 'bg-[#121215] text-white border-[#FF7A1A] ring-2 ring-[#FF7A1A]/30 shadow-[0_20px_50px_rgba(255,122,26,0.3)]'

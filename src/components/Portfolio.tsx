@@ -76,7 +76,7 @@ export const Portfolio: React.FC<PortfolioProps> = ({
               <button
                 key={cat.id}
                 onClick={() => setActiveCategory(cat.id)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all duration-300 relative cursor-pointer ${
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap shrink-0 transition-all duration-300 relative cursor-pointer ${
                   activeCategory === cat.id
                     ? 'text-white'
                     : isDarkMode
