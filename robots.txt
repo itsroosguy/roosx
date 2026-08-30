@@ -1,0 +1,28 @@
+# Search Engine Directives for Roos StudioX (https://roosstudiox.com/)
+User-agent: *
+Allow: /
+
+# GEO (Generative Engine Optimization) AI Search Crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sitemap Location
+Sitemap: https://roosstudiox.com/sitemap.xml
