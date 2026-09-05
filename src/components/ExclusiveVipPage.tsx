@@ -82,7 +82,7 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
           </h1>
 
           <p className="text-sm sm:text-base md:text-lg text-zinc-600 font-medium leading-relaxed max-w-2xl mx-auto">
-            Directly connect your executive background with Praveen Aryan and the Roos StudioX leadership team. Designed for ambitious founders and high-growth ventures seeking category authority.
+            Directly connect your executive background with Praveen Raj and the Roos StudioX leadership team. Designed for ambitious founders and high-growth ventures seeking category authority.
           </p>
         </motion.div>
 
@@ -103,7 +103,7 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
                 <div className="relative shrink-0">
                   <img
                     src="/images/praveen-aryan.png"
-                    alt="Praveen Aryan — Founder & Managing Director"
+                    alt="Praveen Raj — Founder & Managing Director"
                     className="w-16 h-16 rounded-2xl object-cover border-2 border-[#FF7A1A]/60 shadow-md"
                   />
                   <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-[#FF7A1A] flex items-center justify-center text-white">
@@ -113,7 +113,7 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
 
                 <div>
                   <h3 className="font-display text-lg font-extrabold text-[#111111] flex items-center gap-1.5">
-                    Praveen Aryan
+                    Praveen Raj
                   </h3>
                   <p className="text-xs font-mono font-semibold text-[#FF7A1A] uppercase tracking-wider">
                     Founder & Managing Director
@@ -189,7 +189,7 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
                         Application Received
                       </h3>
                       <p className="text-xs sm:text-sm text-zinc-600 font-medium leading-relaxed">
-                        Thank you, <span className="font-bold text-[#111111]">{formData.fullName}</span>. Praveen Aryan and our leadership team will review your LinkedIn submission (<span className="font-mono text-xs text-[#0077B5]">{formData.linkedinUrl}</span>) and respond within 24 business hours.
+                        Thank you, <span className="font-bold text-[#111111]">{formData.fullName}</span>. Praveen Raj and our leadership team will review your LinkedIn submission (<span className="font-mono text-xs text-[#0077B5]">{formData.linkedinUrl}</span>) and respond within 24 business hours.
                       </p>
                     </div>
 

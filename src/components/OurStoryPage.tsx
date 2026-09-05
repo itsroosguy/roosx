@@ -369,7 +369,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
               <div className="relative rounded-[28px] overflow-hidden border-2 border-zinc-800/90 shadow-2xl bg-[#08080A] group-hover:border-[#FF7A1A]/70 transition-all duration-500">
                 <img
                   src="/images/praveen-aryan.png"
-                  alt="Praveen Aryan — Founder & Managing Director, Roos StudioX"
+                  alt="Praveen Raj — Founder & Managing Director, Roos StudioX"
                   className="w-full h-auto max-h-[460px] object-cover object-center group-hover:scale-105 transition-transform duration-700 filter contrast-[1.05]"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-85" />
@@ -378,7 +378,7 @@ export const OurStoryPage: React.FC<OurStoryPageProps> = ({
                 <div className="absolute bottom-5 left-5 right-5 p-3.5 rounded-xl bg-black/80 backdrop-blur-md border border-white/15 flex items-center justify-between">
                   <div>
                     <h4 className="font-display text-base font-bold text-white flex items-center gap-1.5">
-                      Praveen Aryan <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
+                      Praveen Raj <CheckCircle2 className="w-4 h-4 text-[#FF7A1A]" />
                     </h4>
                     <p className="text-[10px] font-mono text-[#FF7A1A] uppercase tracking-wider font-semibold">
                       Founder & Managing Director
