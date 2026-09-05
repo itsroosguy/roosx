@@ -17,20 +17,29 @@ import { ServicePage } from './components/ServicePage';
 import { WorksPage } from './components/WorksPage';
 import { ExclusiveVipPage } from './components/ExclusiveVipPage';
 import { BlogSection } from './components/BlogSection';
-import { BlogPostModal } from './components/BlogPostModal';
+import { BlogArticlePage } from './components/BlogArticlePage';
+import { BLOG_POSTS } from './data/blogData';
 import { Project, BlogPost } from './types';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(() => {
+    const hash = window.location.hash;
+    if (hash.startsWith('#blog/')) {
+      const slug = hash.replace('#blog/', '');
+      return BLOG_POSTS.find((p) => p.slug === slug) || BLOG_POSTS[0];
+    }
+    return BLOG_POSTS[0];
+  });
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'our-story' | 'services' | 'works' | 'exclusive'>(() => {
+  const [currentView, setCurrentView] = useState<'home' | 'our-story' | 'services' | 'works' | 'exclusive' | 'blog-article'>(() => {
     const hash = window.location.hash;
     if (hash === '#our-story' || hash === '#story' || hash === '#about') return 'our-story';
     if (hash === '#services') return 'services';
     if (hash === '#works' || hash === '#portfolio') return 'works';
     if (hash === '#exclusive' || hash === '#vip') return 'exclusive';
+    if (hash.startsWith('#blog')) return 'blog-article';
     return 'home';
   });
 
@@ -45,6 +54,11 @@ export function App() {
         setCurrentView('works');
       } else if (hash === '#exclusive' || hash === '#vip') {
         setCurrentView('exclusive');
+      } else if (hash.startsWith('#blog')) {
+        const slug = hash.replace('#blog/', '');
+        const found = BLOG_POSTS.find((p) => p.slug === slug);
+        if (found) setSelectedPost(found);
+        setCurrentView('blog-article');
       } else {
         setCurrentView('home');
       }
@@ -144,6 +158,20 @@ export function App() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         />
+      ) : currentView === 'blog-article' ? (
+        <BlogArticlePage
+          post={selectedPost}
+          onNavigateBack={() => {
+            window.location.hash = '#insights';
+            setCurrentView('home');
+            setTimeout(() => {
+              const el = document.getElementById('insights');
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          }}
+          onOpenInquiry={() => setIsInquiryOpen(true)}
+          isDarkMode={isDarkMode}
+        />
       ) : (
         <main>
           <Hero onOpenInquiry={() => setIsInquiryOpen(true)} isDarkMode={isDarkMode} />
@@ -157,7 +185,12 @@ export function App() {
           
           {/* Executive Insights (Blog) & Case Studies Dual Section */}
           <BlogSection
-            onSelectPost={(post) => setSelectedPost(post)}
+            onSelectPost={(post) => {
+              setSelectedPost(post);
+              window.location.hash = `#blog/${post.slug}`;
+              setCurrentView('blog-article');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             onSelectProject={(project) => setSelectedProject(project)}
             isDarkMode={isDarkMode}
           />
@@ -179,13 +212,6 @@ export function App() {
       <Footer isDarkMode={isDarkMode} />
 
       {/* Interactive Modals */}
-      <BlogPostModal
-        post={selectedPost}
-        onClose={() => setSelectedPost(null)}
-        onOpenInquiry={() => setIsInquiryOpen(true)}
-        isDarkMode={isDarkMode}
-      />
-
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
