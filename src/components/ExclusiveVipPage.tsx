@@ -16,7 +16,7 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
     email: '',
     linkedinUrl: '',
     company: '',
-    scope: 'Brand Architecture',
+    selectedScopes: ['Brand & Identity'],
     timeline: 'Immediate (1-2 Weeks)',
     message: '',
   });
@@ -35,6 +35,18 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
     'Full Digital Transformation',
     'Other / Custom Request',
   ];
+
+  const toggleScope = (option: string) => {
+    setFormData((prev) => {
+      const exists = prev.selectedScopes.includes(option);
+      if (exists) {
+        if (prev.selectedScopes.length === 1) return prev;
+        return { ...prev, selectedScopes: prev.selectedScopes.filter((s) => s !== option) };
+      } else {
+        return { ...prev, selectedScopes: [...prev.selectedScopes, option] };
+      }
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -133,18 +145,6 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
               <p className="text-xs sm:text-sm text-zinc-700 leading-relaxed font-medium italic border-l-2 border-[#FF7A1A] pl-3.5">
                 "We bypass account managers and junior delegates. Every exclusive submission is reviewed directly by leadership for maximum strategic alignment."
               </p>
-
-              {/* Advisory Metrics Matrix */}
-              <div className="grid grid-cols-2 gap-3 pt-2">
-                <div className="p-3.5 rounded-2xl bg-zinc-50 border border-zinc-200/80">
-                  <span className="font-mono text-lg font-black text-[#111111] block">7+ Yrs</span>
-                  <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider font-semibold block">Global Advisory</span>
-                </div>
-                <div className="p-3.5 rounded-2xl bg-zinc-50 border border-zinc-200/80">
-                  <span className="font-mono text-lg font-black text-[#111111] block">UAE • CA • IN</span>
-                  <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-wider font-semibold block">Market Scope</span>
-                </div>
-              </div>
 
               {/* Security & Confidentiality Directives */}
               <div className="space-y-2.5 pt-2 border-t border-zinc-100">
@@ -285,19 +285,19 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
                       />
                     </div>
 
-                    {/* INTERACTIVE SCOPE SELECTORS */}
+                    {/* INTERACTIVE MULTI-SELECT SCOPE SELECTORS */}
                     <div className="space-y-2.5">
                       <label className="text-xs font-mono font-bold text-zinc-800 uppercase tracking-wider block">
-                        Select Primary Service Scope *
+                        Select Primary Service Scope(s) * <span className="text-zinc-400 font-normal lowercase">(multiple selectable)</span>
                       </label>
                       <div className="flex flex-wrap gap-2">
                         {scopeOptions.map((option) => {
-                          const isSelected = formData.scope === option;
+                          const isSelected = formData.selectedScopes.includes(option);
                           return (
                             <button
                               key={option}
                               type="button"
-                              onClick={() => setFormData({ ...formData, scope: option })}
+                              onClick={() => toggleScope(option)}
                               className={`px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer border ${
                                 isSelected
                                   ? 'bg-orange-50/90 text-orange-950 border-[#FF7A1A] ring-2 ring-[#FF7A1A]/30 shadow-md shadow-orange-500/10'
