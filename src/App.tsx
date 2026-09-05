@@ -84,11 +84,6 @@ export function App() {
           setCurrentView('works');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        onNavigateExclusive={() => {
-          window.location.hash = '#exclusive';
-          setCurrentView('exclusive');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
         onNavigateHome={() => {
           window.location.hash = '';
           setCurrentView('home');

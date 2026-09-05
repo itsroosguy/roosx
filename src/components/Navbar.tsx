@@ -11,7 +11,6 @@ interface NavbarProps {
   onNavigateStory?: () => void;
   onNavigateServices?: () => void;
   onNavigateWorks?: () => void;
-  onNavigateExclusive?: () => void;
   onNavigateHome?: () => void;
 }
 
@@ -22,7 +21,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onNavigateStory,
   onNavigateServices,
   onNavigateWorks,
-  onNavigateExclusive,
   onNavigateHome,
 }) => {
   const [scrolled, setScrolled] = useState(false);
@@ -41,7 +39,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { name: 'About', href: '#about', action: onNavigateStory },
     { name: 'Services', href: '#services', action: onNavigateServices },
     { name: 'Works', href: '#works', action: onNavigateWorks },
-    { name: 'Exclusive VIP', href: '#exclusive', action: onNavigateExclusive },
   ];
 
   return (
