@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Calendar, Share2, Sparkles, CheckCircle2, ArrowRight } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, Share2, Sparkles, CheckCircle2 } from 'lucide-react';
 import { BlogPost } from '../types';
+import { AlphaRoosButton } from './AlphaRoosButton';
 
 interface BlogArticlePageProps {
   post: BlogPost | null;
@@ -273,13 +274,13 @@ export const BlogArticlePage: React.FC<BlogArticlePageProps> = ({
           <p className="text-sm sm:text-base text-zinc-300 max-w-xl mx-auto leading-relaxed">
             Partner directly with Praveen Raj and Roos StudioX to engineer category-defining brand strategy, spatial web experiences, and high-visibility growth pipelines.
           </p>
-          <button
-            onClick={onOpenInquiry}
-            className="px-8 py-4 rounded-full bg-gradient-to-r from-[#FF7A1A] via-[#FF944D] to-[#EA580C] text-white font-mono text-xs font-bold uppercase tracking-wider shadow-lg shadow-[#FF7A1A]/30 hover:scale-105 transition-all inline-flex items-center gap-2 cursor-pointer"
-          >
-            <span>Book Direct Founder Strategy Session</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
+          <div className="flex justify-center pt-2">
+            <AlphaRoosButton
+              onClick={onOpenInquiry}
+              isDarkMode={isDarkMode}
+              text="Book Direct Founder Strategy Session"
+            />
+          </div>
         </div>
 
       </div>
