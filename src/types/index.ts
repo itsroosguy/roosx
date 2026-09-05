@@ -66,3 +66,39 @@ export interface InquiryFormData {
   company: string;
   projectDetails: string;
 }
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  subtitle: string;
+  excerpt: string;
+  category: string;
+  readTime: string;
+  date: string;
+  author: {
+    name: string;
+    role: string;
+    avatar: string;
+  };
+  coverImage: string;
+  problemImage: string;
+  featuredImage?: string;
+  featured?: boolean;
+  content: {
+    intro: string;
+    sections: {
+      heading: string;
+      paragraphs: string[];
+      pullQuote?: string;
+      formula?: {
+        label: string;
+        expression: string;
+        explanation: string;
+      };
+      bulletPoints?: string[];
+      imagePlacement?: 'problem' | 'solution' | 'warehouse';
+    }[];
+    conclusion: string;
+  };
+}

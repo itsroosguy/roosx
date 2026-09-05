@@ -7,7 +7,6 @@ import { HeroMarquee } from './components/HeroMarquee';
 import { BrandPhilosophySection } from './components/BrandPhilosophySection';
 import { CreativeServicesExperience } from './components/CreativeServicesExperience';
 import { ProcessSection } from './components/ProcessSection';
-import { Portfolio } from './components/Portfolio';
 import { FAQSection } from './components/FAQSection';
 import { PreFooterCTA } from './components/PreFooterCTA';
 import { Footer } from './components/Footer';
@@ -17,10 +16,13 @@ import { OurStoryPage } from './components/OurStoryPage';
 import { ServicePage } from './components/ServicePage';
 import { WorksPage } from './components/WorksPage';
 import { ExclusiveVipPage } from './components/ExclusiveVipPage';
-import { Project } from './types';
+import { BlogSection } from './components/BlogSection';
+import { BlogPostModal } from './components/BlogPostModal';
+import { Project, BlogPost } from './types';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
   const [currentView, setCurrentView] = useState<'home' | 'our-story' | 'services' | 'works' | 'exclusive'>(() => {
@@ -84,6 +86,16 @@ export function App() {
           setCurrentView('works');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onNavigateBlog={() => {
+          if (currentView !== 'home') {
+            setCurrentView('home');
+          }
+          window.location.hash = '#insights';
+          setTimeout(() => {
+            const el = document.getElementById('insights');
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }}
         onNavigateHome={() => {
           window.location.hash = '';
           setCurrentView('home');
@@ -143,8 +155,9 @@ export function App() {
           />
           <ProcessSection isDarkMode={isDarkMode} />
           
-          {/* Case Studies & Featured Works Section */}
-          <Portfolio
+          {/* Executive Insights (Blog) & Case Studies Dual Section */}
+          <BlogSection
+            onSelectPost={(post) => setSelectedPost(post)}
             onSelectProject={(project) => setSelectedProject(project)}
             isDarkMode={isDarkMode}
           />
@@ -166,6 +179,13 @@ export function App() {
       <Footer isDarkMode={isDarkMode} />
 
       {/* Interactive Modals */}
+      <BlogPostModal
+        post={selectedPost}
+        onClose={() => setSelectedPost(null)}
+        onOpenInquiry={() => setIsInquiryOpen(true)}
+        isDarkMode={isDarkMode}
+      />
+
       <ProjectModal
         project={selectedProject}
         onClose={() => setSelectedProject(null)}
