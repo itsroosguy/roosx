@@ -53,11 +53,9 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div
           className={`flex items-center justify-between transition-all duration-300 rounded-2xl ${
-            scrolled
-              ? isDarkMode
-                ? 'bg-[#0A0A0A]/90 shadow-lg border border-[#27272A] px-3.5 py-1.5 backdrop-blur-md'
-                : 'glass-nav shadow-sm border border-[#E4E4E7] px-3.5 py-1.5'
-              : 'bg-transparent px-4 py-2'
+            isDarkMode
+              ? 'bg-[#0A0A0A]/95 shadow-xl border border-[#27272A] px-4 py-2 backdrop-blur-xl'
+              : 'bg-white/95 shadow-lg border border-[#E4E4E7] px-4 py-2 backdrop-blur-xl'
           }`}
         >
           {/* Logo */}
@@ -80,10 +78,10 @@ export const Navbar: React.FC<NavbarProps> = ({
                     link.action();
                   }
                 }}
-                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                   isDarkMode
                     ? 'text-[#D4D4D8] hover:text-white hover:bg-[#18181B]'
-                    : 'text-[#52525B] hover:text-[#111111] hover:bg-[#F4F4F5]'
+                    : 'text-[#18181B] hover:text-[#000000] hover:bg-[#F4F4F5]'
                 }`}
               >
                 {link.name}
@@ -100,10 +98,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               className={`p-2 rounded-xl transition-all duration-300 ${
                 isDarkMode
                   ? 'text-[#D4D4D8] hover:text-white hover:bg-[#18181B] border border-[#27272A]'
-                  : 'text-[#52525B] hover:text-[#111111] hover:bg-[#F4F4F5] border border-[#E4E4E7]'
+                  : 'text-[#18181B] hover:text-[#000000] hover:bg-[#F4F4F5] border border-[#E4E4E7]'
               }`}
             >
-              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              {isDarkMode ? <Sun className="w-4 h-4 text-white" /> : <Moon className="w-4 h-4 text-black" />}
             </button>
 
             {/* CTA Button */}

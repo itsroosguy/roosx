@@ -25,10 +25,15 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
   const [loading, setLoading] = useState(false);
 
   const scopeOptions = [
-    'Brand Architecture',
-    '3D Spatial Web Experience',
-    'Autonomous AI Automation',
-    'Growth Engine & Telemetry',
+    'Strategy & Positioning',
+    'Brand & Identity',
+    'UI/UX & Interface Design',
+    'Web & App Development',
+    'AI & Automation',
+    'Growth & Marketing',
+    'Product Consulting',
+    'Full Digital Transformation',
+    'Other / Custom Request',
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -281,11 +286,11 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
                     </div>
 
                     {/* INTERACTIVE SCOPE SELECTORS */}
-                    <div className="space-y-2">
+                    <div className="space-y-2.5">
                       <label className="text-xs font-mono font-bold text-zinc-800 uppercase tracking-wider block">
-                        Primary Scope of Interest
+                        Select Primary Service Scope *
                       </label>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                      <div className="flex flex-wrap gap-2">
                         {scopeOptions.map((option) => {
                           const isSelected = formData.scope === option;
                           return (
@@ -293,14 +298,16 @@ export const ExclusiveVipPage: React.FC<ExclusiveVipPageProps> = ({
                               key={option}
                               type="button"
                               onClick={() => setFormData({ ...formData, scope: option })}
-                              className={`p-3 rounded-xl text-xs font-bold text-left border transition-all flex items-center justify-between cursor-pointer ${
+                              className={`px-3.5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 cursor-pointer border ${
                                 isSelected
-                                  ? 'bg-[#111111] text-white border-[#111111] shadow-md'
-                                  : 'bg-zinc-50 text-zinc-700 border-zinc-200 hover:border-zinc-300'
+                                  ? 'bg-orange-50/90 text-orange-950 border-[#FF7A1A] ring-2 ring-[#FF7A1A]/30 shadow-md shadow-orange-500/10'
+                                  : 'bg-zinc-50 text-zinc-700 border-zinc-200/90 hover:border-zinc-300 hover:text-zinc-900'
                               }`}
                             >
+                              <CheckCircle2 className={`w-3.5 h-3.5 transition-transform ${
+                                isSelected ? 'text-[#FF7A1A] scale-110' : 'text-zinc-400'
+                              }`} />
                               <span>{option}</span>
-                              {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-[#FF7A1A]" />}
                             </button>
                           );
                         })}
