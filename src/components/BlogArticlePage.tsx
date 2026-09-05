@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ArrowLeft, Clock, Calendar, Share2, Sparkles, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowLeft, Clock, Calendar, Share2, Sparkles, CheckCircle2, Copy, Check, ExternalLink } from 'lucide-react';
 import { BlogPost } from '../types';
 import { AlphaRoosButton } from './AlphaRoosButton';
 
@@ -17,9 +17,23 @@ export const BlogArticlePage: React.FC<BlogArticlePageProps> = ({
   onOpenInquiry,
   isDarkMode = true,
 }) => {
+  const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const shareRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [post]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (shareRef.current && !shareRef.current.contains(event.target as Node)) {
+        setIsShareMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   if (!post) {
     return (
@@ -37,17 +51,55 @@ export const BlogArticlePage: React.FC<BlogArticlePageProps> = ({
     );
   }
 
-  const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: post.title,
-        text: post.subtitle,
-        url: window.location.href,
-      }).catch(() => {});
-    } else {
-      navigator.clipboard.writeText(window.location.href);
-      alert('Article link copied to clipboard!');
-    }
+  const articleUrl = typeof window !== 'undefined' ? window.location.href : `https://roosstudiox.com/#blog/${post.slug}`;
+
+  const shareLinks = [
+    {
+      name: 'X (Twitter)',
+      icon: (
+        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      ),
+      url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(articleUrl)}`,
+      color: 'hover:text-[#1DA1F2] hover:bg-[#1DA1F2]/10',
+    },
+    {
+      name: 'LinkedIn',
+      icon: (
+        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.25V10.9H6.46M7.86 6.75a1.4 1.4 0 1 0 0 2.8 1.4 1.4 0 0 0 0-2.8z" />
+        </svg>
+      ),
+      url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(articleUrl)}`,
+      color: 'hover:text-[#0077B5] hover:bg-[#0077B5]/10',
+    },
+    {
+      name: 'Facebook',
+      icon: (
+        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H7.5v-3H10V9.69c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.23.19 2.23.19v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 3h-2.34v6.8c4.56-.93 8-4.96 8-9.8z" />
+        </svg>
+      ),
+      url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(articleUrl)}`,
+      color: 'hover:text-[#1877F2] hover:bg-[#1877F2]/10',
+    },
+    {
+      name: 'WhatsApp',
+      icon: (
+        <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm5.78 14.15c-.24.68-1.42 1.33-1.97 1.37-.52.04-1.19.19-3.92-.91-3.28-1.33-5.38-4.66-5.55-4.88-.16-.22-1.32-1.75-1.32-3.34 0-1.59.83-2.37 1.13-2.69.3-.32.65-.4.87-.4.22 0 .43.01.62.01.2 0 .46-.07.72.55.26.63.89 2.18.97 2.34.08.16.13.35.02.57-.11.22-.17.36-.34.56-.17.2-.36.45-.51.6-.16.16-.33.34-.14.67.19.33.85 1.4 1.82 2.27 1.26 1.12 2.31 1.47 2.64 1.63.33.16.52.14.71-.08.2-.22.84-.98 1.07-1.32.22-.34.45-.28.75-.17.3.11 1.91.9 2.24 1.06.33.16.55.24.63.38.08.14.08.81-.16 1.49z" />
+        </svg>
+      ),
+      url: `https://api.whatsapp.com/send?text=${encodeURIComponent(`${post.title} — ${articleUrl}`)}`,
+      color: 'hover:text-[#25D366] hover:bg-[#25D366]/10',
+    },
+  ];
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(articleUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   return (
@@ -74,8 +126,8 @@ export const BlogArticlePage: React.FC<BlogArticlePageProps> = ({
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-10">
         
-        {/* TOP NAVIGATION BACK BAR */}
-        <div className="flex items-center justify-between border-b pb-6 border-zinc-500/20">
+        {/* TOP NAVIGATION BACK BAR & CUSTOM SHARE DROPDOWN */}
+        <div className="flex items-center justify-between border-b pb-6 border-zinc-500/20 relative">
           <button
             onClick={onNavigateBack}
             className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono font-bold transition-all cursor-pointer border ${
@@ -88,17 +140,80 @@ export const BlogArticlePage: React.FC<BlogArticlePageProps> = ({
             <span>Back to Insights &amp; Articles</span>
           </button>
 
-          <button
-            onClick={handleShare}
-            className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono font-bold transition-all cursor-pointer border ${
-              isDarkMode
-                ? 'bg-[#18181B] text-zinc-300 border-[#27272A] hover:text-white hover:border-[#FF7A1A]/60'
-                : 'bg-white text-zinc-700 border-zinc-200 hover:text-black hover:border-[#FF7A1A]/60 shadow-sm'
-            }`}
-          >
-            <Share2 className="w-4 h-4 text-[#FF7A1A]" />
-            <span>Share Article</span>
-          </button>
+          {/* CUSTOM SOCIAL SHARE POPOVER CONTAINER */}
+          <div className="relative" ref={shareRef}>
+            <button
+              onClick={() => setIsShareMenuOpen(!isShareMenuOpen)}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono font-bold transition-all cursor-pointer border ${
+                isShareMenuOpen
+                  ? 'bg-[#FF7A1A] text-white border-[#FF7A1A] shadow-md shadow-[#FF7A1A]/30'
+                  : isDarkMode
+                  ? 'bg-[#18181B] text-zinc-300 border-[#27272A] hover:text-white hover:border-[#FF7A1A]/60'
+                  : 'bg-white text-zinc-700 border-zinc-200 hover:text-black hover:border-[#FF7A1A]/60 shadow-sm'
+              }`}
+            >
+              <Share2 className="w-4 h-4" />
+              <span>Share Article</span>
+            </button>
+
+            {/* CUSTOM SOCIAL SHARE POPOVER MENU */}
+            <AnimatePresence>
+              {isShareMenuOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  className={`absolute right-0 mt-3 w-64 rounded-2xl p-3 shadow-2xl border backdrop-blur-xl z-50 space-y-1 ${
+                    isDarkMode
+                      ? 'bg-[#121215]/95 border-[#27272A] text-white shadow-black/80'
+                      : 'bg-white/95 border-zinc-200 text-[#111111] shadow-zinc-300/80'
+                  }`}
+                >
+                  <div className="px-3 py-1.5 border-b border-zinc-800/60 mb-1">
+                    <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-[#FF7A1A] block">
+                      Share This Article
+                    </span>
+                  </div>
+
+                  {shareLinks.map((platform) => (
+                    <a
+                      key={platform.name}
+                      href={platform.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => setIsShareMenuOpen(false)}
+                      className={`flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all ${
+                        isDarkMode ? 'text-zinc-300 hover:text-white' : 'text-zinc-700 hover:text-black'
+                      } ${platform.color}`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        {platform.icon}
+                        <span>{platform.name}</span>
+                      </div>
+                      <ExternalLink className="w-3 h-3 opacity-50" />
+                    </a>
+                  ))}
+
+                  <button
+                    onClick={copyToClipboard}
+                    className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium transition-all cursor-pointer ${
+                      copied
+                        ? 'bg-orange-500/20 text-[#FF7A1A] font-bold'
+                        : isDarkMode
+                        ? 'text-zinc-300 hover:text-white hover:bg-zinc-800/60'
+                        : 'text-zinc-700 hover:text-black hover:bg-zinc-100'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2.5">
+                      {copied ? <Check className="w-4 h-4 text-[#FF7A1A]" /> : <Copy className="w-4 h-4 text-zinc-400" />}
+                      <span>{copied ? 'Link Copied!' : 'Copy Direct Link'}</span>
+                    </div>
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* ARTICLE HERO HEADER */}
