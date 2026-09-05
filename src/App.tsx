@@ -16,17 +16,19 @@ import { ProjectInquiryModal } from './components/ProjectInquiryModal';
 import { OurStoryPage } from './components/OurStoryPage';
 import { ServicePage } from './components/ServicePage';
 import { WorksPage } from './components/WorksPage';
+import { ExclusiveVipPage } from './components/ExclusiveVipPage';
 import { Project } from './types';
 
 export function App() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isInquiryOpen, setIsInquiryOpen] = useState<boolean>(false);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(true);
-  const [currentView, setCurrentView] = useState<'home' | 'our-story' | 'services' | 'works'>(() => {
+  const [currentView, setCurrentView] = useState<'home' | 'our-story' | 'services' | 'works' | 'exclusive'>(() => {
     const hash = window.location.hash;
     if (hash === '#our-story' || hash === '#story' || hash === '#about') return 'our-story';
     if (hash === '#services') return 'services';
     if (hash === '#works' || hash === '#portfolio') return 'works';
+    if (hash === '#exclusive' || hash === '#vip') return 'exclusive';
     return 'home';
   });
 
@@ -39,6 +41,8 @@ export function App() {
         setCurrentView('services');
       } else if (hash === '#works' || hash === '#portfolio') {
         setCurrentView('works');
+      } else if (hash === '#exclusive' || hash === '#vip') {
+        setCurrentView('exclusive');
       } else {
         setCurrentView('home');
       }
@@ -80,6 +84,11 @@ export function App() {
           setCurrentView('works');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
+        onNavigateExclusive={() => {
+          window.location.hash = '#exclusive';
+          setCurrentView('exclusive');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
         onNavigateHome={() => {
           window.location.hash = '';
           setCurrentView('home');
@@ -113,6 +122,15 @@ export function App() {
           onSelectProject={(project) => setSelectedProject(project)}
           onOpenInquiry={() => setIsInquiryOpen(true)}
           isDarkMode={isDarkMode}
+          onNavigateHome={() => {
+            window.location.hash = '';
+            setCurrentView('home');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        />
+      ) : currentView === 'exclusive' ? (
+        <ExclusiveVipPage
+          onOpenInquiry={() => setIsInquiryOpen(true)}
           onNavigateHome={() => {
             window.location.hash = '';
             setCurrentView('home');
