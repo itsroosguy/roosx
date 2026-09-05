@@ -10,7 +10,6 @@ interface NavbarProps {
   onToggleTheme: () => void;
   onNavigateStory?: () => void;
   onNavigateServices?: () => void;
-  onNavigateWorks?: () => void;
   onNavigateBlog?: () => void;
   onNavigateHome?: () => void;
 }
@@ -21,7 +20,6 @@ export const Navbar: React.FC<NavbarProps> = ({
   onToggleTheme,
   onNavigateStory,
   onNavigateServices,
-  onNavigateWorks,
   onNavigateBlog,
   onNavigateHome,
 }) => {
@@ -41,7 +39,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { name: 'About', href: '#about', action: onNavigateStory },
     { name: 'Services', href: '#services', action: onNavigateServices },
     { name: 'Blog', href: '#insights', action: onNavigateBlog },
-    { name: 'Works', href: '#works', action: onNavigateWorks },
   ];
 
   return (

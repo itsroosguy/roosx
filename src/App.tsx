@@ -95,11 +95,6 @@ export function App() {
           setCurrentView('services');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
-        onNavigateWorks={() => {
-          window.location.hash = '#works';
-          setCurrentView('works');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }}
         onNavigateBlog={() => {
           if (currentView !== 'home') {
             setCurrentView('home');
