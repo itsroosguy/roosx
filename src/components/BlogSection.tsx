@@ -19,7 +19,6 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
   const [activeTab, setActiveTab] = useState<'insights' | 'case-studies'>('insights');
 
   const featuredPost = BLOG_POSTS.find((p) => p.featured) || BLOG_POSTS[0];
-  const secondaryPosts = BLOG_POSTS.filter((p) => p.id !== featuredPost.id);
 
   return (
     <section
@@ -139,26 +138,17 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
                     <p className="text-sm sm:text-base text-zinc-400 leading-relaxed font-normal">
                       {featuredPost.excerpt}
                     </p>
-
-                    {/* VALUE HOOK TEASERS TO TRIGGER READING FULL BLOG */}
-                    <div className="space-y-2.5 pt-3 border-t border-zinc-800/80">
-                      <span className="text-[11px] font-mono font-bold text-[#FF7A1A] uppercase tracking-wider block">
-                        Key Executive Insights Inside:
-                      </span>
-                      <ul className="space-y-2 text-xs font-medium text-zinc-300">
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A1A] shrink-0" />
-                          <span>Why 90% of extraordinary products stay hidden in the closet</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A1A] shrink-0" />
-                          <span>The Growth Multiplier Law: Great Product × Visibility = Growth</span>
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#FF7A1A] shrink-0" />
-                          <span>How category leaders build audience &amp; distribution pre-launch</span>
-                        </li>
-                      </ul>
+                    {/* 7-8 LINE EXECUTIVE INTRO TEASER CONTENT */}
+                    <div className="space-y-3 pt-3 border-t border-zinc-800/80">
+                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal italic">
+                        Thousands of startups die every year, and it is rarely because the product was bad or the founders lacked talent. Most of the time, they die quietly in the dark simply because nobody knew they existed.
+                      </p>
+                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed font-normal">
+                        Founders pour months obsessing over every line of code, assuming great engineering speaks for itself. But market dynamics follow a strict multiplication law: multiply extraordinary product code by zero visibility, and your revenue remains zero.
+                      </p>
+                      <p className="text-xs text-[#FF7A1A] font-mono font-bold tracking-wide flex items-center gap-1.5 pt-1">
+                        <span>Read the full strategic breakdown inside →</span>
+                      </p>
                     </div>
                   </div>
 
@@ -186,55 +176,6 @@ export const BlogSection: React.FC<BlogSectionProps> = ({
                     </div>
                   </div>
                 </div>
-              </div>
-
-              {/* SECONDARY BLOG POSTS GRID */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {secondaryPosts.map((post) => (
-                  <motion.div
-                    key={post.id}
-                    onClick={() => onSelectPost(post)}
-                    whileHover={{ y: -6 }}
-                    className={`group rounded-3xl p-6 sm:p-8 border transition-all duration-500 cursor-pointer space-y-5 flex flex-col justify-between ${
-                      isDarkMode
-                        ? 'bg-[#0E0E10] border-zinc-800/90 hover:border-[#FF7A1A]/60 shadow-xl'
-                        : 'bg-white border-zinc-200 hover:border-[#FF7A1A]/60 shadow-lg'
-                    }`}
-                  >
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between text-xs font-mono text-zinc-400">
-                        <span className="text-[#FF7A1A] font-bold">{post.category}</span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-zinc-500" />
-                          {post.readTime}
-                        </span>
-                      </div>
-
-                      <h3
-                        className={`font-display text-xl font-extrabold tracking-tight group-hover:text-[#FF7A1A] transition-colors ${
-                          isDarkMode ? 'text-white' : 'text-[#111111]'
-                        }`}
-                      >
-                        {post.title}
-                      </h3>
-
-                      <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                        {post.excerpt}
-                      </p>
-                    </div>
-
-                    <div className="pt-4 border-t border-zinc-800/80 flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold text-[#FF7A1A] flex items-center gap-1.5 group-hover:translate-x-1 transition-transform">
-                        <span>Read Full Article</span>
-                        <ArrowUpRight className="w-3.5 h-3.5" />
-                      </span>
-
-                      <span className="text-[11px] font-mono text-zinc-500">
-                        {post.date}
-                      </span>
-                    </div>
-                  </motion.div>
-                ))}
               </div>
             </div>
           ) : (
